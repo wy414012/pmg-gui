@@ -305,7 +305,9 @@ Ext.define('PMG.StdWorkspace', {
 			    title: 'Administration',
 			    itemId: 'admin',
 			    expandedOnInit: true,
-			    html: "Server Administration"
+			    items: [{
+				xtype: 'pmgServerAdministration',
+			    }]
 			},
 			{
 			    xtype: 'panel',
