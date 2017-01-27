@@ -255,7 +255,7 @@ Ext.define('PMG.StdWorkspace', {
 			    title: 'Configuration',
 			    itemId: 'configuration',
 			    expandedOnInit: true,
-			    html: "System Configuration"
+			    items: [{ xtype: 'pmgSystemConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
