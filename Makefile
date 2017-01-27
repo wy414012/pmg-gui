@@ -13,6 +13,9 @@ WWWCSSDIR=${WWWBASEDIR}/css
 WWWIMAGESDIR=${WWWBASEDIR}/images
 WWWJSDIR=${WWWBASEDIR}/js
 
+IMAGES=			\
+	logo-128.png
+
 all:
 
 .PHONY: deb
@@ -27,6 +30,7 @@ install: index.html
 	install -d -m 755 ${WWWIMAGESDIR}
 	install -d -m 755 ${WWWJSDIR}
 	install -m 0644 index.html ${WWWBASEDIR}
+	for i in ${IMAGES}; do install -m 0644 images/$$i  ${WWWIMAGESDIR}; done
 
 .PHONY: upload
 upload: ${DEB}
