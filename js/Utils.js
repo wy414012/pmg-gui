@@ -37,7 +37,7 @@ Ext.define('PMG.Utils', { utilities: {
     // this singleton contains miscellaneous utilities
 
     authOK: function() {
-	return Ext.util.Cookies.get('PMGAuthCookie');
+	return (PMG.UserName !== '') && Ext.util.Cookies.get('PMGAuthCookie');
     },
 
     authClear: function() {
