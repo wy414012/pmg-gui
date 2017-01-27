@@ -19,8 +19,6 @@ Ext.define('PMG.Workspace', {
     updateLoginData: function(loginData) {
 	var me = this;
 
-	console.dir(loginData);
-
 	me.loginData = loginData;
 	PMG.CSRFPreventionToken = loginData.CSRFPreventionToken;
 	PMG.UserName = loginData.username;
@@ -87,6 +85,9 @@ Ext.define('PMG.Workspace', {
 		    },
 		    url: '/api2/json/access/ticket',
 		    method: 'POST',
+		    failure: function() {
+			me.showLogin();
+		    },
 		    success: function(response, opts) {
 			var obj = Ext.decode(response.responseText);
 			me.updateLoginData(obj.data);
