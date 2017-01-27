@@ -219,7 +219,7 @@ Ext.define('PMG.StdWorkspace', {
 			    title: 'Mail Filter',
 			    itemId: 'filter',
 			    expandedOnInit: true,
-			    html: "Rules"
+			    items: [{ xtype: 'pmgRuleConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
@@ -305,9 +305,7 @@ Ext.define('PMG.StdWorkspace', {
 			    title: 'Administration',
 			    itemId: 'admin',
 			    expandedOnInit: true,
-			    items: [{
-				xtype: 'pmgServerAdministration',
-			    }]
+			    items: [{ xtype: 'pmgServerAdministration' }]
 			},
 			{
 			    xtype: 'panel',

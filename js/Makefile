@@ -2,6 +2,7 @@ JSSRC= 				                 	\
 	Utils.js					\
 	LoginWindow.js					\
 	ServerAdministration.js				\
+	RuleConfiguration.js				\
 	ConfigPanel.js					\
 	Workspace.js
 
