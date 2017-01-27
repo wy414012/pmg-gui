@@ -20,12 +20,12 @@ Ext.define('PMG.Workspace', {
 	var me = this;
 
 	console.dir(loginData);
-	
+
 	me.loginData = loginData;
 	PMG.CSRFPreventionToken = loginData.CSRFPreventionToken;
 	PMG.UserName = loginData.username;
 
-	// creates a session cookie (expire = null) 
+	// creates a session cookie (expire = null)
 	// that way the cookie gets deleted after browser window close
 	Ext.util.Cookies.set('PMGAuthCookie', loginData.ticket, null, '/', null, true);
 	me.onLogin(loginData);
@@ -67,7 +67,7 @@ Ext.define('PMG.Workspace', {
 
         if (!PMG.Utils.authOK()) {
 	    me.showLogin();
-	} else { 
+	} else {
 	    if (me.loginData) {
 		me.onLogin(me.loginData);
 	    }
@@ -81,7 +81,7 @@ Ext.define('PMG.Workspace', {
 		}
 
 		Ext.Ajax.request({
-		    params: { 
+		    params: {
 			username: PMG.UserName,
 			password: ticket
 		    },
@@ -102,34 +102,6 @@ Ext.define('PMG.StdWorkspace', {
     extend: 'PMG.Workspace',
 
     alias: ['widget.pmgStdWorkspace'],
-
-    // private
-    setContent: function(comp) {
-	var me = this;
-	
-	var cont = me.child('#content');
-
-	var lay = cont.getLayout();
-
-	var cur = lay.getActiveItem();
-
-	if (comp) {
-	    PMG.Utils.setErrorMask(cont, false);
-	    comp.border = false;
-	    cont.add(comp);
-	    if (cur !== null && lay.getNext()) {
-		lay.next();
-		var task = Ext.create('Ext.util.DelayedTask', function(){
-		    cont.remove(cur);
-		});
-		task.delay(10);
-	    }
-	}
-	else {
-	    // helper for cleaning the content when logging out
-	    cont.removeAll();
-	}
-    },
 
     onLogin: function(loginData) {
 	var me = this;
@@ -191,13 +163,13 @@ Ext.define('PMG.StdWorkspace', {
 	    items: [
 		{
 		    region: 'north',
-		    layout: { 
+		    layout: {
 			type: 'hbox',
 			align: 'middle'
 		    },
-		    baseCls: 'x-plain',		
+		    baseCls: 'x-plain',
 		    defaults: {
-			baseCls: 'x-plain'			
+			baseCls: 'x-plain'
 		    },
 		    border: false,
 		    margin: '2 0 2 5',
@@ -226,9 +198,9 @@ Ext.define('PMG.StdWorkspace', {
 			    baseCls: 'x-btn',
 			    iconCls: 'fa fa-sign-out',
 			    text: gettext("Logout"),
-			    handler: function() { 
-				me.showLogin(); 
-				me.setContent(null);
+			    handler: function() {
+				me.showLogin();
+				// fixme: me.setContent(null);
 			    }
 			}
 		    ]
@@ -240,32 +212,130 @@ Ext.define('PMG.StdWorkspace', {
 		    minWidth: 100,
 		    minHeight: 100,
 		    id: 'content',
-		    xtype: 'container',
-		    layout: { type: 'card' },
-		    border: false,
-		    margin: '0 5 0 0',
-		    items: []
-		},
-		{
-		    region: 'west',
-		    stateful: true,
-		    stateId: 'pvewest',
-		    itemId: 'west',
-		    xtype: 'container',
-		    border: false,
-		    layout: { type: 'vbox', align: 'stretch' },
-		    margin: '0 0 0 5',
-		    split: true,
-		    width: 200,
-		    items: [{ html: "A TEST" }],
-		    listeners: {
-			resize: function(panel, width, height) {
-			    var viewWidth = me.getSize().width;
-			    if (width > viewWidth - 100) {
-				panel.setWidth(viewWidth - 100);
-			    }
+		    xtype: 'pmgPanelConfig',
+		    items: [
+			{
+			    xtype: 'panel',
+			    title: 'Mail Filter',
+			    itemId: 'filter',
+			    expandedOnInit: true,
+			    html: "Rules"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['filter'],
+			    title: 'Actions',
+			    itemId: 'filter-actions',
+			    html: "Actions"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['filter'],
+			    title: 'Who',
+			    itemId: 'filter-who',
+			    html: "Who"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['filter'],
+			    title: 'What',
+			    itemId: 'filter-what',
+			    html: "What"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['filter'],
+			    title: 'When',
+			    itemId: 'filter-when',
+			    html: "When"
+			},
+
+			{
+			    xtype: 'panel',
+			    title: 'Configuration',
+			    itemId: 'configuration',
+			    expandedOnInit: true,
+			    html: "System Configuration"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['configuration'],
+			    title: 'Mail Proxy',
+			    itemId: 'config-mail-proxy',
+			    html: "Mail Proxy"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['configuration'],
+			    title: 'Spam Detector',
+			    itemId: 'config-spam',
+			    html: "Spam Detector"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['configuration'],
+			    title: 'Virus Detector',
+			    itemId: 'config-virus',
+			    html: "Virus Detector"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['configuration'],
+			    title: 'User Management',
+			    itemId: 'config-users',
+			    html: "User Management"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['configuration'],
+			    title: 'Cluster',
+			    itemId: 'config-cluster',
+			    html: "Cluster"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['configuration'],
+			    title: 'License',
+			    itemId: 'config-license',
+			    html: "License"
+			},
+
+			{
+			    xtype: 'panel',
+			    title: 'Administration',
+			    itemId: 'admin',
+			    expandedOnInit: true,
+			    html: "Server Administration"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['admin'],
+			    title: 'Statistics',
+			    itemId: 'statistics',
+			    html: "Statistics"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['admin'],
+			    title: 'Quarantine',
+			    itemId: 'quarantine',
+			    html: "Quarantine"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['admin'],
+			    title: 'Tracking Center',
+			    itemId: 'tracking',
+			    html: "Tracking Center"
+			},
+			{
+			    xtype: 'panel',
+			    groups: ['admin'],
+			    title: 'Queues',
+			    itemId: 'queues',
+			    html: "Queues"
 			}
-		    }
+		    ]
 		}
 	    ]
 	});
@@ -285,4 +355,3 @@ Ext.define('PMG.StdWorkspace', {
 	});
     }
 });
-

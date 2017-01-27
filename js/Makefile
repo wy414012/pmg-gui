@@ -1,6 +1,7 @@
 JSSRC= 				                 	\
 	Utils.js					\
 	LoginWindow.js					\
+	ConfigPanel.js					\
 	Workspace.js
 
 lint: ${JSSRC}
