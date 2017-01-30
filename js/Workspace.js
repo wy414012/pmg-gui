@@ -20,8 +20,8 @@ Ext.define('PMG.Workspace', {
 	var me = this;
 
 	me.loginData = loginData;
-	PMG.CSRFPreventionToken = loginData.CSRFPreventionToken;
-	PMG.UserName = loginData.username;
+	Proxmox.CSRFPreventionToken = loginData.CSRFPreventionToken;
+	Proxmox.UserName = loginData.username;
 
 	// creates a session cookie (expire = null)
 	// that way the cookie gets deleted after browser window close
@@ -33,8 +33,8 @@ Ext.define('PMG.Workspace', {
     showLogin: function() {
 	var me = this;
 
-	PMG.Utils.authClear();
-	PMG.UserName = null;
+	Proxmox.Utils.authClear();
+	Proxmox.UserName = null;
 	me.loginData = null;
 
 	if (!me.login) {
@@ -63,7 +63,7 @@ Ext.define('PMG.Workspace', {
 
 	me.callParent();
 
-        if (!PMG.Utils.authOK()) {
+        if (!Proxmox.Utils.authOK()) {
 	    me.showLogin();
 	} else {
 	    if (me.loginData) {
@@ -73,14 +73,14 @@ Ext.define('PMG.Workspace', {
 
 	Ext.TaskManager.start({
 	    run: function() {
-		var ticket = PMG.Utils.authOK();
-		if (!ticket || !PMG.UserName) {
+		var ticket = Proxmox.Utils.authOK();
+		if (!ticket || !Proxmox.UserName) {
 		    return;
 		}
 
 		Ext.Ajax.request({
 		    params: {
-			username: PMG.UserName,
+			username: Proxmox.UserName,
 			password: ticket
 		    },
 		    url: '/api2/json/access/ticket',
@@ -110,7 +110,7 @@ Ext.define('PMG.StdWorkspace', {
 	me.updateUserInfo();
 
 	if (loginData) {
-	    PMG.Utils.API2Request({
+	    Proxmox.Utils.API2Request({
 		url: '/version',
 		method: 'GET',
 		success: function(response) {
@@ -126,8 +126,8 @@ Ext.define('PMG.StdWorkspace', {
 
 	var ui = me.query('#userinfo')[0];
 
-	if (PMG.UserName) {
-	    var msg =  Ext.String.format(gettext("You are logged in as {0}"), "'" + PMG.UserName + "'");
+	if (Proxmox.UserName) {
+	    var msg =  Ext.String.format(gettext("You are logged in as {0}"), "'" + Proxmox.UserName + "'");
 	    ui.update('<div class="x-unselectable" style="white-space:nowrap;">' + msg + '</div>');
 	} else {
 	    ui.update('');

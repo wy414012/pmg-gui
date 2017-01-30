@@ -19,12 +19,18 @@
     <script type="text/javascript" src="/pve2/ext6/ext-all.js"></script>
     <script type="text/javascript" src="/pve2/ext6/charts.js"></script>
     [% END %]
+    <script type="text/javascript">
+      Proxmox = {
+        Setup: { auth_cookie_name: 'PMGAuthCookie' },
+        NodeName: '[% nodename %]',
+        UserName: '[% username %]',
+        CSRFPreventionToken: '[% csrftoken %]'
+      };
+    </script>
+    <script type="text/javascript" src="/proxmoxlib.js"></script>
     <script type="text/javascript" src="/pve2/js/pmgmanagerlib.js"></script>
     <script type="text/javascript" src="/pve2/ext6/locale/locale-[% lang %].js"></script>
     <script type="text/javascript">
-      if (typeof(PMG) === 'undefined') PMG = {};
-      PMG.UserName = '[% username %]'
-      PMG.CSRFPreventionToken = '[% csrftoken %]';
       Ext.History.fieldid = 'x-history-field';
       Ext.onReady(function() { Ext.create('PMG.StdWorkspace');});
     </script>    
