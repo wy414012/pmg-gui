@@ -6,8 +6,14 @@ Ext.define('PMG.ServerAdministration', {
 
     items: [
 	{
+	    xtype: 'proxmoxNodeServiceView',
             title: gettext('Services'),
-	    html: "Server Administration1"
+	    startOnlyServices: {
+		syslog: true,
+		pmgproxy: true,
+		pmgdaemon: true
+	    },
+	    nodename: Proxmox.NodeName
 	},
 	{
             title: gettext('Updates'),
