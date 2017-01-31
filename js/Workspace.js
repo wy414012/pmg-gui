@@ -213,6 +213,7 @@ Ext.define('PMG.StdWorkspace', {
 		    minWidth: 100,
 		    minHeight: 100,
 		    id: 'content',
+		    defaults: { layout: 'fit' },
 		    xtype: 'pmgPanelConfig',
 		    items: [
 			{

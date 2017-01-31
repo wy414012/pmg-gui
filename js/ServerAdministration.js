@@ -12,6 +12,12 @@ Ext.define('PMG.ServerAdministration', {
 	{
             title: gettext('Updates'),
 	    html: "Server Administration2"
+	},
+	{
+	    xtype: 'proxmoxNodeTasks',
+	    title: gettext('Tasks'),
+	    height: 'auto',
+	    nodename: Proxmox.NodeName
 	}
     ]
 });
