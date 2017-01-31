@@ -6,8 +6,9 @@ Ext.define('PMG.SystemConfiguration', {
 
     items: [
 	{
-            title: gettext('Network'),
-	    html: "Network"
+	    title: gettext('Network'),
+	    xtype: 'proxmoxNodeNetworkView',
+	    nodename: Proxmox.NodeName
 	},
 	{
 	    title: gettext('Time'),
