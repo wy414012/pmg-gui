@@ -11,6 +11,11 @@ Ext.define('PMG.SystemConfiguration', {
 	    nodename: Proxmox.NodeName
 	},
 	{
+	    title: gettext('DNS'),
+	    xtype: 'proxmoxNodeDNSView',
+	    nodename: Proxmox.NodeName
+	},
+	{
 	    title: gettext('Time'),
             xtype: 'proxmoxNodeTimeView',
 	    nodename: Proxmox.NodeName
