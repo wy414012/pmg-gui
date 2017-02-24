@@ -27,7 +27,7 @@ Ext.define('PMG.MailProxyRelaying', {
 		header: gettext('SMTP port'),
 		editor: {
 		    xtype: 'proxmoxWindowEdit',
-		    subject: gettext('SMTP port'),
+		    subject: gettext('SMTP Port'),
 		    items: {
 			xtype: 'proxmoxintegerfield',
 			name: 'relayport',
@@ -77,48 +77,16 @@ Ext.define('PMG.MailProxyRelaying', {
 
 	var baseurl = '/config/mail';
 
-	var reload = function() {
-	    me.rstore.load();
-	};
-
-	var run_editor = function() {
-	    var sm = me.getSelectionModel();
-	    var rec = sm.getSelection()[0];
-	    if (!rec) {
-		return;
-	    }
-
-	    var rowdef = rows[rec.data.key];
-	    if (!rowdef.editor) {
-		return;
-	    }
-
-	    var win;
-	    if (Ext.isString(rowdef.editor)) {
-		win = Ext.create(rowdef.editor, {
-		    confid: rec.data.key,
-		    url: '/api2/extjs/' + baseurl
-		});
-	    } else {
-		var config = Ext.apply({
-		    confid: rec.data.key,
-		    url: '/api2/extjs/' + baseurl
-		}, rowdef.editor);
-		win = Ext.createWidget(rowdef.editor.xtype, config);
-		win.load();
-	    }
-
-	    win.show();
-	    win.on('destroy', reload);
-	};
-
 	Ext.apply(me, {
-	    url: '/api2/json/' + baseurl,
+	    url: '/api2/json' + baseurl,
+	    editorConfig: {
+		url: '/api2/extjs' + baseurl,
+	    },
 	    interval: 5000,
 	    cwidth1: 200,
 	    rows: rows,
 	    listeners: {
-		itemdblclick: run_editor
+		itemdblclick: me.run_editor
 	    }
 	});
 

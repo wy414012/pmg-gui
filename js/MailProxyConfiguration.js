@@ -11,7 +11,7 @@ Ext.define('PMG.MailProxyConfiguration', {
 	},
 	{
 	    title: gettext('Ports'),
-	    html: "Ports",
+	    xtype: 'pmgMailProxyPorts'
 	},
 	{
             title: gettext('Options'),

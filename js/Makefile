@@ -5,6 +5,7 @@ JSSRC= 				                 	\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\
+	MailProxyPorts.js				\
 	MailProxyConfiguration.js			\
 	ConfigPanel.js					\
 	Workspace.js
