@@ -264,7 +264,7 @@ Ext.define('PMG.StdWorkspace', {
 			    groups: ['configuration'],
 			    title: 'Mail Proxy',
 			    itemId: 'config-mail-proxy',
-			    html: "Mail Proxy"
+			    items: [{ xtype: 'pmgMailProxyConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
