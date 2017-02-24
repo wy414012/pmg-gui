@@ -5,85 +5,41 @@ Ext.define('PMG.MailProxyOptions', {
     initComponent : function() {
 	var me = this;
 
-	var register_bool = function(cfg, name, subject, defaultValue, labelWidth) {
-	    cfg[name] = {
-		required: true,
-		defaultValue: defaultValue,
-		header: subject,
-		renderer: Proxmox.Utils.format_boolean,
-		editor: {
-		    xtype: 'proxmoxWindowEdit',
-		    subject: subject,
-		    items: {
-			xtype: 'proxmoxcheckbox',
-			name: name,
-			uncheckedValue: 0,
-			defaultValue: defaultValue,
-			deleteDefaultValue: true,
-			labelWidth: labelWidth,
-			fieldLabel: subject
-		    }
-		}
-	    };
-	};
+	me.add_integer_row('maxsize', gettext('Message Size (bytes)'),
+			   { defaultValue: 1024*1024*10,
+			     minValue: 1024, deleteEmpty: true });
 
-	var register_integer = function(cfg, name, subject, defaultValue,
-					minValue, maxValue, labelWidth) {
-	    cfg[name] = {
-		required: true,
-		defaultValue: defaultValue,
-		header: subject,
-		editor: {
-		    xtype: 'proxmoxWindowEdit',
-		    subject: subject,
-		    items: {
-			xtype: 'proxmoxintegerfield',
-			name: 'name',
-			minValue: minValue,
-			maxValue: maxValue,
-			deleteEmpty: true,
-			value: defaultValue,
-			labelWidth: labelWidth,
-			fieldLabel: subject
-		    }
-		}
-	    };
-	};
+	me.add_boolean_row('rejectunknown', gettext('Reject Unknown Clients'));
 
-	var rows = {};
+	me.add_boolean_row('rejectunknownsender', gettext('Reject Unknown Senders'));
 
-	register_integer(rows, 'maxsize', gettext('Message Size (bytes)'),
-			 1024*1024*10, 1024, undefined, 150);
+	me.add_boolean_row('helotests', gettext('SMTP HELO checks'));
 
-	register_bool(rows, 'rejectunknown', gettext('Reject Unknown Clients'), 0, 150);
-
-	register_bool(rows, 'rejectunknownsender', gettext('Reject Unknown Senders'), 0, 150);
-
-	register_bool(rows, 'helotests', gettext('SMTP HELO checks'), 0, 150);
-
-	register_bool(rows, 'use_rbl', gettext('Use RBL checks'), 1, 150);
+	me.add_boolean_row('use_rbl', gettext('Use RBL checks'),
+			   { defaultValue: 1 });
 
 	// fixme: verify receivers
 
-	register_bool(rows, 'greylist', gettext('Use Greylisting'), 1, 150);
+	me.add_boolean_row('greylist', gettext('Use Greylisting'),
+			   { defaultValue: 1 });
 
-	register_bool(rows, 'spf', gettext('Use SPF'), 1, 100);
+	me.add_boolean_row('spf', gettext('Use SPF'), { defaultValue: 1 });
 
-	register_bool(rows, 'hide_received', gettext('Hide Internal Hosts'), 0, 150);
+	me.add_boolean_row('hide_received', gettext('Hide Internal Hosts'));
 
-	register_integer(rows, 'dwarning', gettext('Delay Warning Time (hours)'),
-			 4, 0, undefined, 200);
+	me.add_integer_row('dwarning', gettext('Delay Warning Time (hours)'),
+			   { defaultValue: 4, minValue: 0 });
 
-	register_integer(rows, 'conn_count_limit', gettext('Client Connection Count Limit'),
-			 50, 0, 65535, 200);
+	me.add_integer_row('conn_count_limit', gettext('Client Connection Count Limit'),
+			   { defaultValue: 50, minValue: 0, maxValue: 65535 });
 
-	register_integer(rows, 'conn_rate_limit', gettext('Client Connection Rate Limit'),
-			 0, 0, undefined, 200);
+	me.add_integer_row('conn_rate_limit', gettext('Client Connection Rate Limit'),
+			   { defaultValue: 0, minValue: 0 });
 
-	register_integer(rows, 'message_rate_limit', gettext('Client Message Rate Limit'),
-			 0, 0, undefined, 200);
+	me.add_integer_row('message_rate_limit', gettext('Client Message Rate Limit'),
+			   { defaultValue: 0, minValue: 0 });
 
-	rows.banner = {
+	me.rows.banner = {
 	    required: true,
 	    defaultValue: 'ESMTP Proxmox',
 	    header: gettext('SMTPD Banner'),
@@ -108,7 +64,6 @@ Ext.define('PMG.MailProxyOptions', {
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
-	    rows: rows,
 	    listeners: {
 		itemdblclick: me.run_editor
 	    }
