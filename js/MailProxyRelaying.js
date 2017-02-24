@@ -96,13 +96,11 @@ Ext.define('PMG.MailProxyRelaying', {
 	    var win;
 	    if (Ext.isString(rowdef.editor)) {
 		win = Ext.create(rowdef.editor, {
-		    pveSelNode: me.pveSelNode,
 		    confid: rec.data.key,
 		    url: '/api2/extjs/' + baseurl
 		});
 	    } else {
 		var config = Ext.apply({
-		    pveSelNode: me.pveSelNode,
 		    confid: rec.data.key,
 		    url: '/api2/extjs/' + baseurl
 		}, rowdef.editor);
@@ -117,12 +115,10 @@ Ext.define('PMG.MailProxyRelaying', {
 	Ext.apply(me, {
 	    url: '/api2/json/' + baseurl,
 	    interval: 5000,
-	    cwidth1: 250,
-	    //tbar: [ edit_btn, revert_btn ],
+	    cwidth1: 200,
 	    rows: rows,
 	    listeners: {
 		itemdblclick: run_editor
-		//selectionchange: set_button_status
 	    }
 	});
 
@@ -130,9 +126,5 @@ Ext.define('PMG.MailProxyRelaying', {
 
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
-
-	//me.rstore.on('datachanged', function() {
-	//set_button_status();
-	//});
     }
 });
