@@ -53,23 +53,69 @@ Ext.define('PMG.RelayDomains', {
 	    }
 	});
 
+	var run_editor = function() {
+	    var rec = me.selModel.getSelection()[0];
+	    if (!rec) {
+		return;
+	    }
+
+	    var config = {
+		url: "/api2/extjs/config/domains/" + rec.data.domain,
+		method: 'PUT',
+		subject: gettext("Relay Domain"),
+		items: [
+		    {
+			xtype: 'displayfield',
+			name: 'domain',
+			fieldLabel: gettext("Relay Domain")
+		    },
+		    {
+			xtype: 'textfield',
+			name: 'comment',
+			fieldLabel: gettext("Comment")
+		    }
+		]
+	    };
+
+	    var win = Ext.createWidget('proxmoxWindowEdit', config);
+
+	    win.load();
+	    win.on('destroy', reload);
+	    win.show();
+	};
+
 	var tbar = [
+            {
+		xtype: 'proxmoxButton',
+		text: gettext('Edit'),
+		disabled: true,
+		selModel: me.selModel,
+		handler: run_editor
+            },
             {
 		text: gettext('Create'),
 		handler: function() {
 		    var config = {
 			method: 'POST',
-			create: true,
 			url: "/api2/extjs/config/domains",
+			create: true,
 			subject: gettext("Relay Domain"),
-			items: {
-			    xtype: 'proxmoxtextfield',
-			    name: 'domain',
-			    fieldLabel: gettext("Relay Domain")
-			}
+			items: [
+			    {
+				xtype: 'proxmoxtextfield',
+				name: 'domain',
+				fieldLabel: gettext("Relay Domain")
+			    },
+			    {
+				xtype: 'proxmoxtextfield',
+				name: 'comment',
+				fieldLabel: gettext("Comment")
+			    }
+			]
 		    };
 
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
+
 		    win.on('destroy', reload);
 		    win.show();
 		}
@@ -101,6 +147,7 @@ Ext.define('PMG.RelayDomains', {
 		}
 	    ],
 	    listeners: {
+		itemdblclick: run_editor,
 		activate: reload
 	    }
 	});
