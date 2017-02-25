@@ -27,12 +27,12 @@ Ext.define('PMG.RelayDomains', {
             store.load();
         };
 
-	var sm = Ext.create('Ext.selection.RowModel', {});
+	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
 	var remove_btn = Ext.createWidget('proxmoxButton', {
 	    text: gettext('Remove'),
 	    disabled: true,
-	    selModel: sm,
+	    selModel: me.selModel,
 	    confirmMsg: function (rec) {
 		return Ext.String.format(
 		    gettext('Are you sure you want to remove entry {0}'),
@@ -81,7 +81,6 @@ Ext.define('PMG.RelayDomains', {
 
 	Ext.apply(me, {
 	    store: store,
-	    selModel: sm,
 	    tbar: tbar,
 	    viewConfig: {
 		trackOver: false
