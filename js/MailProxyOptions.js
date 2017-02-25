@@ -18,7 +18,31 @@ Ext.define('PMG.MailProxyOptions', {
 	me.add_boolean_row('use_rbl', gettext('Use RBL checks'),
 			   { defaultValue: 1 });
 
-	// fixme: verify receivers
+	me.rows.verifyreceivers = {
+	    required: true,
+	    header: gettext('Verify Receivers'),
+	    renderer: function(value) {
+		if (value === undefined) {
+		    return Proxmox.Utils.noText;
+		}
+		return Proxmox.Utils.yesText + ' (' + value + ')';
+	    },
+	    editor: {
+		xtype: 'proxmoxWindowEdit',
+		subject: gettext('Verify Receivers'),
+		items: {
+		    xtype: 'proxmoxKVComboBox',
+		    name: 'verifyreceivers',
+		    value: '__default__',
+		    comboItems: [
+			['__default__', Proxmox.Utils.noText],
+			['450', Proxmox.Utils.yesText + ' (450)'],
+			['550', Proxmox.Utils.yesText + ' (550)']],
+		    deleteEmpty: true,
+		    fieldLabel: gettext('Verify Receivers')
+		}
+	    }
+	};
 
 	me.add_boolean_row('greylist', gettext('Use Greylisting'),
 			   { defaultValue: 1 });
