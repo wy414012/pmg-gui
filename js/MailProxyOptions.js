@@ -63,21 +63,8 @@ Ext.define('PMG.MailProxyOptions', {
 	me.add_integer_row('message_rate_limit', gettext('Client Message Rate Limit'),
 			   { defaultValue: 0, minValue: 0 });
 
-	me.rows.banner = {
-	    required: true,
-	    defaultValue: 'ESMTP Proxmox',
-	    header: gettext('SMTPD Banner'),
-	    editor: {
-		xtype: 'proxmoxWindowEdit',
-		subject: gettext('SMTPD Banner'),
-		items: {
-		    xtype: 'proxmoxtextfield',
-		    name: 'banner',
-		    deleteEmpty: true,
-		    fieldLabel: gettext('SMTPD Banner')
-		}
-	    }
-	};
+	me.add_text_row('banner', gettext('SMTPD Banner'),
+			{ defaultValue: 'ESMTP Proxmox' });
 
 	var baseurl = '/config/mail';
 
