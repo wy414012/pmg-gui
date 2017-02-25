@@ -5,46 +5,13 @@ Ext.define('PMG.MailProxyPorts', {
     initComponent : function() {
 	var me = this;
 
-	var rows = {
-	    ext_port: {
-		required: true,
-		defaultValue: 26,
-		header: gettext('External SMTP Port'),
-		editor: {
-		    xtype: 'proxmoxWindowEdit',
-		    subject: gettext('External SMTP Port'),
-		    items: {
-			xtype: 'proxmoxintegerfield',
-			name: 'ext_port',
-			minValue: 1,
-			maxValue: 65535,
-			deleteEmpty: true,
-			value: 26,
-			labelWidth: 150,
-			fieldLabel: gettext('External SMTP Port')
-		    }
-		}
-	    },
-	    int_port: {
-		required: true,
-		defaultValue: 25,
-		header: gettext('Internal SMTP Port'),
-		editor: {
-		    xtype: 'proxmoxWindowEdit',
-		    subject: gettext('Internal SMTP Port'),
-		    items: {
-			xtype: 'proxmoxintegerfield',
-			name: 'int_port',
-			minValue: 1,
-			maxValue: 65535,
-			deleteEmpty: true,
-			value: 25,
-			labelWidth: 150,
-			fieldLabel: gettext('Internal SMTP Port')
-		    }
-		}
-	    }
-	};
+	me.add_integer_row('ext_port', gettext('External SMTP Port'),
+			   { defaultValue: 26, deleteEmpty: true,
+			     minValue: 1, maxValue: 65535 });
+
+	me.add_integer_row('int_port', gettext('Internal SMTP Port'),
+			   { defaultValue: 25, deleteEmpty: true,
+			     minValue: 1, maxValue: 65535 });
 
 	var baseurl = '/config/mail';
 
@@ -55,7 +22,6 @@ Ext.define('PMG.MailProxyPorts', {
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
-	    rows: rows,
 	    listeners: {
 		itemdblclick: me.run_editor
 	    }
