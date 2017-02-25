@@ -5,43 +5,17 @@ Ext.define('PMG.MailProxyRelaying', {
     initComponent : function() {
 	var me = this;
 
-	me.rows.relay = {
-	    required: true,
-	    defaultValue: Proxmox.Utils.noneText,
-	    header: gettext('Default Relay'),
-	    editor: {
-		xtype: 'proxmoxWindowEdit',
-		subject: gettext('Default Relay'),
-		items: {
-		    xtype: 'proxmoxtextfield',
-		    name: 'relay',
-		    deleteEmpty: true,
-		    fieldLabel: gettext('Default Relay')
-		}
-	    }
-	};
+	me.add_text_row('relay', gettext('Default Relay'),
+			{ defaultValue: Proxmox.Utils.noneText });
 
 	me.add_integer_row('relayport', gettext('SMTP Port'),
 			   { defaultValue: 25, deleteEmpty: true,
 			     minValue: 1, maxValue: 65535 });
 
-	me.add_boolean_row('relaynomx', ettext('Disable MX lookup'));
+	me.add_boolean_row('relaynomx', gettext('Disable MX lookup'));
 
-	me.rows.smarthost = {
-	    required: true,
-	    defaultValue: Proxmox.Utils.noneText,
-	    header: gettext('Smarthost'),
-	    editor: {
-		xtype: 'proxmoxWindowEdit',
-		subject: gettext('Smarthost'),
-		items: {
-		    xtype: 'proxmoxtextfield',
-		    name: 'smarthost',
-		    deleteEmpty: true,
-		    fieldLabel: gettext('Smarthost')
-		}
-	    }
-	};
+	me.add_text_row('smarthost', gettext('Smarthost'),
+			{ defaultValue: Proxmox.Utils.noneText });
 
 	var baseurl = '/config/mail';
 
