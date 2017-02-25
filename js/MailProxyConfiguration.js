@@ -10,6 +10,10 @@ Ext.define('PMG.MailProxyConfiguration', {
 	    xtype: 'pmgMailProxyRelaying'
 	},
 	{
+	    title: gettext('Relay Domains'),
+	    xtype: 'pmgRelayDomains'
+	},
+	{
 	    title: gettext('Ports'),
 	    xtype: 'pmgMailProxyPorts'
 	},
