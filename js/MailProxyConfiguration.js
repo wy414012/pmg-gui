@@ -23,7 +23,7 @@ Ext.define('PMG.MailProxyConfiguration', {
 	},
 	{
             title: gettext('Transports'),
-	    html: "Transports"
+	    xtype: 'pmgTransport'
 	},
 	{
             title: gettext('Networks'),

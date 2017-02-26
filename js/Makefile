@@ -7,8 +7,9 @@ JSSRC= 				                 	\
 	MailProxyRelaying.js				\
 	MailProxyPorts.js				\
 	MailProxyOptions.js				\
-	MailProxyConfiguration.js			\
+	Transport.js					\
 	RelayDomains.js					\
+	MailProxyConfiguration.js			\
 	ConfigPanel.js					\
 	Workspace.js
 
