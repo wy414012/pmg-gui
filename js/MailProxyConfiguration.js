@@ -31,7 +31,7 @@ Ext.define('PMG.MailProxyConfiguration', {
 	},
 	{
             title: gettext('TLS'),
-	    html: "TLS"
+	    xtype: 'pmgMailProxyTLS'
 	},
 	{
             title: gettext('Whitelist'),
