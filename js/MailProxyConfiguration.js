@@ -27,7 +27,7 @@ Ext.define('PMG.MailProxyConfiguration', {
 	},
 	{
             title: gettext('Networks'),
-	    html: "Networks"
+	    xtype: 'pmgMyNetworks'
 	},
 	{
             title: gettext('TLS'),
