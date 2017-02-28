@@ -11,10 +11,6 @@ Ext.define('PMG.SpamDetectorConfiguration', {
 	    xtype: 'pmgSpamDetectorOptions'
 	},
 	{
-	    title: gettext('Languages'),
-	    html: 'Languages'
-	},
-	{
 	    title: gettext('Quarantine'),
 	    html: 'Quarantine'
 	},
