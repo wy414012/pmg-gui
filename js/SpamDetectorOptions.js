@@ -14,6 +14,9 @@ Ext.define('PMG.SpamDetectorOptions', {
 	me.add_boolean_row('rbl_checks', gettext('Use RBL checks'),
 			   { defaultValue: 1 });
 
+	me.add_boolean_row('use_razor', gettext('Use Razor2 checks'),
+			   { defaultValue: 1 });
+
 	me.add_integer_row('maxspamsize', gettext('Max Spam Size (bytes)'),
 			   { defaultValue: 200*1024,
 			     minValue: 64, deleteEmpty: true });
