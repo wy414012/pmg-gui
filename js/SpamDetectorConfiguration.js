@@ -12,7 +12,7 @@ Ext.define('PMG.SpamDetectorConfiguration', {
 	},
 	{
 	    title: gettext('Quarantine'),
-	    html: 'Quarantine'
+	    xtype: 'pmgQuarantineOptions'
 	},
 	{
 	    title: gettext('Backscatter'),
