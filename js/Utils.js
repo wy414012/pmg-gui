@@ -23,10 +23,12 @@ Ext.define('PMG.Utils', {
 	1000: {
 	    subdir: 'regex',
 	    subject: gettext("Regular Expression"),
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
 		    name: 'regex',
+		    labelWidth: 150,
 		    fieldLabel: gettext("Regular Expression")
 		}
 	    ]
@@ -34,10 +36,13 @@ Ext.define('PMG.Utils', {
 	1009: {
 	    subdir: 'receiver_regex',
 	    subject: gettext("Regular Expression"),
+	    receivertest: true,
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
 		    name: 'regex',
+		    labelWidth: 150,
 		    fieldLabel: gettext("Regular Expression")
 		}
 	    ]
@@ -45,6 +50,7 @@ Ext.define('PMG.Utils', {
 	1001: {
 	    subdir: 'email',
 	    subject: gettext("Email"),
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
@@ -56,6 +62,8 @@ Ext.define('PMG.Utils', {
 	1007: {
 	    subdir: 'receiver',
 	    subject: gettext("Email"),
+	    receivertest: true,
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
@@ -67,6 +75,7 @@ Ext.define('PMG.Utils', {
 	1002: {
 	    subdir: 'domain',
 	    subject: gettext("Domain"),
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
@@ -78,6 +87,8 @@ Ext.define('PMG.Utils', {
 	1008: {
 	    subdir: 'receiver_domain',
 	    subject: gettext("Domain"),
+	    receivertest: true,
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
@@ -89,6 +100,7 @@ Ext.define('PMG.Utils', {
 	1003: {
 	    subdir: 'ip',
 	    subject: gettext("IP Address"),
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
@@ -100,6 +112,7 @@ Ext.define('PMG.Utils', {
 	1004: {
 	    subdir: 'network',
 	    subject: gettext("IP Network"),
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
