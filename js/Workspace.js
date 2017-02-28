@@ -218,7 +218,7 @@ Ext.define('PMG.StdWorkspace', {
 		    items: [
 			{
 			    xtype: 'panel',
-			    title: 'Mail Filter',
+			    title: gettext('Mail Filter'),
 			    itemId: 'filter',
 			    expandedOnInit: true,
 			    items: [{ xtype: 'pmgRuleConfiguration' }]
@@ -262,35 +262,35 @@ Ext.define('PMG.StdWorkspace', {
 			{
 			    xtype: 'panel',
 			    groups: ['configuration'],
-			    title: 'Mail Proxy',
+			    title: gettext('Mail Proxy'),
 			    itemId: 'config-mail-proxy',
 			    items: [{ xtype: 'pmgMailProxyConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['configuration'],
-			    title: 'Spam Detector',
+			    title: gettext('Spam Detector'),
 			    itemId: 'config-spam',
 			    items: [{ xtype: 'pmgSpamDetectorConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['configuration'],
-			    title: 'Virus Detector',
+			    title: gettext('Virus Detector'),
 			    itemId: 'config-virus',
-			    html: "Virus Detector"
+			    items: [{ xtype: 'pmgVirusDetectorConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['configuration'],
-			    title: 'User Management',
+			    title: gettext('User Management'),
 			    itemId: 'config-users',
 			    html: "User Management"
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['configuration'],
-			    title: 'Cluster',
+			    title: gettext('Cluster'),
 			    itemId: 'config-cluster',
 			    html: "Cluster"
 			},
@@ -304,7 +304,7 @@ Ext.define('PMG.StdWorkspace', {
 
 			{
 			    xtype: 'panel',
-			    title: 'Administration',
+			    title: gettext('Administration'),
 			    itemId: 'admin',
 			    expandedOnInit: true,
 			    items: [{ xtype: 'pmgServerAdministration' }]
@@ -312,28 +312,28 @@ Ext.define('PMG.StdWorkspace', {
 			{
 			    xtype: 'panel',
 			    groups: ['admin'],
-			    title: 'Statistics',
+			    title: gettext('Statistics'),
 			    itemId: 'statistics',
 			    html: "Statistics"
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['admin'],
-			    title: 'Quarantine',
+			    title: gettext('Quarantine'),
 			    itemId: 'quarantine',
 			    html: "Quarantine"
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['admin'],
-			    title: 'Tracking Center',
+			    title: gettext('Tracking Center'),
 			    itemId: 'tracking',
 			    html: "Tracking Center"
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['admin'],
-			    title: 'Queues',
+			    title: gettext('Queues'),
 			    itemId: 'queues',
 			    html: "Queues"
 			}

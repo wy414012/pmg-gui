@@ -17,6 +17,8 @@ JSSRC= 				                 	\
 	SpamDetectorOptions.js				\
 	QuarantineOptions.js				\
 	SpamDetectorConfiguration.js			\
+	VirusDetectorOptions.js				\
+	VirusDetectorConfiguration.js			\
 	ConfigPanel.js					\
 	Workspace.js
 
