@@ -8,8 +8,8 @@ Ext.define('PMG.Utils', {
  
     // this singleton contains miscellaneous utilities
 
-    yesText: gettext('Yes'),
-    noText: gettext('No'),
+    senderText: gettext('Sender'),
+    receiverText: gettext('Receiver'),
 			  
     constructor: function() {
 	var me = this;

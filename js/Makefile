@@ -12,6 +12,7 @@ JSSRC= 				                 	\
 	MyNetworks.js					\
 	RelayDomains.js					\
 	MailProxyConfiguration.js			\
+	SMTPWhitelist.js				\
 	ConfigPanel.js					\
 	Workspace.js
 

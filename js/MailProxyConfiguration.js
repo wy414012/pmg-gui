@@ -35,7 +35,7 @@ Ext.define('PMG.MailProxyConfiguration', {
 	},
 	{
             title: gettext('Whitelist'),
-	    html: "whitelist"
+	    xtype: "pmgSMTPWhitelist"
 	}
     ]
 });
