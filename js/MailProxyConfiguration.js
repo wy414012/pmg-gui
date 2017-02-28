@@ -2,7 +2,8 @@ Ext.define('PMG.MailProxyConfiguration', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.pmgMailProxyConfiguration',
 
-    title: gettext('Mail Proxy Configuration'),
+    title: gettext('Configuration') + ': ' +
+	gettext('Mail Proxy'),
 
     items: [
 	{

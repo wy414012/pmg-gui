@@ -2,7 +2,8 @@ Ext.define('PMG.SpamDetectorConfiguration', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.pmgSpamDetectorConfiguration',
 
-    title: gettext('Spam Detector Configuration'),
+    title: gettext('Configuration') + ': ' +
+	gettext('Spam Detector'),
 
     items: [
 	{
