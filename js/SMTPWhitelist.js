@@ -87,104 +87,13 @@ Ext.define('PMG.SMTPWhitelist', {
 	    }
 	});
 
-	var editors = {
-	    1000: {
-		subdir: 'regex',
-		subject: gettext("Regular Expression"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'regex',
-			fieldLabel: gettext("Regular Expression")
-		    }
-		]
-	    },
-	    1009: {
-		subdir: 'receiver_regex',
-		subject: gettext("Regular Expression"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'regex',
-			fieldLabel: gettext("Regular Expression")
-		    }
-		]
-	    },
-	    1001: {
-		subdir: 'email',
-		subject: gettext("Email"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'email',
-			fieldLabel: gettext("Email")
-		    }
-		]
-	    },
-	    1007: {
-		subdir: 'receiver',
-		subject: gettext("Email"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'email',
-			fieldLabel: gettext("Email")
-		    }
-		]
-	    },
-	    1002: {
-		subdir: 'domain',
-		subject: gettext("Domain"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'domain',
-			fieldLabel: gettext("Domain")
-		    }
-		]
-	    },
-	    1008: {
-		subdir: 'receiver_domain',
-		subject: gettext("Domain"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'domain',
-			fieldLabel: gettext("Domain")
-		    }
-		]
-	    },
-	    1003: {
-		subdir: 'ip',
-		subject: gettext("IP Address"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'ip',
-			fieldLabel: gettext("IP Address")
-		    }
-		]
-	    },
-	    1004: {
-		subdir: 'network',
-		subject: gettext("IP Network"),
-		items: [
-		    {
-			xtype: 'textfield',
-			name: 'cidr',
-			fieldLabel: gettext("IP Network")
-		    }
-		]
-	    }
-	};
-	
 	var run_editor = function() {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
 
-	    var editor = editors[rec.data.otype];
+	    var editor = PMG.Utils.object_editors[rec.data.otype];
 	    if (!editor) {
 		return;
 	    }
@@ -196,7 +105,7 @@ Ext.define('PMG.SMTPWhitelist', {
 	    config.subject = editor.subject + ' (' + direction + ')'; 
 	    
 	    config.url = "/config/whitelist/" + editor.subdir +
-		'/' + rec.data.id,
+		'/' + rec.data.id;
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
 
