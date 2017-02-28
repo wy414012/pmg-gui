@@ -8,7 +8,7 @@ Ext.define('PMG.SpamDetectorConfiguration', {
     items: [
 	{
 	    title: gettext('Options'),
-	    html: 'Options'
+	    xtype: 'pmgSpamDetectorOptions'
 	},
 	{
 	    title: gettext('Languages'),
