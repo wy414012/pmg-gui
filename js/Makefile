@@ -13,6 +13,7 @@ JSSRC= 				                 	\
 	RelayDomains.js					\
 	MailProxyConfiguration.js			\
 	SMTPWhitelist.js				\
+	SpamDetectorLanguages.js			\
 	SpamDetectorOptions.js				\
 	SpamDetectorConfiguration.js			\
 	ConfigPanel.js					\

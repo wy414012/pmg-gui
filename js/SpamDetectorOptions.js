@@ -21,6 +21,15 @@ Ext.define('PMG.SpamDetectorOptions', {
 			   { defaultValue: 200*1024,
 			     minValue: 64, deleteEmpty: true });
 
+	me.rows.languages = {
+	    required: true,
+	    header: gettext('Languages'),
+	    editor: 'PMG.SpamDetectorLanguages',
+	    renderer: function(value) {
+		return value ? value : 'all';
+	    }
+	};
+
 	var baseurl = '/config/spam';
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
