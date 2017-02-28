@@ -271,7 +271,7 @@ Ext.define('PMG.StdWorkspace', {
 			    groups: ['configuration'],
 			    title: 'Spam Detector',
 			    itemId: 'config-spam',
-			    html: "Spam Detector"
+			    items: [{ xtype: 'pmgSpamDetectorConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
