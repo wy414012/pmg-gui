@@ -18,31 +18,22 @@ Ext.define('PMG.MailProxyOptions', {
 	me.add_boolean_row('use_rbl', gettext('Use RBL checks'),
 			   { defaultValue: 1 });
 
-	me.rows.verifyreceivers = {
-	    required: true,
-	    header: gettext('Verify Receivers'),
-	    renderer: function(value) {
-		if (value === undefined) {
-		    return Proxmox.Utils.noText;
-		}
-		return Proxmox.Utils.yesText + ' (' + value + ')';
-	    },
-	    editor: {
-		xtype: 'proxmoxWindowEdit',
-		subject: gettext('Verify Receivers'),
-		items: {
-		    xtype: 'proxmoxKVComboBox',
-		    name: 'verifyreceivers',
-		    value: '__default__',
-		    comboItems: [
-			['__default__', Proxmox.Utils.noText],
-			['450', Proxmox.Utils.yesText + ' (450)'],
-			['550', Proxmox.Utils.yesText + ' (550)']],
-		    deleteEmpty: true,
-		    fieldLabel: gettext('Verify Receivers')
-		}
+	var render_verifyreceivers = function(value) {
+	    if (value === undefined || value === '__default__') {
+		return Proxmox.Utils.noText;
 	    }
+	    return Proxmox.Utils.yesText + ' (' + value + ')';
 	};
+
+	me.add_combobox_row('verifyreceivers', gettext('Verify Receivers'), {
+	    renderer: render_verifyreceivers,
+	    defaultValue: '__default__',
+	    deleteEmpty: true,
+	    comboItems: [
+		['__default__', render_verifyreceivers('__default__') ],
+		['450', render_verifyreceivers('450') ],
+		['550', render_verifyreceivers('550') ]]
+	});
 
 	me.add_boolean_row('greylist', gettext('Use Greylisting'),
 			   { defaultValue: 1 });
