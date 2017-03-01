@@ -16,7 +16,7 @@ Ext.define('PMG.VirusDetectorConfiguration', {
 	},
 	{
 	    title: gettext('Quarantine'),
-	    html: 'Quarantine'
+	    xtype: 'pmgVirusQuarantineOptions'
 	}
     ]
 });
