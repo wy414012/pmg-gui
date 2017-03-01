@@ -55,7 +55,7 @@ Ext.define('PMG.MailProxyOptions', {
 			   { defaultValue: 0, minValue: 0 });
 
 	me.add_text_row('banner', gettext('SMTPD Banner'),
-			{ defaultValue: 'ESMTP Proxmox' });
+			{ deleteEmpty: true, defaultValue: 'ESMTP Proxmox' });
 
 	var baseurl = '/config/mail';
 

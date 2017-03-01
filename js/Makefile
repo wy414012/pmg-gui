@@ -15,7 +15,7 @@ JSSRC= 				                 	\
 	SMTPWhitelist.js				\
 	SpamDetectorLanguages.js			\
 	SpamDetectorOptions.js				\
-	QuarantineOptions.js				\
+	SpamQuarantineOptions.js			\
 	SpamDetectorConfiguration.js			\
 	VirusDetectorOptions.js				\
 	VirusDetectorConfiguration.js			\
