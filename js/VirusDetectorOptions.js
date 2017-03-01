@@ -12,6 +12,21 @@ Ext.define('PMG.VirusDetectorOptions', {
 			   { minValue: 1, defaultValue: 5,
 			     deleteEmpty: true });
 
+	me.add_integer_row('archivemaxfiles', gettext('Max files'),
+			   { minValue: 0, defaultValue: 1000,
+			     deleteEmpty: true });
+
+	me.add_integer_row('archivemaxsize', gettext('Max file size'),
+			   { minValue: 1000000, defaultValue: 25000000,
+			     deleteEmpty: true });
+
+	me.add_integer_row('maxscansize', gettext('Max scan size'),
+			   { minValue: 1000000, defaultValue: 100000000,
+			     deleteEmpty: true });
+
+	me.add_integer_row('maxcccount', gettext('Max credit card numbers'),
+			   { minValue: 0, defaultValue: 0,
+			     deleteEmpty: true });
 	
 	var baseurl = '/config/clamav';
 
