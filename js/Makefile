@@ -2,6 +2,9 @@ JSSRC= 				                 	\
 	Utils.js					\
 	LoginWindow.js					\
 	ServerAdministration.js				\
+	ObjectGroup.js					\
+	Who.js						\
+	WhoConfiguration.js				\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\

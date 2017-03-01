@@ -1,7 +1,9 @@
-Ext.define('PMG.SMTPWhitelist', {
+Ext.define('PMG.Who', {
     extend: 'Ext.grid.GridPanel',
-    alias: ['widget.pmgSMTPWhitelist'],
 
+    baseurl: undefined,
+    
+    otype_list: [],
 
     columns: [
 	{
@@ -11,13 +13,6 @@ Ext.define('PMG.SMTPWhitelist', {
 	    width: 200
 	},
 	{
-	    header: gettext('Direction'),
-	    dataIndex: 'receivertest',
-	    renderer: function(value) {
-		return value ? PMG.Utils.receiverText : PMG.Utils.senderText;
-	    }
-	},
-	{
 	    header: gettext('Value'),
 	    dataIndex: 'descr',
 	    renderer: Ext.String.htmlEncode,
@@ -25,23 +20,39 @@ Ext.define('PMG.SMTPWhitelist', {
 	}
     ],
 
-    viewConfig: {
-	trackOver: false
+    setBaseUrl: function(baseurl) {
+	var me = this;
+
+	me.baseurl = baseurl;
+
+	me.store.setProxy({
+	    type: 'proxmox',
+	    url: '/api2/json' + me.baseurl + '/objects'
+	});
+
+	me.store.load(function() {
+	    me.down('#addMenuButton').setDisabled(false);
+
+	});
     },
 
+    setObjectInfo: function(name, info) {
+	var me = this;
+
+	var html = '<b>' + Ext.String.htmlEncode(name) + '</b>';
+	html += "<br><br>";
+	html += Ext.String.htmlEncode(info);
+
+	me.down('#oginfo').update(html);
+	me.down('#ogdata').setHidden(false);
+    },
+    
     initComponent : function() {
 	var me = this;
 
 	me.store = new Ext.data.Store({
 	    model: 'pmg-object-list',
-	    proxy: {
-		type: 'proxmox',
-		url: "/api2/json/config/whitelist/objects"
-	    },
 	    sorters: [
-		{
-		    property : 'receivertest',
-		},
 		{
 		    property : 'otype',
 		    direction: 'ASC'
@@ -67,7 +78,7 @@ Ext.define('PMG.SMTPWhitelist', {
 	    },
 	    handler: function(btn, event, rec) {
 		Proxmox.Utils.API2Request({
-		    url: '/config/whitelist/objects/' + rec.data.id,
+		    url: me.baseurl + '/objects/'+ rec.data.id,
 		    method: 'DELETE',
 		    waitMsgTarget: me,
 		    callback: function() {
@@ -91,14 +102,9 @@ Ext.define('PMG.SMTPWhitelist', {
 		return;
 	    }
 
-	    var direction = rec.data.receivertest ?
-		PMG.Utils.receiverText : PMG.Utils.senderText;
-
 	    var config = Ext.apply({ method: 'PUT' }, editor);
-	    config.subject = editor.subject + ' (' + direction + ')';
 
-	    config.url = "/config/whitelist/" + editor.subdir +
-		'/' + rec.data.id;
+	    config.url = me.baseurl + '/' + editor.subdir + '/' + rec.data.id;
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
 
@@ -109,20 +115,19 @@ Ext.define('PMG.SMTPWhitelist', {
 
 	var menu_items = [];
 
-	Ext.Array.each([1000, 1009, 1001, 1007, 1002, 1008, 1003, 1004], function(otype) {
+	Ext.Array.each(me.otype_list, function(otype) {
 
 	    var editor = PMG.Utils.object_editors[otype];
 
-	    var direction = editor.receivertest ?
-		PMG.Utils.receiverText : PMG.Utils.senderText;
-
 	    var config = Ext.apply({ method: 'POST' }, editor);
-	    config.subject = editor.subject + ' (' + direction + ')';
 
-	    config.url = "/config/whitelist/" + editor.subdir;
 	    menu_items.push({
 		text: config.subject,
 		handler: function() {
+		    if (me.baseurl == undefined) {
+			return;
+		    }
+		    config.url = me.baseurl + '/' + editor.subdir;
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
 		    win.on('destroy', reload);
 		    win.show();
@@ -130,24 +135,48 @@ Ext.define('PMG.SMTPWhitelist', {
 	    });
 	});
 
-	me.tbar = [
-	    {
-		text: gettext('Add'),
-		menu: new Ext.menu.Menu({
-		    items: menu_items
-		})
-	    },
-	    {
-		xtype: 'proxmoxButton',
-		text: gettext('Edit'),
-		disabled: true,
-		selModel: me.selModel,
-		handler: run_editor
-            },
- 	    remove_btn
-        ];
-
-	Proxmox.Utils.monStoreErrors(me, me.store);
+	me.dockedItems = [];
+	
+	me.dockedItems.push({
+	    xtype: 'toolbar',
+	    dock: 'top',
+	    items: [
+		{
+		    text: gettext('Add'),
+		    disabled: true,
+		    itemId: 'addMenuButton',
+		    menu: new Ext.menu.Menu({
+			items: menu_items
+		    })
+		},
+		{
+		    xtype: 'proxmoxButton',
+		    text: gettext('Edit'),
+		    disabled: true,
+		    selModel: me.selModel,
+		    handler: run_editor
+		},
+ 		remove_btn
+	    ]
+	});
+	
+	me.dockedItems.push({
+	    dock: 'top',
+	    border: 1,
+	    layout: 'anchor',
+	    //hidden: true,
+	    itemId: 'ogdata',
+	    items: [
+		{
+		    xtype: 'component',
+		    anchor: '100%',
+		    itemId: 'oginfo',
+		    padding: 10,
+		    html: gettext('Please select an object.')
+		}
+	    ]
+	});
+    
 
 	Ext.apply(me, {
 	    listeners: {

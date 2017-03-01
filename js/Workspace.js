@@ -235,7 +235,7 @@ Ext.define('PMG.StdWorkspace', {
 			    groups: ['filter'],
 			    title: 'Who',
 			    itemId: 'filter-who',
-			    html: "Who"
+			    items: [{ xtype: 'pmgWhoConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
