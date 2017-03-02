@@ -41,7 +41,7 @@ Ext.define('PMG.Who', {
 
 	var html = '<b>' + Ext.String.htmlEncode(name) + '</b>';
 	html += "<br><br>";
-	html += Ext.String.htmlEncode(info);
+	html += Ext.String.htmlEncode(Ext.String.trim(info));
 
 	me.down('#oginfo').update(html);
 	me.down('#ogdata').setHidden(false);
@@ -171,6 +171,7 @@ Ext.define('PMG.Who', {
 		    xtype: 'component',
 		    anchor: '100%',
 		    itemId: 'oginfo',
+		    style: { 'white-space': 'pre' },
 		    padding: 10,
 		    html: gettext('Please select an object.')
 		}
