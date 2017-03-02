@@ -4,7 +4,7 @@ JSSRC= 				                 	\
 	ServerAdministration.js				\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\
-	WhoConfiguration.js				\
+	ObjectGroupConfiguration.js			\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\

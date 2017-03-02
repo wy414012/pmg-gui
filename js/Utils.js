@@ -11,6 +11,13 @@ Ext.define('PMG.Utils', {
     senderText: gettext('Sender'),
     receiverText: gettext('Receiver'),
 
+    oclass_text: {
+	who: gettext('Who Objects'),
+	what: gettext('What Objects'),
+	when: gettext('When Objects'),
+	action: gettext('Action Objects')
+    },
+    
     format_otype: function(otype) {
 	var editor = PMG.Utils.object_editors[otype];
 	if (editor) {

@@ -226,32 +226,32 @@ Ext.define('PMG.StdWorkspace', {
 			{
 			    xtype: 'panel',
 			    groups: ['filter'],
-			    title: 'Actions',
+			    title: PMG.Utils.oclass_text['action'],
 			    itemId: 'filter-actions',
-			    html: "Actions"
+			    items: [{ xtype: 'pmgActionConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['filter'],
-			    title: 'Who',
+			    title: PMG.Utils.oclass_text['who'],
 			    itemId: 'filter-who',
 			    items: [{ xtype: 'pmgWhoConfiguration' }]
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['filter'],
-			    title: 'What',
+			    title: PMG.Utils.oclass_text['what'],
 			    itemId: 'filter-what',
-			    html: "What"
+			    items: [{ xtype: 'pmgWhatConfiguration' }]
+
 			},
 			{
 			    xtype: 'panel',
 			    groups: ['filter'],
-			    title: 'When',
+			    title: PMG.Utils.oclass_text['when'],
 			    itemId: 'filter-when',
-			    html: "When"
+			    items: [{ xtype: 'pmgWhenConfiguration' }]
 			},
-
 			{
 			    xtype: 'panel',
 			    title: 'Configuration',
