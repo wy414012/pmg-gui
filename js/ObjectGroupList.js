@@ -23,6 +23,57 @@ Ext.define('PMG.ObjectGroupList', {
 
     subject: 'Object Group List', // please overwrite
 
+    baseurl: undefined,
+
+    inputItems: [
+	{
+	    xtype: 'textfield',
+	    name: 'name',
+	    fieldLabel: gettext('Name')
+	},
+	{
+	    xtype: 'textareafield',
+	    name: 'info',
+	    fieldLabel: gettext("Description")
+	}
+    ],
+
+    reload: function() {
+	var me = this;
+
+	var rec = me.selModel.getSelection()[0];
+        me.store.load(function() {
+	    if (rec) {
+		// try to selectprevious selection
+		var nrec = me.store.findRecord('id', rec.data.id);
+		me.selModel.select(nrec);
+	    }
+	});
+    },
+
+    run_editor: function() {
+	var me = this;
+
+	var rec = me.selModel.getSelection()[0];
+	if (!rec) {
+	    return;
+	}
+
+	var config = {
+	    url: "/api2/extjs" + me.baseurl +'/' + rec.data.id + '/config',
+	    method: 'PUT',
+	    subject: me.subject,
+	    width: 400,
+	    items: me.inputItems
+	};
+
+	var win = Ext.createWidget('proxmoxWindowEdit', config);
+
+	win.load();
+	win.on('destroy', me.reload, me);
+	win.show();
+    },
+
     initComponent : function() {
 	var me = this;
 
@@ -30,30 +81,19 @@ Ext.define('PMG.ObjectGroupList', {
 	    throw "ogclass not initialized";
 	}
 
-	var baseurl = "/config/ruledb/" + me.ogclass;
-	
-	var store = new Ext.data.Store({
+	me.baseurl = "/config/ruledb/" + me.ogclass;
+
+	me.store = new Ext.data.Store({
 	    model: 'pmg-object-group',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json" + baseurl,
+		url: "/api2/json" + me.baseurl,
 	    },
 	    sorters: {
 		property: 'name',
 		order: 'DESC'
 	    }
 	});
-
-        var reload = function() {
-	    var rec = me.selModel.getSelection()[0];
-            store.load(function() {
-		if (rec) {
-		    // try to selectprevious selection
-		    var nrec = store.findRecord('id', rec.data.id);
-		    me.selModel.select(nrec);
-		}
-	    });
-        };
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
@@ -68,11 +108,11 @@ Ext.define('PMG.ObjectGroupList', {
 	    },
 	    handler: function(btn, event, rec) {
 		Proxmox.Utils.API2Request({
-		    url: baseurl + '/' + rec.data.id,
+		    url: me.baseurl + '/' + rec.data.id,
 		    method: 'DELETE',
 		    waitMsgTarget: me,
 		    callback: function() {
-			reload();
+			me.reload();
 		    },
 		    failure: function (response, opts) {
 			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
@@ -81,73 +121,38 @@ Ext.define('PMG.ObjectGroupList', {
 	    }
 	});
 
-	var inputItems = [
-	    {
-		xtype: 'textfield',
-		name: 'name',
-		fieldLabel: gettext('Name')
-	    },
-	    {
-		xtype: 'textareafield',
-		name: 'info',
-		fieldLabel: gettext("Description")
-	    }
-	];
-
-	var run_editor = function() {
-	    var rec = me.selModel.getSelection()[0];
-	    if (!rec) {
-		return;
-	    }
-
-	    var config = {
-		url: "/api2/extjs" + baseurl +'/' + rec.data.id + '/config',
-		method: 'PUT',
-		subject: me.subject,
-		width: 400,
-		items: inputItems
-	    };
-
-	    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
-	    win.load();
-	    win.on('destroy', reload);
-	    win.show();
-	};
-
 	var tbar = [
             {
 		xtype: 'proxmoxButton',
 		text: gettext('Edit'),
 		disabled: true,
 		selModel: me.selModel,
-		handler: run_editor
+		handler: function() { me.run_editor(); }
             },
             {
 		text: gettext('Create'),
 		handler: function() {
 		    var config = {
 			method: 'POST',
-			url: "/api2/extjs" + baseurl,
+			url: "/api2/extjs" + me.baseurl,
 			create: true,
 			width: 400,
 			subject: me.subject,
-			items: inputItems
+			items: me.inputItems
 		    };
 
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
 
-		    win.on('destroy', reload);
+		    win.on('destroy', me.reload, me);
 		    win.show();
 		}
             },
 	    remove_btn
         ];
 
-	Proxmox.Utils.monStoreErrors(me, store);
+	Proxmox.Utils.monStoreErrors(me, me.store);
 
 	Ext.apply(me, {
-	    store: store,
 	    tbar: tbar,
 	    columns: [
 		{
@@ -159,13 +164,13 @@ Ext.define('PMG.ObjectGroupList', {
 		}
 	    ],
 	    listeners: {
-		itemdblclick: run_editor,
-		activate: reload
+		itemdblclick: function() { me.run_editor(); },
+		activate: function() { me.reload(); }
 	    }
 	});
 
 	me.callParent();
 
-	reload(); // initial load
+	me.reload(); // initial load
     }
 });
