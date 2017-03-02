@@ -9,6 +9,8 @@ Ext.define('PMG.ObjectGroup', {
     hideGroupInfo: false,
     showDirection: false, // only important for SMTP Whitelist
 
+    ogdata: undefined,
+
     setBaseUrl: function(baseurl) {
 	var me = this;
 
@@ -25,12 +27,14 @@ Ext.define('PMG.ObjectGroup', {
 	});
     },
 
-    setObjectInfo: function(name, info) {
+    setObjectInfo: function(ogdata) {
 	var me = this;
 
-	var html = '<b>' + Ext.String.htmlEncode(name) + '</b>';
+	me.ogdata = ogdata;
+
+	var html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
 	html += "<br><br>";
-	html += Ext.String.htmlEncode(Ext.String.trim(info));
+	html += Ext.String.htmlEncode(Ext.String.trim(me.ogdata.info));
 
 	me.down('#oginfo').update(html);
 	me.down('#ogdata').setHidden(false);
@@ -201,11 +205,20 @@ Ext.define('PMG.ObjectGroup', {
 		    itemId: 'oginfo',
 		    style: { 'white-space': 'pre' },
 		    padding: 10,
-		    html: gettext('Please select an object.')
+		    html: gettext('Please select an object.'),
+		    listeners: {
+			dblclick: {
+			    fn: function(e, t) {
+				if (me.ogdata === undefined) { return; }
+				me.fireEvent('dblclickOGInfo', me, e, t, me.ogdata);
+			    },
+			    element: 'el',
+			    scope: this,
+			}
+		    }
 		}
 	    ]
 	});
-
 
 	Ext.apply(me, {
 	    listeners: {
