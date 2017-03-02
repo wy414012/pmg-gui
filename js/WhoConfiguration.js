@@ -12,9 +12,10 @@ Ext.define('PMG.WhoConfiguration', {
     initComponent : function() {
 	var me = this;
 
-	var left = Ext.create('PMG.ObjectGroup', {
+	var left = Ext.create('PMG.ObjectGroupList', {
 	    width: 250,
 	    ogclass: me.ogclass,
+	    subject: me.title,
 	    border: false
 	});
 	

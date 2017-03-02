@@ -15,16 +15,20 @@ Ext.define('pmg-object-list', {
 });
 
 
-Ext.define('PMG.ObjectGroup', {
+Ext.define('PMG.ObjectGroupList', {
     extend: 'Ext.grid.GridPanel',
-    alias: ['widget.pmgObjectGroup'],
+    alias: ['widget.pmgObjectGroupList'],
 
-    ogclass: 'who',
+    ogclass: undefined, //  'who', 'when', 'what'
 
-    subject: gettext('Object Group'),
-    
+    subject: 'Object Group List', // please overwrite
+
     initComponent : function() {
 	var me = this;
+
+	if (!me.ogclass) {
+	    throw "ogclass not initialized";
+	}
 
 	var baseurl = "/config/ruledb/" + me.ogclass;
 	
@@ -84,7 +88,7 @@ Ext.define('PMG.ObjectGroup', {
 		fieldLabel: gettext('Name')
 	    },
 	    {
-		xtype: 'textfield',
+		xtype: 'textareafield',
 		name: 'info',
 		fieldLabel: gettext("Description")
 	    }
@@ -100,6 +104,7 @@ Ext.define('PMG.ObjectGroup', {
 		url: "/api2/extjs" + baseurl +'/' + rec.data.id + '/config',
 		method: 'PUT',
 		subject: me.subject,
+		width: 400,
 		items: inputItems
 	    };
 
@@ -125,6 +130,7 @@ Ext.define('PMG.ObjectGroup', {
 			method: 'POST',
 			url: "/api2/extjs" + baseurl,
 			create: true,
+			width: 400,
 			subject: me.subject,
 			items: inputItems
 		    };

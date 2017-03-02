@@ -2,7 +2,7 @@ JSSRC= 				                 	\
 	Utils.js					\
 	LoginWindow.js					\
 	ServerAdministration.js				\
-	ObjectGroup.js					\
+	ObjectGroupList.js				\
 	Who.js						\
 	WhoConfiguration.js				\
 	RuleConfiguration.js				\
