@@ -22,7 +22,17 @@ Ext.define('PMG.WhoConfiguration', {
 	var right = Ext.create('PMG.ObjectGroup', {
 	    otype_list: [1000, 1001, 1002, 1003, 1004],
 	    border: false,
-	    flex: 1
+	    flex: 1,
+	    listeners: {
+		dblclickOGInfo: function(w, e, t, ogdata) {
+		    // test if the correct groups is selected (just to be sure)
+		    var rec = left.selModel.getSelection()[0];
+		    if (rec && rec.data && rec.data.id === ogdata.id) {
+			left.run_editor();
+			return;
+		    }
+		}
+	    }
 	});
 
 	me.mon(left.selModel, "selectionchange", function() {
@@ -30,7 +40,7 @@ Ext.define('PMG.WhoConfiguration', {
 	    if (!(rec && rec.data && rec.data.id)) {
 		return;
 	    }
-	    right.setObjectInfo(rec.data.name, rec.data.info);
+	    right.setObjectInfo(rec.data);
 	    var baseurl = '/config/ruledb/who/' + rec.data.id;
 	    right.setBaseUrl(baseurl);
 	});
