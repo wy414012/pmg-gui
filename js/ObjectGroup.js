@@ -1,24 +1,13 @@
 Ext.define('PMG.ObjectGroup', {
     extend: 'Ext.grid.GridPanel',
+    alias: 'widget.pmgObjectGroup',
 
     baseurl: undefined,
-    
+
     otype_list: [],
 
-    columns: [
-	{
-	    header: gettext('Type'),
-	    dataIndex: 'otype',
-	    renderer: PMG.Utils.format_otype,
-	    width: 200
-	},
-	{
-	    header: gettext('Value'),
-	    dataIndex: 'descr',
-	    renderer: Ext.String.htmlEncode,
-	    flex: 1
-	}
-    ],
+    hideGroupInfo: false,
+    showDirection: false, // only important for SMTP Whitelist
 
     setBaseUrl: function(baseurl) {
 	var me = this;
@@ -46,7 +35,7 @@ Ext.define('PMG.ObjectGroup', {
 	me.down('#oginfo').update(html);
 	me.down('#ogdata').setHidden(false);
     },
-    
+
     initComponent : function() {
 	var me = this;
 
@@ -54,11 +43,38 @@ Ext.define('PMG.ObjectGroup', {
 	    model: 'pmg-object-list',
 	    sorters: [
 		{
+		    property : 'receivertest',
+		},
+		{
 		    property : 'otype',
 		    direction: 'ASC'
 		}
 	    ]
 	});
+
+	me.columns = [{
+	    header: gettext('Type'),
+	    dataIndex: 'otype',
+	    renderer: PMG.Utils.format_otype,
+	    width: 200
+	}];
+
+	if (me.showDirection) {
+	    me.columns.push({
+		header: gettext('Direction'),
+		dataIndex: 'receivertest',
+		renderer: function(value) {
+		    return value ? PMG.Utils.receiverText : PMG.Utils.senderText;
+		}
+	    });
+	}
+
+	me.columns.push({
+	    header: gettext('Value'),
+	    dataIndex: 'descr',
+	    renderer: Ext.String.htmlEncode,
+	    flex: 1
+	})
 
 	var reload = function() {
             me.store.load();
@@ -91,6 +107,17 @@ Ext.define('PMG.ObjectGroup', {
 	    }
 	});
 
+	var full_subject = function(subject, receivertest) {
+	    if (me.showDirection) {
+		var direction = receivertest ?
+		    PMG.Utils.receiverText : PMG.Utils.senderText;
+
+		return subject + ' (' + direction + ')';
+	    } else {
+		return subject;
+	    }
+	};
+
 	var run_editor = function() {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) {
@@ -103,7 +130,7 @@ Ext.define('PMG.ObjectGroup', {
 	    }
 
 	    var config = Ext.apply({ method: 'PUT' }, editor);
-
+	    config.subject = full_subject(editor.subject, rec.data.receivertest);
 	    config.url = me.baseurl + '/' + editor.subdir + '/' + rec.data.id;
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
@@ -120,6 +147,7 @@ Ext.define('PMG.ObjectGroup', {
 	    var editor = PMG.Utils.object_editors[otype];
 
 	    var config = Ext.apply({ method: 'POST' }, editor);
+	    config.subject = full_subject(editor.subject, editor.receivertest);
 
 	    menu_items.push({
 		text: config.subject,
@@ -136,7 +164,7 @@ Ext.define('PMG.ObjectGroup', {
 	});
 
 	me.dockedItems = [];
-	
+
 	me.dockedItems.push({
 	    xtype: 'toolbar',
 	    dock: 'top',
@@ -159,12 +187,12 @@ Ext.define('PMG.ObjectGroup', {
  		remove_btn
 	    ]
 	});
-	
+
 	me.dockedItems.push({
 	    dock: 'top',
 	    border: 1,
 	    layout: 'anchor',
-	    //hidden: true,
+	    hidden: me.hideGroupInfo ? true : false,
 	    itemId: 'ogdata',
 	    items: [
 		{
@@ -177,7 +205,7 @@ Ext.define('PMG.ObjectGroup', {
 		}
 	    ]
 	});
-    
+
 
 	Ext.apply(me, {
 	    listeners: {
@@ -187,5 +215,9 @@ Ext.define('PMG.ObjectGroup', {
 	});
 
 	me.callParent();
+
+	if (me.baseurl) {
+	    me.setBaseUrl(me.baseurl); // configure store, load()
+	}
     }
 });

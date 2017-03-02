@@ -15,7 +15,6 @@ JSSRC= 				                 	\
 	MyNetworks.js					\
 	RelayDomains.js					\
 	MailProxyConfiguration.js			\
-	SMTPWhitelist.js				\
 	SpamDetectorLanguages.js			\
 	SpamDetectorOptions.js				\
 	SpamQuarantineOptions.js			\

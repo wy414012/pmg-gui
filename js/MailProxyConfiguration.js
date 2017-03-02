@@ -35,10 +35,14 @@ Ext.define('PMG.MailProxyConfiguration', {
 	    xtype: 'pmgMailProxyTLS'
 	},
 	{
-            title: gettext('Whitelist'),
-	    xtype: "pmgSMTPWhitelist"
+	    title: gettext('Whitelist'),
+	    xtype: 'pmgObjectGroup',
+	    hideGroupInfo: true,
+	    showDirection: true,
+	    otype_list: [1000, 1009, 1001, 1007, 1002, 1008, 1003, 1004],
+	    baseurl: '/config/whitelist'
 	}
-    ]
+   ]
 });
 
 
