@@ -19,7 +19,7 @@ Ext.define('PMG.WhoConfiguration', {
 	    border: false
 	});
 	
-	var right = Ext.create('PMG.Who', {
+	var right = Ext.create('PMG.ObjectGroup', {
 	    otype_list: [1000, 1001, 1002, 1003, 1004],
 	    border: false,
 	    flex: 1

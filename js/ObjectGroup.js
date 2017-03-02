@@ -1,4 +1,4 @@
-Ext.define('PMG.Who', {
+Ext.define('PMG.ObjectGroup', {
     extend: 'Ext.grid.GridPanel',
 
     baseurl: undefined,

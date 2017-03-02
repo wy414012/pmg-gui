@@ -3,7 +3,7 @@ JSSRC= 				                 	\
 	LoginWindow.js					\
 	ServerAdministration.js				\
 	ObjectGroupList.js				\
-	Who.js						\
+	ObjectGroup.js					\
 	WhoConfiguration.js				\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
