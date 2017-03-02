@@ -70,7 +70,7 @@ Ext.define('PMG.WhenConfiguration', {
     alias: 'widget.pmgWhenConfiguration',
 
     ogclass: 'when',
-    otype_list: []
+    otype_list: [2000]
 });
 
 Ext.define('PMG.WhatConfiguration', {

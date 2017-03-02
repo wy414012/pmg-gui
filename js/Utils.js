@@ -127,6 +127,24 @@ Ext.define('PMG.Utils', {
 		    fieldLabel: gettext("IP Network")
 		}
 	    ]
+	},
+	2000: {
+	    subdir: 'timeframe',
+	    subject: gettext("TimeFrame"),
+	    items: [
+		{
+		    xtype: 'timefield',
+		    name: 'start',
+		    format: 'H:i',
+		    fieldLabel: gettext("Start Time")
+		},
+		{
+		    xtype: 'timefield',
+		    name: 'end',
+		    format: 'H:i',
+		    fieldLabel: gettext("End Time")
+		}
+	    ]
 	}
     },
 			  
