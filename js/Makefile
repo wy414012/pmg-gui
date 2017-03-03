@@ -5,6 +5,7 @@ JSSRC= 				                 	\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\
 	ObjectGroupConfiguration.js			\
+	ActionConfiguration.js				\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\

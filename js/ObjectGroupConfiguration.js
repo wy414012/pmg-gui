@@ -81,11 +81,3 @@ Ext.define('PMG.WhatConfiguration', {
     otype_list: []
 });
 
-Ext.define('PMG.ActionConfiguration', {
-    extend: 'PMG.ObjectGroupConfiguration',
-    alias: 'widget.pmgActionConfiguration',
-
-    ogclass: 'action',
-    otype_list: []
-});
-

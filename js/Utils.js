@@ -145,6 +145,37 @@ Ext.define('PMG.Utils', {
 		    fieldLabel: gettext("End Time")
 		}
 	    ]
+	},
+	4005: {
+	    subdir: 'bcc',
+	    subject: gettext('BCC'),
+	    width: 400,
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'name',
+		    allowBlank: false,
+		    fieldLabel: gettext('Name')
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'info',
+		    fieldLabel: gettext("Description")
+		},
+		{
+		    xtype: 'textfield',
+		    name: 'target',
+		    allowBlank: false,
+		    fieldLabel: gettext("Target")
+		},
+		{
+		    xtype: 'proxmoxcheckbox',
+		    checked: true,
+		    name: 'original',
+		    fieldLabel: gettext("send orig. Mail")
+		}
+	    ]
+
 	}
     },
 			  

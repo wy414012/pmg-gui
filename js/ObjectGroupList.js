@@ -29,6 +29,7 @@ Ext.define('PMG.ObjectGroupList', {
 	{
 	    xtype: 'textfield',
 	    name: 'name',
+	    allowBlank: false,
 	    fieldLabel: gettext('Name')
 	},
 	{
