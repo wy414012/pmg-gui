@@ -12,7 +12,7 @@ Ext.define('PMG.VirusDetectorConfiguration', {
 	},
 	{
 	    title: gettext('ClamAV'),
-	    html: 'ClamAV'
+	    xtype: 'pmgClamAVDatabase'
 	},
 	{
 	    title: gettext('Quarantine'),

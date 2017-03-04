@@ -22,6 +22,7 @@ JSSRC= 				                 	\
 	SpamDetectorConfiguration.js			\
 	VirusDetectorOptions.js				\
 	VirusQuarantineOptions.js			\
+	ClamAVDatabase.js				\
 	VirusDetectorConfiguration.js			\
 	ConfigPanel.js					\
 	Workspace.js
