@@ -8,6 +8,9 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 	me.add_text_row('dbmirror', gettext('Database Mirror'),
 			{ deleteEmpty: true, defaultValue: 'database.clamav.net' });
 
+	me.add_boolean_row('safebrowsing', gettext('Google Safe Browsing'),
+			   { defaultValue: 1 });
+
 	var baseurl = '/config/clamav';
 
 	Ext.apply(me, {
@@ -24,11 +27,13 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 
 	me.callParent();
 
-	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
+
+	me.rstore.startUpdate();
     }
 });
-Ext.define('pmg-clamav-dbstat', {
+
+Ext.define('pmg-clamav-database', {
     extend: 'Ext.data.Model',
     fields: [ 'name', 'type', 'build_time', 'version',
 	      { name: 'nsigs', type: 'integer' }],
@@ -51,10 +56,10 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 	var me = this;
 
 	me.store = new Ext.data.Store({
-	    model: 'pmg-clamav-dbstat',
+	    model: 'pmg-clamav-database',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json/nodes/" + Proxmox.NodeName + "/clamav/dbstat"
+		url: "/api2/json/nodes/" + Proxmox.NodeName + "/clamav/database"
 	    },
 	    sorters: {
 		property: 'name',
@@ -117,6 +122,29 @@ Ext.define('PMG.ClamAVDatabase', {
 	    selModel: selModel
 	});
 
+	var statusPanel = Ext.create('PMG.ClamAVDatabaseStatus', {
+	    border: false
+	});
+
+	var update_command = function(){
+	    Proxmox.Utils.API2Request({
+		url: '/nodes/' + Proxmox.NodeName + '/clamav/database',
+		method: 'POST',
+		failure: function(response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		},
+		success: function(response, opts) {
+		    var upid = response.result.data;
+
+		    var win = Ext.create('Proxmox.window.TaskViewer', {
+			upid: upid
+		    });
+		    win.show();
+		    me.mon(win, 'close', function() { statusPanel.reload() });
+		}
+	    });
+	};
+
 	me.tbar = [
 	    {
 		text: gettext('Edit'),
@@ -127,19 +155,11 @@ Ext.define('PMG.ClamAVDatabase', {
             },
 	    {
 		text: gettext('Update now'),
-		handler: function() {
-		    console.log("run update");
-		}
+		handler: update_command
 	    }
 	];
 
-	me.items = [
-	    editPanel,
-	    {
-		border: false,
-		xtype: 'pmgClamAVDatabaseStatus'
-	    }
-	];
+	me.items = [ editPanel, statusPanel ];
 
 	me.callParent();
 
