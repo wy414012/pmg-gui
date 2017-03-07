@@ -5,6 +5,9 @@ Ext.define('PMG.VirusDetectorConfiguration', {
     title: gettext('Configuration') + ': ' +
 	gettext('Virus Detector'),
 
+    border: false,
+    defaults: { border: false },
+
     items: [
 	{
 	    title: gettext('Options'),

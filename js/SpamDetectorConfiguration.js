@@ -5,6 +5,9 @@ Ext.define('PMG.SpamDetectorConfiguration', {
     title: gettext('Configuration') + ': ' +
 	gettext('Spam Detector'),
 
+    border: false,
+    defaults: { border: false },
+
     items: [
 	{
 	    title: gettext('Options'),

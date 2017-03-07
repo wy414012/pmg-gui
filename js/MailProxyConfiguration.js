@@ -5,6 +5,9 @@ Ext.define('PMG.MailProxyConfiguration', {
     title: gettext('Configuration') + ': ' +
 	gettext('Mail Proxy'),
 
+    border: false,
+    defaults: { border: false },
+
     items: [
 	{
 	    title: gettext('Relaying'),

@@ -3,6 +3,8 @@ Ext.define('PMG.SystemConfiguration', {
     alias: 'widget.pmgSystemConfiguration',
 
     title: gettext('Configuration') + ': ' + gettext('System'),
+    border: false,
+    defaults: { border: false },
 
     items: [
 	{

@@ -4,6 +4,9 @@ Ext.define('PMG.ServerAdministration', {
 
     title: gettext('Server Administration'),
 
+    border: false,
+    defaults: { border: false },
+
     items: [
 	{
 	    xtype: 'proxmoxNodeServiceView',
