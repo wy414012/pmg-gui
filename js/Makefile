@@ -4,6 +4,7 @@ JSSRC= 				                 	\
 	ServerAdministration.js				\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\
+	ObjectGroupSelector.js				\
 	ObjectGroupConfiguration.js			\
 	ActionConfiguration.js				\
 	RuleList.js					\

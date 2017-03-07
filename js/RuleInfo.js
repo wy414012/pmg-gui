@@ -30,8 +30,6 @@ Ext.define('PMG.RuleInfo', {
 	    waitMsgTarget: me,
 	    success: function(response, opts) {
 		me.setRuleInfo(response.result.data);
-		me.down('#addFromButton').setDisabled(false);
-
 	    },
 	    failure: function (response, opts) {
 		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
@@ -43,6 +41,11 @@ Ext.define('PMG.RuleInfo', {
 	var me = this;
 
 	me.ruledata = ruledata;
+
+	me.down('#addFromButton').setDisabled(me.ruledata === undefined);
+	me.down('#addToButton').setDisabled(me.ruledata === undefined);
+	me.down('#addWhenButton').setDisabled(me.ruledata === undefined);
+	me.down('#addWhatButton').setDisabled(me.ruledata === undefined);
 
 	if (me.ruledata === undefined) {
 
@@ -120,6 +123,21 @@ Ext.define('PMG.RuleInfo', {
 	    }
 	});
 
+	var add_object_group = function(url, ogroupId) {
+	    Proxmox.Utils.API2Request({
+		url: url,
+		params: { ogroup: ogroupId },
+		method: 'POST',
+		waitMsgTarget: me,
+		callback: function() {
+		    me.reload();
+		},
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
+	};
+
 	me.dockedItems = [];
 
 	me.dockedItems.push({
@@ -131,34 +149,63 @@ Ext.define('PMG.RuleInfo', {
 		    disabled: true,
 		    itemId: 'addFromButton',
 		    handler: function() {
-			var win = Ext.create('Ext.window.Window', {
-			    title: 'From',
-			    width: 600,
-			    layout: 'auto',
-			    modal: true,
-			    bodyPadding: 5,
-			    items: {
-				xtype: 'pmgObjectGroupList',
-				enableButtons: false,
-				ogclass: 'who',
-				listeners: {
-				    itemdblclick: function(view, rec) {
-					console.log("ADD");
-					console.dir(rec.data.id);
-					win.destroy();
-					Proxmox.Utils.API2Request({
-					    url: me.baseurl + '/from',
-					    params: { ogroup: rec.data.id },
-					    method: 'POST',
-					    waitMsgTarget: me,
-					    callback: function() {
-						me.reload();
-					    },
-					    failure: function (response, opts) {
-						Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-					    }
-					});
-				    }
+			var win = Ext.create('PMG.ObjectGroupSelector', {
+			    rulegroup: 'from',
+			    listeners: {
+				selectObjectGroup: function(view, rec) {
+				    win.destroy();
+				    add_object_group(me.baseurl + '/from', rec.data.id);
+				}
+			    }
+			});
+			win.show();
+		    }
+		},
+		{
+		    text: gettext('To'),
+		    disabled: true,
+		    itemId: 'addToButton',
+		    handler: function() {
+			var win = Ext.create('PMG.ObjectGroupSelector', {
+			    rulegroup: 'to',
+			    listeners: {
+				selectObjectGroup: function(view, rec) {
+				    win.destroy();
+				    add_object_group(me.baseurl + '/to', rec.data.id);
+				}
+			    }
+			});
+			win.show();
+		    }
+		},
+		{
+		    text: gettext('When'),
+		    disabled: true,
+		    itemId: 'addWhenButton',
+		    handler: function() {
+			var win = Ext.create('PMG.ObjectGroupSelector', {
+			    rulegroup: 'when',
+			    listeners: {
+				selectObjectGroup: function(view, rec) {
+				    win.destroy();
+				    add_object_group(me.baseurl + '/when', rec.data.id);
+				}
+			    }
+			});
+			win.show();
+		    }
+		},
+		{
+		    text: gettext('What'),
+		    disabled: true,
+		    itemId: 'addWhatButton',
+		    handler: function() {
+			var win = Ext.create('PMG.ObjectGroupSelector', {
+			    rulegroup: 'what',
+			    listeners: {
+				selectObjectGroup: function(view, rec) {
+				    win.destroy();
+				    add_object_group(me.baseurl + '/what', rec.data.id);
 				}
 			    }
 			});
