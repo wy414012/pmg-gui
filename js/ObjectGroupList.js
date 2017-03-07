@@ -1,7 +1,7 @@
 Ext.define('pmg-object-group', {
     extend: 'Ext.data.Model',
     fields: [ 'id', 'name', 'info' ],
-    idProperty: 'cidr'
+    idProperty: 'id'
 });
 
 Ext.define('pmg-object-list', {
@@ -25,6 +25,8 @@ Ext.define('PMG.ObjectGroupList', {
 
     baseurl: undefined,
 
+    enableButtons: true,
+
     inputItems: [
 	{
 	    xtype: 'textfield',
@@ -42,14 +44,7 @@ Ext.define('PMG.ObjectGroupList', {
     reload: function() {
 	var me = this;
 
-	var rec = me.selModel.getSelection()[0];
-        me.store.load(function() {
-	    if (rec) {
-		// try to selectprevious selection
-		var nrec = me.store.findRecord('id', rec.data.id);
-		me.selModel.select(nrec);
-	    }
-	});
+        me.store.load();
     },
 
     run_editor: function() {
@@ -153,8 +148,11 @@ Ext.define('PMG.ObjectGroupList', {
 
 	Proxmox.Utils.monStoreErrors(me, me.store);
 
+	if (me.enableButtons) {
+	    me.tbar = tbar;
+	}
+
 	Ext.apply(me, {
-	    tbar: tbar,
 	    columns: [
 		{
 		    header: gettext('Name'),
@@ -165,7 +163,11 @@ Ext.define('PMG.ObjectGroupList', {
 		}
 	    ],
 	    listeners: {
-		itemdblclick: function() { me.run_editor(); },
+		itemdblclick: function() {
+		    if (me.enableButtons) {
+			me.run_editor();
+		    }
+		},
 		activate: function() { me.reload(); }
 	    }
 	});

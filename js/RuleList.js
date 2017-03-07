@@ -28,20 +28,39 @@ Ext.define('PMG.RuleList', {
 	    name: 'name',
 	    allowBlank: false,
 	    fieldLabel: gettext('Name')
+	},
+	{
+	    xtype: 'proxmoxintegerfield',
+	    name: 'priority',
+	    allowBlank: false,
+	    minValue: 0,
+	    maxValue: 100,
+	    fieldLabel: gettext('Priority')
+	},
+	{
+	    xtype: 'proxmoxKVComboBox',
+	    name: 'direction',
+	    comboItems: [
+		[0, PMG.Utils.format_rule_direction(0)],
+		[1, PMG.Utils.format_rule_direction(1)],
+		[2, PMG.Utils.format_rule_direction(2)]],
+	    value: 2,
+	    fieldLabel: gettext('Direction')
+	},
+	{
+	    xtype: 'proxmoxcheckbox',
+	    name: 'active',
+	    defaultValue: 0,
+	    uncheckedValue: 0,
+	    checked: false,
+	    fieldLabel: gettext('Active')
 	}
     ],
 
     reload: function() {
 	var me = this;
 
-	var rec = me.selModel.getSelection()[0];
-        me.store.load(function() {
-	    if (rec) {
-		// try to selectprevious selection
-		var nrec = me.store.findRecord('id', rec.data.id);
-		me.selModel.select(nrec);
-	    }
-	});
+	me.store.load();
     },
 
     run_editor: function() {
@@ -88,7 +107,10 @@ Ext.define('PMG.RuleList', {
 	    ],
 	    grouper: {
 		property: 'active',
-		direction: 'DESC'
+		direction: 'DESC',
+		getGroupString: function(rec) {
+		    return Proxmox.Utils.format_boolean(rec.get('active'));
+		}
 	    }
 	});
 

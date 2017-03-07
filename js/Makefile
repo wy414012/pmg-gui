@@ -7,6 +7,7 @@ JSSRC= 				                 	\
 	ObjectGroupConfiguration.js			\
 	ActionConfiguration.js				\
 	RuleList.js					\
+	RuleInfo.js					\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\

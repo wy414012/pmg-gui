@@ -41,6 +41,14 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	    }
 	});
 
+	me.mon(left.store, "refresh", function() {
+	    var rec = left.selModel.getSelection()[0];
+	    if (!(rec && rec.data && rec.data.id)) {
+		return;
+	    }
+	    right.setObjectInfo(rec.data);
+	});
+
 	me.mon(left.selModel, "selectionchange", function() {
 	    var rec = left.selModel.getSelection()[0];
 	    if (!(rec && rec.data && rec.data.id)) {

@@ -16,15 +16,14 @@ Ext.define('PMG.RuleConfiguration', {
 	    border: false
 	});
 
-	var right = Ext.create('Ext.panel.Panel', {
-	    html: "test",
+	var right = Ext.create('PMG.RuleInfo', {
 	    border: false,
 	    flex: 1,
 	    listeners: {
-		dblclickOGInfo: function(w, e, t, ogdata) {
+		dblclickRuleInfo: function(w, e, t, ruledata) {
 		    // test if the correct groups is selected (just to be sure)
 		    var rec = left.selModel.getSelection()[0];
-		    if (rec && rec.data && rec.data.id === ogdata.id) {
+		    if (rec && rec.data && rec.data.id === ruledata.id) {
 			left.run_editor();
 			return;
 		    }
@@ -32,13 +31,16 @@ Ext.define('PMG.RuleConfiguration', {
 	    }
 	});
 
+	me.mon(left.store, "refresh", function() {
+	    right.reload();
+	});
+
 	me.mon(left.selModel, "selectionchange", function() {
 	    var rec = left.selModel.getSelection()[0];
 	    if (!(rec && rec.data && rec.data.id)) {
+		right.setBaseUrl(undefined);
 		return;
 	    }
-	    return; // fixme
-	    right.setObjectInfo(rec.data);
 	    var baseurl = '/config/ruledb/rules/' + rec.data.id;
 	    right.setBaseUrl(baseurl);
 	});

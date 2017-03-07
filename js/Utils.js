@@ -5,7 +5,7 @@ console.log("Starting PMG Manager");
 
 Ext.define('PMG.Utils', {
     singleton: true,
- 
+
     // this singleton contains miscellaneous utilities
 
     senderText: gettext('Sender'),
@@ -17,7 +17,17 @@ Ext.define('PMG.Utils', {
 	when: gettext('When Objects'),
 	action: gettext('Action Objects')
     },
-    
+
+    rule_direction_text: {
+	0: gettext('In'),
+	1: gettext('Out'),
+	2: gettext('In & Out')
+    },
+
+    format_rule_direction: function(dir) {
+	return PMG.Utils.rule_direction_text[dir] || dir;
+    },
+
     format_otype: function(otype) {
 	var editor = PMG.Utils.object_editors[otype];
 	if (editor) {
@@ -178,7 +188,7 @@ Ext.define('PMG.Utils', {
 
 	}
     },
-			  
+
     constructor: function() {
 	var me = this;
 

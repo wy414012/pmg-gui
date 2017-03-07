@@ -23,7 +23,6 @@ Ext.define('PMG.ObjectGroup', {
 
 	me.store.load(function() {
 	    me.down('#addMenuButton').setDisabled(false);
-
 	});
     },
 
