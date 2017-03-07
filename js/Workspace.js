@@ -228,7 +228,7 @@ Ext.define('PMG.StdWorkspace', {
 			    groups: ['filter'],
 			    title: PMG.Utils.oclass_text['action'],
 			    itemId: 'filter-actions',
-			    items: [{ xtype: 'pmgActionConfiguration' }]
+			    items: [{ xtype: 'pmgActionList' }]
 			},
 			{
 			    xtype: 'panel',

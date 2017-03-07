@@ -7,15 +7,17 @@ Ext.define('pmg-action-list', {
     idProperty: 'id'
 });
 
-Ext.define('PMG.ActionConfiguration', {
+Ext.define('PMG.ActionList', {
     extend: 'Ext.grid.GridPanel',
-    alias: ['widget.pmgActionConfiguration'],
+    alias: ['widget.pmgActionList'],
 
     title: PMG.Utils.oclass_text['action'],
 
     baseurl: '/config/ruledb/action',
 
     otype_list: [4005],
+
+    enableButtons: true,
 
     initComponent : function() {
 	var me = this;
@@ -50,7 +52,7 @@ Ext.define('PMG.ActionConfiguration', {
 	    }
 
 	    var config = Ext.apply({ method: 'PUT' }, editor);
-	
+
 	    config.url = me.baseurl + '/' + editor.subdir + '/' + rec.data.id;
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
@@ -124,8 +126,11 @@ Ext.define('PMG.ActionConfiguration', {
 
 	Proxmox.Utils.monStoreErrors(me, me.store);
 
+	if (me.enableButtons) {
+	    me.tbar = tbar;
+	}
+
 	Ext.apply(me, {
-	    tbar: tbar,
 	    columns: [
 		{
 		    header: gettext('Name'),
@@ -150,7 +155,11 @@ Ext.define('PMG.ActionConfiguration', {
 		},
 	    ],
 	    listeners: {
-		itemdblclick: run_editor,
+		itemdblclick: function() {
+		    if (me.enableButtons) {
+			run_editor();
+		    }
+		},
 		activate: reload
 	    }
 	});

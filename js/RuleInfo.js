@@ -46,6 +46,7 @@ Ext.define('PMG.RuleInfo', {
 	me.down('#addToButton').setDisabled(me.ruledata === undefined);
 	me.down('#addWhenButton').setDisabled(me.ruledata === undefined);
 	me.down('#addWhatButton').setDisabled(me.ruledata === undefined);
+	me.down('#addActionButton').setDisabled(me.ruledata === undefined);
 
 	if (me.ruledata === undefined) {
 
@@ -206,6 +207,23 @@ Ext.define('PMG.RuleInfo', {
 				selectObjectGroup: function(view, rec) {
 				    win.destroy();
 				    add_object_group(me.baseurl + '/what', rec.data.id);
+				}
+			    }
+			});
+			win.show();
+		    }
+		},
+		{
+		    text: gettext('Action'),
+		    disabled: true,
+		    itemId: 'addActionButton',
+		    handler: function() {
+			var win = Ext.create('PMG.ObjectGroupSelector', {
+			    rulegroup: 'action',
+			    listeners: {
+				selectObjectGroup: function(view, rec) {
+				    win.destroy();
+				    add_object_group(me.baseurl + '/action', rec.data.ogroup);
 				}
 			    }
 			});

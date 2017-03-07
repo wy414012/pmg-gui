@@ -36,17 +36,30 @@ Ext.define('PMG.ObjectGroupSelector', {
 	} else {
 	    throw "unknown rulegroup";
 	}
-	
-	me.items = {
-	    xtype: 'pmgObjectGroupList',
-	    enableButtons: false,
-	    ogclass: ogclass,
-	    listeners: {
-		itemdblclick: function(view, rec) {
-		    me.fireEvent('selectObjectGroup', me, rec);
+
+	if (me.rulegroup === 'action') {
+	    me.items = {
+		xtype: 'pmgActionList',
+		title: undefined,
+		enableButtons: false,
+		listeners: {
+		    itemdblclick: function(view, rec) {
+			me.fireEvent('selectObjectGroup', me, rec);
+		    }
 		}
-	    }
-	};
+	    };
+	} else {
+	    me.items = {
+		xtype: 'pmgObjectGroupList',
+		enableButtons: false,
+		ogclass: ogclass,
+		listeners: {
+		    itemdblclick: function(view, rec) {
+			me.fireEvent('selectObjectGroup', me, rec);
+		    }
+		}
+	    };
+	}
 
 	me.callParent();
     }

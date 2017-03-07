@@ -6,7 +6,7 @@ JSSRC= 				                 	\
 	ObjectGroup.js					\
 	ObjectGroupSelector.js				\
 	ObjectGroupConfiguration.js			\
-	ActionConfiguration.js				\
+	ActionList.js				\
 	RuleList.js					\
 	RuleInfo.js					\
 	RuleConfiguration.js				\
