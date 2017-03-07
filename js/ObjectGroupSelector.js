@@ -42,6 +42,7 @@ Ext.define('PMG.ObjectGroupSelector', {
 		xtype: 'pmgActionList',
 		title: undefined,
 		enableButtons: false,
+		border: true,
 		listeners: {
 		    itemdblclick: function(view, rec) {
 			me.fireEvent('selectObjectGroup', me, rec);

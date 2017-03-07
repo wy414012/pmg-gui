@@ -12,6 +12,7 @@ Ext.define('PMG.ActionList', {
     alias: ['widget.pmgActionList'],
 
     title: PMG.Utils.oclass_text['action'],
+    border: false,
 
     baseurl: '/config/ruledb/action',
 
