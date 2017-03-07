@@ -11,19 +11,27 @@ Ext.define('PMG.ObjectGroup', {
 
     ogdata: undefined,
 
+    emptyText: gettext('Please select an object.'),
+
     setBaseUrl: function(baseurl) {
 	var me = this;
 
 	me.baseurl = baseurl;
 
-	me.store.setProxy({
-	    type: 'proxmox',
-	    url: '/api2/json' + me.baseurl + '/objects'
-	});
+	if (me.baseurl === undefined) {
+	    me.store.setProxy(undefined);
+	    me.store.setData([]);
+	    me.down('#addMenuButton').setDisabled(true);
+	} else {
+	    me.store.setProxy({
+		type: 'proxmox',
+		url: '/api2/json' + me.baseurl + '/objects'
+	    });
 
-	me.store.load(function() {
-	    me.down('#addMenuButton').setDisabled(false);
-	});
+	    me.store.load(function() {
+		me.down('#addMenuButton').setDisabled(false);
+	    });
+	}
     },
 
     setObjectInfo: function(ogdata) {
@@ -31,12 +39,19 @@ Ext.define('PMG.ObjectGroup', {
 
 	me.ogdata = ogdata;
 
-	var html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
-	html += "<br><br>";
-	html += Ext.String.htmlEncode(Ext.String.trim(me.ogdata.info));
+	if (me.ogdata === undefined) {
 
-	me.down('#oginfo').update(html);
-	me.down('#ogdata').setHidden(false);
+	    me.down('#oginfo').update(me.emptyText);
+
+	} else {
+
+	    var html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
+	    html += "<br><br>";
+	    html += Ext.String.htmlEncode(Ext.String.trim(me.ogdata.info));
+
+	    me.down('#oginfo').update(html);
+	    me.down('#ogdata').setHidden(false);
+	}
     },
 
     initComponent : function() {
@@ -204,7 +219,7 @@ Ext.define('PMG.ObjectGroup', {
 		    itemId: 'oginfo',
 		    style: { 'white-space': 'pre' },
 		    padding: 10,
-		    html: gettext('Please select an object.'),
+		    html: me.emptyText,
 		    listeners: {
 			dblclick: {
 			    fn: function(e, t) {

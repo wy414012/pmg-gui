@@ -52,6 +52,8 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	me.mon(left.selModel, "selectionchange", function() {
 	    var rec = left.selModel.getSelection()[0];
 	    if (!(rec && rec.data && rec.data.id)) {
+		right.setObjectInfo(undefined);
+		right.setBaseUrl(undefined);
 		return;
 	    }
 	    right.setObjectInfo(rec.data);
