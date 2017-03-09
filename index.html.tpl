@@ -24,7 +24,7 @@
         Setup: { auth_cookie_name: 'PMGAuthCookie' },
         NodeName: '[% nodename %]',
         UserName: '[% username %]',
-        CSRFPreventionToken: '[% csrftoken %]'
+        CSRFPreventionToken: '[% token %]'
       };
     </script>
     <script type="text/javascript" src="/proxmoxlib.js"></script>
