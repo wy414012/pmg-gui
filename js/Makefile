@@ -1,6 +1,7 @@
 JSSRC= 				                 	\
 	Utils.js					\
 	LoginWindow.js					\
+	ServerStatus.js					\
 	ServerAdministration.js				\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\

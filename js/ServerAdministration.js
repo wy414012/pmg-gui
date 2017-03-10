@@ -9,6 +9,9 @@ Ext.define('PMG.ServerAdministration', {
 
     items: [
 	{
+	    xtype: 'pmgServerStatus'
+	},
+	{
 	    xtype: 'proxmoxNodeServiceView',
             title: gettext('Services'),
 	    startOnlyServices: {
