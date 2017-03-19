@@ -28,6 +28,8 @@ JSSRC= 				                 	\
 	VirusQuarantineOptions.js			\
 	ClamAVDatabase.js				\
 	VirusDetectorConfiguration.js			\
+	LDAPConfig.js					\
+	UserManagement.js				\
 	ConfigPanel.js					\
 	Workspace.js
 

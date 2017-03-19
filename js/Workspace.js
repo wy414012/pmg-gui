@@ -285,7 +285,7 @@ Ext.define('PMG.StdWorkspace', {
 			    groups: ['configuration'],
 			    title: gettext('User Management'),
 			    itemId: 'config-users',
-			    html: "User Management"
+			    items: [{ xtype: 'pmgUserManagement' }]
 			},
 			{
 			    xtype: 'panel',

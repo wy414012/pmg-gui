@@ -36,6 +36,13 @@ Ext.define('PMG.Utils', {
 	return 'unknown';
     },
 
+    format_ldap_protocol: function(p) {
+	if (p === undefined) return 'LDAP';
+	if (p === 'ldap') return 'LDAP';
+	if (p === 'ldaps') return 'LDAPS';
+	return 'unknown';
+    },
+
     object_editors: {
 	1000: {
 	    subdir: 'regex',
