@@ -4,6 +4,9 @@ Ext.define('pmg-ldap-config', {
 	      'mode', 'binddn', 'bindpw', 'basedn', 'groupbasedn',
 	      'filter', 'accountattr', 'mailattr',
 	      { name: 'port',  type: 'integer' },
+	      { name: 'gcount',  type: 'integer' },
+	      { name: 'mcount',  type: 'integer' },
+	      { name: 'ucount',  type: 'integer' },
 	      { name: 'disable',  type: 'boolean' }
 	    ],
     proxy: {
@@ -295,7 +298,25 @@ Ext.define('PMG.LDAPConfig', {
 		    renderer: Ext.String.htmlEncode,
 		    dataIndex: 'comment',
 		    flex: 1
-		}
+		},
+		{
+		    header: gettext('Accounts'),
+		    width: 80,
+		    sortable: true,
+		    dataIndex: 'ucount'
+		},
+		{
+		    header: gettext('Addresses'),
+		    width: 80,
+		    sortable: true,
+		    dataIndex: 'mcount'
+		},
+		{
+		    header: gettext('Groups'),
+		    width: 80,
+		    sortable: true,
+		    dataIndex: 'gcount'
+		},
 	    ],
 	    listeners: {
 		itemdblclick: run_editor,
