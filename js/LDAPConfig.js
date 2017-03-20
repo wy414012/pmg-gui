@@ -214,6 +214,30 @@ Ext.define('PMG.LDAPConfig', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
+	var remove_btn = Ext.createWidget('proxmoxButton', {
+	    text: gettext('Remove'),
+	    disabled: true,
+	    selModel: me.selModel,
+	    confirmMsg: function (rec) {
+		return Ext.String.format(
+		    gettext('Are you sure you want to remove entry {0}'),
+		    "'" + rec.data.section + "'");
+	    },
+	    handler: function(btn, event, rec) {
+		Proxmox.Utils.API2Request({
+		    url: '/config/ldap/' + rec.data.section,
+		    method: 'DELETE',
+		    waitMsgTarget: me,
+		    callback: function() {
+			reload();
+		    },
+		    failure: function (response, opts) {
+			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		    }
+		});
+	    }
+	});
+
 	var run_editor = function() {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) {
@@ -243,16 +267,19 @@ Ext.define('PMG.LDAPConfig', {
 		    win.on('destroy', reload);
 		    win.show();
 		}
-	    }
+	    },
+	    remove_btn
 	];
+
+	Proxmox.Utils.monStoreErrors(me, me.store);
 
 	Ext.apply(me, {
 
 	    columns: [
 		{
-		    header: gettext('ID'),
-		    width: 200,
+		    header: gettext('Profile Name'),
 		    sortable: true,
+		    width: 120,
 		    dataIndex: 'section'
 		},
 		{
