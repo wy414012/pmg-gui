@@ -99,29 +99,14 @@ Ext.define('PMG.RuleInfo', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxButton', {
-	    text: gettext('Remove'),
-	    disabled: true,
+	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
 	    selModel: me.selModel,
-	    confirmMsg: function (rec) {
-		return Ext.String.format(
-		    gettext('Are you sure you want to remove entry {0}'),
-		    "'" + rec.data.name + "'");
+	    getUrl: function(rec) {
+		return me.baseurl + '/' + rec.data.oclass + '/'+ rec.data.id;
 	    },
-	    handler: function(btn, event, rec) {
-		console.dir(rec.data);
-		Proxmox.Utils.API2Request({
-		    url: me.baseurl + '/' + rec.data.oclass + '/'+ rec.data.id,
-		    method: 'DELETE',
-		    waitMsgTarget: me,
-		    callback: function() {
-			me.reload();
-		    },
-		    failure: function (response, opts) {
-			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		    }
-		});
-	    }
+	    callback: function() { me.reload(); },
+	    getRecordName: function(rec) { return rec.data.name; },
+	    waitMsgTarget: me
 	});
 
 	var add_object_group = function(url, ogroupId) {

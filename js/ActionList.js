@@ -63,26 +63,14 @@ Ext.define('PMG.ActionList', {
 	    win.show();
 	};
 
-	var remove_btn = Ext.createWidget('proxmoxButton', {
-	    text: gettext('Remove'),
-	    disabled: true,
+	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
 	    selModel: me.selModel,
-	    confirmMsg: function (rec) {
-		return Ext.String.format(
-		    gettext('Are you sure you want to remove entry {0}'),
-		    "'" + rec.data.descr + "'");
+	    getUrl: function(rec) {
+		return me.baseurl + '/objects/' + rec.data.id;
 	    },
-	    handler: function(btn, event, rec) {
-		Proxmox.Utils.API2Request({
-		    url: me.baseurl + '/objects/' + rec.data.id,
-		    method: 'DELETE',
-		    waitMsgTarget: me,
-		    callback: reload,
-		    failure: function (response, opts) {
-			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		    }
-		});
-	    }
+	    callback: reload,
+	    getRecordName: function(rec) { return rec.data.descr; },
+	    waitMsgTarget: me
 	});
 
 	var menu_items = [];

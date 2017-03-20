@@ -30,28 +30,11 @@ Ext.define('PMG.Transport', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxButton', {
-	    text: gettext('Remove'),
-	    disabled: true,
+	var remove_btn =  Ext.createWidget('proxmoxStdRemoveButton', {
 	    selModel: me.selModel,
-	    confirmMsg: function (rec) {
-		return Ext.String.format(
-		    gettext('Are you sure you want to remove entry {0}'),
-		    "'" + rec.data.domain + "'");
-	    },
-	    handler: function(btn, event, rec) {
-		Proxmox.Utils.API2Request({
-		    url: '/config/transport/' + rec.data.domain,
-		    method: 'DELETE',
-		    waitMsgTarget: me,
-		    callback: function() {
-			reload();
-		    },
-		    failure: function (response, opts) {
-			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		    }
-		});
-	    }
+	    baseurl: '/config/transport',
+	    callback: reload,
+	    waitMsgTarget: me
 	});
 
 	var common_properties = [
