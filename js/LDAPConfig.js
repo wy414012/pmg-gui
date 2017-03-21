@@ -224,6 +224,23 @@ Ext.define('PMG.LDAPConfig', {
 	    waitMsgTarget: me
 	});
 
+	var sync_btn =  Ext.createWidget('proxmoxButton', {
+	    text: gettext('Synchronize'),
+	    selModel: me.selModel,
+	    disabled: true,
+	    handler: function(btn, event, rec) {
+		Proxmox.Utils.API2Request({
+		    url: '/config/ldap/' + rec.data.section,
+		    method: 'POST',
+		    waitMsgTarget: me,
+		    callback: reload,
+		    failure: function (response, opts) {
+			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		    }
+		});
+	    }
+	});
+
 	var run_editor = function() {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) {
@@ -254,7 +271,7 @@ Ext.define('PMG.LDAPConfig', {
 		    win.show();
 		}
 	    },
-	    remove_btn
+	    remove_btn, sync_btn
 	];
 
 	Proxmox.Utils.monStoreErrors(me, me.store);
