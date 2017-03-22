@@ -166,7 +166,7 @@ Ext.define('PMG.LDAPEdit', {
             me.url = '/api2/extjs/config/ldap';
             me.method = 'POST';
 	} else {
-            me.url = '/api2/extjs/config/ldap/' + me.profileId;
+            me.url = '/api2/extjs/config/ldap/' + me.profileId + '/config';
             me.method = 'PUT';
 	}
 
@@ -230,7 +230,7 @@ Ext.define('PMG.LDAPConfig', {
 	    disabled: true,
 	    handler: function(btn, event, rec) {
 		Proxmox.Utils.API2Request({
-		    url: '/config/ldap/' + rec.data.profile,
+		    url: '/config/ldap/' + rec.data.profile + '/sync',
 		    method: 'POST',
 		    waitMsgTarget: me,
 		    callback: reload,
