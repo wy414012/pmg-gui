@@ -1,6 +1,6 @@
 Ext.define('pmg-ldap-config', {
     extend: 'Ext.data.Model',
-    fields: [ 'section', 'server1', 'server2', 'comment',
+    fields: [ 'profile', 'server1', 'server2', 'comment',
 	      'mode', 'binddn', 'bindpw', 'basedn', 'groupbasedn',
 	      'filter', 'accountattr', 'mailattr',
 	      { name: 'port',  type: 'integer' },
@@ -13,14 +13,14 @@ Ext.define('pmg-ldap-config', {
         type: 'proxmox',
 	url: "/api2/json/config/ldap"
     },
-    idProperty: 'section'
+    idProperty: 'profile'
 });
 
 Ext.define('PMG.LDAPInputPanel', {
     extend: 'Proxmox.panel.InputPanel',
     alias: 'widget.pmgLDAPInputPanel',
 
-    sectionId: undefined,
+    profileId: undefined,
 
     onGetValues: function(values) {
 	var me = this;
@@ -36,10 +36,10 @@ Ext.define('PMG.LDAPInputPanel', {
 
 	me.column1 = [
 	    {
-		xtype: me.sectionId ? 'displayfield' : 'textfield',
+		xtype: me.profileId ? 'displayfield' : 'textfield',
 		fieldLabel: gettext('Profile Name'),
-		value: me.sectionId || '',
-		name: 'section',
+		value: me.profileId || '',
+		name: 'profile',
 		vtype: 'StorageId',
 		allowBlank: false
 	    },
@@ -160,19 +160,19 @@ Ext.define('PMG.LDAPEdit', {
     initComponent : function() {
 	var me = this;
 
-	me.create = me.sectionId ? false : true;
+	me.create = me.profileId ? false : true;
 
 	if (me.create) {
             me.url = '/api2/extjs/config/ldap';
             me.method = 'POST';
 	} else {
-            me.url = '/api2/extjs/config/ldap/' + me.sectionId;
+            me.url = '/api2/extjs/config/ldap/' + me.profileId;
             me.method = 'PUT';
 	}
 
 	var ipanel = Ext.create('PMG.LDAPInputPanel', {
 	    create: me.create,
-	    sectionId: me.sectionId
+	    profileId: me.profileId
 	});
 
 	me.items = [ ipanel ];
@@ -206,7 +206,7 @@ Ext.define('PMG.LDAPConfig', {
 	me.store = new Ext.data.Store({
 	    model: 'pmg-ldap-config',
 	    sorters: {
-		property: 'section',
+		property: 'profile',
 		order: 'DESC'
 	    }
 	});
@@ -230,7 +230,7 @@ Ext.define('PMG.LDAPConfig', {
 	    disabled: true,
 	    handler: function(btn, event, rec) {
 		Proxmox.Utils.API2Request({
-		    url: '/config/ldap/' + rec.data.section,
+		    url: '/config/ldap/' + rec.data.profile,
 		    method: 'POST',
 		    waitMsgTarget: me,
 		    callback: reload,
@@ -248,7 +248,7 @@ Ext.define('PMG.LDAPConfig', {
 	    }
 
 	    var win = Ext.createWidget('pmgLDAPEdit', {
-		sectionId: rec.data.section
+		profileId: rec.data.profile
 	    });
 	    win.load();
 	    win.on('destroy', reload);
@@ -283,7 +283,7 @@ Ext.define('PMG.LDAPConfig', {
 		    header: gettext('Profile Name'),
 		    sortable: true,
 		    width: 120,
-		    dataIndex: 'section'
+		    dataIndex: 'profile'
 		},
 		{
 		    header: gettext('Protocol'),
