@@ -10,7 +10,6 @@ Ext.define('PMG.Utils', {
 
     senderText: gettext('Sender'),
     receiverText: gettext('Receiver'),
-    anyProfileText: gettext('Any Profile'),
 
     oclass_text: {
 	who: gettext('Who Objects'),
