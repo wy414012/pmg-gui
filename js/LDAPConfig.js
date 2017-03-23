@@ -227,6 +227,9 @@ Ext.define('PMG.LDAPConfig', {
 	var sync_btn =  Ext.createWidget('proxmoxButton', {
 	    text: gettext('Synchronize'),
 	    selModel: me.selModel,
+	    enableFn: function(rec) {
+		return !rec.data.disable;
+	    },
 	    disabled: true,
 	    handler: function(btn, event, rec) {
 		Proxmox.Utils.API2Request({
