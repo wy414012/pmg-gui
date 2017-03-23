@@ -6,11 +6,13 @@ JSSRC= 				                 	\
 	LDAPProfileSelector.js				\
 	LDAPGroupSelector.js				\
 	LDAPGroupEditor.js				\
+	LDAPUserSelector.js				\
+	LDAPUserEditor.js				\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\
 	ObjectGroupSelector.js				\
 	ObjectGroupConfiguration.js			\
-	ActionList.js				\
+	ActionList.js					\
 	RuleList.js					\
 	RuleInfo.js					\
 	RuleConfiguration.js				\

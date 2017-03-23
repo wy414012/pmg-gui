@@ -1,27 +1,46 @@
-Ext.define('PMG.LDAPGroupSelector', {
-    extend: 'Ext.form.ComboBox',
-    alias: 'widget.pmgLDAPGroupSelector',
+Ext.define('PMG.LDAPUserSelector', {
+    extend: 'Proxmox.form.ComboGrid',
+    alias: 'widget.pmgLDAPUserSelector',
 
     profile: undefined,
     
-    queryMode: 'local',
-
     store: {
-	fields: [ 'dn' ],
+	fields: [ 'account', 'pmail', 'dn' ],
 	filterOnLoad: true,
 	sorters: [
 	    {
-		property : 'dn',
+		property : 'account',
 		direction: 'ASC'
 	    }
 	]
     },
 
-    valueField: 'dn',
-    displayField: 'dn',
+    valueField: 'account',
+    displayField: 'account',
 
     allowBlank: false,
 
+    listConfig: {
+	columns: [
+	    {
+		header: gettext('Account'),
+		dataIndex: 'account',
+		hideable: false,
+		width: 100
+	    },
+	    {
+		header: gettext('EMail'),
+		dataIndex: 'pmail',
+		width: 150
+	    },
+	    {
+		header: 'DN',
+		dataIndex: 'dn',
+		width: 200
+	    }
+	]
+    },
+    
     setProfile: function(profile, force) {
 	var me = this;
 
@@ -35,7 +54,7 @@ Ext.define('PMG.LDAPGroupSelector', {
 
 	me.store.setProxy({
 	    type: 'proxmox',
-	    url: '/api2/json/config/ldap/' + me.profile + '/groups'
+	    url: '/api2/json/config/ldap/' + me.profile + '/users'
 	});
 
 	me.store.load();

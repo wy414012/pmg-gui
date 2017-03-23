@@ -64,6 +64,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 	{
 	    xtype: 'proxmoxKVComboBox',
 	    name: 'mode',
+	    value: 'group',
 	    comboItems: [
 		[ 'group', gettext('Group member') ],
 		[ 'profile-any', gettext('Existing LDAP address')],

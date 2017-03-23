@@ -64,6 +64,11 @@ Ext.define('PMG.Utils', {
 	    subdir: 'ldap',
 	    subject: gettext("LDAP Group")
 	},
+	1006: {
+	    xtype: 'pmgLDAPUserEditor',
+	    subdir: 'ldapuser',
+	    subject: gettext("LDAP User")
+	},
 	1009: {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_regex',
