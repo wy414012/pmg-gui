@@ -10,6 +10,7 @@ Ext.define('PMG.Utils', {
 
     senderText: gettext('Sender'),
     receiverText: gettext('Receiver'),
+    anyProfileText: gettext('Any Profile'),
 
     oclass_text: {
 	who: gettext('Who Objects'),
@@ -45,6 +46,7 @@ Ext.define('PMG.Utils', {
 
     object_editors: {
 	1000: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'regex',
 	    subject: gettext("Regular Expression"),
 	    width: 400,
@@ -57,7 +59,13 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 	},
+	1005: {
+	    xtype: 'pmgLDAPGroupEditor',
+	    subdir: 'ldap',
+	    subject: gettext("LDAP Group")
+	},
 	1009: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_regex',
 	    subject: gettext("Regular Expression"),
 	    receivertest: true,
@@ -72,6 +80,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1001: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'email',
 	    subject: gettext("Email"),
 	    width: 400,
@@ -84,6 +93,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1007: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver',
 	    subject: gettext("Email"),
 	    receivertest: true,
@@ -97,6 +107,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1002: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'domain',
 	    subject: gettext("Domain"),
 	    width: 400,
@@ -109,6 +120,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1008: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_domain',
 	    subject: gettext("Domain"),
 	    receivertest: true,
@@ -122,6 +134,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1003: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'ip',
 	    subject: gettext("IP Address"),
 	    width: 400,
@@ -134,6 +147,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1004: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'network',
 	    subject: gettext("IP Network"),
 	    width: 400,
@@ -146,6 +160,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	2000: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'timeframe',
 	    subject: gettext("TimeFrame"),
 	    items: [
@@ -164,6 +179,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	4005: {
+	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'bcc',
 	    subject: gettext('BCC'),
 	    width: 400,

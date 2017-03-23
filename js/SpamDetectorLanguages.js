@@ -70,17 +70,11 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
     ],
 
     onGetValues: function(values) {
-	console.log("on get values");
-
-	console.dir(values);
-
 	if (!values.languages) {
 	    values['delete'] = 'languages';
 	} else if (Ext.isArray(values.languages)) {
 	    values.languages = values.languages.join(' ')
 	}
-
-	console.dir(values);
 
 	return values;
     },

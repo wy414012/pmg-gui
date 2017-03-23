@@ -72,7 +72,7 @@ Ext.define('PMG.WhoConfiguration', {
     alias: 'widget.pmgWhoConfiguration',
 
     ogclass: 'who',
-    otype_list: [1000, 1001, 1002, 1003, 1004]
+    otype_list: [1000, 1001, 1002, 1003, 1004, 1005]
 });
 
 Ext.define('PMG.WhenConfiguration', {

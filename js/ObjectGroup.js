@@ -139,7 +139,7 @@ Ext.define('PMG.ObjectGroup', {
 	    config.subject = full_subject(editor.subject, rec.data.receivertest);
 	    config.url = me.baseurl + '/' + editor.subdir + '/' + rec.data.id;
 
-	    var win = Ext.createWidget('proxmoxWindowEdit', config);
+	    var win = Ext.createWidget(config);
 
 	    win.load();
 	    win.on('destroy', reload);
@@ -162,7 +162,7 @@ Ext.define('PMG.ObjectGroup', {
 			return;
 		    }
 		    config.url = me.baseurl + '/' + editor.subdir;
-		    var win = Ext.createWidget('proxmoxWindowEdit', config);
+		    var win = Ext.create(config);
 		    win.on('destroy', reload);
 		    win.show();
 		}

@@ -3,6 +3,9 @@ JSSRC= 				                 	\
 	LoginWindow.js					\
 	ServerStatus.js					\
 	ServerAdministration.js				\
+	LDAPProfileSelector.js				\
+	LDAPGroupSelector.js				\
+	LDAPGroupEditor.js				\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\
 	ObjectGroupSelector.js				\
