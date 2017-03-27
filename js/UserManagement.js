@@ -11,7 +11,7 @@ Ext.define('PMG.UserManagement', {
     items: [
 	{
 	    title: gettext('Local'),
-	    html: "local"
+	    xtype: "pmgUserView"
 	},
 	{
 	    title: gettext('LDAP'),

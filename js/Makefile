@@ -1,4 +1,4 @@
-JSSRC= 				                 	\
+JSSRC=							\
 	Utils.js					\
 	LoginWindow.js					\
 	ServerStatus.js					\
@@ -34,6 +34,8 @@ JSSRC= 				                 	\
 	ClamAVDatabase.js				\
 	VirusDetectorConfiguration.js			\
 	LDAPConfig.js					\
+	UserEdit.js					\
+	UserView.js					\
 	UserManagement.js				\
 	ConfigPanel.js					\
 	Workspace.js
