@@ -64,8 +64,9 @@ Ext.define('PMG.UserEdit', {
 
 	column1.push(
 	    {
-		xtype: 'textfield',
+		xtype: 'pmgRoleSelector',
 		name: 'role',
+		disabled: me.userid === 'root@pam',
 		allowBlank: false,
 		fieldLabel: gettext('Role')
 	    },

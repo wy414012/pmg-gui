@@ -1,6 +1,7 @@
 JSSRC=							\
 	Utils.js					\
 	LoginWindow.js					\
+	RoleSelector.js					\
 	ServerStatus.js					\
 	ServerAdministration.js				\
 	LDAPProfileSelector.js				\
