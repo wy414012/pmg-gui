@@ -93,17 +93,20 @@ Ext.define('PMG.UserEdit', {
         var column2 = [
 	    {
 		xtype: 'proxmoxtextfield',
+		deleteEmpty: me.create ? false : true,
 		name: 'firstname',
 		fieldLabel: gettext('First Name')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
+		deleteEmpty: me.create ? false : true,
 		name: 'lastname',
 		fieldLabel: gettext('Last Name')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'email',
+		deleteEmpty: me.create ? false : true,
 		fieldLabel: gettext('E-Mail'),
 		vtype: 'proxmoxMail'
 	    }
@@ -113,11 +116,13 @@ Ext.define('PMG.UserEdit', {
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'comment',
+		deleteEmpty: me.create ? false : true,
 		disabled: me.userid === 'root@pam',
 		fieldLabel: gettext('Comment')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
+		deleteEmpty: me.create ? false : true,
 		name: 'keys',
 		fieldLabel: gettext('Key IDs')
 	    }
@@ -140,8 +145,6 @@ Ext.define('PMG.UserEdit', {
 		if (!values.password) {
 		    delete values.password;
 		}
-
-		console.dir(values);
 
 		return values;
 	    }

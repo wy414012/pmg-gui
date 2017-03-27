@@ -2,7 +2,7 @@ Ext.define('pmg-users', {
     extend: 'Ext.data.Model',
     fields: [
 	'userid', 'firstname', 'lastname' , 'email', 'comment',
-	'role', 'keys',
+	'role', 'keys', 'realm',
 	{ type: 'boolean', name: 'enable' },
 	{ type: 'date', dateFormat: 'timestamp', name: 'expire' }
     ],
@@ -22,10 +22,16 @@ Ext.define('PMG.UserView', {
 
 	var store = new Ext.data.Store({
  	    model: 'pmg-users',
-	    sorters: {
-		property: 'userid',
-		order: 'DESC'
-	    }
+	    sorters: [
+		{
+		    property: 'realm',
+		    direction: 'ASC'
+		},
+		{
+		    property: 'userid',
+		    direction: 'DESC'
+		}
+	    ]
 	});
 
 	var reload = function() {
@@ -93,10 +99,6 @@ Ext.define('PMG.UserView', {
 	    return userid.match(/^(.+)(@[^@]+)$/)[1];
 	};
 
-	var render_realm = function(userid) {
-	    return userid.match(/@([^@]+)$/)[1];
-	};
-
 	Ext.apply(me, {
 	    store: store,
 	    selModel: sm,
@@ -116,8 +118,7 @@ Ext.define('PMG.UserView', {
 		    header: gettext('Realm'),
 		    width: 100,
 		    sortable: true,
-		    renderer: render_realm,
-		    dataIndex: 'userid'
+		    dataIndex: 'realm'
 		},
 		{
 		    header: gettext('Enabled'),
