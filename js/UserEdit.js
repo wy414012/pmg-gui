@@ -1,25 +1,30 @@
-Ext.define('PMG.UserEdit', {
-    extend: 'Proxmox.window.Edit',
-    alias: ['widget.pmgUserEdit'],
+Ext.define('PMG.UserInputPanel', {
+    extend: 'Proxmox.panel.InputPanel',
+    alias: 'widget.pmgUserInputPanel',
 
-    isAdd: true,
+    onGetValues: function(values) {
+	var me = this;
+
+	// hack: ExtJS datefield does not submit 0, so we need to set that
+	if (!values.expire) {
+	    values.expire = 0;
+	}
+
+	if (me.create) {
+	    values.userid = values.userid + '@pmg';
+	}
+
+	if (!values.password) {
+	    delete values.password;
+	}
+
+	return values;
+    },
 
     initComponent : function() {
         var me = this;
 
-        me.create = !me.userid;
-
-        var url;
-        var method;
-        var realm;
-
-        if (me.create) {
-            url = '/api2/extjs/access/users';
-            method = 'POST';
-        } else {
-            url = '/api2/extjs/access/users/' + me.userid;
-            method = 'PUT';
-	}
+	me.create = !me.userid;
 
 	var verifypw;
 	var pwfield;
@@ -47,7 +52,7 @@ Ext.define('PMG.UserEdit', {
 	    validator: validate_pw
 	});
 
-        var column1 = [
+        me.column1 = [
             {
                 xtype: me.create ? 'textfield' : 'displayfield',
                 name: 'userid',
@@ -59,10 +64,10 @@ Ext.define('PMG.UserEdit', {
 	];
 
 	if (me.create) {
-	    column1.push(pwfield, verifypw);
+	    me.column1.push(pwfield, verifypw);
 	}
 
-	column1.push(
+	me.column1.push(
 	    {
 		xtype: 'pmgRoleSelector',
 		name: 'role',
@@ -90,7 +95,7 @@ Ext.define('PMG.UserEdit', {
 	    }
         );
 
-        var column2 = [
+        me.column2 = [
 	    {
 		xtype: 'proxmoxtextfield',
 		deleteEmpty: me.create ? false : true,
@@ -112,7 +117,7 @@ Ext.define('PMG.UserEdit', {
 	    }
 	];
 
-	var columnB = [
+	me.columnB = [
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'comment',
@@ -128,37 +133,39 @@ Ext.define('PMG.UserEdit', {
 	    }
 	];
 
-	var ipanel = Ext.create('Proxmox.panel.InputPanel', {
-	    column1: column1,
-	    column2: column2,
-	    columnB: columnB,
-	    onGetValues: function(values) {
-		// hack: ExtJS datefield does not submit 0, so we need to set that
-		if (!values.expire) {
-		    values.expire = 0;
-		}
+	me.callParent();
+    }
+});
 
-		if (me.create) {
-		    values.userid = values.userid + '@pmg';
-		}
+Ext.define('PMG.UserEdit', {
+    extend: 'Proxmox.window.Edit',
+    alias: ['widget.pmgUserEdit'],
 
-		if (!values.password) {
-		    delete values.password;
-		}
+    isAdd: true,
 
-		return values;
-	    }
-	});
+    subject: gettext('User'),
 
-	Ext.applyIf(me, {
-            subject: gettext('User'),
-            url: url,
-            method: method,
-	    fieldDefaults: {
-		labelWidth: 120
-	    },
-	    items: [ ipanel ]
-        });
+    fieldDefaults: {
+	labelWidth: 120
+    },
+
+    initComponent : function() {
+        var me = this;
+
+        me.create = !me.userid;
+
+        if (me.create) {
+            me.url = '/api2/extjs/access/users';
+            me.method = 'POST';
+        } else {
+            me.url = '/api2/extjs/access/users/' + me.userid;
+            me.method = 'PUT';
+	}
+
+	me.items = {
+	    xtype: 'pmgUserInputPanel',
+	    userid: me.userid
+	};
 
         me.callParent();
 
