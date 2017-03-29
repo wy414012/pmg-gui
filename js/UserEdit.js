@@ -187,6 +187,21 @@ Ext.define('PMG.UserEdit', {
 	}
     },
 
+    setValues: function(values) {
+	var me = this;
+
+	if (Ext.isDefined(values.expire)) {
+	    if (values.expire) {
+		values.expire = new Date(values.expire * 1000);
+	    } else {
+		// display 'never' instead of '1970-01-01'
+		values.expire = null;
+	    }
+	}
+
+	me.callParent([values]);
+    },
+
     initComponent : function() {
         var me = this;
 
@@ -204,21 +219,7 @@ Ext.define('PMG.UserEdit', {
 	me.callParent();
 
 	if (userid) {
-            me.load({
-		success: function(response, options) {
-		    var data = response.result.data;
-		    if (Ext.isDefined(data.expire)) {
-			if (data.expire) {
-			    data.expire = new Date(data.expire * 1000);
-			} else {
-			    // display 'never' instead of '1970-01-01'
-			    data.expire = null;
-			}
-		    }
-
-		    me.setValues(data);
-                }
-            });
+            me.load();
         }
     }
 });
