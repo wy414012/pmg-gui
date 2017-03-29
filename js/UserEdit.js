@@ -212,14 +212,11 @@ Ext.define('PMG.UserEdit', {
             me.url = '/api2/extjs/access/users';
             me.method = 'POST';
         } else {
+	    me.autoLoad = true;
             me.url = '/api2/extjs/access/users/' + userid;
             me.method = 'PUT';
 	}
 
 	me.callParent();
-
-	if (userid) {
-            me.load();
-        }
     }
 });
