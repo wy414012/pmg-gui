@@ -17,6 +17,21 @@ Ext.define('PMG.UserView', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgUserView',
 
+    store: {
+	autoLoad: true,
+	model: 'pmg-users',
+	sorters: [
+	    {
+		property: 'realm',
+		direction: 'ASC'
+	    },
+	    {
+		property: 'userid',
+		direction: 'ASC'
+	    }
+	]
+    },
+
     controller: {
 
 	xclass: 'Ext.app.ViewController',
@@ -147,26 +162,5 @@ Ext.define('PMG.UserView', {
 	var me = this;
 
 	me.store.load();
-    },
-
-    initComponent : function() {
-	var me = this;
-
-	me.store = new Ext.data.Store({
-	    autoLoad: true,
- 	    model: 'pmg-users',
-	    sorters: [
-		{
-		    property: 'realm',
-		    direction: 'ASC'
-		},
-		{
-		    property: 'userid',
-		    direction: 'ASC'
-		}
-	    ]
-	});
-
-	me.callParent();
     }
 });
