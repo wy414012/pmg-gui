@@ -68,6 +68,7 @@ Ext.define('PMG.UserEdit', {
 			field.next().validate();
                     }
 		},
+		hidden: true, // avoid flicker
 		bind: {
 		    hidden: '{!isCreate}',
 		    disabled: '{!isCreate}'
@@ -81,6 +82,7 @@ Ext.define('PMG.UserEdit', {
 		vtype: 'password',
 		initialPassField: 'password',
 		submitValue: false,
+		hidden: true,  // avoid flicker
 		bind: {
 		    hidden: '{!isCreate}',
 		    disabled: '{!isCreate}'
