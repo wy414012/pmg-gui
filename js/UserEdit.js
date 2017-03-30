@@ -174,11 +174,12 @@ Ext.define('PMG.UserEdit', {
 
 	xclass: 'Ext.app.ViewController',
 
-	init: function(view) {
-	    var userid = view.userid;
-	    var viewModel = view.getViewModel();
+	initViewModel: function(viewModel) {
 
-	    view.getViewModel().set('isCreate', !view.userid);
+	    var view = this.getView();
+	    var userid = view.userid;
+
+	    viewModel.set('isCreate', !view.userid);
 
 	    if (userid) {
 		viewModel.set('userid', userid);
