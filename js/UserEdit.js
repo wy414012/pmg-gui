@@ -3,7 +3,8 @@ Ext.define('PMG.UserViewModel', {
     alias: 'viewmodel.pmgUserViewModel',
 
     data: {
-	userid: undefined
+	userid: undefined,
+	isCreate: true
     },
 
     formulas: {
@@ -172,9 +173,7 @@ Ext.define('PMG.UserEdit', {
 	    var view = this.getView();
 	    var userid = view.getUserid();
 
-	    if (userid) {
-		viewModel.set('userid', userid);
-	    }
+	    viewModel.set('userid', userid);
 	}
     },
 
