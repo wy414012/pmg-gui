@@ -20,6 +20,10 @@ Ext.define('PMG.UserEdit', {
     extend: 'Proxmox.window.Edit',
     alias: ['widget.pmgUserEdit'],
 
+    config: {
+	userid: undefined
+    },
+
     viewModel: { type: 'pmgUserViewModel' },
 
     isAdd: true,
@@ -166,7 +170,7 @@ Ext.define('PMG.UserEdit', {
 	initViewModel: function(viewModel) {
 
 	    var view = this.getView();
-	    var userid = view.userid;
+	    var userid = view.getUserid();
 
 	    if (userid) {
 		viewModel.set('userid', userid);
@@ -212,13 +216,18 @@ Ext.define('PMG.UserEdit', {
 	me.callParent([values]);
     },
 
-    initComponent : function() {
-        var me = this;
+    create: true,
+    url: '/api2/extjs/access/users',
+    autoLoad: false,
+    method: 'POST',
 
-	var userid = me.userid;
+    updateUserid: function(userid) {
+	var me = this;
+
 	me.create = !userid; // fixme
 
-        if (!userid) {
+	if (!userid) {
+	    autoLoad = false;
             me.url = '/api2/extjs/access/users';
             me.method = 'POST';
         } else {
@@ -227,6 +236,6 @@ Ext.define('PMG.UserEdit', {
             me.method = 'PUT';
 	}
 
-	me.callParent();
+	return userid;
     }
 });
