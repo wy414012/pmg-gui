@@ -23,33 +23,13 @@ Ext.define('PMG.UserEdit', {
 
     items: {
 	xtype: 'inputpanel',
-	onGetValues: function(values) {
-	    var me = this;
-
-	    // hack: ExtJS datefield does not submit 0, so we need to set that
-	    if (!values.expire) {
-		values.expire = 0;
-	    }
-
-	    if (me.create) {
-		values.userid = values.userid + '@pmg';
-	    }
-
-	    if (!values.password) {
-		delete values.password;
-	    }
-
-	    return values;
-	},
-
 	column1: [
 	    {
 		xtype: 'textfield',
-		name: 'userid',
+		name: 'username',
 		fieldLabel: gettext('User name'),
 		allowBlank: false,
 		bind: {
-		    value: '{userid}',
 		    submitValue: '{isCreate}',
 		    editable: '{isCreate}'
 		}
@@ -188,6 +168,29 @@ Ext.define('PMG.UserEdit', {
 		}
 	    }
 	}
+    },
+
+    getValues: function(dirtyOnly) {
+	var me = this;
+
+	var values = me.callParent(arguments);
+
+	// hack: ExtJS datefield does not submit 0, so we need to set that
+	if (!values.expire) {
+	    values.expire = 0;
+	}
+
+	if (me.create) {
+	    values.userid = values.username + '@pmg';
+	}
+
+	delete values.username;
+
+	if (!values.password) {
+	    delete values.password;
+	}
+
+	return values;
     },
 
     setValues: function(values) {
