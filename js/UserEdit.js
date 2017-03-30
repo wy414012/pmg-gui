@@ -3,9 +3,16 @@ Ext.define('PMG.UserViewModel', {
     alias: 'viewmodel.pmgUserViewModel',
 
     data: {
-	userid: undefined,
-	isCreate: true,
-	isSuperUser: false,
+	userid: undefined
+    },
+
+    formulas: {
+        isCreate: function (get) {
+            return !get('userid');
+        },
+        isSuperUser: function (get) {
+            return get('userid') === 'root@pam';
+        }
     }
 });
 
@@ -161,13 +168,8 @@ Ext.define('PMG.UserEdit', {
 	    var view = this.getView();
 	    var userid = view.userid;
 
-	    viewModel.set('isCreate', !view.userid);
-
 	    if (userid) {
 		viewModel.set('userid', userid);
-		if (userid === 'root@pam') {
-		    viewModel.set('isSuperUser', true);
-		}
 	    }
 	}
     },
