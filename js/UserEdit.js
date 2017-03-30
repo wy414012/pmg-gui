@@ -234,7 +234,5 @@ Ext.define('PMG.UserEdit', {
             me.url = '/api2/extjs/access/users/' + userid;
             me.method = 'PUT';
 	}
-
-	return userid;
     }
 });
