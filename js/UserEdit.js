@@ -39,6 +39,7 @@ Ext.define('PMG.UserEdit', {
 		inputType: 'password',
 		fieldLabel: gettext('Password'),
 		minLength: 5,
+		allowBlank: false,
 		name: 'password',
 		listeners: {
                     change: function(field){
@@ -61,6 +62,7 @@ Ext.define('PMG.UserEdit', {
 		name: 'verifypassword',
 		vtype: 'password',
 		initialPassField: 'password',
+		allowBlank: false,
 		submitValue: false,
 		hidden: true,  // avoid flicker
 		bind: {
