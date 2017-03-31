@@ -36,6 +36,10 @@ Ext.define('PMG.UserView', {
 
 	xclass: 'Ext.app.ViewController',
 
+	init: function(view) {
+	    Proxmox.Utils.monStoreErrors(view, view.store);
+	},
+
 	renderUsername: function(userid) {
 	    return userid.match(/^(.+)(@[^@]+)$/)[1];
 	},
