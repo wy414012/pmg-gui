@@ -1,37 +1,31 @@
-Ext.define('PMG.UserViewModel', {
-    extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.pmgUserViewModel',
-
-    data: {
-	userid: undefined,
-	isCreate: true
-    },
-
-    formulas: {
-        isCreate: function (get) {
-            return !get('userid');
-        },
-        isSuperUser: function (get) {
-            return get('userid') === 'root@pam';
-        }
-    }
-});
-
 Ext.define('PMG.UserEdit', {
     extend: 'Proxmox.window.Edit',
-    alias: ['widget.pmgUserEdit'],
+    alias: 'widget.pmgUserEdit',
+    mixins: ['Proxmox.Mixin.CBind'],
 
-    config: {
-	userid: undefined
-    },
-
-    viewModel: { type: 'pmgUserViewModel' },
+    userid: undefined,
 
     isAdd: true,
 
     subject: gettext('User'),
 
     fieldDefaults: { labelWidth: 120 },
+
+    cbindData: function(initialConfig) {
+	var me = this;
+
+	var userid = initialConfig.userid;
+	var baseurl = '/api2/extjs/access/users';
+
+	me.create = !userid;
+	me.url = userid ?  baseurl + '/' + userid : baseurl;
+	me.method = userid ? 'PUT' : 'POST';
+	me.autoLoad = userid ? true : false;
+
+	return {
+	    isSuperUser: userid === 'root@pam',
+	}
+    },
 
     items: {
 	xtype: 'inputpanel',
@@ -41,9 +35,9 @@ Ext.define('PMG.UserEdit', {
 		name: 'username',
 		fieldLabel: gettext('User name'),
 		allowBlank: false,
-		bind: {
-		    submitValue: '{isCreate}',
-		    editable: '{isCreate}'
+		cbind: {
+		    submitValue: '{create}',
+		    editable: '{create}'
 		}
 	    },
 	    {
@@ -61,10 +55,9 @@ Ext.define('PMG.UserEdit', {
 			field.next().validate();
                     }
 		},
-		hidden: true, // avoid flicker
-		bind: {
-		    hidden: '{!isCreate}',
-		    disabled: '{!isCreate}'
+		cbind: {
+		    hidden: '{!create}',
+		    disabled: '{!create}'
 		}
 	    },
 	    {
@@ -76,10 +69,9 @@ Ext.define('PMG.UserEdit', {
 		initialPassField: 'password',
 		allowBlank: false,
 		submitValue: false,
-		hidden: true,  // avoid flicker
-		bind: {
-		    hidden: '{!isCreate}',
-		    disabled: '{!isCreate}'
+		cbind: {
+		    hidden: '{!create}',
+		    disabled: '{!create}'
 		}
 	    },
 	    {
@@ -87,7 +79,7 @@ Ext.define('PMG.UserEdit', {
 		name: 'role',
 		allowBlank: false,
 		fieldLabel: gettext('Role'),
-		bind: {
+		cbind: {
 		    disabled: '{isSuperUser}'
 		}
 	    },
@@ -98,7 +90,7 @@ Ext.define('PMG.UserEdit', {
 		format: 'Y-m-d',
 		submitFormat: 'U',
                 fieldLabel: gettext('Expire'),
-		bind: {
+		cbind: {
 		    disabled: '{isSuperUser}'
 		}
             },
@@ -109,7 +101,7 @@ Ext.define('PMG.UserEdit', {
 		uncheckedValue: 0,
 		defaultValue: 1,
 		checked: true,
-		bind: {
+		cbind: {
 		    disabled: '{isSuperUser}'
 		}
 	    }
@@ -120,16 +112,16 @@ Ext.define('PMG.UserEdit', {
 		xtype: 'proxmoxtextfield',
 		name: 'firstname',
 		fieldLabel: gettext('First Name'),
-		bind: {
-		    deleteEmpty: '{!isCreate}'
+		cbind: {
+		    deleteEmpty: '{!create}'
 		}
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'lastname',
 		fieldLabel: gettext('Last Name'),
-		bind: {
-		    deleteEmpty: '{!isCreate}'
+		cbind: {
+		    deleteEmpty: '{!create}'
 		}
 	    },
 	    {
@@ -137,8 +129,8 @@ Ext.define('PMG.UserEdit', {
 		name: 'email',
 		fieldLabel: gettext('E-Mail'),
 		vtype: 'proxmoxMail',
-		bind: {
-		    deleteEmpty: '{!isCreate}'
+		cbind: {
+		    deleteEmpty: '{!create}'
 		}
 	    }
 	],
@@ -148,33 +140,20 @@ Ext.define('PMG.UserEdit', {
 		xtype: 'proxmoxtextfield',
 		name: 'comment',
 		fieldLabel: gettext('Comment'),
-		bind: {
+		cbind: {
 		    disabled: '{isSuperUser}',
-		    deleteEmpty: '{!isCreate}'
+		    deleteEmpty: '{!create}'
 		}
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'keys',
 		fieldLabel: gettext('Key IDs'),
-		bind: {
-		    deleteEmpty: '{!isCreate}'
+		cbind: {
+		    deleteEmpty: '{!create}'
 		}
 	    }
 	]
-    },
-
-    controller: {
-
-	xclass: 'Ext.app.ViewController',
-
-	initViewModel: function(viewModel) {
-
-	    var view = this.getView();
-	    var userid = view.getUserid();
-
-	    viewModel.set('userid', userid);
-	}
     },
 
     getValues: function(dirtyOnly) {
@@ -213,26 +192,5 @@ Ext.define('PMG.UserEdit', {
 	}
 
 	me.callParent([values]);
-    },
-
-    create: true,
-    url: '/api2/extjs/access/users',
-    autoLoad: false,
-    method: 'POST',
-
-    updateUserid: function(userid) {
-	var me = this;
-
-	me.create = !userid; // fixme
-
-	if (!userid) {
-	    autoLoad = false;
-            me.url = '/api2/extjs/access/users';
-            me.method = 'POST';
-        } else {
-	    me.autoLoad = true;
-            me.url = '/api2/extjs/access/users/' + userid;
-            me.method = 'PUT';
-	}
     }
 });
