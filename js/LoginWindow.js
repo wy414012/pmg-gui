@@ -10,10 +10,15 @@ Ext.define('PMG.window.LoginWindow', {
 
 	    var form = this.lookupReference('loginForm');
 	    var unField = this.lookupReference('usernameField');
+	    var realmField = this.lookupReference('realmField');
 	    var view = this.getView();
+
+	    var username = unField.getValue();
+	    realmField.setValue(username === 'root' ? 'pam' : 'pmg');
 
 	    if(form.isValid()){
 		view.el.mask(gettext('Please wait...'), 'x-mask-loading');
+
 
 		form.submit({
 		    failure: function(f, resp){
@@ -118,7 +123,8 @@ Ext.define('PMG.window.LoginWindow', {
 	    {
 		xtype: 'hiddenfield',
 		name: 'realm',
-		value: 'pam',
+		reference: 'realmField',
+		value: 'pam'
 	    }
 	],
 	buttons: [
