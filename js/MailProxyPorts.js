@@ -2,6 +2,38 @@ Ext.define('PMG.MailProxyPorts', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgMailProxyPorts'],
 
+    url: '/api2/json/config/mail',
+
+    editorConfig: {
+	url: '/api2/extjs/config/mail',
+    },
+
+    interval: 5000,
+
+    cwidth1: 200,
+
+    controller: {
+
+	xclass: 'Ext.app.ViewController',
+
+	onEdit: function() {
+	    this.getView().run_editor();
+	}
+    },
+
+    listeners: {
+	itemdblclick: 'onEdit',
+    },
+
+    tbar: [
+	{
+	    text: gettext('Edit'),
+	    xtype: 'proxmoxButton',
+	    disabled: true,
+	    handler: 'onEdit'
+	}
+    ],
+
     initComponent : function() {
 	var me = this;
 
@@ -13,32 +45,9 @@ Ext.define('PMG.MailProxyPorts', {
 			   { defaultValue: 25, deleteEmpty: true,
 			     minValue: 1, maxValue: 65535 });
 
-	var baseurl = '/config/mail';
-
-	me.selModel = Ext.create('Ext.selection.RowModel', {});
-
-	Ext.apply(me, {
-	    tbar: [{
-		text: gettext('Edit'),
-		xtype: 'proxmoxButton',
-		disabled: true,
-		handler: function() { me.run_editor() },
-		selModel: me.selModel
-	    }],
-	    url: '/api2/json' + baseurl,
-	    editorConfig: {
-		url: '/api2/extjs' + baseurl,
-	    },
-	    interval: 5000,
-	    cwidth1: 200,
-	    listeners: {
-		itemdblclick: me.run_editor
-	    }
-	});
-
 	me.callParent();
 
-	me.on('activate', me.rstore.startUpdate);
+	me.rstore.startUpdate();
 	me.on('destroy', me.rstore.stopUpdate);
     }
 });
