@@ -335,7 +335,7 @@ Ext.define('PMG.StdWorkspace', {
 			    groups: ['admin'],
 			    title: gettext('Queues'),
 			    itemId: 'queues',
-			    html: "Queues"
+			    items: [{ xtype: 'pmgQueueAdministration' }]
 			}
 		    ]
 		}

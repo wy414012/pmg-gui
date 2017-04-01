@@ -38,6 +38,8 @@ JSSRC=							\
 	UserEdit.js					\
 	UserView.js					\
 	UserManagement.js				\
+	QueueAdministration.js				\
+	MailQueue.js					\
 	ConfigPanel.js					\
 	Workspace.js
 
