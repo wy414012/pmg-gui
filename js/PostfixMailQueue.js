@@ -24,8 +24,36 @@ Ext.define('PMG.Postfix.MailQueue', {
 
 	init: function(view) {
 	    if (view.nodename) view.setNodename(view.nodename);
+
+	    view.delayFilterTask = new Ext.util.DelayedTask(function() {
+		var filter = view.lookupReference('filter').getValue();
+		view.setFilter(filter);
+	    });
+	},
+
+	onChangeFilter: function(f, v) {
+	    var view = this.getView();
+	    view.delayFilterTask.delay(500);
+	},
+
+	control: {
+	    'field[reference=filter]': {
+		change: 'onChangeFilter'
+	    }
 	}
     },
+
+    tbar: [
+	{
+	    xtype: 'label',
+	    html: gettext('Filter') + ':'
+	},
+	{
+	    xtype: 'textfield',
+	    width: 300,
+	    reference: 'filter'
+	}
+    ],
 
     columns: [
 	{
@@ -56,16 +84,52 @@ Ext.define('PMG.Postfix.MailQueue', {
 	}
     ],
 
+    pendingLoad: false,
+
+    updateProxy: function() {
+	var me = this;
+
+	if (me.pendingLoad) return;
+
+	var proxy = {
+	    type: 'proxmox',
+	    url: "/api2/json/nodes/" + me.nodename + "/postfix/mailq"
+	};
+
+	var filter = me.filter;
+	var nodename = me.nodename;
+
+	if (filter) { proxy.extraParams = { filter: filter }; }
+
+
+	me.store.setProxy(proxy);
+
+	me.pendingLoad = true;
+
+	me.store.load(function() {
+	    me.pendingLoad = false;
+	    if (me.nodename != nodename || me.filter != filter) {
+		setTimeout(function() {
+		    me.updateProxy();
+		}, 100);
+	    }
+	});
+    },
+
+    setFilter: function(filter) {
+	var me = this;
+
+	me.filter = filter;
+
+	me.updateProxy();
+    },
+
     setNodename: function(nodename) {
 	var me = this;
 
 	me.nodename = nodename;
 
-	me.store.setProxy({
-	    type: 'proxmox',
-	    url: "/api2/json/nodes/" + nodename + "/postfix/mailq"
-	});
-	me.store.load();
+	me.updateProxy();
     }
 
 });
