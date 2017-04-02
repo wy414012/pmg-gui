@@ -32,7 +32,9 @@ Ext.define('PMG.Postfix.MailQueue', {
 
 	    view.delayFilterTask = new Ext.util.DelayedTask(function() {
 		var filter = view.lookupReference('filter').getValue();
-		view.setFilter(filter);
+
+		view.filter = filter;
+		view.updateProxy();
 	    });
 	},
 
@@ -124,11 +126,7 @@ Ext.define('PMG.Postfix.MailQueue', {
     },
 
     setFilter: function(filter) {
-	var me = this;
-
-	me.filter = filter;
-
-	me.updateProxy();
+	this.lookupReference('filter').setValue(filter);
     },
 
     setNodename: function(nodename) {
