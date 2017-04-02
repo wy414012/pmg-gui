@@ -35,15 +35,48 @@ Ext.define('PMG.Postfix.QShape', {
 	xclass: 'Ext.app.ViewController',
 
 	onFlush: function() {
-	    console.log('flush');
+	    var view = this.getView();
+
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/nodes/' + Proxmox.NodeName + '/postfix/flush_queues',
+		method: 'POST',
+		waitMsgTarget: view,
+		success: function(response, opts) {
+		    view.store.load();
+		},
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
 	},
 
 	onDeleteAll: function() {
-	    console.log('delete all');
+	    var view = this.getView();
+
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/nodes/' + Proxmox.NodeName + '/postfix/delete_deferred_queue',
+		method: 'POST',
+		waitMsgTarget: view,
+		success: function(response, opts) {
+		    view.store.load();
+		},
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
 	},
 
 	onDiscardVerifyDatabase: function() {
-	    console.log('discard verify datatbase');
+	    var view = this.getView();
+
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/nodes/' + Proxmox.NodeName + '/postfix/discard_verify_cache',
+		method: 'POST',
+		waitMsgTarget: view,
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
 	}
     },
 
@@ -55,13 +88,13 @@ Ext.define('PMG.Postfix.QShape', {
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Delete all Messages'),
+	    dangerous: true,
+	    confirmMsg: "Are you sure you want to delete all deferred mails?",
 	    selModel: null,
 	    handler: 'onDeleteAll'
 	},
 	{
-	    xtype: 'proxmoxButton',
 	    text: gettext('Discard address verification database'),
-	    selModel: null,
 	    handler: 'onDiscardVerifyDatabase'
 	}
     ],

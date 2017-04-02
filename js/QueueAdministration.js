@@ -36,7 +36,7 @@ Ext.define('PMG.QueueAdministration', {
 
     items: [
 	{
-	    title: gettext('Shape'),
+	    title: gettext('Summary'),
 	    xtype: 'pmgPostfixQShape'
 	},
 	{
