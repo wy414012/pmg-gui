@@ -16,7 +16,12 @@ Ext.define('PMG.Postfix.MailQueue', {
     nodename : undefined,
     filter: undefined,
 
-    store: { model: 'pmg-mailq' },
+    store: {
+	xclass: 'Ext.data.BufferedStore',
+	model: 'pmg-mailq',
+	remoteFilter: true,
+	pageSize: 2000
+    },
 
     controller: {
 
@@ -93,6 +98,8 @@ Ext.define('PMG.Postfix.MailQueue', {
 
 	var proxy = {
 	    type: 'proxmox',
+	    startParam: 'start',
+	    limitParam: 'limit',
 	    url: "/api2/json/nodes/" + me.nodename + "/postfix/mailq"
 	};
 
