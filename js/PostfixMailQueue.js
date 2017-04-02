@@ -44,6 +44,11 @@ Ext.define('PMG.Postfix.MailQueue', {
 	},
 
 	control: {
+	    '#': {
+		activate: function() {
+		    this.view.updateProxy(); // reload
+		}
+	    },
 	    'field[reference=filter]': {
 		change: 'onChangeFilter'
 	    }
