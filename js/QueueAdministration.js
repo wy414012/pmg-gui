@@ -37,6 +37,7 @@ Ext.define('PMG.QueueAdministration', {
     items: [
 	{
 	    title: gettext('Summary'),
+	    nodename: Proxmox.NodeName,
 	    xtype: 'pmgPostfixQShape'
 	},
 	{

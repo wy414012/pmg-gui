@@ -14,16 +14,14 @@ Ext.define('pmg-qshape', {
 	{ type: 'integer', name: '1280s'},
 	{ type: 'integer', name: '1280s+'}
     ],
-    proxy: {
-	type: 'proxmox',
-	url: "/api2/json/nodes/" + Proxmox.NodeName + "/postfix/qshape"
-    },
     idProperty: 'domain'
 });
 
 Ext.define('PMG.Postfix.QShape', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgPostfixQShape',
+
+    nodename : undefined,
 
     store: {
 	autoLoad: true,
@@ -33,6 +31,10 @@ Ext.define('PMG.Postfix.QShape', {
     controller: {
 
 	xclass: 'Ext.app.ViewController',
+
+	init: function(view) {
+	    if (view.nodename) view.setNodename(view.nodename);
+	},
 
 	onFlush: function() {
 	    var view = this.getView();
@@ -77,6 +79,14 @@ Ext.define('PMG.Postfix.QShape', {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		}
 	    });
+	},
+
+	control: {
+	    '#': {
+		activate: function() {
+		    this.view.store.load(); // reload
+		}
+	    },
 	}
     },
 
@@ -160,5 +170,19 @@ Ext.define('PMG.Postfix.QShape', {
 	    width: 80,
 	    dataIndex: '1280s+'
 	}
-    ]
+    ],
+
+    setNodename: function(nodename) {
+	var me = this;
+
+	me.nodename = nodename;
+
+	me.store.setProxy({
+	    type: 'proxmox',
+	    url: "/api2/json/nodes/" + me.nodename + "/postfix/qshape"
+	});
+
+	me.store.load();
+    }
+
 });
