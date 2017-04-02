@@ -1,14 +1,3 @@
-Ext.define('pmg-mailq', {
-    extend: 'Ext.data.Model',
-    fields: [
-	'queue_id', 'queue_name',
-	{ type: 'date',  dateFormat: 'timestamp', name: 'arrival_time'},
-	{ type: 'integer', name: 'message_size'},
-	'sender', 'receiver', 'reason'
-    ],
-    idProperty: 'queue_id'
-});
-
 Ext.define('pmg-qshape', {
     extend: 'Ext.data.Model',
     fields: [

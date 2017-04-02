@@ -9,8 +9,13 @@ Ext.define('PMG.QueueAdministration', {
 
     items: [
 	{
-	    title: gettext('Deferred Mails'),
+	    title: gettext('Shape'),
 	    xtype: 'pmgPostfixQShape'
+	},
+	{
+	    title: gettext('Deferred Mails'),
+	    nodename: Proxmox.NodeName,
+	    xtype: 'pmgPostfixMailQueue'
 	}
     ]
 });

@@ -40,6 +40,7 @@ JSSRC=							\
 	UserManagement.js				\
 	QueueAdministration.js				\
 	PostfixQShape.js				\
+	PostfixMailQueue.js				\
 	ConfigPanel.js					\
 	Workspace.js
 
