@@ -46,12 +46,8 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    view.delayFilterTask.delay(500);
 	},
 
-	onFlush: function() {
+	onFlush: function(button, event, rec) {
 	    var view = this.getView();
-
-	    var rec = view.selModel.getSelection()[0];
-
-	    if (!rec || !rec.data.queue_id) return;
 
 	    Proxmox.Utils.API2Request({
 		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/queue/' +
@@ -63,6 +59,23 @@ Ext.define('PMG.Postfix.MailQueue', {
 		}
 	    });
 
+	},
+
+	onRemove: function(button, event, rec) {
+	    var view = this.getView();
+
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/queue/' +
+		    view.queuename + '/' + rec.data.queue_id,
+		method: 'DELETE',
+		waitMsgTarget: view,
+		success: function(response, opts) {
+		    view.store.load();
+		},
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
 	},
 
 	control: {
@@ -83,6 +96,10 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    disabled: true,
 	    text: gettext('Flush'),
 	    handler: 'onFlush'
+	},
+	{
+	    xtype: 'proxmoxStdRemoveButton',
+	    handler: 'onRemove'
 	},
 	{
 	    xtype: 'label',
