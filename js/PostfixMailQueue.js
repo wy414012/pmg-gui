@@ -46,6 +46,25 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    view.delayFilterTask.delay(500);
 	},
 
+	onFlush: function() {
+	    var view = this.getView();
+
+	    var rec = view.selModel.getSelection()[0];
+
+	    if (!rec || !rec.data.queue_id) return;
+
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/queue/' +
+		    view.queuename + '/' + rec.data.queue_id,
+		method: 'POST',
+		waitMsgTarget: view,
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
+
+	},
+
 	control: {
 	    '#': {
 		activate: function() {
@@ -59,6 +78,12 @@ Ext.define('PMG.Postfix.MailQueue', {
     },
 
     tbar: [
+	{
+	    xtype: 'proxmoxButton',
+	    disabled: true,
+	    text: gettext('Flush'),
+	    handler: 'onFlush'
+	},
 	{
 	    xtype: 'label',
 	    html: gettext('Filter') + ':'
