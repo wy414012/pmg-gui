@@ -14,7 +14,10 @@ Ext.define('PMG.Postfix.MailQueue', {
     alias: 'widget.pmgPostfixMailQueue',
 
     nodename : undefined,
+
     filter: undefined,
+
+    queuename: 'deferred',
 
     store: {
 	xclass: 'Ext.data.BufferedStore',
@@ -107,11 +110,12 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    type: 'proxmox',
 	    startParam: 'start',
 	    limitParam: 'limit',
-	    url: "/api2/json/nodes/" + me.nodename + "/postfix/mailq"
+	    url: "/api2/json/nodes/" + me.nodename + "/postfix/queue/" + me.queuename
 	};
 
 	var filter = me.filter;
 	var nodename = me.nodename;
+	var queuename = me.queuename;
 
 	if (filter) { proxy.extraParams = { filter: filter }; }
 
@@ -122,7 +126,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 
 	me.store.load(function() {
 	    me.pendingLoad = false;
-	    if (me.nodename != nodename || me.filter != filter) {
+	    if (me.nodename !== nodename || me.filter !== filter || me.queuename !== queuename) {
 		setTimeout(function() {
 		    me.updateProxy();
 		}, 100);
@@ -138,6 +142,14 @@ Ext.define('PMG.Postfix.MailQueue', {
 	var me = this;
 
 	me.nodename = nodename;
+
+	me.updateProxy();
+    },
+
+    setQueueName: function(queuename) {
+	var me = this;
+
+	me.queuename = queuename;
 
 	me.updateProxy();
     }
