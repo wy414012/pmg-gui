@@ -70,6 +70,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 		method: 'DELETE',
 		waitMsgTarget: view,
 		success: function(response, opts) {
+		    view.selModel.deselectAll();
 		    view.store.load();
 		},
 		failure: function (response, opts) {
