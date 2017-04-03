@@ -40,7 +40,7 @@ Ext.define('PMG.Postfix.QShape', {
 	    var view = this.getView();
 
 	    Proxmox.Utils.API2Request({
-		url: '/api2/extjs/nodes/' + Proxmox.NodeName + '/postfix/flush_queues',
+		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/flush_queues',
 		method: 'POST',
 		waitMsgTarget: view,
 		success: function(response, opts) {
@@ -56,7 +56,7 @@ Ext.define('PMG.Postfix.QShape', {
 	    var view = this.getView();
 
 	    Proxmox.Utils.API2Request({
-		url: '/api2/extjs/nodes/' + Proxmox.NodeName + '/postfix/delete_deferred_queue',
+		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/delete_deferred_queue',
 		method: 'POST',
 		waitMsgTarget: view,
 		success: function(response, opts) {
@@ -72,7 +72,7 @@ Ext.define('PMG.Postfix.QShape', {
 	    var view = this.getView();
 
 	    Proxmox.Utils.API2Request({
-		url: '/api2/extjs/nodes/' + Proxmox.NodeName + '/postfix/discard_verify_cache',
+		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/discard_verify_cache',
 		method: 'POST',
 		waitMsgTarget: view,
 		failure: function (response, opts) {
