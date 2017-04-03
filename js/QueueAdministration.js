@@ -41,7 +41,7 @@ Ext.define('PMG.QueueAdministration', {
 	    xtype: 'pmgPostfixQShape'
 	},
 	{
-	    title: gettext('Deferred Mails'),
+	    title: gettext('Deferred Mail'),
 	    nodename: Proxmox.NodeName,
 	    reference: 'mailq',
 	    xtype: 'pmgPostfixMailQueue'

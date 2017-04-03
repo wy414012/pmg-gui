@@ -13,7 +13,7 @@ Ext.define('PMG.Postfix.MailQueue', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgPostfixMailQueue',
 
-    nodename : undefined,
+    nodename: undefined,
 
     filter: undefined,
 
@@ -78,10 +78,26 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    });
 	},
 
+	onHeaders: function(button, event, rec) {
+	    var view = this.getView();
+
+	    var url = '/api2/extjs/nodes/' + view.nodename + '/postfix/queue/' +
+		view.queuename + '/' + rec.data.queue_id;
+
+	    var win = Ext.create('PMG.ViewMailHeaders', {
+		title: view.title + ' : ' + rec.data.queue_id,
+		url: url,
+	    });
+	    win.show();
+	},
+
 	control: {
 	    '#': {
 		activate: function() {
 		    this.view.updateProxy(); // reload
+		},
+		itemdblclick: function(grid, rec, item, index, event) {
+		    this.onHeaders(grid, event, rec);
 		}
 	    },
 	    'field[reference=filter]': {
@@ -91,6 +107,12 @@ Ext.define('PMG.Postfix.MailQueue', {
     },
 
     tbar: [
+	{
+	    xtype: 'proxmoxButton',
+	    disabled: true,
+	    text: gettext('Headers'),
+	    handler: 'onHeaders'
+	},
 	{
 	    xtype: 'proxmoxButton',
 	    disabled: true,
