@@ -4,28 +4,49 @@ Ext.define('PMG.SystemConfiguration', {
 
     title: gettext('Configuration') + ': ' + gettext('System'),
     border: false,
+    scrollable: true,
     defaults: { border: false },
-
     items: [
 	{
-	    title: gettext('Network'),
-	    xtype: 'proxmoxNodeNetworkView',
-	    nodename: Proxmox.NodeName
-	},
-	{
-	    title: gettext('DNS'),
-	    xtype: 'proxmoxNodeDNSView',
-	    nodename: Proxmox.NodeName
-	},
-	{
-	    title: gettext('Time'),
-            xtype: 'proxmoxNodeTimeView',
-	    nodename: Proxmox.NodeName
+	    title: gettext('Network/Time'),
+	    itemId: 'network',
+	    xtype: 'panel',
+	    layout: {
+		type: 'vbox',
+		align: 'stretch',
+		multi: true,
+	    },
+	    bodyPadding: '0 0 10 0',
+	    defaults: {
+		collapsible: true,
+		animCollapse: false,
+		margin: '10 10 0 10'
+	    },
+	    items: [
+		{
+		    flex: 1,
+		    title: gettext('Interfaces'),
+		    xtype: 'proxmoxNodeNetworkView',
+		    nodename: Proxmox.NodeName,
+		},
+		{
+		    height: 200,
+		    title: gettext('DNS'),
+		    xtype: 'proxmoxNodeDNSView',
+		    nodename: Proxmox.NodeName
+		},
+		{
+		    height: 150,
+		    title: gettext('Time'),
+		    xtype: 'proxmoxNodeTimeView',
+		    nodename: Proxmox.NodeName
+		},
+	    ]
 	},
 	{
 	    itemId: 'backup',
             title: gettext('Backup'),
-	    html: "Backkup"
+	    html: "Backup"
 	},
 	{
 	    itemId: 'restore',
