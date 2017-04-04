@@ -41,8 +41,16 @@ Ext.define('PMG.Utils', {
 	2: gettext('In & Out')
     },
 
+    rule_direction_icon: {
+	0: '<span class="x-fa fa-fw fa-long-arrow-left"></span> ',
+	1: '<span class="x-fa fa-fw fa-long-arrow-right"></span> ',
+	2: '<span class="x-fa fa-fw fa-exchange"></span> '
+    },
+
     format_rule_direction: function(dir) {
-	return PMG.Utils.rule_direction_text[dir] || dir;
+	var icon = PMG.Utils.rule_direction_icon[dir] || '';
+	var text = PMG.Utils.rule_direction_text[dir] || dir;
+	return icon + text;
     },
 
     format_otype: function(otype) {
