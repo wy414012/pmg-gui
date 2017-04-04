@@ -1,6 +1,6 @@
 Ext.define('PMG.SystemConfiguration', {
     extend: 'Ext.tab.Panel',
-    alias: 'widget.pmgSystemConfiguration',
+    xtype: 'pmgSystemConfiguration',
 
     title: gettext('Configuration') + ': ' + gettext('System'),
     border: false,

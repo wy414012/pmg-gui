@@ -69,7 +69,7 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 
 Ext.define('PMG.WhoConfiguration', {
     extend: 'PMG.ObjectGroupConfiguration',
-    alias: 'widget.pmgWhoConfiguration',
+    xtype: 'pmgWhoConfiguration',
 
     ogclass: 'who',
     otype_list: [1000, 1001, 1002, 1003, 1004, 1005, 1006]
@@ -77,7 +77,7 @@ Ext.define('PMG.WhoConfiguration', {
 
 Ext.define('PMG.WhenConfiguration', {
     extend: 'PMG.ObjectGroupConfiguration',
-    alias: 'widget.pmgWhenConfiguration',
+    xtype: 'pmgWhenConfiguration',
 
     ogclass: 'when',
     otype_list: [2000]
@@ -85,7 +85,7 @@ Ext.define('PMG.WhenConfiguration', {
 
 Ext.define('PMG.WhatConfiguration', {
     extend: 'PMG.ObjectGroupConfiguration',
-    alias: 'widget.pmgWhatConfiguration',
+    xtype: 'pmgWhatConfiguration',
 
     ogclass: 'what',
     otype_list: []
