@@ -28,12 +28,11 @@
       };
     </script>
     <script type="text/javascript" src="/proxmoxlib.js"></script>
-    <script type="text/javascript" src="/pve2/js/pmgmanagerlib.js"></script>
     <script type="text/javascript" src="/pve2/ext6/locale/locale-[% lang %].js"></script>
     <script type="text/javascript">
       Ext.History.fieldid = 'x-history-field';
-      Ext.onReady(function() { Ext.create('PMG.StdWorkspace');});
-    </script>    
+    </script>
+    <script type="text/javascript" src="/pve2/js/pmgmanagerlib.js"></script>
   </head>
   <body>
     <!-- Fields required for history management -->

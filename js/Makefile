@@ -1,6 +1,6 @@
 JSSRC=							\
 	Utils.js					\
-	LoginWindow.js					\
+	LoginView.js					\
 	RoleSelector.js					\
 	ServerStatus.js					\
 	ServerAdministration.js				\
@@ -14,8 +14,13 @@ JSSRC=							\
 	ObjectGroupSelector.js				\
 	ObjectGroupConfiguration.js			\
 	ActionList.js					\
-	RuleList.js					\
 	RuleInfo.js					\
+	RuleEditor.js					\
+	Logo.js						\
+	MainView.js					\
+	Dashboard.js					\
+	VersionInfo.js					\
+	NavigationTree.js				\
 	RuleConfiguration.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\
@@ -43,7 +48,7 @@ JSSRC=							\
 	PostfixMailQueue.js				\
 	QueueAdministration.js				\
 	ConfigPanel.js					\
-	Workspace.js
+	Application.js					\
 
 lint: ${JSSRC}
 	jslint ${JSSRC} 
