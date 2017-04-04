@@ -15,7 +15,24 @@ Ext.define('PMG.Utils', {
 	who: gettext('Who Objects'),
 	what: gettext('What Objects'),
 	when: gettext('When Objects'),
-	action: gettext('Action Objects')
+	action: gettext('Action Objects'),
+	from: gettext('From'),
+	to: gettext('To')
+    },
+
+    oclass_icon: {
+	who: '<span class="fa fa-fw fa-user-circle"></span> ',
+	what: '<span class="fa fa-fw fa-cube"></span> ',
+	when: '<span class="fa fa-fw fa-clock-o"></span> ',
+	action: '<span class="fa fa-fw fa-flag"></span> ',
+	from: '<span class="fa fa-fw fa-user-circle"></span> ',
+	to: '<span class="fa fa-fw fa-user-circle"></span> ',
+    },
+
+    format_oclass: function(oclass) {
+	var icon = PMG.Utils.oclass_icon[oclass] || '';
+	var text = PMG.Utils.oclass_text[oclass] || oclass;
+	return icon + text;
     },
 
     rule_direction_text: {
