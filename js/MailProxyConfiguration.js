@@ -10,34 +10,42 @@ Ext.define('PMG.MailProxyConfiguration', {
 
     items: [
 	{
+	    itemId: 'relaying',
 	    title: gettext('Relaying'),
 	    xtype: 'pmgMailProxyRelaying'
 	},
 	{
+	    itemId: 'relaydomains',
 	    title: gettext('Relay Domains'),
 	    xtype: 'pmgRelayDomains'
 	},
 	{
+	    itemId: 'ports',
 	    title: gettext('Ports'),
 	    xtype: 'pmgMailProxyPorts'
 	},
 	{
+	    itemId: 'options',
             title: gettext('Options'),
 	    xtype: 'pmgMailProxyOptions'
 	},
 	{
+	    itemId: 'transports',
             title: gettext('Transports'),
 	    xtype: 'pmgTransport'
 	},
 	{
+	    itemId: 'networks',
             title: gettext('Networks'),
 	    xtype: 'pmgMyNetworks'
 	},
 	{
+	    itemId: 'tls',
             title: gettext('TLS'),
 	    xtype: 'pmgMailProxyTLS'
 	},
 	{
+	    itemId: 'whitelist',
 	    title: gettext('Whitelist'),
 	    xtype: 'pmgObjectGroup',
 	    hideGroupInfo: true,

@@ -23,18 +23,22 @@ Ext.define('PMG.SystemConfiguration', {
 	    nodename: Proxmox.NodeName
 	},
 	{
+	    itemId: 'backup',
             title: gettext('Backup'),
 	    html: "Backkup"
 	},
 	{
+	    itemId: 'restore',
             title: gettext('Restore'),
 	    html: "Restore"
 	},
 	{
+	    itemId: 'reports',
             title: gettext('Reports'),
 	    html: "Reports"
 	},
 	{
+	    itemId: 'ssh',
             title: gettext('SSH Access'),
 	    html: "SSH Access"
 	}
