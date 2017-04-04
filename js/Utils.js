@@ -227,6 +227,12 @@ Ext.define('PMG.Utils', {
 	nw.focus();
     },
 
+    updateLoginData: function(data) {
+	Proxmox.CSRFPreventionToken = data.CSRFPreventionToken;
+	Proxmox.UserName = data.username;
+	Ext.util.Cookies.set('PMGAuthCookie', data.ticket, null, '/', null, true );
+    },
+
     constructor: function() {
 	var me = this;
 
