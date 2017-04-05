@@ -301,9 +301,10 @@ Ext.define('PMG.RuleInfo', {
 		    flex: 1
 		},
 		{
-		    header: gettext('Actions'),
+		    text: '',
 		    xtype: 'actioncolumn',
-		    width: 65,
+		    align: 'center',
+		    width: 40,
 		    items: [
 			{
 			    iconCls: 'fa fa-fw fa-minus-circle',
@@ -351,9 +352,10 @@ Ext.define('PMG.RuleInfo', {
 			flex: 1
 		    },
 		    {
-			header: gettext('Actions'),
-			width: 65,
+			text: '',
 			xtype: 'actioncolumn',
+			align: 'center',
+			width: 40,
 			items: [
 			    {
 				iconCls: 'fa fa-fw fa-plus-circle',

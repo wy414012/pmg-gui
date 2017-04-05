@@ -192,8 +192,10 @@ Ext.define('PMG.RulesConfiguration', {
 		    renderer: PMG.Utils.format_rule_direction
 		},
 		{
-		    text: 'Actions',
+		    text: '',
 		    xtype: 'actioncolumn',
+		    align: 'center',
+		    width: 70,
 		    items: [
 			{
 			    iconCls: 'fa fa-fw fa-pencil',
