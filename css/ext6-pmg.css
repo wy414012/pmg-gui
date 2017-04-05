@@ -121,6 +121,11 @@ table:not(.x-grid-item-selected) tr.x-grid-row.disabled {
     color: #cfcfcf;
 }
 
+/* fix action column icons */
+.x-action-col-icon {
+    font-size: 14px;
+}
+
 .x-action-col-icon:before {
     color: #555;
 }
