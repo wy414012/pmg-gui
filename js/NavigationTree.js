@@ -77,7 +77,7 @@ Ext.define('PMG.store.NavigationStore', {
 		    {
 			text: gettext('Cluster'),
 			iconCls: 'fa fa-server',
-			path: 'pmgCluster',
+			path: 'pmgClusterAdministration',
 			leaf: true,
 		    },
 		    {

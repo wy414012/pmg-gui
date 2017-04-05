@@ -13,7 +13,7 @@ Ext.define('pmg-cluster', {
 
 Ext.define('PMG.ClusterAdministration', {
     extend: 'Ext.tab.Panel',
-    alias: 'widget.pmgClusterAdministration',
+    xtype: 'pmgClusterAdministration',
 
     title: gettext('Cluster Administration'),
 
