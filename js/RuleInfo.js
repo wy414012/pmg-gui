@@ -306,7 +306,7 @@ Ext.define('PMG.RuleInfo', {
 		    width: 65,
 		    items: [
 			{
-			    iconCls: 'x-fa fa-fw fa-minus-circle',
+			    iconCls: 'fa fa-fw fa-minus-circle',
 			    tooltip: gettext('Remove'),
 			    handler: 'removeIconClick'
 			}
@@ -356,7 +356,7 @@ Ext.define('PMG.RuleInfo', {
 			xtype: 'actioncolumn',
 			items: [
 			    {
-				iconCls: 'x-fa fa-fw fa-plus-circle',
+				iconCls: 'fa fa-fw fa-plus-circle',
 				tooltip: gettext('Add'),
 				handler: 'addIconClick'
 			    }

@@ -196,13 +196,13 @@ Ext.define('PMG.RulesConfiguration', {
 		    xtype: 'actioncolumn',
 		    items: [
 			{
-			    iconCls: 'x-fa fa-fw fa-pencil',
+			    iconCls: 'fa fa-fw fa-pencil',
 			    tooltip: 'Edit',
 			    handler: 'editIconClick'
 			},
 			{
 			    getClass: function(val, meta, rec) {
-				return 'x-fa fa-fw fa-' + (rec.get('active') ? 'toggle-on' : 'toggle-off');
+				return 'fa fa-fw fa-' + (rec.get('active') ? 'toggle-on' : 'toggle-off');
 			    },
 			    getTip: function(val, meta, rec) {
 				return (rec.get('active') ? 'Deactivate' : 'Activate');

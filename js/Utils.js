@@ -42,9 +42,9 @@ Ext.define('PMG.Utils', {
     },
 
     rule_direction_icon: {
-	0: '<span class="x-fa fa-fw fa-long-arrow-left"></span> ',
-	1: '<span class="x-fa fa-fw fa-long-arrow-right"></span> ',
-	2: '<span class="x-fa fa-fw fa-exchange"></span> '
+	0: '<span class="fa fa-fw fa-long-arrow-left"></span> ',
+	1: '<span class="fa fa-fw fa-long-arrow-right"></span> ',
+	2: '<span class="fa fa-fw fa-exchange"></span> '
     },
 
     format_rule_direction: function(dir) {
