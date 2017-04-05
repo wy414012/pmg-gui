@@ -20,7 +20,15 @@ Ext.define('PMG.ClusterAdministration', {
     border: false,
     defaults: { border: false },
 
-     items: [
+    viewModel: {
+	parent: null,
+	data: {
+	    nodecount: 0,
+	    master: undefined
+	}
+    },
+
+    items: [
 	{
 	    xtype: 'grid',
 	    title: gettext('Nodes'),
@@ -32,19 +40,54 @@ Ext.define('PMG.ClusterAdministration', {
 		},
 
 		onLoad: function(store, records) {
-		    if(records.length) {
-			console.log(records.length);
-			this.lookupReference('createButton').setDisabled(records.length);
+		    var vm = this.getViewModel();
+		    vm.set('nodecount', records.length);
 
-		    }
+		    var master = undefined;
 		    Ext.Array.each(records, function(ni) {
-			console.dir(ni.data);
 			if (ni.data.type === 'master') {
-			    console.log(ni.data.fingerprint);
+			    master = ni;
 			}
 		    });
-		}
+		    vm.set('master', master);
+		},
 
+		onAdd: function() {
+		    var vm = this.getViewModel();
+		    var win = Ext.create('Ext.window.Window', {
+			width: 800,
+			modal: true,
+			title: gettext('Cluster Join Information'),
+			items: [
+			    {
+				xtype: 'component',
+				border: false,
+				padding: 10,
+				html: gettext("Please use the 'Join' button on the node you want to add, using the following IP address and fingerprint.")
+			    },
+			    {
+				layout: 'form',
+				border: false,
+				padding: '0 10 10 10',
+				items: [
+				    {
+					xtype: 'textfield',
+					fieldLabel: gettext('IP Address'),
+					value: vm.get('master').get('ip'),
+					editable: false
+				    },
+				    {
+					xtype: 'textfield',
+					fieldLabel: gettext('Fingerprint'),
+					value: vm.get('master').get('fingerprint'),
+					editable: false
+				    }
+				]
+			    }
+			]
+		    });
+		    win.show();
+		}
 	    },
 	    store: {
 		autoLoad: true,
@@ -52,9 +95,26 @@ Ext.define('PMG.ClusterAdministration', {
 	    },
 	    tbar: [
 		{
-		    text: gettext('Create Cluster'),
+		    text: gettext('Create'),
 		    reference: 'createButton',
-		    disabled: false
+		    bind: {
+			disabled: '{nodecount}'
+		    }
+		},
+		{
+		    text: gettext('Add'),
+		    reference: 'addButton',
+		    handler: 'onAdd',
+		    bind: {
+			disabled: '{!master}'
+		    }
+		},
+		{
+		    text: gettext('Join'),
+		    reference: 'joinButton',
+		    bind: {
+			disabled: '{nodecount}'
+		    }
 		}
 	    ],
 	    columns: [
