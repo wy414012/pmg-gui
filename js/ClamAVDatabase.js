@@ -2,6 +2,8 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgClamAVDatabaseConfig'],
 
+    monStoreErrors: true,
+
     initComponent : function() {
 	var me = this;
 

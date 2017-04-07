@@ -2,6 +2,8 @@ Ext.define('PMG.MailProxyRelaying', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgMailProxyRelaying'],
 
+    monStoreErrors: true,
+    
     initComponent : function() {
 	var me = this;
 

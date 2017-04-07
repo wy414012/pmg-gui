@@ -2,6 +2,8 @@ Ext.define('PMG.MailProxyTLS', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgMailProxyTLS'],
 
+    monStoreErrors: true,
+
     initComponent : function() {
 	var me = this;
 

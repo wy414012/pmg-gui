@@ -2,6 +2,8 @@ Ext.define('PMG.SpamDetectorOptions', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgSpamDetectorOptions'],
 
+    monStoreErrors: true,
+
     initComponent : function() {
 	var me = this;
 

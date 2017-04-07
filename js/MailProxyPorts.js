@@ -4,6 +4,8 @@ Ext.define('PMG.MailProxyPorts', {
 
     url: '/api2/json/config/mail',
 
+    monStoreErrors: true,
+
     editorConfig: {
 	url: '/api2/extjs/config/mail',
     },

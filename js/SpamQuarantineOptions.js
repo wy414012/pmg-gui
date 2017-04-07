@@ -2,6 +2,8 @@ Ext.define('PMG.SpamQuarantineOptions', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgSpamQuarantineOptions'],
 
+    monStoreErrors: true,
+
     authmodeTextHash: {
 	ticket: 'Ticket',
 	ldap: 'LDAP',

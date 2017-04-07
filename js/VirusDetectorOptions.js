@@ -2,6 +2,8 @@ Ext.define('PMG.VirusDetectorOptions', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgVirusDetectorOptions'],
 
+    monStoreErrors: true,
+
     initComponent : function() {
 	var me = this;
 

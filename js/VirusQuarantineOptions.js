@@ -2,6 +2,8 @@ Ext.define('PMG.VirusQuarantineOptions', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgVirusQuarantineOptions'],
 
+    monStoreErrors: true,
+
     initComponent : function() {
 	var me = this;
 
