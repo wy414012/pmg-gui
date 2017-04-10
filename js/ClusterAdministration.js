@@ -6,9 +6,41 @@ Ext.define('pmg-cluster', {
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/cluster"
+	url: "/api2/json/config/cluster/nodes"
     },
     idProperty: 'cid'
+});
+
+Ext.define('PMG.ClusterJoinNodeWindow', {
+    extend: 'Proxmox.window.Edit',
+    xtype: 'pmgClusterJoinNodeWindow',
+
+    title: gettext('Cluster Join'),
+
+    width: 800,
+
+    method: 'POST',
+
+    url: '/config/cluster/join',
+
+    items: [
+	{
+	    xtype: 'textfield',
+	    fieldLabel: 'IP Address',
+	    name: 'master_ip'
+	},
+	{
+	    xtype: 'textfield',
+	    inputType: 'password',
+	    fieldLabel: gettext('Password'),
+	    name: 'password'
+	},
+	{
+	    xtype: 'textfield',
+	    fieldLabel: gettext('Fingerprint'),
+	    name: 'fingerprint'
+	}
+    ]
 });
 
 Ext.define('PMG.ClusterAddNodeWindow', {
@@ -20,7 +52,7 @@ Ext.define('PMG.ClusterAddNodeWindow', {
 
     modal: true,
 
-    title: gettext('Cluster Join Information'),
+    title: gettext('Cluster Join') + ' : ' + gettext('Information'),
 
     ipAddress: undefined,
 
@@ -69,7 +101,7 @@ Ext.define('PMG.ClusterAdministration', {
 	parent: null,
 	data: {
 	    nodecount: 0,
-	    master: undefined
+	    master: null
 	}
     },
 
@@ -88,13 +120,41 @@ Ext.define('PMG.ClusterAdministration', {
 		    var vm = this.getViewModel();
 		    vm.set('nodecount', records.length);
 
-		    var master = undefined;
+		    var master = null;
 		    Ext.Array.each(records, function(ni) {
 			if (ni.data.type === 'master') {
 			    master = ni;
 			}
 		    });
 		    vm.set('master', master);
+		},
+
+		onCreate: function() {
+		    var view = this.getView();
+
+		    Proxmox.Utils.API2Request({
+			url: '/config/cluster/create',
+			method: 'POST',
+			waitMsgTarget: view,
+			failure: function (response, opts) {
+			    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+			},
+			success: function(response, options) {
+			    var upid = response.result.data;
+			    var win = Ext.create('Proxmox.window.TaskProgress', { upid: upid });
+			    win.show();
+			    win.on('destroy', function() { view.store.load(); });
+			}
+		    });
+		},
+
+		onJoin: function() {
+		    var view = this.getView();
+		    var win = Ext.create('PMG.ClusterJoinNodeWindow', {});
+		    win.show();
+		    win.on('destroy', function() {
+			// fixme: logout
+		    });
 		},
 
 		onAdd: function() {
@@ -116,6 +176,7 @@ Ext.define('PMG.ClusterAdministration', {
 		{
 		    text: gettext('Create'),
 		    reference: 'createButton',
+		    handler: 'onCreate',
 		    bind: {
 			disabled: '{nodecount}'
 		    }
@@ -131,6 +192,7 @@ Ext.define('PMG.ClusterAdministration', {
 		{
 		    text: gettext('Join'),
 		    reference: 'joinButton',
+		    handler: 'onJoin',
 		    bind: {
 			disabled: '{nodecount}'
 		    }
