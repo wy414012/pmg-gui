@@ -1,3 +1,13 @@
+proxmox-mailgateway-gui (1.0-3) unstable; urgency=medium
+
+  * ClusterAdministration.js: implement join/create
+
+  * use new monStoreErrors property
+
+  * change x-fa to fa
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 10 Apr 2017 12:43:25 +0200
+
 proxmox-mailgateway-gui (1.0-2) unstable; urgency=medium
 
   * bump version for first installation tests
