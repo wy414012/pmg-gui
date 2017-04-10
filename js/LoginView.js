@@ -69,6 +69,8 @@ Ext.define('PMG.LoginView', {
 	    autoShow: true,
 	    modal: true,
 
+	    defaultFocus: 'usernameField',
+
 	    layout: 'auto',
 
 	    title: gettext('Proxmox Mail Gateway Login'),
