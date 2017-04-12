@@ -4,7 +4,19 @@ Ext.define('pmg-cluster', {
 	'type', 'name', 'ip', 'hostrsapubkey', 'rootrsapubkey',
 	'fingerprint', { type: 'integer', name: 'cid' },
 	{ type: 'boolean', name: 'insync' },
-	'memory', 'loadavg', 'uptime', 'rootfs', 'conn_error'
+	'memory', 'loadavg', 'uptime', 'rootfs', 'conn_error',
+	{ type: 'number', name: 'memory_per',
+	  calculate: function(data) {
+	      var mem = data.memory;
+	      return Ext.isObject(mem) ? mem.used/mem.total : 0;
+	  }
+	},
+	{ type: 'number', name: 'rootfs_per',
+	  calculate: function(data) {
+	      var du = data.rootfs;
+	      return Ext.isObject(du) ? du.used/du.total : 0;
+	  }
+	}
     ],
     proxy: {
         type: 'proxmox',
@@ -258,24 +270,22 @@ Ext.define('PMG.ClusterAdministration', {
 		    dataIndex: 'loadavg'
 		},
 		{
-		    header: gettext('RAM usage'),
-		    renderer: function(value) {
-			if (Ext.isObject(value)) {
-			    return (value.used*100/value.total).toFixed(2) + '%';
-			}
-			return value;
+		    xtype: 'widgetcolumn',
+		    widget: {
+			xtype: 'progressbarwidget',
+			textTpl: '{value:percent}'
 		    },
-		    dataIndex: 'memory'
+		    header: gettext('RAM usage'),
+		    dataIndex: 'memory_per'
 		},
 		{
-		    header: gettext('HD space'),
-		    renderer: function(value) {
-			if (Ext.isObject(value)) {
-			    return (value.used*100/value.total).toFixed(2) + '%';
-			}
-			return value;
+		    xtype: 'widgetcolumn',
+		    widget: {
+			xtype: 'progressbarwidget',
+			textTpl: '{value:percent}'
 		    },
-		    dataIndex: 'rootfs'
+		    header: gettext('HD space'),
+		    dataIndex: 'rootfs_per'
 		}
 	    ]
 	}
