@@ -2,7 +2,9 @@ Ext.define('pmg-cluster', {
     extend: 'Ext.data.Model',
     fields: [
 	'type', 'name', 'ip', 'hostrsapubkey', 'rootrsapubkey',
-	'fingerprint', { type: 'integer', name: 'cid' }
+	'fingerprint', { type: 'integer', name: 'cid' },
+	{ type: 'boolean', name: 'insync' },
+	'memory', 'loadavg', 'uptime', 'rootfs', 'conn_error'
     ],
     proxy: {
         type: 'proxmox',
@@ -220,6 +222,61 @@ Ext.define('PMG.ClusterAdministration', {
 		    width: 150,
 		    dataIndex: 'ip'
 		},
+		{
+		    header: gettext('State'),
+		    width: 80,
+		    renderer: function(value, metaData, record) {
+			var d = record.data;
+			var state = 'active';
+			if (!d.insync) state = 'syncing';
+			if (d.conn_error) {
+			    metaData.tdCls = 'x-form-invalid-field';
+			    var html = '<p>' +  Ext.htmlEncode(d.conn_error) + '</p>';
+			    html = html.replace(/\n/g, '<br>');
+			    metaData.tdAttr = 'data-qwidth=600 data-qtitle="ERROR" data-qtip="' +
+				html.replace(/\"/g,'&quot;') + '"';
+			    state = 'error';
+			}
+			return state;
+		    },
+		    dataIndex: 'insync'
+		},
+		{
+		    header: gettext('Uptime'),
+		    width: 100,
+		    renderer: Proxmox.Utils.render_uptime,
+		    dataIndex: 'uptime'
+		},
+		{
+		    header: gettext('Load average'),
+		    renderer: function(value) {
+			if (Ext.isArray(value)) {
+			    return value[0];
+			}
+			return value;
+		    },
+		    dataIndex: 'loadavg'
+		},
+		{
+		    header: gettext('RAM usage'),
+		    renderer: function(value) {
+			if (Ext.isObject(value)) {
+			    return (value.used*100/value.total).toFixed(2) + '%';
+			}
+			return value;
+		    },
+		    dataIndex: 'memory'
+		},
+		{
+		    header: gettext('HD space') + '(root)',
+		    renderer: function(value) {
+			if (Ext.isObject(value)) {
+			    return (value.used*100/value.total).toFixed(2) + '%';
+			}
+			return value;
+		    },
+		    dataIndex: 'rootfs'
+		}
 	    ]
 	}
     ]
