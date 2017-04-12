@@ -224,7 +224,7 @@ Ext.define('PMG.ClusterAdministration', {
 		},
 		{
 		    header: gettext('State'),
-		    width: 80,
+		    width: 100,
 		    renderer: function(value, metaData, record) {
 			var d = record.data;
 			var state = 'active';
@@ -243,7 +243,7 @@ Ext.define('PMG.ClusterAdministration', {
 		},
 		{
 		    header: gettext('Uptime'),
-		    width: 100,
+		    width: 150,
 		    renderer: Proxmox.Utils.render_uptime,
 		    dataIndex: 'uptime'
 		},
@@ -268,7 +268,7 @@ Ext.define('PMG.ClusterAdministration', {
 		    dataIndex: 'memory'
 		},
 		{
-		    header: gettext('HD space') + '(root)',
+		    header: gettext('HD space'),
 		    renderer: function(value) {
 			if (Ext.isObject(value)) {
 			    return (value.used*100/value.total).toFixed(2) + '%';
