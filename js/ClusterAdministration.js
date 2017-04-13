@@ -20,7 +20,7 @@ Ext.define('pmg-cluster', {
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/cluster/nodes"
+	url: "/api2/json/config/cluster/status"
     },
     idProperty: 'cid'
 });
