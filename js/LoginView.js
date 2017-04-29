@@ -4,6 +4,43 @@ Ext.define('PMG.LoginView', {
 
     controller: {
 	xclass: 'Ext.app.ViewController',
+
+	init: function(view) {
+	    var loginForm = this.lookupReference('loginForm');
+
+	    // try autologin with quarantine ticket from URL
+
+	    var qs = Ext.Object.fromQueryString(location.search);
+	    if (qs.ticket == undefined) { return; }
+	    var ticket = decodeURIComponent(qs.ticket);
+	    var match = ticket.match(/^PMGQUAR:([^\s\:]+):/);
+	    if (!match) { return; }
+	    var username = match[1];
+
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/access/ticket',
+		params: {
+		    username: username,
+		    password: ticket
+		},
+		method: 'POST',
+		success: function(response) {
+		    // save login data and create cookie
+		    PMG.Utils.updateLoginData(response.result.data);
+		    // change view to mainview
+		    view.destroy();
+		    Ext.create({ xtype: 'mainview' });
+		},
+		failure: function(form, action) {
+		    loginForm.unmask();
+		    Ext.MessageBox.alert(
+			gettext('Error'),
+			gettext('Login failed. Please try again')
+		    );
+		}
+	    });
+	},
+
 	submitForm: function() {
 	    var me = this;
 	    var loginForm = me.lookupReference('loginForm');
