@@ -24,7 +24,16 @@ Ext.define('PMG.Application', {
 	// show login window if not loggedin
 	var loggedin = Proxmox.Utils.authOK();
 	Ext.on('resize', me.realignWindows);
-	Ext.create({ xtype: loggedin ? 'mainview' : 'loginview' });
+
+	if (loggedin) {
+	    if (location.pathname === "/quarantine") {
+		Ext.create({ xtype: 'quarantineview' });
+	    } else {
+		Ext.create({ xtype: 'mainview' });
+	    }
+	} else {
+	    Ext.create({ xtype: 'loginview' });
+	}
     }
 });
 
