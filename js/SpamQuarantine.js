@@ -57,7 +57,7 @@ Ext.define('PMG.SpamArchive', {
 Ext.define('pmg-spam-list', {
     extend: 'Ext.data.Model',
     fields: [ 'id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',
-	{ type: 'number', name: 'bytes' },
+	{ type: 'number', name: 'spamlevel' },
 	{ type: 'integer', name: 'bytes' },
         { type: 'date', dateFormat: 'timestamp', name: 'time' }
     ],
@@ -103,12 +103,32 @@ Ext.define('PMG.SpamList', {
         {
             header: gettext('Sender/Subject'),
             dataIndex: 'subject',
+	    renderer: function(value, metaData, rec) {
+		var subject = Ext.htmlEncode(value);
+		var from = Ext.htmlEncode(rec.data.from);
+		var sender = Ext.htmlEncode(rec.data.sender);
+		if (sender) {
+		    from = Ext.String.format(gettext("{0} on behalf of {1}"),
+					     sender, from);
+		}
+		return '<small>' + from + '</small><br>' + subject;
+	    },
 	    flex: 1
         },
 	{
+	    header: gettext('Level'),
+	    dataIndex: 'spamlevel'
+	},
+	{
+	    header: gettext('Size (KB)'),
+	    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
+	    dataIndex: 'bytes'
+	},
+	{
+	    xtype: 'datecolumn',
 	    header: gettext('Arrival Time'),
 	    dataIndex: 'time',
-	    flex: 1
+	    format: 'H:m:s'
 	}
     ]
 });
