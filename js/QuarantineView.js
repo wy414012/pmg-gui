@@ -138,6 +138,24 @@ Ext.define('PMG.QuarantineView', {
 	    this.redirectTo(item.get('path'));
 	},
 
+	execQuarantineAction: function(qa) {
+	    Proxmox.Utils.API2Request({
+		url: '/api2/extjs/quarantine/content',
+		params: {
+		    id: qa.cselect,
+		    action: qa.action
+		},
+		method: 'POST',
+		success: function(response) {
+		    Ext.Msg.alert(gettext('Info'), "Action " + qa.action + ' ' +
+				  qa.cselect + ' successful');
+		},
+		failure: function(response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
+	},
+
 	init: function(view) {
 	    var me = this;
 
@@ -152,9 +170,19 @@ Ext.define('PMG.QuarantineView', {
 		}
 	    });
 
-	    // select treeitem and load page from url fragment
-	    var token = Ext.util.History.getToken();
-	    this.redirectTo(token, true);
+	    var qa = PMG.Utils.extractQuarantineAction();
+	    if (qa) {
+		var token = 'pmgSpamQuarantine';
+		if (qa.action === 'blacklist') { token = 'pmgUserBlacklist'; }
+		if (qa.action === 'whitelist') { token = 'pmgUserWhitelist'; }
+		this.redirectTo(token, true);
+		me.execQuarantineAction(qa);
+	    } else {
+		// select treeitem and load page from url fragment
+		var token = Ext.util.History.getToken();
+		if (!token || token === 'pmgDashboard') token = 'pmgSpamQuarantine'; // hack
+		this.redirectTo(token, true);
+	    }
 	}
     },
 

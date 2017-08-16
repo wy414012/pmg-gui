@@ -258,6 +258,39 @@ Ext.define('PMG.Utils', {
 	Ext.util.Cookies.set('PMGAuthCookie', data.ticket, null, '/', null, true );
     },
 
+    quarantineActionExtracted: false,
+
+    extractQuarantineAction: function() {
+
+	if (PMG.Utils.quarantineActionExtracted) return;
+
+	PMG.Utils.quarantineActionExtracted = true;
+
+	var qs = Ext.Object.fromQueryString(location.search);
+
+	var cselect = qs.cselect;
+	var action = qs.action;
+	var ticket = qs.ticket;
+
+	delete qs.cselect;
+	delete qs.action;
+	delete qs.ticket;
+
+	var newsearch = Ext.Object.toQueryString(qs);
+
+	var newurl = location.protocol + "//" + location.host + location.pathname;
+	if (newsearch) newurl += '?' + newsearch;
+	newurl += location.hash;
+
+	if (window.history) {
+	    window.history.pushState({ path:newurl }, '', newurl);
+	}
+
+	if (action && cselect) {
+	    return { action: action, cselect: cselect };
+	}
+    },
+
     constructor: function() {
 	var me = this;
 
