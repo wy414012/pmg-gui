@@ -12,6 +12,7 @@ Ext.define('pmg-spam-archive', {
     idProperty: 'day'
 });
 
+
 Ext.define('PMG.SpamArchive', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgSpamArchive',
@@ -203,7 +204,9 @@ Ext.define('PMG.SpamQuarantine', {
 		    }
 		},
 		{
-		    split: true,
+		    xtype: 'splitter'
+		},
+		{
 		    flex: 1,
 		    reference: 'preview',
 		}
