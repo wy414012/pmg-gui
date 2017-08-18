@@ -25,6 +25,7 @@ JSSRC=							\
 	VersionInfo.js					\
 	NavigationTree.js				\
 	RuleConfiguration.js				\
+	SystemOptions.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\
 	MailProxyPorts.js				\

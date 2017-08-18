@@ -91,9 +91,9 @@ Ext.define('PMG.SystemConfiguration', {
 	    xtype: 'pmgRestoreSystemConfiguration'
 	},
 	{
-	    itemId: 'reports',
-            title: gettext('Reports'),
-	    html: "Reports"
+	    itemId: 'options',
+            title: gettext('Options'),
+	    xtype: 'pmgSystemOptions',
 	},
 	{
 	    itemId: 'ssh',
