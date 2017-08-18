@@ -16,6 +16,9 @@ Ext.define('PMG.LoginView', {
 	    var match = ticket.match(/^PMGQUAR:([^\s\:]+):/);
 	    if (!match) { return; }
 	    var username = match[1];
+	    var loginwin = this.lookupReference('loginwindow');
+	    loginwin.autoShow = false;
+	    loginwin.setVisible(false);
 
 	    Proxmox.Utils.API2Request({
 		url: '/api2/extjs/access/ticket',
@@ -108,6 +111,7 @@ Ext.define('PMG.LoginView', {
 	    xtype: 'window',
 	    closable: false,
 	    resizable: false,
+	    reference: 'loginwindow',
 	    autoShow: true,
 	    modal: true,
 
