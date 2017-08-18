@@ -1,3 +1,42 @@
+Ext.define('PMG.RestoreSystemConfiguration', {
+    extend: 'Ext.Panel',
+    xtype: 'pmgRestoreSystemConfiguration',
+
+    title: gettext('Restore'),
+
+    controller: {
+	xclass: 'Ext.app.ViewController',
+
+	onFactoryDefaults: function() {
+	    var me = this.getView();
+
+	    Ext.Msg.confirm(
+		gettext('Confirm'),
+		gettext('Reset rule database to factory defaults?'),
+		function(button) {
+		    if (button !== 'yes') return;
+		    var url = '/config/ruledb';
+		    Proxmox.Utils.API2Request({
+			url: '/config/ruledb',
+			method: 'POST',
+			waitMsgTarget: me,
+			failure: function (response, opts) {
+			    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+			}
+		    });
+		}
+	    );
+	}
+    },
+
+    tbar: [
+	{
+	    text: gettext('Factory Defaults'),
+	    handler: 'onFactoryDefaults'
+	}
+    ]
+});
+
 Ext.define('PMG.SystemConfiguration', {
     extend: 'Ext.tab.Panel',
     xtype: 'pmgSystemConfiguration',
@@ -49,8 +88,7 @@ Ext.define('PMG.SystemConfiguration', {
 	},
 	{
 	    itemId: 'restore',
-            title: gettext('Restore'),
-	    html: "Restore"
+	    xtype: 'pmgRestoreSystemConfiguration'
 	},
 	{
 	    itemId: 'reports',
