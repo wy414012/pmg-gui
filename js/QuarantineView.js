@@ -179,8 +179,7 @@ Ext.define('PMG.QuarantineView', {
 		me.execQuarantineAction(qa);
 	    } else {
 		// select treeitem and load page from url fragment
-		var token = Ext.util.History.getToken();
-		if (!token || token === 'pmgDashboard') token = 'pmgSpamQuarantine'; // hack
+		var token = Ext.util.History.getToken() || 'pmgSpamQuarantine';
 		this.redirectTo(token, true);
 	    }
 	}

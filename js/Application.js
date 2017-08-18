@@ -3,9 +3,6 @@ Ext.define('PMG.Application', {
 
     name: 'PMG',
 
-    // default fragment for the router
-    defaultToken: 'pmgDashboard',
-
     stores: [
 	'NavigationStore'
     ],

@@ -142,7 +142,7 @@ Ext.define('PMG.MainView', {
 	    });
 
 	    // select treeitem and load page from url fragment
-	    var token = Ext.util.History.getToken();
+	    var token = Ext.util.History.getToken() || 'pmgDashboard';
 	    this.redirectTo(token, true);
 
 	}
