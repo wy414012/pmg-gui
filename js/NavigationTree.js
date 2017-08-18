@@ -103,7 +103,7 @@ Ext.define('PMG.store.NavigationStore', {
 		    {
 			text: gettext('Quarantine'),
 			iconCls: 'fa fa-cubes',
-			path: 'pmgQuarantine',
+			path: 'pmgSpamQuarantine',
 			leaf: true,
 		    },
 		    {
