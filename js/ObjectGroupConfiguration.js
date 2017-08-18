@@ -4,7 +4,7 @@ Ext.define('PMG.ObjectGroupConfiguration', {
     ogclass: undefined, // who, when, what
     otype_list: [],
     
-    layout: { type: 'hbox', align: 'stretch' },
+    layout: 'border',
     border: false,
     
     initComponent : function() {
@@ -14,21 +14,24 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	    throw "undefined object group class"
 	}
 	
-	if (!(me.title = PMG.Utils.oclass_text[me.ogclass])) {
+	if (!(PMG.Utils.oclass_text[me.ogclass])) {
 	    throw "unknown object group class";
 	}
 
 	var left = Ext.create('PMG.ObjectGroupList', {
 	    width: 250,
 	    ogclass: me.ogclass,
-	    subject: me.title,
-	    border: false
+	    subject: PMG.Utils.oclass_text[me.ogclass],
+	    title: PMG.Utils.oclass_text[me.ogclass],
+	    border: false,
+	    split: true,
+	    region: 'west'
 	});
 	
 	var right = Ext.create('PMG.ObjectGroup', {
 	    otype_list: me.otype_list,
 	    border: false,
-	    flex: 1,
+	    region: 'center',
 	    listeners: {
 		dblclickOGInfo: function(w, e, t, ogdata) {
 		    // test if the correct groups is selected (just to be sure)
@@ -61,7 +64,7 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	    right.setBaseUrl(baseurl);
 	});
 	
-	me.items = [ left, { xtype: 'splitter' }, right ];
+	me.items = [ left, right ];
 
 	me.callParent();
     }
