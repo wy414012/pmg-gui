@@ -116,7 +116,7 @@ Ext.define('PMG.MyNetworks', {
 	    },
 	    columns: [
 		{
-		    header: gettext('Trusted Netowrk'),
+		    header: gettext('Trusted Network'),
 		    width: 200,
 		    sortable: true,
 		    dataIndex: 'cidr'
