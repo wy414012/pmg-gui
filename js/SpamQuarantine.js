@@ -12,58 +12,23 @@ Ext.define('pmg-spam-archive', {
     idProperty: 'day'
 });
 
-
-Ext.define('PMG.SpamArchive', {
-    extend: 'Ext.grid.GridPanel',
-    xtype: 'pmgSpamArchive',
-
-    controller: {
-
-        xclass: 'Ext.app.ViewController',
-
-	init: function(view) {
-	    view.store.load({
-		callback: function() {
-		    view.getSelectionModel().select(0);
-		}
-	    });
-	}
-    },
-
-    store: {
-        model: 'pmg-spam-archive'
-    },
-
-    columns: [
-        {
-	    xtype: 'datecolumn',
-            header: gettext('Date'),
-	    format: 'Y-m-d',
-            dataIndex: 'day',
-	    flex: 1
-        },
-	{
-	    header: gettext('Count'),
-	    dataIndex: 'count',
-	    flex: 1
-	},
-	{
-	    header: gettext('Spam level'),
-	    dataIndex: 'spamavg',
-	    flex: 1
-	}
-    ]
-});
-
 Ext.define('pmg-spam-list', {
     extend: 'Ext.data.Model',
     fields: [ 'id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',
 	{ type: 'number', name: 'spamlevel' },
 	{ type: 'integer', name: 'bytes' },
-        { type: 'date', dateFormat: 'timestamp', name: 'time' }
+	{ type: 'date', dateFormat: 'timestamp', name: 'time' },
+	{
+	    type: 'string',
+	    name: 'day',
+	    convert: function(v, rec) {
+		return Ext.Date.format(rec.get('time'), 'Y-m-d');
+	    }, depends: ['time']
+	}
     ],
     proxy: {
         type: 'proxmox',
+	url: "/api2/json/quarantine/spam",
     },
     idProperty: 'id'
 });
@@ -72,31 +37,61 @@ Ext.define('PMG.SpamList', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgSpamList',
 
-    setDay: function(day) {
-	var me = this;
+    title: gettext('Spam List'),
 
-	me.setTitle(Ext.Date.format(day, "F j Y"));
-	me.store.load({
-            url: "/api2/json/quarantine/spam/" + (day.getTime() / 1000)
-	});
+    emptyText: gettext('No E-Mail address selected'),
+    viewConfig: {
+	deferEmptyText: false
+    },
+
+    setUser: function(user) {
+	var me = this;
+	var params = me.getStore().getProxy().getExtraParams();
+	params.pmail = user;
+	me.getStore().getProxy().setExtraParams(params);
+	me.user = user;
+    },
+
+    setFrom: function(from) {
+	var me = this;
+	var params = me.getStore().getProxy().getExtraParams();
+	params.starttime = from;
+	me.getStore().getProxy().setExtraParams(params);
+    },
+
+    setTo: function(to) {
+	var me = this;
+	var params = me.getStore().getProxy().getExtraParams();
+	params.endtime = to;
+	me.getStore().getProxy().setExtraParams(params);
+    },
+
+    load: function() {
+	var me = this;
+	if (me.user || PMG.view === 'quarantine') {
+	    // extjs has no method to dynamically change the emptytext on
+	    // grids, so we have to do it this way
+	    var view = me.getView();
+	    view.emptyText = '<div class="x-grid-empty">'+ gettext('No Spam E-Mails found') + '</div>';
+	    view.refresh();
+	}
+	me.getStore().load();
     },
 
     store: {
 	model: 'pmg-spam-list',
+	groupField: 'day',
+	groupDir: 'DESC',
+	sorters: [{
+	    property: 'time',
+	    direction: 'DESC'
+	}]
     },
 
-    tbar: [
+    features: [
 	{
-	    text: gettext('Whitelist')
-	},
-	{
-	    text: gettext('Blacklist')
-	},
-	{
-	    text: gettext('Deliver')
-	},
-	{
-	    text: gettext('Delete')
+	    ftype: 'grouping',
+	    groupHeaderTpl: '{columnName}: {name} ({children.length})'
 	}
     ],
 
@@ -126,11 +121,16 @@ Ext.define('PMG.SpamList', {
 	    dataIndex: 'bytes'
 	},
 	{
+	    header: gettext('Arrival Day'),
+	    dataIndex: 'day',
+	    hidden: true
+	},
+	{
 	    xtype: 'datecolumn',
 	    header: gettext('Arrival Time'),
 	    dataIndex: 'time',
 	    format: 'H:m:s'
-	}
+	},
     ]
 });
 
@@ -148,21 +148,32 @@ Ext.define('PMG.SpamQuarantine', {
         xclass: 'Ext.app.ViewController',
 
         init: function(view) {
+	    var me = this;
+	    var spamlist = me.lookupReference('spamlist');
+	    if (PMG.view === 'quarantine') {
+		spamlist.down('combobox[name=email]').setVisible(false);
+		spamlist.load();
+	    }
+
+	    // we to this to trigger the change event of those fields
+	    var today = new Date();
+	    spamlist.down('datefield[name=from]').setValue(today);
+	    spamlist.down('datefield[name=to]').setValue(today);
         },
 
-	onSelectDay: function() {
-            var view = this.getView();
-
-	    var grid = this.lookupReference('archive');
-	    var rec = grid.selModel.getSelection()[0];
-
-	    if (!rec || !rec.data || !rec.data.day) return;
-
+	changeEmail: function(tb, value) {
 	    var spamlist = this.lookupReference('spamlist');
-	    spamlist.setDay(rec.data.day);
+	    spamlist.setUser(value);
+	    spamlist.load();
+	},
+
+	resetEmail: function() {
+	    var spamlist = this.lookupReference('spamlist');
+	    spamlist.setUser(undefined);
 	},
 
 	onSelectMail: function() {
+	    var me = this;
 	    var spamlist = this.lookupReference('spamlist');
 	    var rec = spamlist.selModel.getSelection()[0];
 
@@ -170,47 +181,171 @@ Ext.define('PMG.SpamQuarantine', {
 
 	    if (!rec || !rec.data || !rec.data.id)  {
 		preview.update('');
+		me.lookupReference('preview').setDisabled(true);
 		return;
 	    }
 
-	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id;
-	    preview.update("<iframe frameborder=0 width=100% height=100% src='" + url +"'></iframe>");
+	    me.lookupReference('preview').setDisabled(false);
+
+	    var raw = me.raw || false;
+
+	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + ((raw)?'&raw=1':'');
+	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
 	},
+
+	rawMail: function(button) {
+	    var me = this;
+	    me.lookupReference('html').setVisible(true);
+	    button.setVisible(false);
+	    me.raw = true;
+	    me.onSelectMail();
+	},
+
+	htmlMail: function(button) {
+	    var me = this;
+	    me.lookupReference('raw').setVisible(true);
+	    button.setVisible(false);
+	    me.raw = false;
+	    me.onSelectMail();
+	},
+
+	changeTime: function(field, value) {
+	    var me = this;
+	    if (!value) {
+		return;
+	    }
+	    var val = value.getTime()/1000;
+	    var spamlist = me.lookupReference('spamlist');
+	    var combobox = me.lookupReference('email');
+	    var params = combobox.getStore().getProxy().getExtraParams();
+
+	    var to = me.lookupReference('to');
+	    var from = me.lookupReference('from');
+
+	    if (field.name === 'from') {
+		spamlist.setFrom(val);
+		params.starttime = val;
+		to.setMinValue(value);
+
+	    } else if (field.name === 'to') {
+		spamlist.setTo(val + 24*60*60);
+		params.endtime = val + 24*60*60;
+		from.setMaxValue(value);
+	    } else {
+		return;
+	    }
+
+	    // the combobox does not know anything about the extraparams
+	    // so we disable queryCaching until we expand (and query) again
+	    combobox.queryCaching = false;
+	    combobox.getStore().getProxy().setExtraParams(params);
+
+	    // we are reloading when we already have an email selected,
+	    // or are in the user quarantine view
+	    if (combobox.getValue() || PMG.view === 'quarantine') {
+		spamlist.load();
+	    }
+	},
+
+	setQueryCaching: function() {
+	    this.lookupReference('email').queryCaching = true;
+	},
+
+	control: {
+	    '#':{
+		beforedestroy: 'resetEmail'
+	    },
+	    'button[reference=raw]': {
+		click: 'rawMail'
+	    },
+	    'button[reference=html]': {
+		click: 'htmlMail'
+	    },
+	    'combobox[name=email]': {
+		change: {
+		    fn: 'changeEmail',
+		    buffer: 500
+		},
+		expand: 'setQueryCaching'
+	    },
+	    'datefield': {
+		change: 'changeTime'
+	    },
+	    'pmgSpamList':{
+		selectionChange: 'onSelectMail'
+	    },
+	}
     },
 
     items: [
 	{
-	    xtype: 'pmgSpamArchive',
-	    reference: 'archive',
+	    tbar: {
+		layout: {
+		    type: 'vbox',
+		    align: 'stretch'
+		},
+		defaults: {
+		    margin: 2,
+		},
+		items: [
+		    {
+			fieldLabel: gettext('From'),
+			reference: 'from',
+			xtype: 'datefield',
+			format: 'Y-m-d',
+			name: 'from'
+		    },
+		    {
+			fieldLabel: gettext('To'),
+			reference: 'to',
+			xtype: 'datefield',
+			format: 'Y-m-d',
+			name: 'to'
+		    },
+		    {
+			xtype: 'combobox',
+			displayField: 'mail',
+			valueField: 'mail',
+			store: {
+			    proxy: {
+				type: 'proxmox',
+				url: '/api2/json/quarantine/spamusers'
+			    }
+			},
+			queryParam: false,
+			queryCaching: false,
+			editable: false,
+			reference: 'email',
+			name: 'email',
+			fieldLabel: 'E-Mail',
+		    }]
+	    },
+	    xtype: 'pmgSpamList',
+	    reference: 'spamlist',
 	    region: 'west',
-	    width: 320,
+	    width: 500,
 	    split: true,
-
-	    listeners: {
-		selectionChange: 'onSelectDay'
-	    }
+	    collapsible: false,
 	},
 	{
-	    xtype: 'panel',
+	    title: gettext('Selected Mail'),
+	    border: 0,
 	    region: 'center',
-	    layout: { type: 'vbox', align: 'stretch' },
-	    items: [
-		{
-		    xtype: 'pmgSpamList',
-		    reference: 'spamlist',
-		    height: 300,
-		    listeners: {
-			selectionChange: 'onSelectMail'
-		    }
-		},
-		{
-		    xtype: 'splitter'
-		},
-		{
-		    flex: 1,
-		    reference: 'preview',
-		}
-	    ]
+	    split: true,
+	    reference: 'preview',
+	    disabled: true,
+	    tbar: [{
+		xtype: 'button',
+		reference: 'raw',
+		text: gettext('Show Raw'),
+		iconCls: 'fa fa-file-code-o'
+	    },{
+		xtype: 'button',
+		reference: 'html',
+		hidden: true,
+		text: gettext('Show HTML'),
+		iconCls: 'fa fa-file-text-o'
+	    }]
 	}
     ]
 });
