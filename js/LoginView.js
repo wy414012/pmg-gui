@@ -32,6 +32,7 @@ Ext.define('PMG.LoginView', {
 		    PMG.Utils.updateLoginData(response.result.data);
 		    // change view to mainview
 		    view.destroy();
+		    PMG.view = 'quarantine';
 		    Ext.create({ xtype: 'quarantineview' });
 		},
 		failure: function(form, action) {
@@ -59,8 +60,10 @@ Ext.define('PMG.LoginView', {
 
 			if (location.pathname === "/quarantine") {
 			    Ext.create({ xtype: 'quarantineview' });
+			    PMG.view = 'quarantine';
 			} else {
 			    Ext.create({ xtype: 'mainview' });
+			    PMG.view = 'main';
 			}
 		    },
 		    failure: function(form, action) {

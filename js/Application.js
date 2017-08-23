@@ -24,8 +24,10 @@ Ext.define('PMG.Application', {
 
 	if (loggedin) {
 	    if (location.pathname === "/quarantine") {
+		PMG.view = 'quarantine';
 		Ext.create({ xtype: 'quarantineview' });
 	    } else {
+		PMG.view = 'main';
 		Ext.create({ xtype: 'mainview' });
 	    }
 	} else {
