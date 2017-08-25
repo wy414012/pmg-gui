@@ -53,7 +53,8 @@ JSSRC=							\
 	QueueAdministration.js				\
 	ClusterAdministration.js			\
 	ConfigPanel.js					\
-	Application.js					\
+	MailStatistics.js				\
+	Application.js
 
 lint: ${JSSRC}
 	jslint ${JSSRC} 

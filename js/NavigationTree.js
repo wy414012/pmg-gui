@@ -97,7 +97,7 @@ Ext.define('PMG.store.NavigationStore', {
 		    {
 			text: gettext('Statistics'),
 			iconCls: 'fa fa-bar-chart',
-			path: 'pmgStatistics',
+			path: 'pmgMailStatistics',
 			leaf: true,
 		    },
 		    {
