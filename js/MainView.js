@@ -141,6 +141,10 @@ Ext.define('PMG.MainView', {
 		interval: 15*60*1000
 	    });
 
+	    var provider = new Ext.state.LocalStorageProvider({
+		prefix: 'ext-pmg-' });
+	    Ext.state.Manager.setProvider(provider);
+
 	    // select treeitem and load page from url fragment
 	    var token = Ext.util.History.getToken() || 'pmgDashboard';
 	    this.redirectTo(token, true);
