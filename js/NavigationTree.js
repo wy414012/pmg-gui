@@ -97,8 +97,23 @@ Ext.define('PMG.store.NavigationStore', {
 		    {
 			text: gettext('Statistics'),
 			iconCls: 'fa fa-bar-chart',
-			path: 'pmgMailStatistics',
-			leaf: true,
+			border: false,
+			path: 'pmgGeneralMailStatistics',
+			expanded: true,
+			children: [
+			    {
+				text: gettext('Spam Scores'),
+				path: 'pmgSpamScoreDistribution',
+				border: false,
+				leaf: true
+			    },
+			    {
+				text: gettext('Virus  Charts'),
+				path: 'pmgVirusCharts',
+				border: false,
+				leaf: true
+			    }
+			]
 		    },
 		    {
 			text: gettext('Quarantine'),
