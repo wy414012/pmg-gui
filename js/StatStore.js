@@ -5,6 +5,8 @@ Ext.define('PMG.data.StatStore', {
     autoDestroy: true,
 
     staturl: undefined,
+
+    includeTimeSpan: false,
     
     reload: function() {
 	var me = this;
@@ -19,7 +21,16 @@ Ext.define('PMG.data.StatStore', {
 	me.proxy.url = me.staturl;
 	me.proxy.extraParams = { starttime: ts.starttime, endtime: ts.endtime };
 
-	console.log("LOAD" + me.proxy.url);
+	var timespan = 3600;
+	if (me.includeTimeSpan) {
+	    var period = ts.endtime - ts.starttime;
+	    if (period <= 86400*7) {
+		timespan = 3600;
+	    } else {
+		timespan = 3600*24;
+	    }
+	    me.proxy.extraParams.timespan = timespan;
+	}
 	
 	me.load();
     },
