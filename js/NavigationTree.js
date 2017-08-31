@@ -112,6 +112,12 @@ Ext.define('PMG.store.NavigationStore', {
 				path: 'pmgVirusCharts',
 				border: false,
 				leaf: true
+			    },
+			    {
+				text: gettext('Hourly Distribution'),
+				path: 'pmgHourlyMailDistribution',
+				border: false,
+				leaf: true
 			    }
 			]
 		    },

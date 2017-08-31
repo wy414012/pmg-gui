@@ -59,6 +59,7 @@ JSSRC=							\
 	VirusCharts.js					\
 	SpamScoreDistribution.js 			\
 	GeneralMailStatistics.js			\
+	HourlyMailDistribution.js			\
 	Application.js
 
 lint: ${JSSRC}
