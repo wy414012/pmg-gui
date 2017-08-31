@@ -10,6 +10,7 @@ Ext.define('PMG.Utils', {
 
     senderText: gettext('Sender'),
     receiverText: gettext('Receiver'),
+    scoreText: gettext('Score'),
 
     oclass_text: {
 	who: gettext('Who Objects'),
