@@ -142,7 +142,7 @@ Ext.define('PMG.GeneralMailStatistics', {
 		{ type: 'integer', name: 'spamcount_in' },
 		{ type: 'integer', name: 'spamcount_out' },
 		{ type: 'integer', name: 'viruscount_in' },
-		{ type: 'integer', name: 'viruscount_ou' },
+		{ type: 'integer', name: 'viruscount_out' },
 		{ type: 'integer', name: 'bounces_in' },
 		{ type: 'integer', name: 'bounces_out' },
 		{ type: 'date', dateFormat: 'timestamp', name: 'time' }
