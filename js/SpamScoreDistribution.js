@@ -4,7 +4,7 @@ Ext.define('PMG.SpamScoreDistribution', {
 
     disableSelection: true,
 
-    title: gettext('Spam Scores'),
+    title: gettext('Statistics') + ': ' + gettext('Spam Scores'),
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 

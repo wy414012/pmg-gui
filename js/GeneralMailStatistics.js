@@ -9,7 +9,7 @@ Ext.define('PMG.GeneralMailStatistics', {
 	margin: '10 10 0 10'
     },
 
-    title: gettext('General Mail Statistics'),
+    title: gettext('Statistics') + ': ' + gettext('Mail'),
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 

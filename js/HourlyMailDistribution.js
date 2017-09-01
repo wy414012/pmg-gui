@@ -60,7 +60,7 @@ Ext.define('PMG.HourlyMailDistribution', {
 	margin: '10 10 0 10'
     },
 
-    title: gettext('Hourly Distribution'),
+    title: gettext('Statistics') + ': ' + gettext('Hourly Distribution'),
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 

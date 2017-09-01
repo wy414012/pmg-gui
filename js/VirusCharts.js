@@ -2,7 +2,7 @@ Ext.define('PMG.VirusCharts', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgVirusCharts',
 
-    title: gettext('Virus Charts'),
+    title: gettext('Statistics') + ': ' + gettext('Virus Charts'),
     
     disableSelection: true,
 

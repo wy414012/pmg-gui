@@ -2,7 +2,7 @@ Ext.define('PMG.DomainStatistics', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgDomainStatistics',
 
-    title: 'Mail Domain Statistics',
+    title: gettext('Statistics') + ': ' + gettext('Domain'),
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 
