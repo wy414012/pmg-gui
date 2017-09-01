@@ -124,7 +124,24 @@ Ext.define('PMG.store.NavigationStore', {
 				path: 'pmgDomainStatistics',
 				border: false,
 				leaf: true
-
+			    },
+			    {
+				text: gettext('Sender'),
+				path: 'pmgSenderStatistics',
+				border: false,
+				leaf: true
+			    },
+			    {
+				text: gettext('Receiver'),
+				path: 'pmgReceiverStatistics',
+				border: false,
+				leaf: true
+			    },
+			    {
+				text: gettext('Contact'),
+				path: 'pmgContactStatistics',
+				border: false,
+				leaf: true
 			    }
 			]
 		    },

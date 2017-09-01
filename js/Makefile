@@ -60,6 +60,9 @@ JSSRC=							\
 	SpamScoreDistribution.js 			\
 	GeneralMailStatistics.js			\
 	DomainStatistics.js				\
+	SenderStatistics.js				\
+	ReceiverStatistics.js				\
+	ContactStatistics.js				\
 	HourlyMailDistribution.js			\
 	Application.js
 
