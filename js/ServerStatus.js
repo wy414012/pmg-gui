@@ -8,12 +8,13 @@ Ext.define('PMG.ServerStatus', {
 
     scrollable: true,
 
-    bodyPadding: '0 0 10 0',
+    bodyPadding: '10 0 0 0',
     defaults: {
-	collapsible: true,
-	animCollapse: false,
-	margin: '10 10 0 10'
+	width: 700,
+	padding: '0 0 10 10'
     },
+
+    layout: 'column',
 
     tbar: [
 	{

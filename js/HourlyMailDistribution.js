@@ -55,10 +55,13 @@ Ext.define('PMG.HourlyMailDistribution', {
 
     scrollable: true,
 
-    bodyPadding: '0 0 10 0',
+    bodyPadding: '10 0 0 0',
     defaults: {
-	margin: '10 10 0 10'
+	width: 700,
+	padding: '0 0 10 10'
     },
+
+    layout: 'column',
 
     title: gettext('Statistics') + ': ' + gettext('Hourly Distribution'),
 
