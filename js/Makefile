@@ -59,6 +59,7 @@ JSSRC=							\
 	VirusCharts.js					\
 	SpamScoreDistribution.js 			\
 	GeneralMailStatistics.js			\
+	DomainStatistics.js				\
 	HourlyMailDistribution.js			\
 	Application.js
 

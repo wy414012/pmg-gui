@@ -118,6 +118,13 @@ Ext.define('PMG.store.NavigationStore', {
 				path: 'pmgHourlyMailDistribution',
 				border: false,
 				leaf: true
+			    },
+			    {
+				text: gettext('Domain'),
+				path: 'pmgDomainStatistics',
+				border: false,
+				leaf: true
+
 			    }
 			]
 		    },
