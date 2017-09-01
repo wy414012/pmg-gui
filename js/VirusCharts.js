@@ -8,7 +8,7 @@ Ext.define('PMG.VirusCharts', {
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 
-    emptyText: gettext('No virus names in database.'),
+    emptyText: gettext('No data in database.'),
     viewConfig: {
 	deferEmptyText: false
     },
