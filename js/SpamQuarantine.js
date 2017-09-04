@@ -112,11 +112,11 @@ Ext.define('PMG.SpamList', {
 	    flex: 1
         },
 	{
-	    header: gettext('Level'),
+	    header: gettext('Score'),
 	    dataIndex: 'spamlevel'
 	},
 	{
-	    header: gettext('Size (KB)'),
+	    header: gettext('Size') + ' (KB)',
 	    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
 	    dataIndex: 'bytes'
 	},
