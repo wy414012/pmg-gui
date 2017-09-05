@@ -31,7 +31,7 @@ Ext.define('PMG.SenderDetails', {
 	type: 'pmgStatStore',
 	remoteSort: true,
 	fields: [
-	    'receiver', 'virusname',
+	    'receiver', 'virusinfo',
 	    { type: 'integer', name: 'bytes' },
 	    { type: 'boolean', name: 'blocked' },
 	    { type: 'integer', name: 'spamlevel' },
