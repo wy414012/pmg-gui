@@ -6,6 +6,8 @@ Ext.define('PMG.SenderStatistics', {
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 
+    multiColumnSort: true,
+
     layout: 'fit',
 
     plugins: 'gridfilters',
@@ -48,6 +50,14 @@ Ext.define('PMG.SenderStatistics', {
 	    {
 		property: 'count',
 		direction: 'DESC'
+	    },
+	    {
+		property: 'bytes',
+		direction: 'DESC'
+	    },
+	    {
+		property: 'sender',
+		direction: 'ASC'
 	    }
 	]
     },
