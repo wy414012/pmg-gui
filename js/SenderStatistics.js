@@ -104,27 +104,9 @@ Ext.define('PMG.SenderList', {
 	    { type: 'integer', name: 'viruscount' }
 	],
 	proxy: {
-	    type: 'proxmox',
+	    type: 'pmgfilterproxy',
 	    sortParam: 'orderby',
-	    getParams: function(operation) {
-		var me = this, i;
-		if (!operation.isReadOperation) {
-		    return {};
-		}
-		var params = Ext.data.RestProxy.prototype.getParams.apply(me, arguments);
-
-		var filters = operation.getFilters() || [];
-		for (i = 0; i < filters.length; i++) {
-		    filter = filters[i];
-		    if (filter.config.id === 'x-gridfilter-sender') {
-			var v = filter.getValue();
-			if (v !== undefined && v !== '') {
-			    params.filter = v;
-			}
-		    }
-		}
-		return params;
-	    }
+	    filterId: 'x-gridfilter-sender'
 	},
 	sorters: [
 	    {
