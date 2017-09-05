@@ -73,7 +73,14 @@ Ext.define('PMG.SenderDetails', {
 	    format: 'H:m:s',
 	    dataIndex: 'time'
 	},
-    ]
+    ],
+
+    initComponent: function() {
+	var me = this;
+	me.callParent();
+
+	Proxmox.Utils.monStoreErrors(me, me.store);
+    }
 });
 
 Ext.define('PMG.SenderList', {
