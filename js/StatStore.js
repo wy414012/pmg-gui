@@ -7,14 +7,31 @@ Ext.define('PMG.data.StatStore', {
     staturl: undefined,
 
     includeTimeSpan: false,
-    
+
+    setUrl: function(url) {
+	var me = this;
+
+	me.staturl = url;
+	me.proxy.extraParams = {};
+	me.reload();
+    },
+
     reload: function() {
 	var me = this;
+
+	Ext.Ajax.abort(me.proxy.activeRequest);
+	delete me.proxy.activeRequest;
+
+	if (me.staturl === undefined) {
+	    me.proxy.extraParams = {};
+	    me.setData([]);
+	    return;
+	}
 
 	var ts = PMG.StatTimeSelector.getTimeSpan();
 
 	var last = me.proxy.extraParams;
-	
+
 	if (last.starttime === ts.starttime && last.endtime === ts.endtime)
 	    return; // avoid repeated loads
 
@@ -31,7 +48,7 @@ Ext.define('PMG.data.StatStore', {
 	    }
 	    me.proxy.extraParams.timespan = timespan;
 	}
-	
+
 	me.load();
     },
 
@@ -44,13 +61,8 @@ Ext.define('PMG.data.StatStore', {
 
 	config = config || {};
 
-	// staturl is required
-	if (!config.staturl) {
-	    throw "no staturl specified";
-	}
-	
 	me.mon(Ext.GlobalEvents, 'pmgStatTimeSelectorUpdate', me.reload, me);
-	
+
 	me.callParent([config]);
 
 	me.reload();
