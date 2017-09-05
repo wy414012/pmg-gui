@@ -1,5 +1,6 @@
 JSSRC=							\
 	Utils.js					\
+	FilterProxy.js					\
 	LoginView.js					\
 	RoleSelector.js					\
 	ServerStatus.js					\
