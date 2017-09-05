@@ -121,13 +121,13 @@ Ext.define('PMG.SpamList', {
 	    dataIndex: 'bytes'
 	},
 	{
-	    header: gettext('Arrival Day'),
+	    header: gettext('Date'),
 	    dataIndex: 'day',
 	    hidden: true
 	},
 	{
 	    xtype: 'datecolumn',
-	    header: gettext('Arrival Time'),
+	    header: gettext('Time'),
 	    dataIndex: 'time',
 	    format: 'H:m:s'
 	},
