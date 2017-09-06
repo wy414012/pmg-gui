@@ -18,6 +18,8 @@ Ext.define('PMG.ReceiverDetails', {
 	var me = this;
 
 	me.store.setUrl(url);
+	Proxmox.Utils.setErrorMask(me, false);
+	me.store.reload();
 
 	var infopanel = me.getComponent('info');
 	if (title) {
@@ -87,7 +89,7 @@ Ext.define('PMG.ReceiverDetails', {
 	var me = this;
 	me.callParent();
 
-	Proxmox.Utils.monStoreErrors(me, me.store);
+	Proxmox.Utils.monStoreErrors(me, me.store, true);
     }
 });
 
@@ -182,7 +184,7 @@ Ext.define('PMG.ReceiverList', {
 	var me = this;
 	me.callParent();
 
-	Proxmox.Utils.monStoreErrors(me, me.store);
+	Proxmox.Utils.monStoreErrors(me, me.store, true);
     }
 });
 
