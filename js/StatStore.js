@@ -19,8 +19,7 @@ Ext.define('PMG.data.StatStore', {
     reload: function() {
 	var me = this;
 
-	Ext.Ajax.abort(me.proxy.activeRequest);
-	delete me.proxy.activeRequest;
+	me.proxy.abort(); // abort pending requests
 
 	if (me.staturl === undefined) {
 	    me.proxy.extraParams = {};
