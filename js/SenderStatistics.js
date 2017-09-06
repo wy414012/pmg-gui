@@ -14,6 +14,8 @@ Ext.define('PMG.SenderDetails', {
 
     disableSelection: true,
 
+    plugins: 'gridfilters',
+
     setUrl: function(url, title) {
 	var me = this;
 
@@ -33,6 +35,7 @@ Ext.define('PMG.SenderDetails', {
 	type: 'pmgStatStore',
 	autoReload: false,
 	remoteSort: true,
+	remoteFilter: true,
 	fields: [
 	    'receiver', 'virusinfo',
 	    { type: 'integer', name: 'bytes' },
@@ -41,7 +44,8 @@ Ext.define('PMG.SenderDetails', {
             { type: 'date', dateFormat: 'timestamp', name: 'time' }
 	],
 	proxy: {
-	    type: 'proxmox',
+	    type: 'pmgfilterproxy',
+	    filterId: 'x-gridfilter-receiver',
 	    sortParam: 'orderby'
 	},
 	sorters: [
@@ -57,6 +61,7 @@ Ext.define('PMG.SenderDetails', {
 	    text: gettext('Receiver'),
 	    renderer: Ext.htmlEncode,
 	    flex: 1,
+	    filter: { type: 'string' },
 	    dataIndex: 'receiver'
 	},
 	{
