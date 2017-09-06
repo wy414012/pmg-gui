@@ -149,7 +149,16 @@ Ext.define('PMG.SenderList', {
 	},
 	{
 	    text: gettext('Count'),
-	    dataIndex: 'count'
+	    columns: [
+		{
+		    text: gettext('Mail'),
+		    dataIndex: 'count'
+		},
+		{
+		    header: gettext('Virus'),
+		    dataIndex: 'viruscount'
+		}
+	    ]
 	},
 	{
 	    text: gettext('Size') + ' (KB)',
