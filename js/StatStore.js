@@ -11,9 +11,11 @@ Ext.define('PMG.data.StatStore', {
     setUrl: function(url) {
 	var me = this;
 
+	me.proxy.abort(); // abort pending requests
+
 	me.staturl = url;
 	me.proxy.extraParams = {};
-	me.reload();
+	me.setData([]);
     },
 
     reload: function() {
