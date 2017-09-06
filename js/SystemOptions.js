@@ -37,6 +37,9 @@ Ext.define('PMG.SystemOptions', {
 	me.add_boolean_row('dailyreport', gettext('Send daily reports'),
 			   { defaultValue: 1});
 
+	me.add_boolean_row('advfilter', gettext('Use advanced statistic filters'),
+			   { defaultValue: 1});
+
 	me.add_integer_row('statlifetime', gettext('User statistic lifetime (days)'),
 			   { minValue: 1, defaultValue: 7, deleteEmpty: true });
 
