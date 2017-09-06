@@ -20,6 +20,7 @@ Ext.define('PMG.ContactDetails', {
 	var me = this;
 
 	me.store.setUrl(url);
+	me.store.setRemoteFilter(url !== undefined);
 	Proxmox.Utils.setErrorMask(me, false);
 	me.store.reload();
 
@@ -35,7 +36,7 @@ Ext.define('PMG.ContactDetails', {
 	type: 'pmgStatStore',
 	autoReload: false,
 	remoteSort: true,
-	remoteFilter: true,
+	remoteFilter: false, // enabled dynamically
 	fields: [
 	    'sender', 'virusinfo',
 	    { type: 'integer', name: 'bytes' },
