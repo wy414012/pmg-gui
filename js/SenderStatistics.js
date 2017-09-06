@@ -31,6 +31,7 @@ Ext.define('PMG.SenderDetails', {
 
     store: {
 	type: 'pmgStatStore',
+	autoReload: false,
 	remoteSort: true,
 	fields: [
 	    'receiver', 'virusinfo',

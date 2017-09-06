@@ -57,12 +57,18 @@ Ext.define('PMG.data.StatStore', {
 	type: 'proxmox'
     },
 
+    autoReload: true,
+
     constructor: function(config) {
 	var me = this;
 
 	config = config || {};
 
-	me.mon(Ext.GlobalEvents, 'pmgStatTimeSelectorUpdate', me.reload, me);
+	me.mon(Ext.GlobalEvents, 'pmgStatTimeSelectorUpdate', function() {
+	    if (me.autoReload) {
+		me.reload();
+	    }
+	}, me);
 
 	me.callParent([config]);
 
