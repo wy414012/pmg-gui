@@ -8,7 +8,7 @@ Ext.define('PMG.ContactDetails', {
 	    xtype: 'panel',
 	    itemId: 'info',
 	    bodyPadding: 10,
-	    html: gettext('Please select a Contact.')
+	    html: gettext('Please select a contact.')
 	}
     ],
 
@@ -28,7 +28,7 @@ Ext.define('PMG.ContactDetails', {
 	if (title) {
 	    infopanel.update(title);
 	} else {
-	    infopanel.update(gettext('Please select a Contact'));
+	    infopanel.update(gettext('Please select a contact'));
 	}
     },
 
@@ -96,7 +96,8 @@ Ext.define('PMG.ContactList', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgContactList',
 
-    title: gettext('Statistics') + ': ' + gettext('Contact'),
+    title: gettext('Statistics') + ': ' + gettext('Contact') +
+	' (' + gettext('Receiver') + ', ' + gettext('Outgoing') +')',
 
     multiColumnSort: true,
     plugins: 'gridfilters',

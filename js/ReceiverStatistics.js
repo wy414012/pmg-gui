@@ -104,7 +104,8 @@ Ext.define('PMG.ReceiverList', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgReceiverList',
 
-    title: gettext('Statistics') + ': ' + gettext('Receiver'),
+    title: gettext('Statistics') + ': ' + gettext('Receiver') +
+	' (' + gettext('Incoming') +')',
 
     multiColumnSort: true,
     plugins: 'gridfilters',

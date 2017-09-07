@@ -96,7 +96,8 @@ Ext.define('PMG.SenderList', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgSenderList',
 
-    title: gettext('Statistics') + ': ' + gettext('Sender'),
+    title: gettext('Statistics') + ': ' + gettext('Sender') +
+	' (' + gettext('Outgoing') +')',
 
     multiColumnSort: true,
     plugins: 'gridfilters',
