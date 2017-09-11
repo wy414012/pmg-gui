@@ -172,8 +172,10 @@ Ext.define('PMG.SpamQuarantine', {
 	},
 
 	resetEmail: function() {
-	    var spamlist = this.lookupReference('spamlist');
-	    spamlist.setUser(undefined);
+	    if (PMG.view !== 'quarantine') {
+		var spamlist = this.lookupReference('spamlist');
+		spamlist.setUser(undefined);
+	    }
 	},
 
 	onSelectMail: function() {
