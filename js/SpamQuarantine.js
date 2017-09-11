@@ -257,6 +257,35 @@ Ext.define('PMG.SpamQuarantine', {
 	    this.lookupReference('email').queryCaching = true;
 	},
 
+	btnHandler: function(button, e) {
+	    var spamlist = this.lookupReference('spamlist');
+	    var selected = spamlist.getSelection();
+	    if (!selected.length) {
+		return;
+	    }
+	    Proxmox.Utils.API2Request({
+		url: '/quarantine/content/',
+		params: {
+		    action: button.reference,
+		    id: selected[0].data.id
+		},
+		method: 'POST',
+		failure: function(response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		},
+		success: function(response, opts) {
+		    spamlist.load();
+		    Ext.Msg.show({
+			title: gettext('Info'),
+			message: "Action '" + button.reference + ' ' +
+				 selected[0].data.id + "' successful",
+			buttons: Ext.Msg.OK,
+			icon: Ext.MessageBox.INFO
+		    });
+		}
+	    });
+	},
+
 	control: {
 	    '#':{
 		beforedestroy: 'resetEmail'
@@ -351,7 +380,27 @@ Ext.define('PMG.SpamQuarantine', {
 		hidden: true,
 		text: gettext('Show HTML'),
 		iconCls: 'fa fa-file-text-o'
-	    }]
+	    },'->',{
+		reference: 'whitelist',
+		text: gettext('Whitelist'),
+		iconCls: 'fa fa-check',
+		handler: 'btnHandler'
+	    },{
+		reference: 'blacklist',
+		text: gettext('Blacklist'),
+		iconCls: 'fa fa-times',
+		handler: 'btnHandler'
+	    },{
+		reference: 'deliver',
+		text: gettext('Deliver'),
+		iconCls: 'fa fa-paper-plane-o',
+		handler: 'btnHandler'
+	    },{
+		reference: 'delete',
+		text: gettext('Delete'),
+		iconCls: 'fa fa-trash-o',
+		handler: 'btnHandler'
+	    },]
 	}
     ]
 });
