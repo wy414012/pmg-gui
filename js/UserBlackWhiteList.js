@@ -16,21 +16,30 @@ Ext.define('PMG.UserBlackWhiteList', {
 
 	onAddAddress: function() {
 	    var me = this.getView();
+	    var params = me.getStore().getProxy().getExtraParams() || {};
 
 	    var url = '/quarantine/' + me.listname;
+
+	    var items = [{
+		xtype: 'proxmoxtextfield',
+		name: 'address',
+		fieldLabel: gettext("Address")
+	    }];
+
+	    Ext.Object.each(params, function(key, value) {
+		items.push({
+		    xtype: 'hidden',
+		    name: key,
+		    value: value,
+		});
+	    });
 
 	    var config = {
 		method: 'POST',
 		url: url,
 		create: true,
 		isAdd: true,
-		items: [
-		    {
-			xtype: 'proxmoxtextfield',
-			name: 'address',
-			fieldLabel: gettext("Address")
-		    }
-		]
+		items: items
 	    };
 
 	    if (me.listname === 'blacklist') {
@@ -51,10 +60,11 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) return;
 
+	    var params = me.getStore().getProxy().getExtraParams() || {};
 	    var url = '/quarantine/' + me.listname + '/' + rec.getId();
 
 	    Proxmox.Utils.API2Request({
-		url: url,
+		url: url + '?' + Ext.Object.toQueryString(params),
 		method: 'DELETE',
 		waitMsgTarget: me,
 		callback: function(options, success, response) {
@@ -64,10 +74,52 @@ Ext.define('PMG.UserBlackWhiteList', {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		}
 	    });
+	},
+
+	changeEmail: function(combobox, value) {
+	    var view = this.getView();
+	    view.getStore().getProxy().setExtraParams({
+		pmail: value
+	    });
+	    view.getStore().load();
+	},
+
+	init: function() {
+	    var view = this.getView();
+
+	    if (PMG.view === 'quarantine') {
+		this.lookupReference('email').setVisible(false);
+	    }
+	},
+
+	control: {
+	    'combobox':{
+		change: {
+		    fn: 'changeEmail',
+		    buffer: 500
+		}
+	    }
 	}
     },
 
     tbar: [
+	{
+	    xtype: 'combobox',
+	    displayField: 'mail',
+	    valueField: 'mail',
+	    store: {
+		proxy: {
+		    type: 'proxmox',
+		    url: '/api2/json/quarantine/quarusers'
+		}
+	    },
+	    queryParam: false,
+	    queryCaching: false,
+	    editable: true,
+	    reference: 'email',
+	    name: 'email',
+	    fieldLabel: 'E-Mail',
+	},
 	{
 	    text: gettext('Add'),
 	    handler: 'onAddAddress'
