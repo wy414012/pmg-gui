@@ -60,6 +60,7 @@ JSSRC=							\
 	VirusCharts.js					\
 	SpamScoreDistribution.js 			\
 	GeneralMailStatistics.js			\
+	RBLStatistics.js				\
 	DomainStatistics.js				\
 	SenderStatistics.js				\
 	ReceiverStatistics.js				\

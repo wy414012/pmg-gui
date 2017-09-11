@@ -143,6 +143,13 @@ Ext.define('PMG.store.NavigationStore', {
 			leaf: true
 		    },
 		    {
+			text: gettext('RBL'),
+			iconCls: 'fa fa-line-chart',
+			path: 'pmgRBLStatistics',
+			border: false,
+			leaf: true
+		    },
+		    {
 			text: gettext('Domain'),
 			iconCls: 'fa fa-table',
 			path: 'pmgDomainStatistics',
