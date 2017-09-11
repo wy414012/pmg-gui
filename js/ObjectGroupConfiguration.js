@@ -91,6 +91,6 @@ Ext.define('PMG.WhatConfiguration', {
     xtype: 'pmgWhatConfiguration',
 
     ogclass: 'what',
-    otype_list: []
+    otype_list: [3002, 3003]
 });
 
