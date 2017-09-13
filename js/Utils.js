@@ -212,19 +212,29 @@ Ext.define('PMG.Utils', {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'matchfield',
 	    subject: gettext('Match Field'),
+	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
 		    name: 'field',
+		    labelWidth: 150,
 		    allowBlank: false,
 		    fieldLabel: gettext('Field')
 		},
 		{
 		    xtype: 'textfield',
+		    reference: 'value',
 		    name: 'value',
+		    labelWidth: 150,
 		    allowBlank: false,
 		    fieldLabel: gettext('Value')
 		},
+		{
+		    labelWidth: 150,
+		    fieldLabel: gettext('Test String'),
+		    xtype: 'pmgRegexTester',
+		    regexFieldReference: 'value',
+		}
 	    ]
 	},
 	3003: {
