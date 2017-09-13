@@ -314,6 +314,46 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 	},
+	3005: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'archivefilter',
+	    width: 400,
+	    subject: gettext('Archive Filter'),
+	    items: [
+		{
+		    xtype: 'combobox',
+		    displayField: 'text',
+		    labelWidth: 150,
+		    valueField: 'mimetype',
+		    name: 'contenttype',
+		    editable: true,
+		    queryMode: 'local',
+		    store: {
+			autoLoad: true,
+			proxy: {
+			    type: 'proxmox',
+			    url: '/api2/json/config/mimetypes'
+			},
+		    },
+		    fieldLabel: gettext('Content Type'),
+		    anyMatch: true,
+		    matchFieldWidth: false,
+		    listeners: {
+			change: function(cb, value) {
+			    var me = this;
+			    me.up().down('displayfield').setValue(value);
+			}
+		    }
+		},
+		{
+		    xtype: 'displayfield',
+		    fieldLabel: gettext('Value'),
+		    labelWidth: 150,
+		    allowBlank: false,
+		    reset: Ext.emptyFn
+		}
+	    ]
+	},
 	4005: {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'bcc',
