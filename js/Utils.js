@@ -208,6 +208,20 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 	},
+	3000: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'spamfilter',
+	    subject: gettext('Spam Filter'),
+	    items: [
+		{
+		    xtype: 'proxmoxintegerfield',
+		    name: 'spamlevel',
+		    allowBlank: false,
+		    minValue: 0,
+		    fieldLabel: gettext('Level')
+		},
+	    ]
+	},
 	3002: {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'matchfield',
