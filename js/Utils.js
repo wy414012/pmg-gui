@@ -241,7 +241,7 @@ Ext.define('PMG.Utils', {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'contenttype',
 	    width: 400,
-	    subject: gettext('Content Type'),
+	    subject: gettext('Content Type Filter'),
 	    items: [
 		{
 		    xtype: 'combobox',
@@ -273,6 +273,7 @@ Ext.define('PMG.Utils', {
 		    fieldLabel: gettext('Value'),
 		    labelWidth: 150,
 		    allowBlank: false,
+		    reset: Ext.emptyFn
 		},
 	    ]
 	},
