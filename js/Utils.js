@@ -291,6 +291,29 @@ Ext.define('PMG.Utils', {
 		},
 	    ]
 	},
+	3004: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'filenamefilter',
+	    width: 400,
+	    subject: gettext('Match Filename'),
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'filename',
+		    reference: 'filename',
+		    fieldLabel: gettext('Filename'),
+		    labelWidth: 150,
+		    allowBlank: false
+		},
+		{
+		    labelWidth: 150,
+		    fieldLabel: gettext('Test String'),
+		    wholeMatch: true,
+		    xtype: 'pmgRegexTester',
+		    regexFieldReference: 'filename'
+		}
+	    ]
+	},
 	4005: {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'bcc',
