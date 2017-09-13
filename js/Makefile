@@ -10,6 +10,7 @@ JSSRC=							\
 	LDAPGroupEditor.js				\
 	LDAPUserSelector.js				\
 	LDAPUserEditor.js				\
+	RegexTester.js					\
 	ObjectGroupList.js				\
 	ObjectGroup.js					\
 	ObjectGroupSelector.js				\
