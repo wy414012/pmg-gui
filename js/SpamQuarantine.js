@@ -133,7 +133,7 @@ Ext.define('PMG.SpamList', {
 	    xtype: 'datecolumn',
 	    header: gettext('Time'),
 	    dataIndex: 'time',
-	    format: 'H:m:s'
+	    format: 'H:i:s'
 	},
     ]
 });

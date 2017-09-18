@@ -79,7 +79,7 @@ Ext.define('PMG.ReceiverDetails', {
 	{
 	    xtype: 'datecolumn',
 	    header: gettext('Time'),
-	    format: 'H:m:s',
+	    format: 'H:i:s',
 	    dataIndex: 'time'
 	},
 	{
