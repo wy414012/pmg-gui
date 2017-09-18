@@ -27,7 +27,7 @@ Ext.define('PMG.Utils', {
 	when: '<span class="fa fa-fw fa-clock-o"></span> ',
 	action: '<span class="fa fa-fw fa-flag"></span> ',
 	from: '<span class="fa fa-fw fa-user-circle"></span> ',
-	to: '<span class="fa fa-fw fa-user-circle"></span> ',
+	to: '<span class="fa fa-fw fa-user-circle"></span> '
     },
 
     format_oclass: function(oclass) {
@@ -63,9 +63,9 @@ Ext.define('PMG.Utils', {
     },
 
     format_ldap_protocol: function(p) {
-	if (p === undefined) return 'LDAP';
-	if (p === 'ldap') return 'LDAP';
-	if (p === 'ldaps') return 'LDAPS';
+	if (p === undefined) { return 'LDAP'; }
+	if (p === 'ldap') { return 'LDAP'; }
+	if (p === 'ldaps') { return 'LDAPS'; }
 	return 'unknown';
     },
 
@@ -219,7 +219,7 @@ Ext.define('PMG.Utils', {
 		    allowBlank: false,
 		    minValue: 0,
 		    fieldLabel: gettext('Level')
-		},
+		}
 	    ]
 	},
 	3002: {
@@ -247,7 +247,7 @@ Ext.define('PMG.Utils', {
 		    labelWidth: 150,
 		    fieldLabel: gettext('Test String'),
 		    xtype: 'pmgRegexTester',
-		    regexFieldReference: 'value',
+		    regexFieldReference: 'value'
 		}
 	    ]
 	},
@@ -270,7 +270,7 @@ Ext.define('PMG.Utils', {
 			proxy: {
 			    type: 'proxmox',
 			    url: '/api2/json/config/mimetypes'
-			},
+			}
 		    },
 		    fieldLabel: gettext('Content Type'),
 		    anyMatch: true,
@@ -288,7 +288,7 @@ Ext.define('PMG.Utils', {
 		    labelWidth: 150,
 		    allowBlank: false,
 		    reset: Ext.emptyFn
-		},
+		}
 	    ]
 	},
 	3004: {
@@ -333,7 +333,7 @@ Ext.define('PMG.Utils', {
 			proxy: {
 			    type: 'proxmox',
 			    url: '/api2/json/config/mimetypes'
-			},
+			}
 		    },
 		    fieldLabel: gettext('Content Type'),
 		    anyMatch: true,
@@ -409,7 +409,7 @@ Ext.define('PMG.Utils', {
 
     extractQuarantineAction: function() {
 
-	if (PMG.Utils.quarantineActionExtracted) return;
+	if (PMG.Utils.quarantineActionExtracted) { return; }
 
 	PMG.Utils.quarantineActionExtracted = true;
 
@@ -426,7 +426,7 @@ Ext.define('PMG.Utils', {
 	var newsearch = Ext.Object.toQueryString(qs);
 
 	var newurl = location.protocol + "//" + location.host + location.pathname;
-	if (newsearch) newurl += '?' + newsearch;
+	if (newsearch) { newurl += '?' + newsearch; }
 	newurl += location.hash;
 
 	if (window.history) {
