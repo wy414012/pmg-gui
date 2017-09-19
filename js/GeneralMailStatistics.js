@@ -5,6 +5,7 @@ Ext.define('PMG.GeneralMailStatistics', {
     scrollable: true,
     
     bodyPadding: '10 0 0 0',
+    border: false,
     defaults: {
 	width: 700,
 	padding: '0 0 10 10'

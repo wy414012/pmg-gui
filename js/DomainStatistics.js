@@ -7,6 +7,7 @@ Ext.define('PMG.DomainStatistics', {
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 
     layout: 'fit',
+    border: false,
 
     initComponent: function() {
 	var me = this;

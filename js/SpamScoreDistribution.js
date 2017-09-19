@@ -3,6 +3,7 @@ Ext.define('PMG.SpamScoreDistribution', {
     xtype: 'pmgSpamScoreDistribution',
 
     disableSelection: true,
+    border: false,
 
     title: gettext('Statistics') + ': ' + gettext('Spam Scores'),
 

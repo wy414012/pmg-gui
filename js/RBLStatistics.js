@@ -3,6 +3,7 @@ Ext.define('PMG.RBLStatistics', {
     xtype: 'pmgRBLStatistics',
 
     scrollable: true,
+    border: false,
 
     bodyPadding: '10 0 10 10',
 

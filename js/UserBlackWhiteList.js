@@ -8,6 +8,7 @@ Ext.define('pmg-address-list', {
 Ext.define('PMG.UserBlackWhiteList', {
     extend: 'Ext.grid.GridPanel',
 
+    border: false,
     listname: undefined, // 'blacklist' or 'whitelist',
 
     controller: {
@@ -170,7 +171,11 @@ Ext.define('PMG.UserBlacklist', {
     dockedItems: [
 	{
             dock: 'top',
-	    bodyStyle: 'padding: 10px;',
+	    bodyStyle: {
+		padding: '10px',
+		'border-left': '0px',
+		'border-right': '0px',
+	    },
             html: gettext('With this feature, you can manually mark E-mails from certain domains or addresses as spam.') + '<br><br>' +
 		'<b>*.com</b> (all mails from <b>.com</b> domains)' + '<br>' +
 		'<b>*@example.com</b> (all mails from domain <b>example.com</b>)' + '<br>' +
@@ -200,7 +205,11 @@ Ext.define('PMG.UserWhitelist', {
     dockedItems: [
 	{
             dock: 'top',
-	    bodyStyle: 'padding: 10px;',
+	    bodyStyle: {
+		padding: '10px',
+		'border-left': '0px',
+		'border-right': '0px',
+	    },
             html: gettext('With this feature, you can manually bypass spam checking for certain domains or E-mail addresses.') + '<br><br>' +
 		'<b>*.com</b> (all mails from <b>.com</b> domains)' + '<br>' +
 		'<b>*@example.com</b> (all mails from domain <b>example.com</b>)' + '<br>' +

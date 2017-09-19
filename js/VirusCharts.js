@@ -4,6 +4,7 @@ Ext.define('PMG.VirusCharts', {
 
     title: gettext('Statistics') + ': ' + gettext('Virus Charts'),
     
+    border: false,
     disableSelection: true,
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],

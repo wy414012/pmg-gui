@@ -54,6 +54,7 @@ Ext.define('PMG.HourlyMailDistribution', {
     xtype: 'pmgHourlyMailDistribution',
 
     scrollable: true,
+    border: false,
 
     bodyPadding: '10 0 0 0',
     defaults: {
