@@ -11,14 +11,17 @@ Ext.define('PMG.VirusDetectorConfiguration', {
     items: [
 	{
 	    title: gettext('Options'),
+	    itemId: 'options',
 	    xtype: 'pmgVirusDetectorOptions'
 	},
 	{
 	    title: gettext('ClamAV'),
+	    itemId: 'clamav',
 	    xtype: 'pmgClamAVDatabase'
 	},
 	{
 	    title: gettext('Quarantine'),
+	    itemId: 'quarantine',
 	    xtype: 'pmgVirusQuarantineOptions'
 	}
     ]
