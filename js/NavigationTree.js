@@ -129,7 +129,6 @@ Ext.define('PMG.store.NavigationStore', {
 	    {
 		text: gettext('Statistics'),
 		iconCls: 'fa fa-bar-chart',
-		border: false,
 		path: 'pmgGeneralMailStatistics',
 		expanded: true,
 		children: [
@@ -137,56 +136,48 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Spam Scores'),
 			iconCls: 'fa fa-table',
 			path: 'pmgSpamScoreDistribution',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('Virus  Charts'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusCharts',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('Hourly Distribution'),
 			iconCls: 'fa fa-area-chart',
 			path: 'pmgHourlyMailDistribution',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('RBL'),
 			iconCls: 'fa fa-line-chart',
 			path: 'pmgRBLStatistics',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('Domain'),
 			iconCls: 'fa fa-table',
 			path: 'pmgDomainStatistics',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('Sender'),
 			iconCls: 'fa fa-table',
 			path: 'pmgSenderStatistics',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('Receiver'),
 			iconCls: 'fa fa-table',
 			path: 'pmgReceiverStatistics',
-			border: false,
 			leaf: true
 		    },
 		    {
 			text: gettext('Contact'),
 			iconCls: 'fa fa-table',
 			path: 'pmgContactStatistics',
-			border: false,
 			leaf: true
 		    }
 		]
