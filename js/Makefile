@@ -25,6 +25,7 @@ JSSRC=							\
 	QuarantineView.js				\
 	Dashboard.js					\
 	VersionInfo.js					\
+	MailTracker.js					\
 	NavigationTree.js				\
 	RuleConfiguration.js				\
 	SystemOptions.js				\

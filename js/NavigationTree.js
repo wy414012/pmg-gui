@@ -115,7 +115,7 @@ Ext.define('PMG.store.NavigationStore', {
 		    {
 			text: gettext('Tracking Center'),
 			iconCls: 'fa fa-map-o',
-			path: 'pmgTrackingCenter',
+			path: 'pmgMailTracker',
 			leaf: true,
 		    },
 		    {

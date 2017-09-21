@@ -30,6 +30,17 @@ Ext.define('PMG.Utils', {
 	to: '<span class="fa fa-fw fa-user-circle"></span> '
     },
 
+    mail_status_map: {
+	2: 'delivered',
+	4: 'deferred',
+	5: 'bounced',
+	N: 'rejected',
+	G: 'greylisted',
+	A: 'accepted',
+	B: 'blocked',
+	Q: 'quarantine'
+    },
+
     format_oclass: function(oclass) {
 	var icon = PMG.Utils.oclass_icon[oclass] || '';
 	var text = PMG.Utils.oclass_text[oclass] || oclass;
