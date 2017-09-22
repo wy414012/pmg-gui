@@ -31,6 +31,33 @@ Ext.define('PMG.SystemOptions', {
 	itemdblclick: 'onEdit',
     },
 
+    add_proxy_row: function(name, text, opts) {
+	var me = this;
+
+	opts = opts || {};
+	me.rows = me.rows || {};
+
+	me.rows[name] = {
+	    required: true,
+	    defaultValue: Proxmox.Utils.noneText,
+	    header: text,
+	    editor: {
+		xtype: 'proxmoxWindowEdit',
+		subject: text,
+		items: {
+		    xtype: 'proxmoxtextfield',
+		    vtype: 'HttpProxy',
+		    name: name,
+		    deleteEmpty: true,
+		    emptyText: Proxmox.Utils.noneText,
+		    labelWidth: Proxmox.Utils.compute_min_label_width(
+			text, opts.labelWidth),
+		    fieldLabel: text
+		}
+	    }
+	};
+    },
+
     initComponent : function() {
 	var me = this;
 
@@ -45,6 +72,8 @@ Ext.define('PMG.SystemOptions', {
 
 	me.add_text_row('email', gettext("Administrator EMail"),
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
+
+	me.add_proxy_row('http_proxy', gettext("HTTP proxy"));
 
 	me.callParent();
 
