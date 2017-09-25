@@ -24,9 +24,18 @@ Ext.define('PMG.ServerAdministration', {
 	    nodename: Proxmox.NodeName
 	},
 	{
+	    xtype: 'proxmoxNodeAPT',
             title: gettext('Updates'),
+	    upgradeBtn: {
+		xtype: 'button',
+		disabled: !(Proxmox.UserName && Proxmox.UserName === 'root@pam'),
+		text: gettext('Upgrade'),
+		handler: function() {
+		    PMG.Utils.openVNCViewer('upgrade', Proxmox.NodeName);
+		}
+	    },
 	    itemId: 'updates',
-	    html: "Server Administration2"
+	    nodename: Proxmox.NodeName
 	},
 	{
 	    xtype: 'proxmoxLogView',
