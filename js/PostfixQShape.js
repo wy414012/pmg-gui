@@ -56,8 +56,8 @@ Ext.define('PMG.Postfix.QShape', {
 	    var view = this.getView();
 
 	    Proxmox.Utils.API2Request({
-		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/delete_deferred_queue',
-		method: 'POST',
+		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/queue/deferred',
+		method: 'DELETE',
 		waitMsgTarget: view,
 		success: function(response, opts) {
 		    view.store.load();
