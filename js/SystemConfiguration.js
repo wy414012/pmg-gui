@@ -94,11 +94,6 @@ Ext.define('PMG.SystemConfiguration', {
 	    itemId: 'options',
             title: gettext('Options'),
 	    xtype: 'pmgSystemOptions',
-	},
-	{
-	    itemId: 'ssh',
-            title: gettext('SSH Access'),
-	    html: "SSH Access"
 	}
     ]
 });
