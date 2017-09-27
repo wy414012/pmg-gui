@@ -81,10 +81,10 @@ Ext.define('PMG.store.NavigationStore', {
 			leaf: true,
 		    },
 		    {
-			text: gettext('License'),
-			iconCls: 'fa fa-ticket',
-			path: 'pmgLicense',
-			leaf: true,
+			text: gettext('Subscription'),
+			iconCls: 'fa fa-support',
+			path: 'pmgSubscription',
+			leaf: true
 		    }
 		]
 	    },
