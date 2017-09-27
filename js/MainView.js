@@ -182,6 +182,14 @@ Ext.define('PMG.MainView', {
 		    tpl: Ext.String.format(gettext("You are logged in as '{0}'"), '{username}')
 		},
 		{
+		    xtype: 'proxmoxHelpButton',
+		    hidden: false,
+		    baseCls: 'x-btn',
+		    iconCls: 'fa fa-info-circle x-btn-icon-el-default-toolbar-small ',
+		    listenToGlobalEvent: false,
+		    onlineHelp: 'pmg_documentation_index'
+		},
+		{
 		    reference: 'logoutButton',
 		    xtype: 'button',
 		    iconCls: 'fa fa-sign-out',

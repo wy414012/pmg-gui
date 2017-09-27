@@ -101,6 +101,10 @@
     top: 2px;
 }
 
+.proxmox-inline-button .x-btn-inner {
+    color: black;
+}
+
 /* for auto layout */
 div.inline-block {
     display: inline-block;

@@ -70,11 +70,15 @@ JSSRC=							\
 	HourlyMailDistribution.js			\
 	Application.js
 
+OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
+	/usr/bin/asciidoc-pmg scan-extjs ${JSSRC} >$@.tmp
+	mv $@.tmp $@
+
 lint: ${JSSRC}
 	jslint ${JSSRC} 
 
-pmgmanagerlib.js: ${JSSRC}
-	cat ${JSSRC} >$@.tmp
+pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
+	cat OnlineHelpInfo.js ${JSSRC} >$@.tmp
 	mv $@.tmp $@
 
 all: pmgmanagerlib.js
@@ -82,7 +86,7 @@ all: pmgmanagerlib.js
 .PHONY: clean
 clean:
 	find . -name '*~' -exec rm {} ';'	
-	rm -rf pmgmanagerlib.js
+	rm -rf pmgmanagerlib.js OnlineHelpInfo.js
 
 
 
