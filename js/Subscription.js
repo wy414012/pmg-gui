@@ -18,7 +18,7 @@ Ext.define('PMG.Subscription', {
     extend: 'Proxmox.grid.ObjectGrid',
     xtype: 'pmgSubscription',
 
-    //o//nlineHelp: 'getting_help',
+    onlineHelp: 'getting_help',
 
     viewConfig: {
 	enableTextSelection: true
