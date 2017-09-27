@@ -20,7 +20,9 @@ Ext.define('PMG.Subscription', {
 
     //o//nlineHelp: 'getting_help',
 
-    features: [ {ftype: 'selectable'}],
+    viewConfig: {
+	enableTextSelection: true
+    },
 
     initComponent : function() {
 	var me = this;
