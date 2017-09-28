@@ -82,7 +82,10 @@ Ext.define('PMG.ActionList', {
 
 	    var config = Ext.apply({ method: 'POST' }, editor);
 
-	    config.create = true,
+	    /*jslint confusion: true*/
+	    /*create is a boolean below and a function above*/
+	    config.create = true;
+	    /*jslint confusion: false*/
 	    menu_items.push({
 		text: config.subject,
 		handler: function() {

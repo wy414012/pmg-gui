@@ -97,5 +97,5 @@ Ext.define('PMG.LDAPGroupEditor', {
 
     width: 500,
 
-    items: { xtype: 'pmgLDAPGroupInputPanel' }
+    items: [{ xtype: 'pmgLDAPGroupInputPanel' }]
 });

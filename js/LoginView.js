@@ -87,7 +87,9 @@ Ext.define('PMG.LoginView', {
 
     plugins: 'viewport',
 
-    layout: 'border',
+    layout: {
+	type: 'border'
+    },
 
     items: [
 	{
@@ -121,14 +123,18 @@ Ext.define('PMG.LoginView', {
 
 	    defaultFocus: 'usernameField',
 
-	    layout: 'auto',
+	    layout: {
+		type: 'auto'
+	    },
 
 	    title: gettext('Proxmox Mail Gateway Login'),
 
 	    items: [
 		{
 		    xtype: 'form',
-		    layout: 'form',
+		    layout: {
+			type: 'form'
+		    },
 		    defaultButton: 'loginButton',
 		    url: '/api2/extjs/access/ticket',
 		    reference: 'loginForm',

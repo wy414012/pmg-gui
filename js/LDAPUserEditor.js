@@ -51,5 +51,5 @@ Ext.define('PMG.LDAPUserEditor', {
 
     width: 500,
 
-    items: { xtype: 'pmgLDAPUserInputPanel' }
+    items: [{ xtype: 'pmgLDAPUserInputPanel' }]
 });

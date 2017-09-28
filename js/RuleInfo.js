@@ -1,4 +1,6 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/* bind is a function function */
 Ext.define('PMG.RuleInfo', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgRuleInfo',
@@ -233,9 +235,9 @@ Ext.define('PMG.RuleInfo', {
     items: [
 	{
 	    xtype: 'panel',
-	    bodyPadding: 10,
+	    bodyPadding: '10 10 10 10',
 	    data: {
-		name: false,
+		name: ''
 	    },
 	    bind: {
 		data: {

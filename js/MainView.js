@@ -87,7 +87,10 @@ Ext.define('PMG.MainView', {
 	logout: function() {
 	    var me = this;
 	    Proxmox.Utils.authClear();
+	    /*jslint confusion: true*/
+	    /*destroy is a function below and boolean above */
 	    me.getView().destroy();
+	    /*jslint confusion: false*/
 	    Ext.create({ xtype: 'loginview'});
 	},
 
@@ -155,7 +158,7 @@ Ext.define('PMG.MainView', {
 
     plugins: 'viewport',
 
-    layout: 'border',
+    layout: { type: 'border' },
 
     items: [
 	{
@@ -225,7 +228,7 @@ Ext.define('PMG.MainView', {
 	},
 	{
 	    xtype: 'panel',
-	    layout: 'card',
+	    layout: { type: 'card' },
 	    region: 'center',
 	    border: false,
 	    reference: 'contentpanel'

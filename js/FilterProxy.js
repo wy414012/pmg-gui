@@ -13,11 +13,13 @@ Ext.define('PMG.FilterProxy', {
 
 	var filters = operation.getFilters() || [];
 	for (i = 0; i < filters.length; i++) {
-	    filter = filters[i];
+	    var filter = filters[i];
 	    if (filter.config.id === me.filterId) {
 		var v = filter.getValue();
 		if (v !== undefined && v !== '') {
+		    /*jslint confusion: true */
 		    params.filter = v;
+		    /*jslint confusion: false */
 		}
 	    }
 	}

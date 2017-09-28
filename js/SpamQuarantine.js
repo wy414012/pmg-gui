@@ -1,4 +1,6 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/*format is a string and a function*/
 Ext.define('pmg-spam-archive', {
     extend: 'Ext.data.Model',
     fields: [
@@ -144,7 +146,7 @@ Ext.define('PMG.SpamQuarantine', {
     xtype: 'pmgSpamQuarantine',
 
     border: false,
-    layout: 'border',
+    layout: { type: 'border' },
 
     defaults: { border: false },
 
@@ -365,7 +367,7 @@ Ext.define('PMG.SpamQuarantine', {
 	},
 	{
 	    title: gettext('Selected Mail'),
-	    border: 0,
+	    border: false,
 	    region: 'center',
 	    split: true,
 	    reference: 'preview',
