@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-object-group', {
     extend: 'Ext.data.Model',
     fields: [ 'id', 'name', 'info' ],

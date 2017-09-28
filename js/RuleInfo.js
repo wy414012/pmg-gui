@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.RuleInfo', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgRuleInfo',

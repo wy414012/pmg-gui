@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.LDAPProfileSelector', {
     extend: 'Proxmox.form.ComboGrid',
     alias: 'widget.pmgLDAPProfileSelector',

@@ -1,3 +1,4 @@
+/*global Proxmox */
 Ext.ns('PMG');
 
 console.log("Starting PMG Manager");

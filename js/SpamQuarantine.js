@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-spam-archive', {
     extend: 'Ext.data.Model',
     fields: [

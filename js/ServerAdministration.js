@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.ServerAdministration', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.pmgServerAdministration',

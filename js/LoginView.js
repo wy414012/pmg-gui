@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.LoginView', {
     extend: 'Ext.container.Container',
     xtype: 'loginview',

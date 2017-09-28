@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-action-list', {
     extend: 'Ext.data.Model',
     fields: [
