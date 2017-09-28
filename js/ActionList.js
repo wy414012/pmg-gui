@@ -12,7 +12,7 @@ Ext.define('PMG.ActionList', {
     extend: 'Ext.grid.GridPanel',
     alias: ['widget.pmgActionList'],
 
-    title: PMG.Utils.oclass_text['action'],
+    title: PMG.Utils.oclass_text.action,
     border: false,
 
     baseurl: '/config/ruledb/action',
