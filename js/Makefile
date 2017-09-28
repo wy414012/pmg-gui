@@ -20,6 +20,8 @@ JSSRC=							\
 	RuleEditor.js					\
 	Logo.js						\
 	MainView.js					\
+	QuarantineList.js				\
+	SpamInfoGrid.js					\
 	SpamQuarantine.js				\
 	UserBlackWhiteList.js				\
 	QuarantineView.js				\
