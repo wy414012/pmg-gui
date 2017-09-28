@@ -450,6 +450,44 @@ Ext.define('PMG.Utils', {
 	}
     },
 
+    doQuarantineAction: function(action, id, callback) {
+	Proxmox.Utils.API2Request({
+	    url: '/quarantine/content/',
+	    params: {
+		action: action,
+		id: id
+	    },
+	    method: 'POST',
+	    failure: function(response, opts) {
+		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+	    },
+	    success: function(response, opts) {
+		Ext.Msg.show({
+		    title: gettext('Info'),
+		    message: "Action '" + action + ' ' +
+		    id + "' successful",
+		    buttons: Ext.Msg.OK,
+		    icon: Ext.MessageBox.INFO
+		});
+
+		if (Ext.isFunction(callback)) {
+		    callback();
+		}
+	    }
+	});
+    },
+
+    sender_renderer: function(value, metaData, rec) {
+	var subject = Ext.htmlEncode(value);
+	var from = Ext.htmlEncode(rec.data.from);
+	var sender = Ext.htmlEncode(rec.data.sender);
+	if (sender) {
+	    from = Ext.String.format(gettext("{0} on behalf of {1}"),
+				     sender, from);
+	}
+	return '<small>' + from + '</small><br>' + subject;
+    },
+
     constructor: function() {
 	var me = this;
 
