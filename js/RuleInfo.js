@@ -115,7 +115,7 @@ Ext.define('PMG.RuleInfo', {
 			    // FIXME
 			    // actions have the ogroup as a string
 			    // -> parseInt
-			    return (ids.indexOf(parseInt(record.data[idField])) === -1);
+			    return (ids.indexOf(parseInt(record.data[idField], 10)) === -1);
 			}
 		    });
 		    store.load();

@@ -47,7 +47,7 @@ Ext.define('PMG.LDAPGroupSelector', {
 	me.callParent();
 
 	if (me.profile !== undefined) {
-	    me.setProfile(profile, true);
+	    me.setProfile(me.profile, true);
 	}
     }
 });

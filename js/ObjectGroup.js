@@ -92,7 +92,7 @@ Ext.define('PMG.ObjectGroup', {
 	    dataIndex: 'descr',
 	    renderer: Ext.String.htmlEncode,
 	    flex: 1
-	})
+	});
 
 	var reload = function() {
             me.store.load();

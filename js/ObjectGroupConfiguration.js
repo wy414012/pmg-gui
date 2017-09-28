@@ -11,7 +11,7 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	var me = this;
 
 	if (me.ogclass === undefined) {
-	    throw "undefined object group class"
+	    throw "undefined object group class";
 	}
 	
 	if (!(PMG.Utils.oclass_text[me.ogclass])) {
