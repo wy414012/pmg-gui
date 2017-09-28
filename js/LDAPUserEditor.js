@@ -26,7 +26,7 @@ Ext.define('PMG.LDAPUserInputPanel', {
 	    'field[name=profile]': {
 		change: 'changeProfile'
 	    }
-	},
+	}
     },
 
     items: [

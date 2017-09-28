@@ -104,7 +104,7 @@ Ext.define('PMG.LoginView', {
 		},
 		{
 		    xtype: 'versioninfo',
-		    makeApiCall: false,
+		    makeApiCall: false
 		}
 	    ]
 	},
@@ -144,7 +144,7 @@ Ext.define('PMG.LoginView', {
 			    fieldLabel: gettext('User name'),
 			    name: 'username',
 			    itemId: 'usernameField',
-			    reference: 'usernameField',
+			    reference: 'usernameField'
 			},
 			{
 			    xtype: 'textfield',
@@ -156,7 +156,7 @@ Ext.define('PMG.LoginView', {
 			{
 			    xtype: 'hiddenfield',
 			    name: 'realm',
-			    value: 'pam',
+			    value: 'pam'
 			}
 		    ],
 		    buttons: [

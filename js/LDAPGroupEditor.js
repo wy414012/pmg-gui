@@ -57,7 +57,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 	    'field[name=profile]': {
 		change: 'changeProfile'
 	    }
-	},
+	}
     },
 
     items: [
@@ -72,7 +72,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 		  ', any profile' ],
 		[ 'profile-none', gettext('Unknown LDAP address')],
 		[ 'none', gettext('Unknown LDAP address') +
-		  ', any profile' ],
+		  ', any profile' ]
 	    ],
 	    fieldLabel: gettext("Match")
 	},

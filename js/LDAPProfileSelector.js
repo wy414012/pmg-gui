@@ -7,7 +7,7 @@ Ext.define('PMG.LDAPProfileSelector', {
 	fields: [ 'profile', 'disable', 'comment' ],
 	proxy: {
 	    type: 'proxmox',
-	    url: '/api2/json/config/ldap',
+	    url: '/api2/json/config/ldap'
 	},
 	filterOnLoad: true,
 	sorters: [

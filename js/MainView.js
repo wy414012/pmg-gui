@@ -194,7 +194,7 @@ Ext.define('PMG.MainView', {
 		    reference: 'logoutButton',
 		    xtype: 'button',
 		    iconCls: 'fa fa-sign-out',
-		    text: gettext('Logout'),
+		    text: gettext('Logout')
 		}
 	    ]
 	},
@@ -228,7 +228,7 @@ Ext.define('PMG.MainView', {
 	    layout: 'card',
 	    region: 'center',
 	    border: false,
-	    reference: 'contentpanel',
+	    reference: 'contentpanel'
 	}
     ]
 });

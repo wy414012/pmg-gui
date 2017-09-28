@@ -29,7 +29,7 @@ Ext.define('pmg-spam-list', {
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/quarantine/spam",
+	url: "/api2/json/quarantine/spam"
     },
     idProperty: 'id'
 });
@@ -309,7 +309,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    },
 	    'pmgSpamList':{
 		selectionChange: 'onSelectMail'
-	    },
+	    }
 	}
     },
 

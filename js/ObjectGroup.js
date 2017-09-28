@@ -61,7 +61,7 @@ Ext.define('PMG.ObjectGroup', {
 	    model: 'pmg-object-list',
 	    sorters: [
 		{
-		    property : 'receivertest',
+		    property : 'receivertest'
 		},
 		{
 		    property : 'otype',
@@ -215,7 +215,7 @@ Ext.define('PMG.ObjectGroup', {
 				me.fireEvent('dblclickOGInfo', me, e, t, me.ogdata);
 			    },
 			    element: 'el',
-			    scope: this,
+			    scope: this
 			}
 		    }
 		}

@@ -43,5 +43,5 @@ Ext.define('PMG.RuleEditor', {
 	    checked: false,
 	    fieldLabel: gettext('Active')
 	}
-    ],
+    ]
 });

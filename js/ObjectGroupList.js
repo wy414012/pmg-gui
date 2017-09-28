@@ -84,7 +84,7 @@ Ext.define('PMG.ObjectGroupList', {
 	    model: 'pmg-object-group',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json" + me.baseurl,
+		url: "/api2/json" + me.baseurl
 	    },
 	    sorters: {
 		property: 'name',

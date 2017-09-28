@@ -158,12 +158,12 @@ Ext.define('PMG.RuleInfo', {
 	    'tabpanel[reference=availobjects] > grid': {
 		drop: 'removeDrop'
 	    }
-	},
+	}
     },
 
     viewModel: {
 	data: {
-	    baseurl: undefined,
+	    baseurl: undefined
 	},
 
 	stores: {
@@ -177,7 +177,7 @@ Ext.define('PMG.RuleInfo', {
 		model: 'pmg-action-list',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/action/objects",
+		    url: "/api2/json/config/ruledb/action/objects"
 		},
 		sorters: 'name'
 	    },
@@ -185,7 +185,7 @@ Ext.define('PMG.RuleInfo', {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/who",
+		    url: "/api2/json/config/ruledb/who"
 		},
 		sorters: 'name'
 	    },
@@ -193,7 +193,7 @@ Ext.define('PMG.RuleInfo', {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/who",
+		    url: "/api2/json/config/ruledb/who"
 		},
 		sorters: 'name'
 	    },
@@ -201,7 +201,7 @@ Ext.define('PMG.RuleInfo', {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/what",
+		    url: "/api2/json/config/ruledb/what"
 		},
 		sorters: 'name'
 	    },
@@ -209,16 +209,16 @@ Ext.define('PMG.RuleInfo', {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/when",
+		    url: "/api2/json/config/ruledb/when"
 		},
 		sorters: 'name'
-	    },
+	    }
 	}
     },
 
 
     defaults: {
-	padding: '5 10 5 10',
+	padding: '5 10 5 10'
     },
 
     bodyPadding: '5 0 5 0',
@@ -255,7 +255,7 @@ Ext.define('PMG.RuleInfo', {
 		'<tpl else>',
 		gettext('Please select a rule.'),
 		'</tpl>'
-	    ],
+	    ]
 	},
 	{
 	    xtype: 'grid',
@@ -294,7 +294,7 @@ Ext.define('PMG.RuleInfo', {
 		{
 		    header: gettext('Type'),
 		    dataIndex: 'oclass',
-		    hidden: true,
+		    hidden: true
 		},
 		{
 		    header: gettext('Name'),
@@ -319,7 +319,7 @@ Ext.define('PMG.RuleInfo', {
 	    bind: {
 		store: '{objects}',
 		hidden: '{!selectedRule}'
-	    },
+	    }
 	},
 	{
 	    xtype: 'tabpanel',
@@ -365,7 +365,7 @@ Ext.define('PMG.RuleInfo', {
 			    }
 			]
 		    }
-		],
+		]
 	    },
 	    items: [
 		{
@@ -374,7 +374,7 @@ Ext.define('PMG.RuleInfo', {
 			store: '{actionobjects}'
 		    },
 		    type: 'action',
-		    iconCls: 'fa fa-flag',
+		    iconCls: 'fa fa-flag'
 		},
 		{
 		    title: gettext('From'),
@@ -382,7 +382,7 @@ Ext.define('PMG.RuleInfo', {
 		    type: 'from',
 		    bind: {
 			store: '{fromobjects}'
-		    },
+		    }
 		},
 		{
 		    title: gettext('To'),
@@ -390,7 +390,7 @@ Ext.define('PMG.RuleInfo', {
 		    type: 'to',
 		    bind: {
 			store: '{toobjects}'
-		    },
+		    }
 		},
 		{
 		    title: gettext('What'),
@@ -398,7 +398,7 @@ Ext.define('PMG.RuleInfo', {
 		    type: 'what',
 		    bind: {
 			store: '{whatobjects}'
-		    },
+		    }
 		},
 		{
 		    title: gettext('When'),
@@ -406,8 +406,8 @@ Ext.define('PMG.RuleInfo', {
 		    type: 'when',
 		    bind: {
 			store: '{whenobjects}'
-		    },
-		},
+		    }
+		}
 	    ]
 	}
     ]

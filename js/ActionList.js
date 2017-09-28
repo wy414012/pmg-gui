@@ -3,7 +3,7 @@ Ext.define('pmg-action-list', {
     extend: 'Ext.data.Model',
     fields: [
 	'id', 'name', 'info', 'descr',
-	{ name: 'otype', type: 'integer' },
+	{ name: 'otype', type: 'integer' }
     ],
     idProperty: 'id'
 });
@@ -28,7 +28,7 @@ Ext.define('PMG.ActionList', {
 	    model: 'pmg-action-list',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json" + me.baseurl + '/objects',
+		url: "/api2/json" + me.baseurl + '/objects'
 	    },
 	    sorters: {
 		property: 'name',
@@ -142,7 +142,7 @@ Ext.define('PMG.ActionList', {
 		    flex: 1,
 		    dataIndex: 'info',
 		    renderer: Ext.String.htmlEncode
-		},
+		}
 	    ],
 	    listeners: {
 		itemdblclick: function() {
