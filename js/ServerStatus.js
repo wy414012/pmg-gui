@@ -38,8 +38,20 @@ Ext.define('PMG.ServerStatus', {
 	    fields: [
 		{ type: 'number', name: 'loadavg' },
 		{ type: 'number', name: 'maxcpu' },
-		{ type: 'number', name: 'cpu' },
-		{ type: 'number', name: 'iowait' },
+		{
+		    type: 'number',
+		    name: 'cpu',
+		    convert: function(val) {
+			return val*100;
+		    }
+		},
+		{
+		    type: 'number',
+		    name: 'iowait',
+		    convert: function(val) {
+			return val*100;
+		    }
+		},
 		{ type: 'number', name: 'memtotal' },
 		{ type: 'number', name: 'memused' },
 		{ type: 'number', name: 'swaptotal' },
