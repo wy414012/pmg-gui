@@ -114,6 +114,7 @@ Ext.define('PMG.SpamQuarantine', {
 
     items: [
 	{
+	    title: gettext('Spam Quarantine'),
 	    xtype: 'pmgQuarantineList',
 	    emailSelection: true,
 	    reference: 'list',
