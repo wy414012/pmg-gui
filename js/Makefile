@@ -47,6 +47,7 @@ JSSRC=							\
 	SpamDetectorConfiguration.js			\
 	VirusDetectorOptions.js				\
 	VirusQuarantineOptions.js			\
+	VirusQuarantine.js				\
 	ClamAVDatabase.js				\
 	VirusDetectorConfiguration.js			\
 	LDAPConfig.js					\

@@ -95,9 +95,15 @@ Ext.define('PMG.store.NavigationStore', {
 		expanded: true,
 		children: [
 		    {
-			text: gettext('Quarantine'),
-			iconCls: 'fa fa-cubes',
+			text: gettext('Spam Quarantine'),
+			iconCls: 'fa fa-bullhorn',
 			path: 'pmgSpamQuarantine',
+			leaf: true,
+		    },
+		    {
+			text: gettext('Virus Quarantine'),
+			iconCls: 'fa fa-bug',
+			path: 'pmgVirusQuarantine',
 			leaf: true,
 		    },
 		    {
