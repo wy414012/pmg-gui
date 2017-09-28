@@ -35,12 +35,11 @@ Ext.define('PMG.MainView', {
 		subpath = subpath || 0;
 		if (lastpanel.getActiveTab) {
 		    // we assume lastpanel is a tabpanel
-		    if (lastpanel.getActiveTab().getItemId() === subpath) {
-			// we are already there
-		    } else {
+		    if (lastpanel.getActiveTab().getItemId() !== subpath) {
 			// set the active tab
 			lastpanel.setActiveTab(subpath);
 		    }
+		    // else we are already there
 		}
 		action.stop();
 		return;
