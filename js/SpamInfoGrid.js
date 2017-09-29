@@ -2,6 +2,8 @@ Ext.define('PMG.grid.SpamInfoGrid',{
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgSpamInfoGrid',
 
+    hideHeaders: true,
+
     store: {
 	autoDestroy: true,
 	fields: [ 'desc', 'name', { type: 'number', name: 'score' } ],
