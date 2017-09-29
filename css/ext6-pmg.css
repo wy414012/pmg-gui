@@ -160,3 +160,8 @@ table:not(.x-grid-item-selected) tr.x-grid-row.disabled {
 .x-webkit :not(.x-form-textarea-body) > .x-form-trigger-wrap {
     height: initial;
 }
+
+tr.x-grid-row-summary  td.x-grid-cell {
+    border-top: 1px solid black;
+    font-weight: bold;
+}
