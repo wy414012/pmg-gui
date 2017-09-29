@@ -22,8 +22,6 @@ Ext.define('PMG.grid.SpamInfoGrid',{
 
     emptyText: gettext('No Spam Info'),
     hidden: true,
-    border: true,
-    bodyBorder: false,
 
     features: [{
 	ftype: 'summary'

@@ -220,6 +220,7 @@ Ext.define('PMG.SpamQuarantine', {
 		},
 		{
 		    xtype: 'pmgSpamInfoGrid',
+		    border: false,
 		    reference: 'spaminfo'
 		}
 	    ]
