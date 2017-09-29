@@ -35,6 +35,7 @@ Ext.define('PMG.LoginView', {
 		    view.destroy();
 		    PMG.view = 'quarantine';
 		    Ext.create({ xtype: 'quarantineview' });
+		    Proxmox.Utils.checked_command(function() {}); // display subscription status
 		},
 		failure: function(form, action) {
 		    loginForm.unmask();
@@ -66,6 +67,7 @@ Ext.define('PMG.LoginView', {
 			    Ext.create({ xtype: 'mainview' });
 			    PMG.view = 'main';
 			}
+			Proxmox.Utils.checked_command(function() {}); // display subscription status
 		    },
 		    failure: function(form, action) {
 			loginForm.unmask();
