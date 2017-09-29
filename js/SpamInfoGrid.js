@@ -12,6 +12,7 @@ Ext.define('PMG.grid.SpamInfoGrid',{
 	me.setStore({
 	    autoLoad: true,
 	    autoDestroy: true,
+	    fields: [ 'desc', 'name', { type: 'number', name: 'score' } ],
 	    proxy: {
 		type: 'proxmox',
 		url: '/api2/json/quarantine/content?id='+rec.data.id,
