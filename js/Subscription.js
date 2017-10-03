@@ -6,6 +6,8 @@ Ext.define('PMG.SubscriptionKeyEdit', {
     width: 300,
     autoLoad: true,
 
+    onlineHelp: 'getting_help',
+
     items: {
 	xtype: 'textfield',
 	name: 'key',
