@@ -4,7 +4,7 @@ Ext.define('pmg-cluster', {
 	'type', 'name', 'ip', 'hostrsapubkey', 'rootrsapubkey',
 	'fingerprint', { type: 'integer', name: 'cid' },
 	{ type: 'boolean', name: 'insync' },
-	'memory', 'loadavg', 'uptime', 'rootfs', 'conn_error',
+	'memory', 'loadavg', 'uptime', 'rootfs', 'conn_error', 'level',
 	{ type: 'number', name: 'memory_per',
 	  calculate: function(data) {
 	      var mem = data.memory;
@@ -252,6 +252,12 @@ Ext.define('PMG.ClusterAdministration', {
 			return state;
 		    },
 		    dataIndex: 'insync'
+		},
+		{
+		    header: gettext('Subscription'),
+		    width: 120,
+		    renderer: Proxmox.Utils.format_subscription_level,
+		    dataIndex: 'level'
 		},
 		{
 		    header: gettext('Uptime'),
