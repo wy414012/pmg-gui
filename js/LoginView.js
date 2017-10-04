@@ -81,6 +81,14 @@ Ext.define('PMG.LoginView', {
 	},
 
 	control: {
+	    'field[name=lang]': {
+		change: function(f, value) {
+		    var dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
+		    Ext.util.Cookies.set('ProxmoxLangCookie', value, dt);
+		    this.getView().mask(gettext('Please wait...'), 'x-mask-loading');
+		    window.location.reload();
+		}
+	    },
 	    'button[reference=loginButton]': {
 		click: 'submitForm'
 	    }
@@ -160,6 +168,13 @@ Ext.define('PMG.LoginView', {
 			    fieldLabel: gettext('Password'),
 			    name: 'password',
 			    reference: 'passwordField'
+			},
+			{
+			    xtype: 'proxmoxLanguageSelector',
+			    fieldLabel: gettext('Language'),
+			    value: Ext.util.Cookies.get('ProxmoxLangCookie') || 'en',
+			    name: 'lang',
+			    submitValue: false
 			},
 			{
 			    xtype: 'hiddenfield',
