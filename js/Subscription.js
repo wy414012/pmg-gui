@@ -20,6 +20,8 @@ Ext.define('PMG.Subscription', {
     extend: 'Proxmox.grid.ObjectGrid',
     xtype: 'pmgSubscription',
 
+    title: gettext('Subscription'),
+
     onlineHelp: 'getting_help',
 
     viewConfig: {
