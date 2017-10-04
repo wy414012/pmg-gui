@@ -84,7 +84,7 @@ Ext.define('PMG.LoginView', {
 	    'field[name=lang]': {
 		change: function(f, value) {
 		    var dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
-		    Ext.util.Cookies.set('ProxmoxLangCookie', value, dt);
+		    Ext.util.Cookies.set('PMGLangCookie', value, dt);
 
 		    var loginwin = this.lookupReference('loginwindow');
 		    loginwin.mask(gettext('Please wait...'), 'x-mask-loading');
@@ -174,7 +174,7 @@ Ext.define('PMG.LoginView', {
 			{
 			    xtype: 'proxmoxLanguageSelector',
 			    fieldLabel: gettext('Language'),
-			    value: Ext.util.Cookies.get('ProxmoxLangCookie') || 'en',
+			    value: Ext.util.Cookies.get('PMGLangCookie') || 'en',
 			    name: 'lang',
 			    submitValue: false
 			},
