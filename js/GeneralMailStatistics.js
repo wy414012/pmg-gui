@@ -116,7 +116,7 @@ Ext.define('PMG.GeneralMailStatistics', {
 	});
 	    
 	res.push({
-	    name: gettext("Avg. Mail Precessing Time"),
+	    name: gettext("Avg. Mail Processing Time"),
 	    value: Ext.String.format(gettext("{0} seconds"),
 				     Ext.Number.toFixed(data.avptime, 2))
 	});
