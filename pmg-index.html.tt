@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href="/pve2/ext6/crisp/resources/charts-all.css" />
     <link rel="stylesheet" type="text/css" href="/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="/pve2/css/ext6-pmg.css" />
+    [% IF langfile %]
+    <script type='text/javascript' src='/pve2/locale/pmg-lang-[% lang %].js'></script>
+    [%- END %]
     [% IF debug %]
     <script type="text/javascript" src="/pve2/ext6/ext-all-debug.js"></script>
     <script type="text/javascript" src="/pve2/ext6/charts-debug.js"></script>
