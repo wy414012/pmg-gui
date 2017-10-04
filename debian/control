@@ -8,6 +8,6 @@ Homepage: http://www.proxmox.com
 
 Package: proxmox-mailgateway-gui
 Architecture: all
-Depends: ${perl:Depends}, libtemplate-perl, libjs-extjs (>= 6.0.1), fonts-font-awesome
+Depends: ${perl:Depends}, libtemplate-perl, libjs-extjs (>= 6.0.1), fonts-font-awesome, pmg-i18n, proxmox-widget-toolkit
 Description: Proxmox Mail Gateway GUI
  graphical user interface for Proxmox Mail Gateway.
