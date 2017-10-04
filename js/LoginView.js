@@ -85,7 +85,9 @@ Ext.define('PMG.LoginView', {
 		change: function(f, value) {
 		    var dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
 		    Ext.util.Cookies.set('ProxmoxLangCookie', value, dt);
-		    this.getView().mask(gettext('Please wait...'), 'x-mask-loading');
+
+		    var loginwin = this.lookupReference('loginwindow');
+		    loginwin.mask(gettext('Please wait...'), 'x-mask-loading');
 		    window.location.reload();
 		}
 	    },
