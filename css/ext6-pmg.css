@@ -165,3 +165,36 @@ tr.x-grid-row-summary  td.x-grid-cell {
     border-top: 1px solid black;
     font-weight: bold;
 }
+
+p.logs {
+    white-space: nowrap;
+    font-family: monospace;
+    overflow: auto;
+    border: 1px solid #cfcfcf;
+    margin: 5px;
+    padding: 5px;
+}
+
+tr.quarantine {
+    background-color: #FFE7C2;
+}
+
+tr.blocked {
+    background-color: #FFD1C2;
+}
+
+tr.bounced {
+    background-color: #FFF4C2;
+}
+
+.green {
+    color: #21BF4B;
+}
+
+.gray {
+    color: #cfcfcf;
+}
+
+.red {
+    color: #F00;
+}
