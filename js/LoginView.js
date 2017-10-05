@@ -21,6 +21,7 @@ Ext.define('PMG.LoginView', {
 	    var loginwin = me.lookup('loginwindow');
 	    loginwin.autoShow = false;
 	    loginwin.setVisible(false);
+	    me.lookup('pamfield').setDisabled(true);
 
 	    me.lookup('usernameField').setValue(username);
 	    me.lookup('passwordField').setValue(ticket);
@@ -155,6 +156,7 @@ Ext.define('PMG.LoginView', {
 			},
 			{
 			    xtype: 'hiddenfield',
+			    reference: 'pamfield',
 			    name: 'realm',
 			    value: 'pam'
 			}
