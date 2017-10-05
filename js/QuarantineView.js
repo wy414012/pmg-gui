@@ -9,7 +9,6 @@ Ext.define('PMG.QuarantineNavigationTree', {
     },
 
     store: {
-	xcalss: 'Ext.data.TreeStore',
 	root: {
 	    expanded: true,
 	    children: [
