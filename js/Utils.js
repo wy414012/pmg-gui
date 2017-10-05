@@ -499,7 +499,9 @@ Ext.define('PMG.Utils', {
 		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 	    },
 	    success: function(response, opts) {
-		Ext.Msg.show({
+		var win = Ext.create('Ext.window.MessageBox',{
+		    closeAction: 'destroy'
+		}).show({
 		    title: gettext('Info'),
 		    message: "Action '" + action + ' ' +
 		    id + "' successful",

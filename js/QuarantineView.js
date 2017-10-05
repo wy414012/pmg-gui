@@ -135,21 +135,7 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	execQuarantineAction: function(qa) {
-	    Proxmox.Utils.API2Request({
-		url: '/api2/extjs/quarantine/content',
-		params: {
-		    id: qa.cselect,
-		    action: qa.action
-		},
-		method: 'POST',
-		success: function(response) {
-		    Ext.Msg.alert(gettext('Info'), "Action " + qa.action + ' ' +
-				  qa.cselect + ' successful');
-		},
-		failure: function(response, opts) {
-		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
-	    });
+	    PMG.Utils.doQuarantineAction(qa.action, qa.cselect);
 	},
 
 	control: {
