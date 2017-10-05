@@ -202,9 +202,19 @@ Ext.define('PMG.MailTracker', {
     border: false,
 
     emptyText: gettext('No data in database.'),
+    disableSelection: true,
+
     viewConfig: {
-	deferEmptyText: false
+	deferEmptyText: false,
+	enableTextSelection: true,
     },
+
+    plugins: [
+	{
+	    ptype: 'rowexpander',
+	    rowBodyTpl: '<p class="logs">{logs}</p>',
+	}
+    ],
 
     store: {
 	autoDestroy: true,
@@ -235,22 +245,36 @@ Ext.define('PMG.MailTracker', {
 	    });
 	},
 
-	showDetails: function() {
+	showDetails: function(rowNode, record) {
 	    var view = this.getView();
-	    var sm = view.getSelectionModel();
-	    var rec = sm.getSelection()[0];
-	    if (!rec) {
-		return;
-	    }
 
 	    var params = view.store.proxy.getExtraParams();
 
-	    var win = Ext.create('PMG.MaiLogWindow', {
-		starttime: params.starttime,
-		endtime: params.endtime,
-		logid: rec.data.id
+	    Proxmox.Utils.API2Request({
+		method: 'GET',
+		params: { starttime: params.starttime, endtime: params.endtime },
+		url: '/nodes/' + Proxmox.NodeName + '/tracker/' + record.data.id,
+		waitMsgTarget: view,
+		failure: function(response, opts) {
+		    record.set('logs',gettext('Error') + " " + response.htmlStatus);
+		},
+		success: function(response, opts) {
+		    var data = response.result.data;
+		    var logs = "";
+
+		    Ext.Array.each(data.logs, function(line) {
+			logs += Ext.htmlEncode(line) + "<br>";
+		    });
+
+		    record.set('logs', logs);
+		}
 	    });
-	    win.show();
+	},
+
+	control: {
+	    'gridview': {
+		expandbody: 'showDetails'
+	    }
 	}
     },
 
@@ -327,10 +351,6 @@ Ext.define('PMG.MailTracker', {
 	    dataIndex: 'client'
 	}
     ],
-
-    listeners: {
-	itemdblclick: 'showDetails',
-    },
 
     initComponent: function() {
 	var me = this;
