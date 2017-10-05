@@ -207,6 +207,10 @@ Ext.define('PMG.MailTracker', {
     viewConfig: {
 	deferEmptyText: false,
 	enableTextSelection: true,
+	getRowClass: function(record, index) {
+	    var status = record.data.rstatus || record.data.dstatus;
+	    return PMG.Utils.mail_status_map[status];
+	}
     },
 
     plugins: [
@@ -317,19 +321,24 @@ Ext.define('PMG.MailTracker', {
 	    header: gettext('Status'),
 	    width: 150,
 	    renderer: function(v, metaData, rec) {
+		var returntext = 'unknown';
+		var icon = 'question-circle';
 		var rstatus = rec.data.rstatus;
 		if (v !== undefined && v !== '') {
 		    vtext = PMG.Utils.mail_status_map[v] || v;
+		    icon = v;
 		    if (rstatus !== undefined && rstatus !== '') {
 			rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
-			return vtext + '/' + rtext;
+			returntext = vtext + '/' + rtext;
+			icon = rstatus;
+		    } else if (rec.data.qid !== undefined) {
+			returntext = 'queued/' + vtext;
+		    } else {
+			returntext = vtext;
 		    }
-		    if (rec.data.qid !== undefined) {
-			return 'queued/' + vtext;
-		    }
-		    return vtext;
 		}
-		return 'unknown';
+
+		return PMG.Utils.format_status_icon(icon) + returntext;
 	    },
 	    dataIndex: 'dstatus'
 	},
