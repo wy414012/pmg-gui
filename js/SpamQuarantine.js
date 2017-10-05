@@ -45,6 +45,9 @@ Ext.define('PMG.SpamQuarantine', {
 
     defaults: { border: false },
 
+    // from mail link
+    cselect: undefined,
+
     controller: {
 
 	xclass: 'Ext.app.ViewController',
@@ -97,6 +100,10 @@ Ext.define('PMG.SpamQuarantine', {
 	toggleSpamInfo: function(btn) {
 	    var grid = this.lookupReference('spaminfo');
 	    grid.setVisible(!grid.isVisible());
+	},
+
+	init: function(view) {
+	    this.lookup('list').cselect = view.cselect;
 	},
 
 	control: {

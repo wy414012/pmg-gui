@@ -31,7 +31,11 @@ Ext.define('PMG.QuarantineList', {
 	    me.lookupReference('from').setValue(today);
 	    me.lookupReference('to').setValue(today);
 
-	    me.load();
+	    me.load(function() {
+		if (view.cselect) {
+		    view.setSelection(view.getStore().getById(view.cselect));
+		}
+	    });
         },
 	// extjs has no method to dynamically change the emptytext on
 	// grids, so we have to do it this way
@@ -42,7 +46,7 @@ Ext.define('PMG.QuarantineList', {
 	    tableview.emptyText = '<div class="x-grid-empty">'+ (emptyText || view.notFoundText) + '</div>';
 	},
 
-	load: function() {
+	load: function(callback) {
 	    var me = this;
 	    var view = me.getView();
 	    if (view.emailSelection) {
@@ -52,7 +56,7 @@ Ext.define('PMG.QuarantineList', {
 		}
 
 	    }
-	    view.getStore().load();
+	    view.getStore().load(callback);
 	},
 
 	setFrom: function(from) {

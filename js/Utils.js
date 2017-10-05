@@ -482,7 +482,7 @@ Ext.define('PMG.Utils', {
 	    window.history.pushState({ path:newurl }, '', newurl);
 	}
 
-	if (action && cselect) {
+	if (action || cselect) {
 	    return { action: action, cselect: cselect };
 	}
     },

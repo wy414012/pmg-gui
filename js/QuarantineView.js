@@ -98,7 +98,7 @@ Ext.define('PMG.QuarantineView', {
 	    var contentpanel = me.lookupReference('contentpanel');
 	    var lastpanel = contentpanel.getLayout().getActiveItem();
 
-	    var obj = contentpanel.add({ xtype: path });
+	    var obj = contentpanel.add({ xtype: path, cselect: subpath });
 	    var treelist = me.lookupReference('navtree');
 
 	    treelist.suspendEvents();
@@ -178,10 +178,16 @@ Ext.define('PMG.QuarantineView', {
 		var token = 'pmgSpamQuarantine';
 		if (qa.action === 'blacklist') { token = 'pmgUserBlacklist'; }
 		if (qa.action === 'whitelist') { token = 'pmgUserWhitelist'; }
+		if (qa.cselect) {
+		    token += ':' + qa.cselect;
+		}
 		this.redirectTo(token, true);
-		me.execQuarantineAction(qa);
+		if (qa.action) {
+		    me.execQuarantineAction(qa);
+		}
 	    } else {
 		// select treeitem and load page from url fragment
+		
 		var token = Ext.util.History.getToken() || 'pmgSpamQuarantine';
 		this.redirectTo(token, true);
 	    }
