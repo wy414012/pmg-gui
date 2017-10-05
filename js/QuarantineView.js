@@ -200,7 +200,8 @@ Ext.define('PMG.QuarantineView', {
 		type: 'hbox',
 		align: 'middle'
 	    },
-	    margin: '4 5 4 5',
+	    margin: '2 5 2 5',
+	    height: 38,
 	    items: [
 		{
 		    xtype: 'proxmoxlogo'

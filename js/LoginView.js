@@ -85,7 +85,8 @@ Ext.define('PMG.LoginView', {
 		type: 'hbox',
 		align: 'middle'
 	    },
-	    margin: '4 5 4 5',
+	    margin: '2 5 2 5',
+	    height: 38,
 	    items: [
 		{
 		    xtype: 'proxmoxlogo'

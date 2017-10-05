@@ -164,7 +164,8 @@ Ext.define('PMG.MainView', {
 		type: 'hbox',
 		align: 'middle'
 	    },
-	    margin: '4 5 4 5',
+	    margin: '2 5 2 5',
+	    height: 38,
 	    items: [
 		{
 		    xtype: 'proxmoxlogo'
@@ -186,6 +187,7 @@ Ext.define('PMG.MainView', {
 		    hidden: false,
 		    baseCls: 'x-btn',
 		    iconCls: 'fa fa-info-circle x-btn-icon-el-default-toolbar-small ',
+		    margin: '0 5 0 0',
 		    listenToGlobalEvent: false,
 		    onlineHelp: 'pmg_documentation_index'
 		},
