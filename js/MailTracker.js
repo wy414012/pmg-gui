@@ -310,12 +310,14 @@ Ext.define('PMG.MailTracker', {
 	{
 	    header: gettext('From'),
 	    flex: 1,
-	    dataIndex: 'from'
+	    dataIndex: 'from',
+	    renderer: Ext.htmlEncode
 	},
 	{
 	    header: gettext('To'),
 	    flex: 1,
-	    dataIndex: 'to'
+	    dataIndex: 'to',
+	    renderer: Ext.htmlEncode
 	},
 	{
 	    header: gettext('Status'),
@@ -351,13 +353,15 @@ Ext.define('PMG.MailTracker', {
 	    header: 'MSGID',
 	    width: 300,
 	    hidden: true,
-	    dataIndex: 'msgid'
+	    dataIndex: 'msgid',
+	    renderer: Ext.htmlEncode
 	},
 	{
 	    header: gettext('Client'),
 	    width: 200,
 	    hidden: true,
-	    dataIndex: 'client'
+	    dataIndex: 'client',
+	    renderer: Ext.htmlEncode
 	}
     ],
 
