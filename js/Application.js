@@ -2,6 +2,7 @@ Ext.define('PMG.Application', {
     extend: 'Ext.app.Application',
 
     name: 'PMG',
+    appProperty: 'app',
 
     stores: [
 	'NavigationStore'
@@ -16,23 +17,52 @@ Ext.define('PMG.Application', {
 	});
     },
 
+    logout: function() {
+	var me = this;
+	Proxmox.Utils.authClear();
+	me.changeView('loginview', true);
+    },
+
+    changeView: function(view, skipCheck) {
+	var me = this;
+	PMG.view = view;
+	me.view = view;
+	me.currentView.destroy();
+	me.currentView = Ext.create({
+	    xtype: view,
+	    targetview: me.targetview,
+	});
+	if (skipCheck !== true) {
+	    Proxmox.Utils.checked_command(function() {}); // display subscription status
+	}
+    },
+
+    view: 'loginview',
+    targetview: 'mainview',
+
     launch: function() {
 	var me = this;
+	Ext.on('resize', me.realignWindows);
 	// show login window if not loggedin
 	var loggedin = Proxmox.Utils.authOK();
-	Ext.on('resize', me.realignWindows);
+	var cookie = Ext.util.Cookies.get(Proxmox.Setup.auth_cookie_name);
+	var qs = Ext.Object.fromQueryString(location.search);
 
-	if (loggedin) {
-	    if (location.pathname === "/quarantine") {
-		PMG.view = 'quarantine';
-		Ext.create({ xtype: 'quarantineview' });
-	    } else {
-		PMG.view = 'main';
-		Ext.create({ xtype: 'mainview' });
+	if (location.pathname === "/quarantine") {
+	    me.targetview = 'quarantineview';
+
+	    if (qs.ticket == undefined && loggedin) {
+		me.view = 'quarantineview';
 	    }
-	} else {
-	    Ext.create({ xtype: 'loginview' });
+	} else if (loggedin && cookie.substr(0, 7) !== 'PMGQUAR') {
+	    me.view = 'mainview';
 	}
+
+	PMG.view = me.view;
+	me.currentView = Ext.create({
+	    xtype: me.view,
+	    targetview: me.targetview
+	});
     }
 });
 

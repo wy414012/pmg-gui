@@ -88,7 +88,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 	init: function() {
 	    var view = this.getView();
 
-	    if (PMG.view === 'quarantine') {
+	    if (PMG.view === 'quarantineview') {
 		this.lookupReference('email').setVisible(false);
 	    }
 	},

@@ -7,6 +7,7 @@ Ext.define('PMG.LoginView', {
 	xclass: 'Ext.app.ViewController',
 
 	init: function(view) {
+	    var me = this;
 	    var loginForm = this.lookupReference('loginForm');
 
 	    // try autologin with quarantine ticket from URL
@@ -17,57 +18,30 @@ Ext.define('PMG.LoginView', {
 	    var match = ticket.match(/^PMGQUAR:([^\s\:]+):/);
 	    if (!match) { return; }
 	    var username = match[1];
-	    var loginwin = this.lookupReference('loginwindow');
+	    var loginwin = me.lookup('loginwindow');
 	    loginwin.autoShow = false;
 	    loginwin.setVisible(false);
 
-	    Proxmox.Utils.API2Request({
-		url: '/api2/extjs/access/ticket',
-		params: {
-		    username: username,
-		    password: ticket
-		},
-		method: 'POST',
-		success: function(response) {
-		    // save login data and create cookie
-		    PMG.Utils.updateLoginData(response.result.data);
-		    // change view to mainview
-		    view.destroy();
-		    PMG.view = 'quarantine';
-		    Ext.create({ xtype: 'quarantineview' });
-		    Proxmox.Utils.checked_command(function() {}); // display subscription status
-		},
-		failure: function(form, action) {
-		    loginForm.unmask();
-		    Ext.MessageBox.alert(
-			gettext('Error'),
-			gettext('Login failed. Please try again')
-		    );
-		}
-	    });
+	    me.lookup('usernameField').setValue(username);
+	    me.lookup('passwordField').setValue(ticket);
+
+	    me.submitForm();
 	},
 
 	submitForm: function() {
 	    var me = this;
+	    var view = me.getView();
 	    var loginForm = me.lookupReference('loginForm');
 
 	    if (loginForm.isValid()) {
-		loginForm.mask(gettext('Please wait...'), 'x-mask-loading');
+		if (loginForm.isVisible()) {
+		    loginForm.mask(gettext('Please wait...'), 'x-mask-loading');
+		}
 		loginForm.submit({
 		    success: function(form, action) {
 			// save login data and create cookie
 			PMG.Utils.updateLoginData(action.result.data);
-			// change view to mainview
-			me.getView().destroy();
-
-			if (location.pathname === "/quarantine") {
-			    Ext.create({ xtype: 'quarantineview' });
-			    PMG.view = 'quarantine';
-			} else {
-			    Ext.create({ xtype: 'mainview' });
-			    PMG.view = 'main';
-			}
-			Proxmox.Utils.checked_command(function() {}); // display subscription status
+			PMG.app.changeView(view.targetview);
 		    },
 		    failure: function(form, action) {
 			loginForm.unmask();

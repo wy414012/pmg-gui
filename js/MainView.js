@@ -84,13 +84,7 @@ Ext.define('PMG.MainView', {
 	},
 
 	logout: function() {
-	    var me = this;
-	    Proxmox.Utils.authClear();
-	    /*jslint confusion: true*/
-	    /*destroy is a function below and boolean above */
-	    me.getView().destroy();
-	    /*jslint confusion: false*/
-	    Ext.create({ xtype: 'loginview'});
+	    PMG.app.logout();
 	},
 
 	navigate: function(treelist, item) {

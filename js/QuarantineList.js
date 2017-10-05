@@ -18,7 +18,7 @@ Ext.define('PMG.QuarantineList', {
 
         init: function(view) {
 	    var me = this;
-	    if (PMG.view === 'quarantine') {
+	    if (PMG.view === 'quarantineview') {
 		view.emailSelection = false;
 		me.setEmptyText();
 	    }

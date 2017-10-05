@@ -128,10 +128,7 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	logout: function() {
-	    var me = this;
-	    Proxmox.Utils.authClear();
-	    me.getView().destroy();
-	    Ext.create({ xtype: 'loginview'});
+	    PMG.app.logout();
 	},
 
 	navigate: function(treelist, item) {
@@ -154,6 +151,12 @@ Ext.define('PMG.QuarantineView', {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		}
 	    });
+	},
+
+	control: {
+	    'button[reference=logoutButton]': {
+		click: 'logout'
+	    }
 	},
 
 	init: function(view) {
@@ -213,6 +216,12 @@ Ext.define('PMG.QuarantineView', {
 		    reference: 'usernameinfo',
 		    padding: '0 5',
 		    tpl: Ext.String.format(gettext("You are logged in as '{0}'"), '{username}')
+		},
+		{
+		    reference: 'logoutButton',
+		    xtype: 'button',
+		    iconCls: 'fa fa-sign-out',
+		    text: gettext('Logout')
 		}
 	    ]
 	},
