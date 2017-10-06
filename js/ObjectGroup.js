@@ -179,9 +179,9 @@ Ext.define('PMG.ObjectGroup', {
 		    text: gettext('Add'),
 		    disabled: true,
 		    itemId: 'addMenuButton',
-		    menu: new Ext.menu.Menu({
+		    menu: {
 			items: menu_items
-		    })
+		    }
 		},
 		{
 		    xtype: 'proxmoxButton',
