@@ -134,7 +134,7 @@ Ext.define('PMG.ObjectGroupList', {
         ];
 	/*jslint confusion: false*/
 
-	Proxmox.Utils.monStoreErrors(me, me.store);
+	Proxmox.Utils.monStoreErrors(me, me.store, true);
 
 	if (me.enableButtons) {
 	    me.tbar = tbar;

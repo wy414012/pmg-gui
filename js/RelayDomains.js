@@ -106,7 +106,7 @@ Ext.define('PMG.RelayDomains', {
 	    remove_btn
         ];
 
-	Proxmox.Utils.monStoreErrors(me, store);
+	Proxmox.Utils.monStoreErrors(me, store, true);
 
 	Ext.apply(me, {
 	    store: store,

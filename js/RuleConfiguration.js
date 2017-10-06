@@ -93,7 +93,7 @@ Ext.define('PMG.RulesConfiguration', {
 
 	init: function(view) {
 	    var grid = this.lookupReference('rulegrid');
-	    Proxmox.Utils.monStoreErrors(grid, grid.store);
+	    Proxmox.Utils.monStoreErrors(grid, grid.getStore(), true);
 	},
 
 	control: {

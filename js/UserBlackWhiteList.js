@@ -85,12 +85,11 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    view.getStore().load();
 	},
 
-	init: function() {
-	    var view = this.getView();
-
+	init: function(view) {
 	    if (PMG.view === 'quarantineview') {
 		this.lookupReference('email').setVisible(false);
 	    }
+	    Proxmox.Utils.monStoreErrors(view.getView(), view.getStore(), true);
 	},
 
 	control: {

@@ -127,7 +127,7 @@ Ext.define('PMG.Transport', {
 	    remove_btn
         ];
 
-	Proxmox.Utils.monStoreErrors(me, store);
+	Proxmox.Utils.monStoreErrors(me, store, true);
 
 	Ext.apply(me, {
 	    store: store,

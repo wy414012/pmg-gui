@@ -128,6 +128,7 @@ Ext.define('PMG.ClusterAdministration', {
 
 		init: function(view) {
 		    view.store.on('load', this.onLoad, this);
+		    Proxmox.Utils.monStoreErrors(view, view.getStore());
 		},
 
 		onLoad: function(store, records) {

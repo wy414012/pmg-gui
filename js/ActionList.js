@@ -117,7 +117,7 @@ Ext.define('PMG.ActionList', {
 	    remove_btn
         ];
 
-	Proxmox.Utils.monStoreErrors(me, me.store);
+	Proxmox.Utils.monStoreErrors(me, me.store, true);
 
 	if (me.enableButtons) {
 	    me.tbar = tbar;

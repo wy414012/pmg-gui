@@ -31,6 +31,7 @@ Ext.define('PMG.QuarantineList', {
 	    me.lookupReference('from').setValue(today);
 	    me.lookupReference('to').setValue(today);
 
+	    Proxmox.Utils.monStoreErrors(view.getView(), view.getStore());
 	    me.load(function() {
 		if (view.cselect) {
 		    view.setSelection(view.getStore().getById(view.cselect));
