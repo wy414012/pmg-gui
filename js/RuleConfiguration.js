@@ -91,6 +91,11 @@ Ext.define('PMG.RulesConfiguration', {
 	    win.show();
 	},
 
+	init: function(view) {
+	    var grid = this.lookupReference('rulegrid');
+	    Proxmox.Utils.monStoreErrors(grid, grid.store);
+	},
+
 	control: {
 	    'grid[reference=rulegrid]': {
 		itemdblclick: 'showEditWindow',
@@ -213,7 +218,7 @@ Ext.define('PMG.RulesConfiguration', {
 			},
 		    ]
 		}
-	    ],
+	    ]
 	},
 	{
 	    region: 'east',
