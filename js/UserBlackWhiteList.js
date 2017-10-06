@@ -88,6 +88,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 	init: function(view) {
 	    if (PMG.view === 'quarantineview') {
 		this.lookupReference('email').setVisible(false);
+		view.getStore().load();
 	    }
 	    Proxmox.Utils.monStoreErrors(view.getView(), view.getStore(), true);
 	},
@@ -166,7 +167,7 @@ Ext.define('PMG.UserBlacklist', {
 
     store: {
 	model: 'pmg-address-list',
-	autoLoad: true,
+	autoDestroy: true,
 	proxy: {
             type: 'proxmox',
             url: "/api2/json/quarantine/blacklist"
@@ -200,7 +201,7 @@ Ext.define('PMG.UserWhitelist', {
 
     store: {
 	model: 'pmg-address-list',
-	autoLoad: true,
+	autoDestroy: true,
 	proxy: {
             type: 'proxmox',
             url: "/api2/json/quarantine/whitelist"
