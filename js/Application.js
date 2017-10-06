@@ -43,6 +43,10 @@ Ext.define('PMG.Application', {
     launch: function() {
 	var me = this;
 	Ext.on('resize', me.realignWindows);
+
+	var provider = new Ext.state.LocalStorageProvider({ prefix: 'ext-pmg-' });
+	Ext.state.Manager.setProvider(provider);
+
 	// show login window if not loggedin
 	var loggedin = Proxmox.Utils.authOK();
 	var cookie = Ext.util.Cookies.get(Proxmox.Setup.auth_cookie_name);
