@@ -55,7 +55,7 @@ Ext.define('PMG.QuarantineList', {
 		    // if the combobox has no selection we do not reload
 		    return;
 		}
-
+		me.setEmptyText();
 	    }
 	    view.getStore().load(callback);
 	},
