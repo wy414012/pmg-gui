@@ -195,7 +195,13 @@ Ext.define('PMG.QuarantineList', {
 		    proxy: {
 			type: 'proxmox',
 			url: '/api2/json/quarantine/spamusers'
-		    }
+		    },
+		    fields: [
+			{
+			    name: 'mail',
+			    renderer: Ext.htmlEncode
+			}
+		    ]
 		},
 		queryParam: false,
 		queryCaching: false,

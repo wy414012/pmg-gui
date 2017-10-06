@@ -111,7 +111,13 @@ Ext.define('PMG.UserBlackWhiteList', {
 		proxy: {
 		    type: 'proxmox',
 		    url: '/api2/json/quarantine/quarusers'
-		}
+		},
+		fields: [
+		    {
+			name: 'mail',
+			renderer: Ext.htmlEncode
+		    }
+		]
 	    },
 	    queryParam: false,
 	    queryCaching: false,

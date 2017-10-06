@@ -50,7 +50,7 @@ Ext.define('PMG.DomainStatistics', {
 	})
 
 	var render_domain = function(v) {
-	    return v === '' ? '--- EMPTY ADDRESS ---' : v;
+	    return v === '' ? '--- EMPTY ADDRESS ---' : Ext.htmlEncode(v);
 	};
 
 	me.items = {
