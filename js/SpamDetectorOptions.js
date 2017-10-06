@@ -32,6 +32,11 @@ Ext.define('PMG.SpamDetectorOptions', {
 	    }
 	};
 
+	me.add_integer_row('bounce_score', gettext('Backscatter Score'),
+			   { defaultValue: 0,
+			     minValue: 0, maxValue: 1000,
+			     deleteEmpty: true });
+
 	var baseurl = '/config/spam';
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
