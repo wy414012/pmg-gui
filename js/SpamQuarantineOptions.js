@@ -91,5 +91,6 @@ Ext.define('PMG.SpamQuarantineOptions', {
 
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
+	me.on('deactivate', me.rstore.stopUpdate);
     }
 });

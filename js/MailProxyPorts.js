@@ -49,7 +49,8 @@ Ext.define('PMG.MailProxyPorts', {
 
 	me.callParent();
 
-	me.rstore.startUpdate();
+	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
+	me.on('deactivate', me.rstore.stopUpdate);
     }
 });
