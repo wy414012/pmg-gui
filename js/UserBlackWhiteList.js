@@ -79,10 +79,12 @@ Ext.define('PMG.UserBlackWhiteList', {
 
 	changeEmail: function(combobox, value) {
 	    var view = this.getView();
-	    view.getStore().getProxy().setExtraParams({
-		pmail: value
-	    });
-	    view.getStore().load();
+	    if (value && combobox.isValid()) {
+		view.getStore().getProxy().setExtraParams({
+		    pmail: value
+		});
+		view.getStore().load();
+	    }
 	},
 
 	init: function(view) {
@@ -107,6 +109,8 @@ Ext.define('PMG.UserBlackWhiteList', {
 	{
 	    xtype: 'combobox',
 	    displayField: 'mail',
+	    vtype: 'email',
+	    allowBlank: false,
 	    valueField: 'mail',
 	    store: {
 		proxy: {
