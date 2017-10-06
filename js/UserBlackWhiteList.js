@@ -11,6 +11,8 @@ Ext.define('PMG.UserBlackWhiteList', {
     border: false,
     listname: undefined, // 'blacklist' or 'whitelist',
 
+    emptyText: gettext('No data in database.'),
+
     controller: {
 
         xclass: 'Ext.app.ViewController',
