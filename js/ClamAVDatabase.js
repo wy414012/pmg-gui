@@ -98,11 +98,14 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 		    sortable: true,
 		    dataIndex: 'nsigs'
 		},
-	    ]
+	    ],
+	    listeners: {
+		activate: me.reload
+	    }
 	});
+
 	me.callParent();
 
-	me.reload();
 	Proxmox.Utils.monStoreErrors(me.getView(), me.store, true);
     }
 });
@@ -164,6 +167,13 @@ Ext.define('PMG.ClamAVDatabase', {
 	me.items = [ editPanel, statusPanel ];
 
 	me.callParent();
+
+	editPanel.relayEvents(me, ['activate']);
+	editPanel.relayEvents(me, ['deactivate']);
+	editPanel.relayEvents(me, ['destroy']);
+	statusPanel.relayEvents(me, ['activate']);
+	statusPanel.relayEvents(me, ['deactivate']);
+	statusPanel.relayEvents(me, ['destroy']);
 
     }
 });
