@@ -19,15 +19,12 @@ Ext.define('PMG.ObjectGroup', {
 	me.baseurl = baseurl;
 
 	if (me.baseurl === undefined) {
-	    me.store.setProxy(undefined);
+	    me.store.proxy.setUrl(undefined);
 	    me.store.setData([]);
 	    me.down('#addMenuButton').setDisabled(true);
 	} else {
-	    me.store.setProxy({
-		type: 'proxmox',
-		url: '/api2/json' + me.baseurl + '/objects'
-	    });
-
+	    var url = '/api2/json' + me.baseurl + '/objects';
+	    me.store.proxy.setUrl(url);
 	    me.store.load(function() {
 		me.down('#addMenuButton').setDisabled(false);
 	    });
@@ -59,6 +56,9 @@ Ext.define('PMG.ObjectGroup', {
 
 	me.store = new Ext.data.Store({
 	    model: 'pmg-object-list',
+	    proxy: {
+		type: 'proxmox'
+	    },
 	    sorters: [
 		{
 		    property : 'receivertest'
@@ -221,6 +221,8 @@ Ext.define('PMG.ObjectGroup', {
 		}
 	    ]
 	});
+
+	Proxmox.Utils.monStoreErrors(me, me.store, true);
 
 	Ext.apply(me, {
 	    listeners: {
