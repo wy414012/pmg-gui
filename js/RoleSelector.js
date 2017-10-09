@@ -3,8 +3,8 @@ Ext.define('PMG.RoleSelector', {
     alias: 'widget.pmgRoleSelector',
 
     comboItems: [
-	['admin', gettext('Administrator')],
-	['qmanager', gettext('Quarantine Manager')],
-	['audit', gettext('Auditor')]
+	['admin', PMG.Utils.format_user_role('admin')],
+	['qmanager', PMG.Utils.format_user_role('qmanager')],
+	['audit', PMG.Utils.format_user_role('audit')]
     ]
 });

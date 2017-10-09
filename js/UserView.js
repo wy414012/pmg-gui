@@ -133,6 +133,13 @@ Ext.define('PMG.UserView', {
 	    dataIndex: 'realm'
 	},
 	{
+	    header: gettext('Role'),
+	    width: 150,
+	    sortable: true,
+	    renderer: PMG.Utils.format_user_role,
+	    dataIndex: 'role'
+	},
+	{
 	    header: gettext('Enabled'),
 	    width: 80,
 	    sortable: true,

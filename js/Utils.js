@@ -13,6 +13,17 @@ Ext.define('PMG.Utils', {
     receiverText: gettext('Receiver'),
     scoreText: gettext('Score'),
 
+    user_role_text: {
+	root: gettext('Superuser'),
+	admin: gettext('Administrator'),
+	qmanager: gettext('Quarantine Manager'),
+	audit: gettext('Auditor'),
+    },
+
+    format_user_role: function(role) {
+	return PMG.Utils.user_role_text[role] || role;
+    },
+
     oclass_text: {
 	who: gettext('Who Objects'),
 	what: gettext('What Objects'),
