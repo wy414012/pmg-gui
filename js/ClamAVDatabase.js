@@ -29,7 +29,7 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 
 	me.callParent();
 
-	me.on('activate', me.rstore.stopUpdate);
+	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
     }
