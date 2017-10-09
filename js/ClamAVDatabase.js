@@ -69,8 +69,6 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 	    }
 	});
 
-	Proxmox.Utils.monStoreErrors(me, me.store);
-
 	Ext.apply(me, {
 	    viewConfig: {
 		trackOver: false
@@ -105,6 +103,7 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 	me.callParent();
 
 	me.reload();
+	Proxmox.Utils.monStoreErrors(me.getView(), me.store, true);
     }
 });
 
@@ -125,7 +124,8 @@ Ext.define('PMG.ClamAVDatabase', {
 	});
 
 	var statusPanel = Ext.create('PMG.ClamAVDatabaseStatus', {
-	    border: false
+	    border: false,
+	    flex: 1
 	});
 
 	var update_command = function(){
