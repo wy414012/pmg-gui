@@ -21,13 +21,11 @@ Ext.define('PMG.ObjectGroup', {
 	if (me.baseurl === undefined) {
 	    me.store.proxy.setUrl(undefined);
 	    me.store.setData([]);
-	    me.down('#addMenuButton').setDisabled(true);
+	    me.setButtonState(me.store, [], false);
 	} else {
 	    var url = '/api2/json' + me.baseurl + '/objects';
 	    me.store.proxy.setUrl(url);
-	    me.store.load(function() {
-		me.down('#addMenuButton').setDisabled(false);
-	    });
+	    me.store.load();
 	}
     },
 
@@ -49,6 +47,15 @@ Ext.define('PMG.ObjectGroup', {
 	    me.down('#oginfo').update(html);
 	    me.down('#ogdata').setHidden(false);
 	}
+    },
+
+    setButtonState: function(store, records, success) {
+	var me = this;
+	if (!success || !me.baseurl) {
+	    me.down('#addMenuButton').setDisabled(true);
+	    return;
+	}
+	me.down('#addMenuButton').setDisabled(false);
     },
 
     initComponent : function() {
@@ -232,6 +239,8 @@ Ext.define('PMG.ObjectGroup', {
 	});
 
 	me.callParent();
+
+	me.mon(me.store, 'load', me.setButtonState, me);
 
 	if (me.baseurl) {
 	    me.setBaseUrl(me.baseurl); // configure store, load()
