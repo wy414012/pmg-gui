@@ -26,6 +26,7 @@ JSSRC=							\
 	UserBlackWhiteList.js				\
 	QuarantineView.js				\
 	Dashboard.js					\
+	dashboard/MailProcessing.js			\
 	dashboard/SubscriptionInfo.js			\
 	dashboard/MiniGraph.js				\
 	VersionInfo.js					\
