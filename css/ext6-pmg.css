@@ -198,3 +198,40 @@ tr.bounced {
 .red {
     color: #F00;
 }
+
+.yellow {
+    color: #DD0;
+}
+
+div.left {
+    float: left;
+}
+
+div.right {
+    float: right;
+}
+
+td.right {
+    text-align: right;
+}
+
+td.center {
+    text-align: center;
+}
+
+td.left {
+    text-align: left;
+}
+
+table.dash {
+    margin: auto;
+    width: 90%;
+}
+
+table.dash h2 {
+    margin: 4px 0px;
+}
+
+table.dash td.half {
+    width: 50%;
+}
