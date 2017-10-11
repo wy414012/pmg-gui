@@ -148,7 +148,8 @@ Ext.define('PMG.QuarantineView', {
 	    var me = this;
 
 	    // load username
-	    me.lookupReference('usernameinfo').update({username:Proxmox.UserName});
+	    var username = Proxmox.UserName.replace(/\@quarantine$/, '');
+	    me.lookupReference('usernameinfo').update({username: username});
 
 	    // show login on requestexception
 	    // fixme: what about other errors
