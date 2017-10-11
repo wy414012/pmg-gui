@@ -199,7 +199,6 @@ Ext.define('PMG.panel.Config', {
 	    });
 	    item.header = false;
 	    if (me.savedItems[item.itemId] !== undefined) {
-		console.log("TEST: " + item.itemId);
 		throw "itemId already exists, please use another";
 	    }
 	    me.savedItems[item.itemId] = item;
