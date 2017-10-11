@@ -52,7 +52,9 @@ Ext.define('PMG.Application', {
 	var cookie = Ext.util.Cookies.get(Proxmox.Setup.auth_cookie_name);
 	var qs = Ext.Object.fromQueryString(location.search);
 
-	if (location.pathname === "/quarantine") {
+	var pathname = location.pathname.replace(/\/+$/, '');
+
+	if (pathname === "/quarantine") {
 	    me.targetview = 'quarantineview';
 
 	    if (qs.ticket == undefined && loggedin) {
