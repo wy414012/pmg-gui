@@ -31,6 +31,15 @@ Ext.define('PMG.LoginView', {
 
 	init: function(view) {
 	    var me = this;
+	    var view = me.getView();
+
+	    var realmfield = me.lookup('realmfield');
+
+	    if (view.targetview === 'quarantineview') {
+		realmfield.setDisabled(true);
+		realmfield.setVisible(false);
+	    }
+
 	    var loginForm = this.lookupReference('loginForm');
 
 	    // try autologin with quarantine ticket from URL
@@ -44,7 +53,7 @@ Ext.define('PMG.LoginView', {
 	    var loginwin = me.lookup('loginwindow');
 	    loginwin.autoShow = false;
 	    loginwin.setVisible(false);
-	    me.lookup('realmfield').setDisabled(true);
+	    realmfield.setDisabled(true);
 
 	    me.lookup('usernameField').setValue(username);
 	    me.lookup('passwordField').setValue(ticket);
