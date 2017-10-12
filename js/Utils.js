@@ -286,6 +286,18 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 	},
+	3001: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'virusfilter',
+	    subject: gettext('Virus Filter'),
+	    uneditable: true,
+	    // there are no parameters to give, so we simply submit it
+	    listeners: {
+		show: function(win) {
+		    win.submit();
+		}
+	    }
+	},
 	3002: {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'matchfield',

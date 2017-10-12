@@ -138,7 +138,7 @@ Ext.define('PMG.ObjectGroup', {
 	    }
 
 	    var editor = PMG.Utils.object_editors[rec.data.otype];
-	    if (!editor) {
+	    if (!editor || editor.uneditable) {
 		return;
 	    }
 
@@ -195,6 +195,10 @@ Ext.define('PMG.ObjectGroup', {
 		    text: gettext('Edit'),
 		    disabled: true,
 		    selModel: me.selModel,
+		    enableFn: function(rec) {
+			var editor = PMG.Utils.object_editors[rec.data.otype];
+			return (editor && !editor.uneditable);
+		    },
 		    handler: run_editor
 		},
  		remove_btn
