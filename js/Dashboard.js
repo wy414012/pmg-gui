@@ -77,7 +77,8 @@ Ext.define('PMG.Dashboard', {
 	    records.forEach(function(item) {
 		bytes_in += item.data.bytes_in;
 		bytes_out += item.data.bytes_out;
-		count += item.data.count;
+		// unnormalize
+		count += (item.data.count*item.data.timespan)/60;
 		ptime += item.data.ptimesum;
 	    });
 
@@ -189,14 +190,38 @@ Ext.define('PMG.Dashboard', {
 		    }
 		},
 		fields: [
-		    { type: 'integer', name: 'count' },
-		    { type: 'integer', name: 'count_in' },
-		    { type: 'integer', name: 'count_out' },
-		    { type: 'integer', name: 'spam' },
-		    { type: 'integer', name: 'spam_in' },
-		    { type: 'integer', name: 'spam_out' },
-		    { type: 'integer', name: 'virus' },
-		    { type: 'integer', name: 'virus_in' },
+		    {
+			type: 'number', name: 'count',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'count_in',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'count_out',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'spam',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'spam_in',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'spam_out',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'virus',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
+		    {
+			type: 'number', name: 'virus_in',
+			convert: PMG.Utils.convert_field_to_per_min
+		    },
 		    { type: 'integer', name: 'virus_out' },
 		    { type: 'integer', name: 'bytes_in' },
 		    { type: 'integer', name: 'bytes_out' },
@@ -273,7 +298,7 @@ Ext.define('PMG.Dashboard', {
 	    items: [
 		{
 		    fields: ['count'],
-		    fieldTitles: [ gettext('Mails') ],
+		    fieldTitles: [ gettext('Mails / min') ],
 		    seriesConfig: {
 			colors: [ '#00617F' ],
 			style: {
@@ -288,7 +313,7 @@ Ext.define('PMG.Dashboard', {
 		},
 		{
 		    fields: ['spam'],
-		    fieldTitles: [ gettext('Spam') ],
+		    fieldTitles: [ gettext('Spam / min') ],
 		    seriesConfig: {
 			colors: [ '#E67300' ],
 			style: {

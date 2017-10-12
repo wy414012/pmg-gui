@@ -129,6 +129,10 @@ Ext.define('PMG.Utils', {
 	return 'unknown';
     },
 
+    convert_field_to_per_min: function(value, record) {
+	return (value/(record.data.timespan/60));
+    },
+
     object_editors: {
 	1000: {
 	    xtype: 'proxmoxWindowEdit',
