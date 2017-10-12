@@ -164,6 +164,7 @@ Ext.define('PMG.ObjectGroup', {
 
 	    menu_items.push({
 		text: config.subject,
+		iconCls: config.iconCls || 'fa fa-question-circle',
 		handler: function() {
 		    if (me.baseurl == undefined) {
 			return;

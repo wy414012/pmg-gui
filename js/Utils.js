@@ -116,10 +116,13 @@ Ext.define('PMG.Utils', {
 
     format_otype: function(otype) {
 	var editor = PMG.Utils.object_editors[otype];
+	var iconCls = 'fa fa-question-circle';
 	if (editor) {
-	    return editor.subject;
+	    var icon = '<span class="fa-fw ' + (editor.iconCls || iconCls) + '"></span> ';
+	    return icon + editor.subject;
 	}
-	return 'unknown';
+
+	return '<span class="fa-fw ' + iconCls + '"></span> unknown';
     },
 
     format_ldap_protocol: function(p) {
@@ -135,6 +138,7 @@ Ext.define('PMG.Utils', {
 
     object_editors: {
 	1000: {
+	    iconCls: 'fa fa-filter',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'regex',
 	    subject: gettext("Regular Expression"),
@@ -149,16 +153,19 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1005: {
+	    iconCls: 'fa fa-users',
 	    xtype: 'pmgLDAPGroupEditor',
 	    subdir: 'ldap',
 	    subject: gettext("LDAP Group")
 	},
 	1006: {
+	    iconCls: 'fa fa-user',
 	    xtype: 'pmgLDAPUserEditor',
 	    subdir: 'ldapuser',
 	    subject: gettext("LDAP User")
 	},
 	1009: {
+	    iconCls: 'fa fa-filter',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_regex',
 	    subject: gettext("Regular Expression"),
@@ -174,6 +181,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1001: {
+	    iconCls: 'fa fa-envelope-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'email',
 	    subject: gettext("Email"),
@@ -187,6 +195,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1007: {
+	    iconCls: 'fa fa-envelope-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver',
 	    subject: gettext("Email"),
@@ -201,6 +210,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1002: {
+	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'domain',
 	    subject: gettext("Domain"),
@@ -214,6 +224,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1008: {
+	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_domain',
 	    subject: gettext("Domain"),
@@ -228,6 +239,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1003: {
+	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'ip',
 	    subject: gettext("IP Address"),
@@ -241,6 +253,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1004: {
+	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'network',
 	    subject: gettext("IP Network"),
@@ -254,6 +267,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	2000: {
+	    iconCls: 'fa fa-clock-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'timeframe',
 	    subject: gettext("TimeFrame"),
@@ -273,6 +287,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3000: {
+	    iconCls: 'fa fa-bullhorn',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'spamfilter',
 	    subject: gettext('Spam Filter'),
@@ -287,6 +302,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3001: {
+	    iconCls: 'fa fa-bug',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'virusfilter',
 	    subject: gettext('Virus Filter'),
@@ -299,6 +315,7 @@ Ext.define('PMG.Utils', {
 	    }
 	},
 	3002: {
+	    iconCls: 'fa fa-code',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'matchfield',
 	    subject: gettext('Match Field'),
@@ -328,6 +345,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3003: {
+	    iconCls: 'fa fa-file-image-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'contenttype',
 	    width: 400,
@@ -368,6 +386,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3004: {
+	    iconCls: 'fa fa-file-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'filenamefilter',
 	    width: 400,
@@ -391,6 +410,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3005: {
+	    iconCls: 'fa fa-file-archive-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'archivefilter',
 	    width: 400,
