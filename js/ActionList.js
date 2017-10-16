@@ -17,7 +17,7 @@ Ext.define('PMG.ActionList', {
 
     baseurl: '/config/ruledb/action',
 
-    otype_list: [4005],
+    otype_list: [4002, 4003, 4005, 4007, 4009],
 
     enableButtons: true,
 

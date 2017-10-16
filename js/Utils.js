@@ -450,6 +450,94 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 	},
+	4002: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'notification',
+	    subject: gettext('Notification'),
+	    width: 400,
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'name',
+		    allowBlank: false,
+		    fieldLabel: gettext('Name')
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'info',
+		    fieldLabel: gettext("Description")
+		},
+		{
+		    xtype: 'textfield',
+		    name: 'to',
+		    allowBlank: false,
+		    value: '__ADMIN__',
+		    fieldLabel: gettext('Receiver')
+		},
+		{
+		    xtype: 'textfield',
+		    name: 'subject',
+		    allowBlank: false,
+		    value: 'Notification: __SUBJECT__',
+		    fieldLabel: gettext('Subject')
+		},
+		{
+		    xtype: 'textarea',
+		    name: 'body',
+		    allowBlank: false,
+		    grow: true,
+		    growMax: 250,
+		    value:
+			"Proxmox Notifcation:\n\n" +
+			"Sender:   __SENDER__\n" +
+			"Receiver: __RECEIVERS__\n" +
+			"Targets:  __TARGETS__\n\n" +
+			"Subject:  __SUBJECT__\n\n" +
+			"Matching Rule: __RULE__\n\n" +
+			"__RULE_INFO__\n\n" +
+			"__VIRUS_INFO__\n" +
+			"__SPAM_INFO__\n",
+		    fieldLabel: gettext('Body')
+		},
+		{
+		    xtype: 'proxmoxcheckbox',
+		    name: 'attach',
+		    fieldLabel: gettext("Attach orig. Mail")
+		}
+	    ]
+	},
+	4003: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'field',
+	    subject: gettext('Header Attribute'),
+	    width: 400,
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'name',
+		    allowBlank: false,
+		    fieldLabel: gettext('Name')
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'info',
+		    fieldLabel: gettext("Description")
+		},
+		{
+		    xtype: 'textfield',
+		    name: 'field',
+		    allowBlank: false,
+		    fieldLabel: gettext('Field')
+		},
+		{
+		    xtype: 'textfield',
+		    reference: 'value',
+		    name: 'value',
+		    allowBlank: false,
+		    fieldLabel: gettext('Value')
+		}
+	    ]
+	},
 	4005: {
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'bcc',
@@ -481,6 +569,67 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 
+	},
+	4007: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'removeattachments',
+	    subject: gettext('Remove Attachments'),
+	    width: 500,
+	    fieldDefaults: {
+		labelWidth: 150
+	    },
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'name',
+		    allowBlank: false,
+		    fieldLabel: gettext('Name')
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'info',
+		    fieldLabel: gettext("Description")
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'text',
+		    grow: true,
+		    growMax: 250,
+		    fieldLabel: gettext("Text Replacement")
+		},
+		{
+		    xtype: 'proxmoxcheckbox',
+		    checked: true,
+		    name: 'all',
+		    fieldLabel: gettext("Remove all attachments")
+		}
+	    ]
+	},
+	4009: {
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'disclaimer',
+	    subject: gettext('Disclaimer'),
+	    width: 400,
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'name',
+		    allowBlank: false,
+		    fieldLabel: gettext('Name')
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'info',
+		    fieldLabel: gettext("Description")
+		},
+		{
+		    xtype: 'textareafield',
+		    name: 'disclaimer',
+		    grow: true,
+		    growMax: 250,
+		    fieldLabel: gettext("Disclaimer")
+		}
+	    ]
 	}
     },
 
