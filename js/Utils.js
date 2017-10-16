@@ -148,7 +148,14 @@ Ext.define('PMG.Utils', {
 		    xtype: 'textfield',
 		    name: 'regex',
 		    labelWidth: 150,
+		    reference: 'regex',
 		    fieldLabel: gettext("Regular Expression")
+		},
+		{
+		    labelWidth: 150,
+		    fieldLabel: gettext('Test String'),
+		    xtype: 'pmgRegexTester',
+		    regexFieldReference: 'regex'
 		}
 	    ]
 	},
