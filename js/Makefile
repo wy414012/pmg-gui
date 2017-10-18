@@ -56,6 +56,7 @@ JSSRC=							\
 	LDAPConfig.js					\
 	UserEdit.js					\
 	UserView.js					\
+	FetchmailView.js				\
 	UserManagement.js				\
 	ViewMailHeaders.js				\
 	PostfixQShape.js				\

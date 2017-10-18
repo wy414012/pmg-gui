@@ -18,8 +18,8 @@ Ext.define('PMG.UserManagement', {
 	    xtype: 'pmgLDAPConfig'
 	},
 	{
-	    title: gettext('POP'),
-	    html: "POP"
+	    title: 'Fetchmail',
+	    xtype: 'pmgFetchmailView'
 	}
     ]
 });
