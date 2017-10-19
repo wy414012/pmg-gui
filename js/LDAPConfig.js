@@ -203,154 +203,392 @@ Ext.define('PMG.LDAPEdit', {
     }
 });
 
-Ext.define('PMG.LDAPConfig', {
-    extend: 'Ext.grid.GridPanel',
-    alias: ['widget.pmgLDAPConfig'],
+Ext.define('PMG.LDAPUserGrid', {
+    extend: 'Ext.grid.Panel',
+    xtype: 'pmgLDAPUserGrid',
 
-    initComponent : function() {
+    emptyText: gettext('No data in database'),
+    store: {
+	autoDestroy: true,
+	fields: [ 'dn', 'account', 'pmail' ],
+	proxy: { type: 'proxmox' },
+	sorters: [ 'dn' ]
+    },
+    columns: [
+	{
+	    text: 'DN',
+	    dataIndex: 'dn',
+	    flex: 1
+	},
+	{
+	    text: gettext('Account'),
+	    dataIndex: 'account',
+	    flex: 1
+	},
+	{
+	    text: gettext('Primary E-Mail'),
+	    dataIndex: 'pmail',
+	    flex: 1
+	}
+    ],
+
+    initComponent: function() {
 	var me = this;
+	me.callParent();
+	if (me.url) {
+	    me.getStore().getProxy().setUrl(me.url);
+	    me.getStore().load();
+	}
+    }
+});
 
-	me.store = new Ext.data.Store({
-	    model: 'pmg-ldap-config',
-	    sorters: {
-		property: 'profile',
-		order: 'DESC'
+Ext.define('PMG.LDAPConfig', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'pmgLDAPConfig',
+
+    controller: {
+	xclass: 'Ext.app.ViewController',
+
+	openUserList: function(grid, record) {
+	    var name = this.getViewModel().get('name');
+	    Ext.create('Ext.window.Window', {
+		title: Ext.String.format(gettext("Users of '{0}'"), record.data.dn),
+		modal: true,
+		width: 600,
+		height: 400,
+		layout: 'fit',
+		items: [{
+		    xtype: 'pmgLDAPUserGrid',
+		    border: false,
+		    url: '/api2/json/config/ldap/' + name + '/groups/' +  record.data.gid
+		}]
+	    }).show();
+	},
+
+	showUsers: function(button) {
+	    var me = this;
+	    var view = me.lookup('groupgrid');
+	    var record = view.getSelection()[0];
+	    me.openUserList(view, record);
+	},
+
+	openUserMails: function(grid, record) {
+	    var name = this.getViewModel().get('name');
+	    Ext.create('Ext.window.Window', {
+		title: Ext.String.format(gettext("E-Mail addresses of '{0}'"), record.data.dn),
+		modal: true,
+		width: 600,
+		height: 400,
+		layout: 'fit',
+		items: [{
+		    xtype: 'grid',
+		    border: false,
+		    store: {
+			autoLoad: true,
+			field: ['email', 'primary'],
+			proxy: {
+			    type: 'proxmox',
+			    url: '/api2/json/config/ldap/' + name + '/users/' +  record.data.pmail
+			}
+		    },
+		    columns: [
+			{ dataIndex: 'email', text: gettext('E-Mail address'), flex: 1 }
+		    ],
+		}]
+	    }).show();
+	},
+
+	showEmails: function(button) {
+	    var me = this;
+	    var view = me.lookup('usergrid');
+	    var record = view.getSelection()[0];
+	    me.openUserMails(view, record);
+	},
+
+	reload: function(grid) {
+	    var me = this;
+	    var selection = grid.getSelection();
+	    me.showInfo(grid, selection);
+	},
+
+	showInfo: function(grid, selected) {
+	    var me = this;
+	    var viewModel = me.getViewModel();
+	    var grid = me.lookup('data');
+	    if (selected[0]) {
+		var name = selected[0].data.profile;
+		viewModel.set('selected', true);
+		viewModel.set('name', name);
+
+		// set grid stores and load them
+		var gstore = me.lookup('groupgrid').getStore();
+		var ustore = me.lookup('usergrid').getStore();
+		gstore.getProxy().setUrl('/api2/json/config/ldap/' + name + '/groups');
+		ustore.getProxy().setUrl('/api2/json/config/ldap/' + name + '/users');
+		gstore.load();
+		ustore.load();
+	    } else {
+		viewModel.set('selected', false);
 	    }
-	});
+	},
 
-        var reload = function() {
-            me.store.load();
-        };
+	init: function(view) {
+	    var me = this;
+	    me.lookup('grid').relayEvents(view, ['activate']);
+	    var groupgrid = me.lookup('groupgrid');
+	    var usergrid = me.lookup('usergrid');
 
-	me.selModel = Ext.create('Ext.selection.RowModel', {});
+	    Proxmox.Utils.monStoreErrors(groupgrid, groupgrid.getStore(), true);
+	    Proxmox.Utils.monStoreErrors(usergrid, usergrid.getStore(), true);
+	},
 
-	var remove_btn =  Ext.createWidget('proxmoxStdRemoveButton', {
-	    selModel: me.selModel,
-	    baseurl: '/config/ldap',
-	    callback: reload,
-	    waitMsgTarget: me
-	});
-
-	var sync_btn =  Ext.createWidget('proxmoxButton', {
-	    text: gettext('Synchronize'),
-	    selModel: me.selModel,
-	    enableFn: function(rec) {
-		return !rec.data.disable;
+	control: {
+	    'grid[reference=grid]': {
+		selectionchange: 'showInfo',
+		load: 'reload'
 	    },
-	    disabled: true,
-	    handler: function(btn, event, rec) {
-		Proxmox.Utils.API2Request({
-		    url: '/config/ldap/' + rec.data.profile + '/sync',
-		    method: 'POST',
-		    waitMsgTarget: me,
-		    callback: reload,
-		    failure: function (response, opts) {
-			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		    }
-		});
+	    'grid[reference=groupgrid]': {
+		itemdblclick: 'openUserList'
+	    },
+	    'grid[reference=usergrid]': {
+		itemdblclick: 'openUserMails'
 	    }
-	});
+	}
+    },
 
-	var run_editor = function() {
-	    var rec = me.selModel.getSelection()[0];
+    viewModel: {
+	data: {
+	    name: '',
+	    selected: false
+	}
+    },
+
+    layout: {
+	type: 'border',
+    },
+
+    items: [
+	{
+	    region: 'center',
+	    reference: 'grid',
+	    xtype: 'pmgLDAPConfigGrid',
+	    border: false,
+	},
+	{
+	    xtype: 'tabpanel',
+	    reference: 'data',
+	    hidden: true,
+	    height: '50%',
+	    border: false,
+	    split: true,
+	    region: 'south',
+	    bind: {
+		hidden: '{!selected}'
+	    },
+	    items: [
+		{
+		    xtype: 'grid',
+		    reference: 'groupgrid',
+		    border: false,
+		    emptyText: gettext('No data in database'),
+		    tbar: [{
+			xtype: 'proxmoxButton',
+			text: gettext('Show Users'),
+			handler: 'showUsers',
+			disabled: true
+		    }],
+		    store: {
+			fields: ['dn', 'gid'],
+			proxy: { type: 'proxmox' },
+			sorters: [ 'dn' ]
+		    },
+		    bind: {
+			title: Ext.String.format(gettext("Groups of '{0}'"), '{name}')
+		    },
+		    columns: [
+			{
+			    text: 'DN',
+			    dataIndex: 'dn',
+			    flex: 1
+			}
+		    ]
+		},
+		{
+		    xtype: 'pmgLDAPUserGrid',
+		    reference: 'usergrid',
+		    border: false,
+		    tbar: [{
+			xtype: 'proxmoxButton',
+			text: gettext('Show E-Mail addresses'),
+			handler: 'showEmails',
+			disabled: true
+		    }],
+		    bind: {
+			title: Ext.String.format(gettext("Users of '{0}'"), '{name}')
+		    },
+		}
+	    ]
+	}
+    ],
+
+});
+
+Ext.define('PMG.LDAPConfigGrid', {
+    extend: 'Ext.grid.GridPanel',
+    alias: 'widget.pmgLDAPConfigGrid',
+
+    controller: {
+	xclass: 'Ext.app.ViewController',
+
+	run_editor: function() {
+	    var me = this;
+	    var view = me.getView();
+	    var rec = view.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
 
 	    var win = Ext.createWidget('pmgLDAPEdit', {
-		profileId: rec.data.profile
+		profileId: rec.data.profile,
 	    });
+	    win.on('destroy', me.reload, me);
 	    win.load();
-	    win.on('destroy', reload);
 	    win.show();
-	};
+	},
 
-	me.tbar = [
-            {
-		xtype: 'proxmoxButton',
-		text: gettext('Edit'),
-		disabled: true,
-		selModel: me.selModel,
-		handler: run_editor
-            },
-            {
-		text: gettext('Create'),
-		handler: function() {
-		    var win = Ext.createWidget('pmgLDAPEdit', {});
-		    win.on('destroy', reload);
-		    win.show();
+	new: function() {
+	    var me = this;
+	    var win = Ext.createWidget('pmgLDAPEdit', {});
+	    win.on('destroy', me.reload, me);
+	    win.show();
+	},
+
+
+	reload: function() {
+	    var me = this.getView();
+	    me.getStore().load();
+	    me.fireEvent('load', me);
+	},
+
+	sync: function() {
+	    var me = this;
+	    var view = me.getView();
+	    var rec = view.getSelection()[0];
+	    Proxmox.Utils.API2Request({
+		url: '/config/ldap/' + rec.data.profile + '/sync',
+		method: 'POST',
+		waitMsgTarget: view,
+		callback: function() {
+		    me.reload();
+		},
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		}
+	    });
+	},
+
+	init: function(view) {
+	    var me = this;
+	    Proxmox.Utils.monStoreErrors(view, view.getStore(), true);
+	}
+    },
+
+    store: {
+	model: 'pmg-ldap-config',
+	sorters: {
+	    property: 'profile',
+	    order: 'DESC'
+	}
+    },
+
+    tbar: [
+	{
+	    xtype: 'proxmoxButton',
+	    text: gettext('Edit'),
+	    disabled: true,
+	    handler: 'run_editor'
+	},
+	{
+	    text: gettext('Create'),
+	    handler: 'new'
+	},
+	{
+	    xtype: 'proxmoxStdRemoveButton',
+	    baseurl: '/config/ldap',
+	    callback: 'reload',
+	},
+	{
+	    xtype: 'proxmoxButton',
+	    text: gettext('Synchronize'),
+	    enableFn: function(rec) {
+		return !rec.data.disable;
 	    },
-	    remove_btn, sync_btn
-	];
+	    disabled: true,
+	    handler: 'sync'
+	},
+    ],
 
-	Proxmox.Utils.monStoreErrors(me, me.store);
+    listeners: {
+	itemdblclick: 'run_editor',
+	activate: 'reload'
+    },
 
-	Ext.apply(me, {
-
-	    columns: [
-		{
-		    header: gettext('Profile Name'),
-		    sortable: true,
-		    width: 120,
-		    dataIndex: 'profile'
-		},
-		{
-		    header: gettext('Protocol'),
-		    sortable: true,
-		    dataIndex: 'mode',
-		    renderer: PMG.Utils.format_ldap_protocol
-		},
-		{
-		    header: gettext('Server'),
-		    sortable: true,
-		    dataIndex: 'server1',
-		    renderer: function(value, metaData, rec) {
-			if (rec.data.server2) {
-			    return value + '<br>' + rec.data.server2;
-			}
-			return value;
-		    }
-		},
-		{
-		    header: gettext('Enabled'),
-		    width: 80,
-		    sortable: true,
-		    dataIndex: 'disable',
-		    renderer: Proxmox.Utils.format_neg_boolean
-		},
-		{
-		    header: gettext('Comment'),
-		    sortable: false,
-		    renderer: Ext.String.htmlEncode,
-		    dataIndex: 'comment',
-		    flex: 1
-		},
-		{
-		    header: gettext('Accounts'),
-		    width: 80,
-		    sortable: true,
-		    dataIndex: 'ucount'
-		},
-		{
-		    header: gettext('Addresses'),
-		    width: 80,
-		    sortable: true,
-		    dataIndex: 'mcount'
-		},
-		{
-		    header: gettext('Groups'),
-		    width: 80,
-		    sortable: true,
-		    dataIndex: 'gcount'
-		},
-	    ],
-	    listeners: {
-		itemdblclick: run_editor,
-		activate: reload
+    columns: [
+	{
+	    header: gettext('Profile Name'),
+	    sortable: true,
+	    width: 120,
+	    dataIndex: 'profile'
+	},
+	{
+	    header: gettext('Protocol'),
+	    sortable: true,
+	    dataIndex: 'mode',
+	    renderer: PMG.Utils.format_ldap_protocol
+	},
+	{
+	    header: gettext('Server'),
+	    sortable: true,
+	    dataIndex: 'server1',
+	    renderer: function(value, metaData, rec) {
+		if (rec.data.server2) {
+		    return value + '<br>' + rec.data.server2;
+		}
+		return value;
 	    }
-	});
+	},
+	{
+	    header: gettext('Enabled'),
+	    width: 80,
+	    sortable: true,
+	    dataIndex: 'disable',
+	    renderer: Proxmox.Utils.format_neg_boolean
+	},
+	{
+	    header: gettext('Comment'),
+	    sortable: false,
+	    renderer: Ext.String.htmlEncode,
+	    dataIndex: 'comment',
+	    flex: 1
+	},
+	{
+	    header: gettext('Accounts'),
+	    width: 80,
+	    sortable: true,
+	    dataIndex: 'ucount'
+	},
+	{
+	    header: gettext('Addresses'),
+	    width: 80,
+	    sortable: true,
+	    dataIndex: 'mcount'
+	},
+	{
+	    header: gettext('Groups'),
+	    width: 80,
+	    sortable: true,
+	    dataIndex: 'gcount'
+	},
+    ],
 
-	me.callParent();
-    }
 });
