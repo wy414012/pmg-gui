@@ -22,6 +22,8 @@ Ext.define('PMG.Subscription', {
 
     title: gettext('Subscription'),
 
+    border: false,
+
     onlineHelp: 'getting_help',
 
     viewConfig: {
