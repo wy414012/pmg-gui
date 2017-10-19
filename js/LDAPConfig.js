@@ -134,6 +134,13 @@ Ext.define('PMG.LDAPInputPanel', {
 		deleteEmpty: me.create ? false : true,
 		name: 'filter',
 		fieldLabel: gettext('LDAP filter')
+	    },
+	    {
+		xtype: 'proxmoxtextfield',
+		allowBlank: true,
+		deleteEmpty: me.create ? false : true,
+		name: 'groupclass',
+		fieldLabel: gettext('Group objectclass')
 	    }
 	];
 
