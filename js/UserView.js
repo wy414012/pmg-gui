@@ -41,13 +41,13 @@ Ext.define('PMG.UserView', {
 	},
 
 	renderUsername: function(userid) {
-	    return userid.match(/^(.+)(@[^@]+)$/)[1];
+	    return Ext.htmlEncode(userid.match(/^(.+)(@[^@]+)$/)[1]);
 	},
 
 	renderFullName: function(firstname, metaData, record) {
 	    var first = firstname || '';
 	    var last = record.data.lastname || '';
-	    return first + " " + last;
+	    return Ext.htmlEncode(first + " " + last);
 	},
 
 	onAdd: function() {
