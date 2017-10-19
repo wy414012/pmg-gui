@@ -17,6 +17,8 @@ Ext.define('PMG.FetchmailView', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgFetchmailView',
 
+    baseurl: '/api2/extjs/config/fetchmail',
+
     store: {
 	autoDestroy: true,
 	autoLoad: true,
@@ -29,15 +31,30 @@ Ext.define('PMG.FetchmailView', {
 
 	init: function(view) {
 	    Proxmox.Utils.monStoreErrors(view, view.store, true);
+	},
+
+	onEdit: function() {
+	    var view = this.getView();
+
+	    var rec = view.selModel.getSelection()[0];
+
+            var win = Ext.create('PMG.FetchmailEdit', {
+		userid: rec.data.id,
+		url: view.baseurl + '/' + rec.data.id,
+		method: 'PUT',
+		autoLoad: true
+            });
+            win.on('destroy', function() { view.store.load(); });
+            win.show();
 	}
     },
 
     listeners: {
 	//scope: 'controller',
-	//itemdblclick: 'onEdit',
+	itemdblclick: 'onEdit',
     },
 
-     columns: [
+    columns: [
 	{
 	    header: gettext('Server'),
 	    flex: 1,
