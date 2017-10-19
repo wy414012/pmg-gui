@@ -168,12 +168,8 @@ Ext.define('PMG.ClamAVDatabase', {
 
 	me.callParent();
 
-	editPanel.relayEvents(me, ['activate']);
-	editPanel.relayEvents(me, ['deactivate']);
-	editPanel.relayEvents(me, ['destroy']);
-	statusPanel.relayEvents(me, ['activate']);
-	statusPanel.relayEvents(me, ['deactivate']);
-	statusPanel.relayEvents(me, ['destroy']);
+	editPanel.relayEvents(me, ['activate', 'deactivate', 'destroy']);
+	statusPanel.relayEvents(me, ['activate', 'deactivate', 'destroy']);
 
     }
 });
