@@ -65,7 +65,9 @@ Ext.define('PMG.UserBlackWhiteList', {
 	onRemoveAddress: function() {
 	    var me = this.getView();
 	    var rec = me.selModel.getSelection()[0];
-	    if (!rec) return;
+	    if (!rec) {
+		return;
+	    }
 
 	    var params = me.getStore().getProxy().getExtraParams() || {};
 	    var url = '/quarantine/' + me.listname + '/' + rec.getId();

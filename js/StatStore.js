@@ -33,8 +33,9 @@ Ext.define('PMG.data.StatStore', {
 
 	var last = me.proxy.extraParams;
 
-	if (last.starttime === ts.starttime && last.endtime === ts.endtime)
+	if (last.starttime === ts.starttime && last.endtime === ts.endtime) {
 	    return; // avoid repeated loads
+	}
 
 	me.proxy.url = me.staturl;
 	me.proxy.extraParams = { starttime: ts.starttime, endtime: ts.endtime };

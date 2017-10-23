@@ -15,7 +15,9 @@ Ext.define('PMG.RestoreSystemConfiguration', {
 		gettext('Confirm'),
 		gettext('Reset rule database to factory defaults?'),
 		function(button) {
-		    if (button !== 'yes') return;
+		    if (button !== 'yes') {
+			return;
+		    }
 		    var url = '/config/ruledb';
 		    Proxmox.Utils.API2Request({
 			url: '/config/ruledb',

@@ -11,7 +11,9 @@ Ext.define('PMG.LoginView', {
 
 	    var realmfield = me.lookup('realmfield');
 
-	    if (view.targetview !== 'quarantineview') return;
+	    if (view.targetview !== 'quarantineview') {
+		return;
+	    }
 
 	    realmfield.setValue('quarantine');
 

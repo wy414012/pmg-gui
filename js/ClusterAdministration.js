@@ -247,7 +247,9 @@ Ext.define('PMG.ClusterAdministration', {
 		    renderer: function(value, metaData, record) {
 			var d = record.data;
 			var state = 'active';
-			if (!d.insync) state = 'syncing';
+			if (!d.insync) {
+			    state = 'syncing';
+			}
 			if (d.conn_error) {
 			    metaData.tdCls = 'x-form-invalid-field';
 			    var html = '<p>' +  Ext.htmlEncode(d.conn_error) + '</p>';

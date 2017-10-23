@@ -32,7 +32,9 @@ Ext.define('PMG.Postfix.MailQueue', {
 	xclass: 'Ext.app.ViewController',
 
 	init: function(view) {
-	    if (view.nodename) view.setNodename(view.nodename);
+	    if (view.nodename) {
+		view.setNodename(view.nodename);
+	    }
 
 	    view.delayFilterTask = new Ext.util.DelayedTask(function() {
 		var filter = view.lookupReference('filter').getValue();
@@ -170,7 +172,9 @@ Ext.define('PMG.Postfix.MailQueue', {
     updateProxy: function() {
 	var me = this;
 
-	if (me.pendingLoad) return;
+	if (me.pendingLoad) {
+	    return;
+	}
 
 	var proxy = {
 	    type: 'proxmox',

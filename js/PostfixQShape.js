@@ -34,7 +34,9 @@ Ext.define('PMG.Postfix.QShape', {
 	xclass: 'Ext.app.ViewController',
 
 	init: function(view) {
-	    if (view.nodename) view.setNodename(view.nodename);
+	    if (view.nodename) {
+		view.setNodename(view.nodename);
+	    }
 	},
 
 	onFlush: function() {

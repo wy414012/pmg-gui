@@ -34,11 +34,17 @@ Ext.define('PMG.ViewMailHeaders', {
 		success: function(response, opts) {
 		    var data = response.result.data;
 		    var from = data.match(/^FROM:\s*(.*\S)\s*$/mi);
-		    if (from) view.lookupReference('fromField').setValue(from[1]);
+		    if (from) {
+			view.lookupReference('fromField').setValue(from[1]);
+		    }
 		    var to = data.match(/^TO:\s*(.*\S)\s*$/mi);
-		    if (to) view.lookupReference('toField').setValue(to[1]);
+		    if (to) {
+			view.lookupReference('toField').setValue(to[1]);
+		    }
 		    var subject = data.match(/^SUBJECT:\s*(.*\S)\s*$/mi);
-		    if (subject) view.lookupReference('subjectField').setValue(subject[1]);
+		    if (subject) {
+			view.lookupReference('subjectField').setValue(subject[1]);
+		    }
 		    panel.update(Ext.String.htmlEncode(data));
 		},
 		failure: function (response, opts) {
