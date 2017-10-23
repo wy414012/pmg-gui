@@ -96,7 +96,7 @@ Ext.define('PMG.MailTrackerFilter', {
 		    value: (function() {
 			var now = new Date();
 			return new Date(now.getTime() - 3600000);
-		    })(),
+		    }()),
 		    xtype: 'promxoxDateTimeField'
 		},
 		{

@@ -95,7 +95,7 @@ Ext.define('PMG.StatTimeSelector', {
 		    var today = new Date();
 		    var year = today.getFullYear();
 		    return [{ year: year }, { year: year -1 },{ year: year -2 }];
-		})()
+		}())
 	    },
 	    listeners: { select: 'onSelect' },
 	    value: (new Date()).getFullYear(),
@@ -116,7 +116,7 @@ Ext.define('PMG.StatTimeSelector', {
 			data.push({ month: i, name: Ext.Date.monthNames[i-1]});
 		    }
 		    return data;
-		})()
+		}())
 	    },
 	    listeners: { select: 'onSelect' },
 	    queryMode: 'local',
@@ -136,7 +136,7 @@ Ext.define('PMG.StatTimeSelector', {
 			data.push({ day: i, name: i});
 		    }
 		    return data;
-		})()
+		}())
 	    },
 	    listeners: { select: 'onSelect' },
 	    queryMode: 'local',
