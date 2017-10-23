@@ -323,7 +323,6 @@ Ext.define('PMG.LDAPConfig', {
 	showInfo: function(grid, selected) {
 	    var me = this;
 	    var viewModel = me.getViewModel();
-	    var grid = me.lookup('data');
 	    if (selected[0]) {
 		var name = selected[0].data.profile;
 		viewModel.set('selected', true);

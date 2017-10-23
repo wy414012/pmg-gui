@@ -7,7 +7,6 @@ Ext.define('PMG.LoginView', {
 
 	init: function(view) {
 	    var me = this;
-	    var view = me.getView();
 
 	    var realmfield = me.lookup('realmfield');
 

@@ -53,8 +53,6 @@ Ext.define('PMG.SpamQuarantine', {
 	xclass: 'Ext.app.ViewController',
 
 	updatePreview: function(raw, rec) {
-	    var list = this.lookupReference('list');
-	    var rec = list.selModel.getSelection()[0];
 	    var preview = this.lookupReference('preview');
 
 	    if (!rec || !rec.data || !rec.data.id)  {
@@ -70,8 +68,10 @@ Ext.define('PMG.SpamQuarantine', {
 
 	toggleRaw: function(button) {
 	    var me = this;
+	    var list = this.lookupReference('list');
+	    var rec = list.selModel.getSelection()[0];
 	    me.raw = !me.raw;
-	    me.updatePreview(me.raw);
+	    me.updatePreview(me.raw, rec);
 	},
 
 	btnHandler: function(button, e) {

@@ -30,7 +30,6 @@ Ext.define('PMG.ViewMailHeaders', {
 		url: view.url,
 		waitMsgTarget: view,
 		method: 'GET',
-		waitMsgTarget: view,
 		success: function(response, opts) {
 		    var data = response.result.data;
 		    var from = data.match(/^FROM:\s*(.*\S)\s*$/mi);

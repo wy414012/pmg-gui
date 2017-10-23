@@ -35,7 +35,7 @@ Ext.define('PMG.VirusQuarantine', {
 
 	xclass: 'Ext.app.ViewController',
 
-	updatePreview: function(raw, rec) {
+	updatePreview: function(raw) {
 	    var list = this.lookupReference('list');
 	    var rec = list.selModel.getSelection()[0];
 	    var preview = this.lookupReference('preview');
@@ -73,10 +73,7 @@ Ext.define('PMG.VirusQuarantine', {
 
 	onSelectMail: function() {
 	    var me = this;
-	    var list = this.lookupReference('list');
-	    var rec = list.selModel.getSelection()[0];
-
-	    me.updatePreview(me.raw || false, rec);
+	    me.updatePreview(me.raw || false);
 	},
 
 	control: {
