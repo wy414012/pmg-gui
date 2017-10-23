@@ -53,41 +53,28 @@ Ext.define('PMG.Utils', {
 	Q: 'quarantine'
     },
 
-    icon_status_map: {
-	2: {
-	    fa: 'check-circle',
-	    color: 'green'
-	},
-	4: {
-	    fa: 'clock-o',
-	},
-	5: {
-	    fa: 'mail-reply',
-	    color: 'gray'
-	},
-	N: {
-	    fa: 'times-circle'
-	},
-	G: {
-	    fa: 'list'
-	},
-	A: {
-	    fa: 'check',
-	    color: 'green'
-	},
-	B: {
-	    fa: 'ban',
-	    color: 'red'
-	},
-	Q: {
-	    fa: 'cube'
-	}
+    icon_status_map_class: {
+	2: 'check-circle',
+	4: 'clock-o',
+	5: 'mail-reply',
+	N: 'times-circle',
+	G: 'list',
+	A: 'check',
+	B: 'ban',
+	Q: 'cube'
+    },
+
+    icon_status_map_color: {
+	2: 'green',
+	5: 'gray',
+	A: 'green',
+	B: 'red'
     },
 
     format_status_icon: function(status) {
-	var icon = PMG.Utils.icon_status_map[status] || {};
-	return '<i class="fa fa-' + (icon.fa || 'question-circle') + ' ' +
-	       (icon.color || '') + '"></i> ';
+	var icon = PMG.Utils.icon_status_map_class[status] || 'question-circle';
+	var color = PMG.Utils.icon_status_map_color[status] || '';
+	return '<i class="fa fa-' + icon + ' ' + color + '"></i> ';
     },
 
     format_oclass: function(oclass) {
