@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.UserEdit', {
     extend: 'Proxmox.window.Edit',
     alias: 'widget.pmgUserEdit',

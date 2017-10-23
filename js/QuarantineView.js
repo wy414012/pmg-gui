@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.QuarantineNavigationTree', {
     extend: 'Ext.list.Tree',
     xtype: 'quarantinenavigationtree',

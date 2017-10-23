@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.Application', {
     extend: 'Ext.app.Application',
 

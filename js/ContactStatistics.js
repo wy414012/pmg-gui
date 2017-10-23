@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.ContactDetails', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgContactDetails',

@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-ldap-config', {
     extend: 'Ext.data.Model',
     fields: [ 'profile', 'server1', 'server2', 'comment',

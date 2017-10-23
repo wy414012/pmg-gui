@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.ViewMailHeaders', {
     extend: 'Ext.window.Window',
     alias: 'widget.pmgViewMailHeaders',

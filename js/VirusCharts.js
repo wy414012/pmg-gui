@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.VirusCharts', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgVirusCharts',

@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-mail-tracker', {
     extend: 'Ext.data.Model',
     fields: [

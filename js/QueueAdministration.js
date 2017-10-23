@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.QueueAdministration', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.pmgQueueAdministration',

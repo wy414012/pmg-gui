@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.ClamAVDatabaseConfig', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgClamAVDatabaseConfig'],

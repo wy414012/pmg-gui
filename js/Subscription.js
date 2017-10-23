@@ -1,4 +1,4 @@
-/*global Blob*/
+/*global Blob,Proxmox*/
 Ext.define('PMG.SubscriptionKeyEdit', {
     extend: 'Proxmox.window.Edit',
     

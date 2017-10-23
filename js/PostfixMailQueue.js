@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-mailq', {
     extend: 'Ext.data.Model',
     fields: [

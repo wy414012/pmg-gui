@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-qshape', {
     extend: 'Ext.data.Model',
     fields: [

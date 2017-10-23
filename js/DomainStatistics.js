@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('PMG.DomainStatistics', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgDomainStatistics',

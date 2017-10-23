@@ -1,3 +1,4 @@
+/*global Proxmox*/
 Ext.define('pmg-address-list', {
     extend: 'Ext.data.Model',
     fields: [ 'address' ],
