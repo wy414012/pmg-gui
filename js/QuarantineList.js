@@ -12,6 +12,10 @@ Ext.define('PMG.QuarantineList', {
 	notFoundText: gettext('No data in database.')
     },
 
+    statics: {
+	from: 0,
+	to: 0
+    },
 
     controller: {
 	xclass: 'Ext.app.ViewController',
@@ -26,10 +30,23 @@ Ext.define('PMG.QuarantineList', {
 	    emailCombobox.setVisible(view.emailSelection);
 	    emailCombobox.setDisabled(!view.emailSelection);
 
+	    var from;
+	    if (PMG.QuarantineList.from != 0) {
+		from = new Date(PMG.QuarantineList.from * 1000);
+	    } else {
+		from = new Date();
+	    }
+
+	    var to;
+	    if (PMG.QuarantineList.to != 0) {
+		to = new Date(PMG.QuarantineList.to * 1000);
+	    } else {
+		to = new Date();
+	    }
+
 	    // we to this to trigger the change event of those fields
-	    var today = new Date();
-	    me.lookupReference('from').setValue(today);
-	    me.lookupReference('to').setValue(today);
+	    me.lookupReference('from').setValue(from);
+	    me.lookupReference('to').setValue(to);
 
 	    Proxmox.Utils.monStoreErrors(view.getView(), view.getStore());
 	    me.load(function() {
@@ -64,13 +81,16 @@ Ext.define('PMG.QuarantineList', {
 	    var me = this.getView();
 	    var params = me.getStore().getProxy().getExtraParams();
 	    params.starttime = from;
+	    PMG.QuarantineList.from = from;
 	    me.getStore().getProxy().setExtraParams(params);
 	},
 
 	setTo: function(to) {
+	    var end_of_to = to + 24*60*60; // we want the end of the day
 	    var me = this.getView();
 	    var params = me.getStore().getProxy().getExtraParams();
-	    params.endtime = to;
+	    params.endtime = end_of_to;
+	    PMG.QuarantineList.to = to; // we save the start of the day here
 	    me.getStore().getProxy().setExtraParams(params);
 	},
 
@@ -103,7 +123,7 @@ Ext.define('PMG.QuarantineList', {
 		to.setMinValue(value);
 
 	    } else if (field.name === 'to') {
-		me.setTo(val + 24*60*60);
+		me.setTo(val);
 		params.endtime = val + 24*60*60;
 		from.setMaxValue(value);
 	    } else {
