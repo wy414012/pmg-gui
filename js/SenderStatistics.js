@@ -1,4 +1,6 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/* filter is a function and object */
 Ext.define('PMG.SenderDetails', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgSenderDetails',

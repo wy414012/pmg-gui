@@ -100,6 +100,8 @@ Ext.define('PMG.Transport', {
 	    win.show();
 	};
 
+	/*jslint confusion: true*/
+	/*create is a function and boolean */
 	var tbar = [
             {
 		xtype: 'proxmoxButton',
@@ -127,6 +129,7 @@ Ext.define('PMG.Transport', {
             },
 	    remove_btn
         ];
+	/*jslint confusion: false*/
 
 	Proxmox.Utils.monStoreErrors(me, store, true);
 

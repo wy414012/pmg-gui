@@ -21,7 +21,7 @@ Ext.define('PMG.SpamScoreDistribution', {
 		    if (rec.data.level >= 10) {
 			return PMG.Utils.scoreText + ' >= 10';
 		    } else {
-			return PMG.Utils.scoreText + ' ' + rec.data.level;
+			return PMG.Utils.scoreText + ' ' + rec.data.level.toString();
 		    }
 		}
 	    }

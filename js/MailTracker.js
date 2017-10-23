@@ -106,7 +106,9 @@ Ext.define('PMG.MailTrackerFilter', {
 		    xtype: 'promxoxDateTimeField'
 		},
 		{
-		    layout: 'hbox',
+		    layout: {
+			type: 'hbox'
+		    },
 		    border: false,
 		    items: [
 			{
@@ -145,7 +147,9 @@ Ext.define('PMG.MaiLogWindow', {
     height: 400,
     scrollable: true,
 
-    layout: 'auto',
+    layout: {
+	type: 'auto'
+    },
     modal: true,
     bodyPadding: 5,
 

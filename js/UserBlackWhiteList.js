@@ -38,6 +38,8 @@ Ext.define('PMG.UserBlackWhiteList', {
 		});
 	    });
 
+	    /*jslint confusion: true*/
+	    /* create is an function */
 	    var config = {
 		method: 'POST',
 		url: url,
@@ -45,6 +47,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 		isAdd: true,
 		items: items
 	    };
+	    /*jslint confusion: false*/
 
 	    if (me.listname === 'blacklist') {
 		config.subject = gettext("Blacklist");

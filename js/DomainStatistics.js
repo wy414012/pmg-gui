@@ -54,7 +54,7 @@ Ext.define('PMG.DomainStatistics', {
 	    return v === '' ? '--- EMPTY ADDRESS ---' : Ext.htmlEncode(v);
 	};
 
-	me.items = {
+	me.items = [{
 	    xtype: 'tabpanel',
 	    border: false,
 	    items: [
@@ -143,7 +143,7 @@ Ext.define('PMG.DomainStatistics', {
 		    ]
 		}
 	    ]
-	};
+	}];
 
 	me.callParent();
 

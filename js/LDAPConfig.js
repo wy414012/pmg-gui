@@ -1,4 +1,12 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/*create is function and bool,
+ * reload is function and string,
+ * height is number and string,
+ * hidden is bool and string,
+ * bind is function and object,
+ * callback is function and string
+ */
 Ext.define('pmg-ldap-config', {
     extend: 'Ext.data.Model',
     fields: [ 'profile', 'server1', 'server2', 'comment',
@@ -364,9 +372,7 @@ Ext.define('PMG.LDAPConfig', {
 	}
     },
 
-    layout: {
-	type: 'border',
-    },
+    layout: 'border',
 
     items: [
 	{
@@ -496,10 +502,10 @@ Ext.define('PMG.LDAPConfigGrid', {
 
     store: {
 	model: 'pmg-ldap-config',
-	sorters: {
+	sorters: [{
 	    property: 'profile',
 	    order: 'DESC'
-	}
+	}]
     },
 
     tbar: [

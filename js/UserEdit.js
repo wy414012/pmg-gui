@@ -1,4 +1,6 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/* submitvalue is string and bool */
 Ext.define('PMG.UserEdit', {
     extend: 'Proxmox.window.Edit',
     alias: 'widget.pmgUserEdit',

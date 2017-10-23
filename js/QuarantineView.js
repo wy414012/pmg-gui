@@ -183,7 +183,9 @@ Ext.define('PMG.QuarantineView', {
 
     plugins: 'viewport',
 
-    layout: 'border',
+    layout: {
+	type: 'border'
+    },
 
     items: [
 	{
@@ -234,7 +236,9 @@ Ext.define('PMG.QuarantineView', {
 	},
 	{
 	    xtype: 'panel',
-	    layout: 'card',
+	    layout: {
+		type: 'card'
+	    },
 	    region: 'center',
 	    border: false,
 	    reference: 'contentpanel'

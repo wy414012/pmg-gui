@@ -1,4 +1,9 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/* create is a function and boolean,
+ * bind is a function and object,
+ * callback is a function and string
+ */
 Ext.define('pmg-rule-list', {
     extend: 'Ext.data.Model',
     fields: [
@@ -26,7 +31,7 @@ Ext.define('PMG.RulesConfiguration', {
 	selectedRuleChange: function(grid, selected, eOpts) {
 	    var me = this;
 	    var infoPanel = me.lookupReference('infopanel');
-	    var baseurl = undefined;
+	    var baseurl;
 
 	    if (selected.length > 0) {
 		baseurl = '/config/ruledb/rules/' + selected[0].data.id;

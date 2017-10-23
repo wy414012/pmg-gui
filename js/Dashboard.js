@@ -1,4 +1,11 @@
 /*global Proxmox*/
+/*jslint confusion: true*/
+/* load is a function and string
+ * hours is a number and string
+ * timespan is a number and string
+ * bind is a function and object
+ * handler is a function and string
+ */
 Ext.define('PMG.Dashboard', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgDashboard',
@@ -18,7 +25,7 @@ Ext.define('PMG.Dashboard', {
 		},
 		items: [{
 		    xtype: 'form',
-		    bodyPadding: 10,
+		    bodyPadding: '10 10 10 10',
 		    defaultButton: 'savebutton',
 		    items: [{
 			xtype: 'proxmoxintegerfield',
@@ -73,7 +80,7 @@ Ext.define('PMG.Dashboard', {
 	    var bytes_in = 0;
 	    var bytes_out = 0;
 	    var ptime = 0;
-	    var avg_ptime = 0;
+	    var avg_ptime;
 
 	    records.forEach(function(item) {
 		bytes_in += item.data.bytes_in;
@@ -260,7 +267,9 @@ Ext.define('PMG.Dashboard', {
 	    Ext.String.format(gettext('{0} hours'), '{hours}') + ')'
     },
 
-    layout: 'column',
+    layout: {
+	type: 'column'
+    },
     border: false,
 
     bodyPadding: '20 0 0 20',
@@ -394,7 +403,7 @@ Ext.define('PMG.Dashboard', {
 	    iconCls: 'fa fa-list',
 	    title: gettext('Top Receivers'),
 
-	    bodyPadding: 20,
+	    bodyPadding: '20 20 20 20',
 	    layout: {
 		type: 'vbox',
 		pack: 'center',

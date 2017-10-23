@@ -30,6 +30,8 @@ Ext.define('PMG.SpamQuarantineOptions', {
 	    return me.authmodeTextHash[value] || value;
 	};
 
+	/*jslint confusion: true*/
+	/* defaultValue is a string and a number*/
 	me.add_combobox_row('authmode', gettext('Authentication mode'), {
 	    defaultValue: 'ticket',
 	    renderer: render_authmode,
@@ -53,6 +55,7 @@ Ext.define('PMG.SpamQuarantineOptions', {
 		['outlook', render_reportstyle('outlook') ],
 		['custom', render_reportstyle('custom') ]]
 	});
+	/*jslint confusion: false*/
 
 	me.add_text_row('hostname', gettext('Quarantine Host'),
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });

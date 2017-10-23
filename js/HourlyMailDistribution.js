@@ -41,7 +41,8 @@ Ext.define('PMG.MailDistChart', {
 		renderer: function(tooltip, record, item) {
 		    var start = record.get('index');
 		    var end = start+1;
-		    tooltip.setHtml('Time: ' + start + ' - ' + end + '<br>' +
+		    tooltip.setHtml('Time: ' + start.toString() +
+				    ' - ' + end.toString() + '<br>' +
 				    'Count: ' + record.get(item.field));
 		}
 	    }

@@ -77,7 +77,7 @@ Ext.define('PMG.ClusterAddNodeWindow', {
 	{
 	    xtype: 'component',
 	    border: false,
-	    padding: 10,
+	    padding: '10 10 10 10',
 	    html: gettext("Please use the 'Join' button on the node you want to add, using the following IP address and fingerprint.")
 	},
 	{
@@ -103,6 +103,8 @@ Ext.define('PMG.ClusterAddNodeWindow', {
     ]
 });
 
+/*jslint confusion: true*/
+/* bind is a function and object */
 Ext.define('PMG.ClusterAdministration', {
     extend: 'Ext.tab.Panel',
     xtype: 'pmgClusterAdministration',
@@ -276,7 +278,7 @@ Ext.define('PMG.ClusterAdministration', {
 			if (Ext.isArray(value)) {
 			    return value[0];
 			}
-			return value;
+			return value.toString();
 		    },
 		    dataIndex: 'loadavg'
 		},
