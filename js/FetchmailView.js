@@ -46,8 +46,23 @@ Ext.define('PMG.FetchmailView', {
             });
             win.on('destroy', function() { view.store.load(); });
             win.show();
+	},
+
+	onAfterRemove: function(btn, res) {
+	    var view = this.getView();
+	    view.store.load();
 	}
     },
+
+    tbar: [
+	{
+	    xtype: 'proxmoxStdRemoveButton',
+	    baseurl: '/config/fetchmail',
+	    reference: 'removeBtn',
+	    callback: 'onAfterRemove',
+	    waitMsgTarget: true
+	},
+    ],
 
     listeners: {
 	//scope: 'controller',
