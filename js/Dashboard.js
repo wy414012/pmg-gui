@@ -142,10 +142,10 @@ Ext.define('PMG.Dashboard', {
 	    var cpuPanel = me.lookup('cpu');
 	    cpuPanel.updateValue(cpu);
 
-	    var memPanel = me.lookup('mem')
+	    var memPanel = me.lookup('mem');
 	    memPanel.updateValue(mem);
 
-	    var hdPanel = me.lookup('hd')
+	    var hdPanel = me.lookup('hd');
 	    hdPanel.updateValue(hd);
 	},
 

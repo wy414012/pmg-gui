@@ -41,7 +41,7 @@ Ext.define('PMG.FetchmailView', {
 		url: view.baseurl,
 		method: 'POST'
             });
-            win.on('destroy', function() { view.store.load() });
+            win.on('destroy', function() { view.store.load(); });
             win.show();
 	},
 

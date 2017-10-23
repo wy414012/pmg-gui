@@ -46,7 +46,7 @@ Ext.define('PMG.SpamDetectorOptions', {
 		text: gettext('Edit'),
 		xtype: 'proxmoxButton',
 		disabled: true,
-		handler: function() { me.run_editor() },
+		handler: function() { me.run_editor(); },
 		selModel: me.selModel
 	    }],
 	    url: '/api2/json' + baseurl,

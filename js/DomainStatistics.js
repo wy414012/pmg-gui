@@ -48,7 +48,7 @@ Ext.define('PMG.DomainStatistics', {
 		store_in.setData(records);
 		store_out.setData(records);
 	    }
-	})
+	});
 
 	var render_domain = function(v) {
 	    return v === '' ? '--- EMPTY ADDRESS ---' : Ext.htmlEncode(v);

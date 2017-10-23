@@ -51,4 +51,4 @@ Ext.define('PMG.dashboard.MailProcessing', {
 	    ]
 	}
     ]
-})
+});

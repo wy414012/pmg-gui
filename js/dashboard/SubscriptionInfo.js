@@ -50,4 +50,4 @@ Ext.define('PMG.dashboard.SubscriptionInfo', {
 	    }
 	}
     }
-})
+});

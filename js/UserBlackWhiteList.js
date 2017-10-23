@@ -58,7 +58,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    }
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
-	    win.on('destroy', function() { me.store.load() });
+	    win.on('destroy', function() { me.store.load(); });
 	    win.show();
 	},
 

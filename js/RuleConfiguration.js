@@ -148,7 +148,7 @@ Ext.define('PMG.RulesConfiguration', {
 			iconCls: 'fa fa-minus-circle',
 			reference: 'removeButton',
 			callback: 'reload',
-			getRecordName: function(rec) { return rec.data.name },
+			getRecordName: function(rec) { return rec.data.name; },
 			bind: {
 			    baseurl: '{baseUrl}'
 			}

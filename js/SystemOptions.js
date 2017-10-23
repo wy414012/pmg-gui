@@ -81,5 +81,4 @@ Ext.define('PMG.SystemOptions', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
     }
-})
-
+});

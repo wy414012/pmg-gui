@@ -28,7 +28,7 @@ Ext.define('PMG.UserEdit', {
 	return {
 	    useridXType: userid ? 'displayfield' : 'textfield',
 	    isSuperUser: userid === 'root@pam'
-	}
+	};
     },
 
     items: {

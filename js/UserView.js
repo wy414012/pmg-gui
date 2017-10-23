@@ -57,7 +57,7 @@ Ext.define('PMG.UserView', {
 	    var view = this.getView();
 
             var win = Ext.create('PMG.UserEdit', {});
-            win.on('destroy', function() { view.reload() });
+            win.on('destroy', function() { view.reload(); });
             win.show();
 	},
 
@@ -69,7 +69,7 @@ Ext.define('PMG.UserView', {
             var win = Ext.create('PMG.UserEdit', {
 		userid: rec.data.userid
             });
-            win.on('destroy', function() { view.reload() });
+            win.on('destroy', function() { view.reload(); });
             win.show();
 	},
 
@@ -79,7 +79,7 @@ Ext.define('PMG.UserView', {
 	    var win = Ext.create('Proxmox.window.PasswordEdit',{
                 userid: rec.data.userid
 	    });
-            win.on('destroy', function() { view.reload() });
+            win.on('destroy', function() { view.reload(); });
 	    win.show();
 	},
 

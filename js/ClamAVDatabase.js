@@ -152,7 +152,7 @@ Ext.define('PMG.ClamAVDatabase', {
 			upid: upid
 		    });
 		    win.show();
-		    me.mon(win, 'close', function() { statusPanel.reload() });
+		    me.mon(win, 'close', function() { statusPanel.reload(); });
 		}
 	    });
 	};
@@ -162,7 +162,7 @@ Ext.define('PMG.ClamAVDatabase', {
 		text: gettext('Edit'),
 		xtype: 'proxmoxButton',
 		disabled: true,
-		handler: function() { editPanel.run_editor() },
+		handler: function() { editPanel.run_editor(); },
 		selModel: selModel
             },
 	    {
