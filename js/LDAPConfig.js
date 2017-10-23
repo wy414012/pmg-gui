@@ -462,7 +462,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    win.show();
 	},
 
-	new: function() {
+	newProfile: function() {
 	    var me = this;
 	    var win = Ext.createWidget('pmgLDAPEdit', {});
 	    win.on('destroy', me.reload, me);
@@ -516,7 +516,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	},
 	{
 	    text: gettext('Create'),
-	    handler: 'new'
+	    handler: 'newProfile'
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
