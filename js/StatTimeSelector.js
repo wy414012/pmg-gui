@@ -79,7 +79,7 @@ Ext.define('PMG.StatTimeSelector', {
 	    
 	    yearsel.setValue(statics.selected_year);
 	    monthsel.setValue(statics.selected_month);
- 	    daysel.setValue(statics.selected_month ? statics.selected_day : 0);
+	    daysel.setValue(statics.selected_month ? statics.selected_day : 0);
 
 	    this.updateVisibility();
 	}

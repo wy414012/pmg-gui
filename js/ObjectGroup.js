@@ -203,7 +203,7 @@ Ext.define('PMG.ObjectGroup', {
 		    },
 		    handler: run_editor
 		},
- 		remove_btn
+		remove_btn
 	    ]
 	});
 

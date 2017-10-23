@@ -3,7 +3,7 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
     alias: 'widget.pmgSpamDetectorLanguagesInputPanel',
 
     languages: [
-    	[ 'af', 'Afrikaans' ],
+	[ 'af', 'Afrikaans' ],
 	[ 'am', 'Amharic' ],
 	[ 'ar', 'Arabic' ],
 	[ 'be', 'Byelorussian' ],

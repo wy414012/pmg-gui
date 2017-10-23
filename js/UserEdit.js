@@ -65,7 +65,7 @@ Ext.define('PMG.UserEdit', {
 		}
 	    },
 	    {
-	    	xtype: 'textfield',
+		xtype: 'textfield',
 		inputType: 'password',
 		fieldLabel: gettext('Confirm password'),
 		name: 'verifypassword',
