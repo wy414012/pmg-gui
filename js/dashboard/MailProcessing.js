@@ -26,28 +26,28 @@ Ext.define('PMG.dashboard.MailProcessing', {
 	{
 	    itemId: 'traffic',
 	    data: {
-		in: 0,
-		out: 0
+		'bytes_in': 0,
+		'bytes_out': 0
 	    },
 	    tpl: [
 		'<h3><i class="fa fa-exchange green"></i> ' + gettext('Traffic') + '</h3>',
 		'<table class="dash"><tr>',
-		'<td class="right half"><h2>{in}</h2></td>',
+		'<td class="right half"><h2>{bytes_in}</h2></td>',
 		'<td class="left">' + PMG.Utils.format_rule_direction(0) + '</td>',
 		'</tr><tr>',
-		'<td class="right half"><h2>{out}</h2></td>',
+		'<td class="right half"><h2>{bytes_out}</h2></td>',
 		'<td class="left">' + PMG.Utils.format_rule_direction(1) + '</td>',
-		'</tr></table>',
+		'</tr></table>'
 	    ]
 	},
 	{
 	    itemId: 'ptime',
 	    data: {
-		avgptime: 0,
+		'avg_ptime': 0
 	    },
 	    tpl: [
 		'<h3><i class="fa fa-clock-o"></i> ' + gettext('Avg. Processing Time') + '</h3>',
-		'<p><h2>{ptime}</h2></p>'
+		'<p><h2>{avg_ptime}</h2></p>'
 	    ]
 	}
     ]

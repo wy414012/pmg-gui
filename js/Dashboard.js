@@ -353,9 +353,9 @@ Ext.define('PMG.Dashboard', {
 		    height: 180,
 		    bind: {
 			data: {
-			    'in': '{bytes_in}',
-			    'out': '{bytes_out}',
-			    'ptime': '{avg_ptime}'
+			    'bytes_in': '{bytes_in}',
+			    'bytes_out': '{bytes_out}',
+			    'avg_ptime': '{avg_ptime}'
 			}
 		    }
 		},
