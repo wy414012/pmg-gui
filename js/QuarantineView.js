@@ -21,13 +21,13 @@ Ext.define('PMG.QuarantineNavigationTree', {
 		    children: [
 			{
 			    text: gettext('Whitelist'),
-			    //iconCls: 'fa fa-cubes',
+			    iconCls: 'fa fa-file-o',
 			    path: 'pmgUserWhitelist',
 			    leaf: true
 			},
 			{
 			    text: gettext('Blacklist'),
-			    //iconCls: 'fa fa-cubes',
+			    iconCls: 'fa fa-file',
 			    path: 'pmgUserBlacklist',
 			    leaf: true
 			}
