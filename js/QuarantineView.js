@@ -161,8 +161,9 @@ Ext.define('PMG.QuarantineView', {
 	    });
 
 	    var qa = PMG.Utils.extractQuarantineAction();
+	    var token;
 	    if (qa) {
-		var token = 'pmgSpamQuarantine';
+		token = 'pmgSpamQuarantine';
 		if (qa.action === 'blacklist') { token = 'pmgUserBlacklist'; }
 		if (qa.action === 'whitelist') { token = 'pmgUserWhitelist'; }
 		if (qa.cselect) {
@@ -175,7 +176,7 @@ Ext.define('PMG.QuarantineView', {
 	    } else {
 		// select treeitem and load page from url fragment
 		
-		var token = Ext.util.History.getToken() || 'pmgSpamQuarantine';
+		token = Ext.util.History.getToken() || 'pmgSpamQuarantine';
 		this.redirectTo(token, true);
 	    }
 	}

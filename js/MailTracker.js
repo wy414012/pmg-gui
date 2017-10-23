@@ -332,10 +332,10 @@ Ext.define('PMG.MailTracker', {
 		var icon = 'question-circle';
 		var rstatus = rec.data.rstatus;
 		if (v !== undefined && v !== '') {
-		    vtext = PMG.Utils.mail_status_map[v] || v;
+		    var vtext = PMG.Utils.mail_status_map[v] || v;
 		    icon = v;
 		    if (rstatus !== undefined && rstatus !== '') {
-			rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
+			var rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
 			returntext = vtext + '/' + rtext;
 			icon = rstatus;
 		    } else if (rec.data.qid !== undefined) {
