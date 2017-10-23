@@ -36,7 +36,7 @@ Ext.define('PMG.SpamQuarantineOptions', {
 	    comboItems: [
 		['ticket', render_authmode('ticket') ],
 		['ldap', render_authmode('ldap') ],
-		['ldapticket', render_authmode('ldapticket') ]],
+		['ldapticket', render_authmode('ldapticket') ]]
 	});
 
 	var render_reportstyle = function(value) {
@@ -51,7 +51,7 @@ Ext.define('PMG.SpamQuarantineOptions', {
 		['short', render_reportstyle('short') ],
 		['verbose', render_reportstyle('verbose') ],
 		['outlook', render_reportstyle('outlook') ],
-		['custom', render_reportstyle('custom') ]],
+		['custom', render_reportstyle('custom') ]]
 	});
 
 	me.add_text_row('hostname', gettext('Quarantine Host'),
@@ -79,7 +79,7 @@ Ext.define('PMG.SpamQuarantineOptions', {
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl,
+		url: '/api2/extjs' + baseurl
 	    },
 	    interval: 5000,
 	    cwidth1: 200,

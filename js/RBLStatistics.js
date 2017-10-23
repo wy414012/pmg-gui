@@ -18,7 +18,7 @@ Ext.define('PMG.RBLStatistics', {
 	    legend: false,
 	    fields: [ 'count' ],
 	    fieldTitles: [
-		gettext('RBL rejects'),
+		gettext('RBL rejects')
 	    ],
 	    store: {
 		type: 'pmgStatStore',

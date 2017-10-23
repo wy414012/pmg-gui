@@ -73,7 +73,7 @@ Ext.define('PMG.FetchmailEdit', {
 		name: 'target',
 		fieldLabel: gettext('Deliver to'),
 		allowBlank: false
-	    },
+	    }
 
 	],
 	column2: [

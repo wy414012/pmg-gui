@@ -5,7 +5,7 @@ Ext.define('pmg-fetchmail-users', {
 	'id', 'protocol', 'port', 'server', 'user', 'pass', 'target',
 	'ssl', 'keep',
 	{ type: 'integer', name: 'interval' },
-	{ type: 'boolean', name: 'enable' },
+	{ type: 'boolean', name: 'enable' }
     ],
     proxy: {
         type: 'proxmox',
@@ -39,7 +39,7 @@ Ext.define('PMG.FetchmailView', {
 
             var win = Ext.create('PMG.FetchmailEdit', {
 		url: view.baseurl,
-		method: 'POST',
+		method: 'POST'
             });
             win.on('destroy', function() { view.store.load() });
             win.show();
@@ -84,12 +84,12 @@ Ext.define('PMG.FetchmailView', {
 	    reference: 'removeBtn',
 	    callback: 'onAfterRemove',
 	    waitMsgTarget: true
-	},
+	}
     ],
 
     listeners: {
 	//scope: 'controller',
-	itemdblclick: 'onEdit',
+	itemdblclick: 'onEdit'
     },
 
     columns: [

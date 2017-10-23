@@ -18,8 +18,8 @@ Ext.define('PMG.dashboard.MiniGraph', {
 	    },
 	    style: {
 		axisLine: false,
-		majorTickSize: 0,
-	    },
+		majorTickSize: 0
+	    }
 	},
 	{
 	    type: 'time',
@@ -31,11 +31,11 @@ Ext.define('PMG.dashboard.MiniGraph', {
 	    },
 	    style: {
 		axisLine: false,
-		majorTickSize: 0,
+		majorTickSize: 0
 	    }
 	}
     ],
     border: false,
     flex: 1,
-    noTool: true,
+    noTool: true
 });

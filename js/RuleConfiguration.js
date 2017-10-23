@@ -17,7 +17,7 @@ Ext.define('PMG.RulesConfiguration', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false,
+	border: false
     },
 
     controller: {
@@ -112,7 +112,7 @@ Ext.define('PMG.RulesConfiguration', {
 	data: {
 	    selectedRule: undefined,
 	    baseUrl: '/config/ruledb/rules'
-	},
+	}
     },
 
     items: [
@@ -135,7 +135,7 @@ Ext.define('PMG.RulesConfiguration', {
 			xtype: 'button',
 			text: gettext('Add'),
 			iconCls: 'fa fa-plus-circle',
-			reference: 'addButton',
+			reference: 'addButton'
 		    },
 		    {
 			xtype: 'proxmoxStdRemoveButton',
@@ -171,7 +171,7 @@ Ext.define('PMG.RulesConfiguration', {
 			direction: 'DESC'
 		    },
 		    {
-			property: 'name',
+			property: 'name'
 		    }
 		]
 	    },
@@ -181,16 +181,16 @@ Ext.define('PMG.RulesConfiguration', {
 		{
 		    text: 'Active',
 		    dataIndex: 'active',
-		    hidden : true,
+		    hidden : true
 		},
 		{
 		    text: 'Name',
 		    dataIndex: 'name',
-		    flex: 1,
+		    flex: 1
 		},
 		{
 		    text: 'Priority',
-		    dataIndex: 'priority',
+		    dataIndex: 'priority'
 		},
 		{
 		    text: 'Direction',
@@ -216,7 +216,7 @@ Ext.define('PMG.RulesConfiguration', {
 				return (rec.get('active') ? 'Deactivate' : 'Activate');
 			    },
 			    handler: 'toggleIconClick'
-			},
+			}
 		    ]
 		}
 	    ]
@@ -226,7 +226,7 @@ Ext.define('PMG.RulesConfiguration', {
 	    reference: 'infopanel',
 	    xtype: 'pmgRuleInfo',
 	    split: true,
-	    width: 440,
+	    width: 440
 	}
     ]
 });

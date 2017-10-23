@@ -6,7 +6,7 @@ Ext.define('PMG.MailStatGrid', {
     hideHeaders: true,
 
     store: {
-	fields: [ 'name', 'value', 'percentage' ],
+	fields: [ 'name', 'value', 'percentage' ]
     },
 
     columns: [

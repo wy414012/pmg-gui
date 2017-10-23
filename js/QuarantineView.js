@@ -23,13 +23,13 @@ Ext.define('PMG.QuarantineNavigationTree', {
 			    text: gettext('Whitelist'),
 			    //iconCls: 'fa fa-cubes',
 			    path: 'pmgUserWhitelist',
-			    leaf: true,
+			    leaf: true
 			},
 			{
 			    text: gettext('Blacklist'),
 			    //iconCls: 'fa fa-cubes',
 			    path: 'pmgUserBlacklist',
-			    leaf: true,
+			    leaf: true
 			}
 		    ]
 		}
@@ -237,7 +237,7 @@ Ext.define('PMG.QuarantineView', {
 	    layout: 'card',
 	    region: 'center',
 	    border: false,
-	    reference: 'contentpanel',
+	    reference: 'contentpanel'
 	}
     ]
 });

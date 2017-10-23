@@ -7,7 +7,7 @@ Ext.define('PMG.MailProxyPorts', {
     monStoreErrors: true,
 
     editorConfig: {
-	url: '/api2/extjs/config/mail',
+	url: '/api2/extjs/config/mail'
     },
 
     interval: 5000,
@@ -24,7 +24,7 @@ Ext.define('PMG.MailProxyPorts', {
     },
 
     listeners: {
-	itemdblclick: 'onEdit',
+	itemdblclick: 'onEdit'
     },
 
     tbar: [

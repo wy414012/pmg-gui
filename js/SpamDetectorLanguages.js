@@ -66,7 +66,7 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
 	[ 'uk', 'Ukrainian' ],
 	[ 'vi', 'Vietnamese' ],
 	[ 'yi', 'Yiddish' ],
-	[ 'zh', 'Chinese' ],
+	[ 'zh', 'Chinese' ]
     ],
 
     onGetValues: function(values) {

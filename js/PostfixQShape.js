@@ -87,7 +87,7 @@ Ext.define('PMG.Postfix.QShape', {
 		activate: function() {
 		    this.view.store.load(); // reload
 		}
-	    },
+	    }
 	}
     },
 

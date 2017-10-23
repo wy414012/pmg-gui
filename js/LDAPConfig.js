@@ -76,7 +76,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		deleteEmpty: me.create ? false : true,
 		minValue: 1,
 		maxValue: 65535,
-		fieldLabel: gettext('Port'),
+		fieldLabel: gettext('Port')
 	    },
 	    {
 		xtype: 'textfield',
@@ -294,7 +294,7 @@ Ext.define('PMG.LDAPConfig', {
 		    },
 		    columns: [
 			{ dataIndex: 'email', text: gettext('E-Mail address'), flex: 1 }
-		    ],
+		    ]
 		}]
 	    }).show();
 	},
@@ -373,7 +373,7 @@ Ext.define('PMG.LDAPConfig', {
 	    region: 'center',
 	    reference: 'grid',
 	    xtype: 'pmgLDAPConfigGrid',
-	    border: false,
+	    border: false
 	},
 	{
 	    xtype: 'tabpanel',
@@ -426,11 +426,11 @@ Ext.define('PMG.LDAPConfig', {
 		    }],
 		    bind: {
 			title: Ext.String.format(gettext("Users of '{0}'"), '{name}')
-		    },
+		    }
 		}
 	    ]
 	}
-    ],
+    ]
 
 });
 
@@ -450,7 +450,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    }
 
 	    var win = Ext.createWidget('pmgLDAPEdit', {
-		profileId: rec.data.profile,
+		profileId: rec.data.profile
 	    });
 	    win.on('destroy', me.reload, me);
 	    win.load();
@@ -516,7 +516,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/config/ldap',
-	    callback: 'reload',
+	    callback: 'reload'
 	},
 	{
 	    xtype: 'proxmoxButton',
@@ -526,7 +526,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    },
 	    disabled: true,
 	    handler: 'sync'
-	},
+	}
     ],
 
     listeners: {
@@ -589,7 +589,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    width: 80,
 	    sortable: true,
 	    dataIndex: 'gcount'
-	},
-    ],
+	}
+    ]
 
 });

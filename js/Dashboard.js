@@ -42,7 +42,7 @@ Ext.define('PMG.Dashboard', {
 			    win.close();
 			}
 		    }]
-		}],
+		}]
 	    }).show();
 	},
 
@@ -156,7 +156,7 @@ Ext.define('PMG.Dashboard', {
 	    hours: 12, // in hours
 	    'bytes_in': 0,
 	    'bytes_out': 0,
-	    'avg_ptime': 0.0,
+	    'avg_ptime': 0.0
 	},
 
 	stores: {
@@ -244,7 +244,7 @@ Ext.define('PMG.Dashboard', {
 		    type: 'proxmox',
 		    url: '/api2/json/statistics/recentreceivers',
 		    extraParams: {
-			hours: '{hours}',
+			hours: '{hours}'
 		    }
 		},
 		fields: [
@@ -288,7 +288,7 @@ Ext.define('PMG.Dashboard', {
 	    title: gettext('E-Mail Volume'),
 	    layout: {
 		type: 'vbox',
-		align: 'stretch',
+		align: 'stretch'
 	    },
 	    defaults: {
 		xtype: 'pmgMiniGraph',
@@ -309,8 +309,8 @@ Ext.define('PMG.Dashboard', {
 			highlightCfg: {
 			    opacity: 1,
 			    scaling: 1
-			},
-		    },
+			}
+		    }
 		},
 		{
 		    fields: ['spam'],
@@ -324,9 +324,9 @@ Ext.define('PMG.Dashboard', {
 			highlightCfg: {
 			    opacity: 1,
 			    scaling: 1
-			},
-		    },
-		},
+			}
+		    }
+		}
 	    ]
 	},
 	{
@@ -334,7 +334,7 @@ Ext.define('PMG.Dashboard', {
 	    height: 300,
 	    layout: {
 		type: 'vbox',
-		align: 'stretch',
+		align: 'stretch'
 	    },
 	    items: [
 		{
@@ -348,7 +348,7 @@ Ext.define('PMG.Dashboard', {
 			    'out': '{bytes_out}',
 			    'ptime': '{avg_ptime}'
 			}
-		    },
+		    }
 		},
 		{
 		    iconCls: 'fa fa-ticket',
@@ -356,7 +356,7 @@ Ext.define('PMG.Dashboard', {
 		    reference: 'subscription',
 		    xtype: 'pmgSubscriptionInfo',
 		    margin: '10 0 0 0',
-		    height: 110,
+		    height: 110
 		}
 	    ]
 	},
@@ -416,7 +416,7 @@ Ext.define('PMG.Dashboard', {
 		columnLines: false,
 		rowLines: false,
 		viewConfig: {
-		    stripeRows: false,
+		    stripeRows: false
 		},
 
 		columns: [

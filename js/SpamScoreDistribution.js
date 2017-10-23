@@ -25,7 +25,7 @@ Ext.define('PMG.SpamScoreDistribution', {
 		    }
 		}
 	    }
-	],
+	]
     },
 
     columns: [
@@ -48,7 +48,7 @@ Ext.define('PMG.SpamScoreDistribution', {
 	    widget: {
 		xtype: 'progressbarwidget',
 		textTpl: ['{percent:number("0")}%' ]
-	    },
+	    }
 	}
     ]
 });

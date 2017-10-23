@@ -82,7 +82,7 @@ Ext.define('PMG.ContactDetails', {
 	    header: gettext('Time'),
 	    format: 'H:i:s',
 	    dataIndex: 'time'
-	},
+	}
     ],
 
     initComponent: function() {
@@ -119,7 +119,7 @@ Ext.define('PMG.ContactList', {
 	    'contact',
 	    { type: 'integer', name: 'count' },
 	    { type: 'integer', name: 'viruscount' },
-	    { type: 'integer', name: 'bytes' },
+	    { type: 'integer', name: 'bytes' }
 	],
 	proxy: {
 	    type: 'pmgfilterproxy',
@@ -192,7 +192,7 @@ Ext.define('PMG.ContactStatistics', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false,
+	border: false
     },
 
     controller: {
@@ -219,7 +219,7 @@ Ext.define('PMG.ContactStatistics', {
 	    layout: 'fit',
 	    flex: 1,
 
-	    listeners: { selectionchange: 'selectionChange' },
+	    listeners: { selectionchange: 'selectionChange' }
 	},
 	{
 	    xtype: 'pmgContactDetails',

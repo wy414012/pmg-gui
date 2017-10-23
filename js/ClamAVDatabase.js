@@ -19,7 +19,7 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 	Ext.apply(me, {
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl,
+		url: '/api2/extjs' + baseurl
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
@@ -98,7 +98,7 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 		    flex: 1,
 		    sortable: true,
 		    dataIndex: 'nsigs'
-		},
+		}
 	    ],
 	    listeners: {
 		activate: me.reload

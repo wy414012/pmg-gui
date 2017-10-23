@@ -217,7 +217,7 @@ Ext.define('PMG.MailTracker', {
     plugins: [
 	{
 	    ptype: 'rowexpander',
-	    rowBodyTpl: '<p class="logs">{logs}</p>',
+	    rowBodyTpl: '<p class="logs">{logs}</p>'
 	}
     ],
 

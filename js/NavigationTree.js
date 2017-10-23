@@ -22,25 +22,25 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Action Objects'),
 			iconCls: 'fa fa-flag',
 			path: 'pmgActionList',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Who Objects'),
 			iconCls: 'fa fa-user-circle',
 			path: 'pmgWhoConfiguration',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('What Objects'),
 			iconCls: 'fa fa-cube',
 			path: 'pmgWhatConfiguration',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('When Objects'),
 			iconCls: 'fa fa-clock-o',
 			path: 'pmgWhenConfiguration',
-			leaf: true,
+			leaf: true
 		    }
 		]
 	    },
@@ -54,31 +54,31 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Mail Proxy'),
 			iconCls: 'fa fa-envelope-o',
 			path: 'pmgMailProxyConfiguration',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Spam Detector'),
 			iconCls: 'fa fa-bullhorn',
 			path: 'pmgSpamDetectorConfiguration',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Virus Detector'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusDetectorConfiguration',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('User Management'),
 			iconCls: 'fa fa-users',
 			path: 'pmgUserManagement',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Cluster'),
 			iconCls: 'fa fa-server',
 			path: 'pmgClusterAdministration',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Subscription'),
@@ -98,37 +98,37 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Spam Quarantine'),
 			iconCls: 'fa fa-bullhorn',
 			path: 'pmgSpamQuarantine',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Virus Quarantine'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusQuarantine',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('User Whitelist'),
 			iconCls: 'fa fa-file-o',
 			path: 'pmgUserWhitelist',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('User Blacklist'),
 			iconCls: 'fa fa-file',
 			path: 'pmgUserBlacklist',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Tracking Center'),
 			iconCls: 'fa fa-map-o',
 			path: 'pmgMailTracker',
-			leaf: true,
+			leaf: true
 		    },
 		    {
 			text: gettext('Queues'),
 			iconCls: 'fa fa-bars',
 			path: 'pmgQueueAdministration',
-			leaf: true,
+			leaf: true
 		    }
 		]
 	    },

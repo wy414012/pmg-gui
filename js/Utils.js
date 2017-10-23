@@ -17,7 +17,7 @@ Ext.define('PMG.Utils', {
 	root: gettext('Superuser'),
 	admin: gettext('Administrator'),
 	qmanager: gettext('Quarantine Manager'),
-	audit: gettext('Auditor'),
+	audit: gettext('Auditor')
     },
 
     format_user_role: function(role) {

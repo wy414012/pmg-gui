@@ -29,7 +29,7 @@ Ext.define('PMG.SystemOptions', {
     }],
 
     listeners: {
-	itemdblclick: 'onEdit',
+	itemdblclick: 'onEdit'
     },
 
     add_proxy_row: function(name, text, opts) {

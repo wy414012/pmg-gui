@@ -55,5 +55,5 @@ Ext.define('PMG.grid.SpamInfoGrid',{
 	    dataIndex: 'desc',
 	    flex: 3
 	}
-    ],
+    ]
 });

@@ -25,7 +25,7 @@ Ext.define('PMG.UserEdit', {
 
 	return {
 	    useridXType: userid ? 'displayfield' : 'textfield',
-	    isSuperUser: userid === 'root@pam',
+	    isSuperUser: userid === 'root@pam'
 	}
     },
 
@@ -39,7 +39,7 @@ Ext.define('PMG.UserEdit', {
 		allowBlank: false,
 		cbind: {
 		    submitValue: '{create}',
-		    xtype: '{useridXType}',
+		    xtype: '{useridXType}'
 		}
 	    },
 	    {

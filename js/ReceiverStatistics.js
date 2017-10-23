@@ -204,7 +204,7 @@ Ext.define('PMG.ReceiverStatistics', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false,
+	border: false
     },
 
     controller: {
@@ -231,7 +231,7 @@ Ext.define('PMG.ReceiverStatistics', {
 	    layout: 'fit',
 	    flex: 1,
 
-	    listeners: { selectionchange: 'selectionChange' },
+	    listeners: { selectionchange: 'selectionChange' }
 	},
 	{
 	    xtype: 'pmgReceiverDetails',

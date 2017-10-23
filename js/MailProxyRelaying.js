@@ -34,7 +34,7 @@ Ext.define('PMG.MailProxyRelaying', {
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl,
+		url: '/api2/extjs' + baseurl
 	    },
 	    interval: 5000,
 	    cwidth1: 200,

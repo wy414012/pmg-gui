@@ -34,7 +34,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 		items.push({
 		    xtype: 'hidden',
 		    name: key,
-		    value: value,
+		    value: value
 		});
 	    });
 
@@ -132,7 +132,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    editable: true,
 	    reference: 'email',
 	    name: 'email',
-	    fieldLabel: 'E-Mail',
+	    fieldLabel: 'E-Mail'
 	},
 	{
 	    text: gettext('Add'),
@@ -178,7 +178,7 @@ Ext.define('PMG.UserBlacklist', {
 	proxy: {
             type: 'proxmox',
             url: "/api2/json/quarantine/blacklist"
-	},
+	}
     },
 
     dockedItems: [
@@ -187,7 +187,7 @@ Ext.define('PMG.UserBlacklist', {
 	    bodyStyle: {
 		padding: '10px',
 		'border-left': '0px',
-		'border-right': '0px',
+		'border-right': '0px'
 	    },
             html: gettext('With this feature, you can manually mark E-mails from certain domains or addresses as spam.') + '<br><br>' +
 		'<b>*.com</b> (all mails from <b>.com</b> domains)' + '<br>' +
@@ -212,7 +212,7 @@ Ext.define('PMG.UserWhitelist', {
 	proxy: {
             type: 'proxmox',
             url: "/api2/json/quarantine/whitelist"
-	},
+	}
     },
 
     dockedItems: [
@@ -221,7 +221,7 @@ Ext.define('PMG.UserWhitelist', {
 	    bodyStyle: {
 		padding: '10px',
 		'border-left': '0px',
-		'border-right': '0px',
+		'border-right': '0px'
 	    },
             html: gettext('With this feature, you can manually bypass spam checking for certain domains or E-mail addresses.') + '<br><br>' +
 		'<b>*.com</b> (all mails from <b>.com</b> domains)' + '<br>' +

@@ -88,7 +88,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 
 	    var win = Ext.create('PMG.ViewMailHeaders', {
 		title: view.title + ' : ' + rec.data.queue_id,
-		url: url,
+		url: url
 	    });
 	    win.show();
 	},

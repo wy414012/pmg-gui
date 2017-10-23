@@ -54,7 +54,7 @@ Ext.define('PMG.SystemConfiguration', {
 	    layout: {
 		type: 'vbox',
 		align: 'stretch',
-		multi: true,
+		multi: true
 	    },
 	    bodyPadding: '0 0 10 0',
 	    defaults: {
@@ -68,7 +68,7 @@ Ext.define('PMG.SystemConfiguration', {
 		    minHeight: 200,
 		    title: gettext('Interfaces'),
 		    xtype: 'proxmoxNodeNetworkView',
-		    nodename: Proxmox.NodeName,
+		    nodename: Proxmox.NodeName
 		},
 		{
 		    title: gettext('DNS'),
@@ -79,7 +79,7 @@ Ext.define('PMG.SystemConfiguration', {
 		    title: gettext('Time'),
 		    xtype: 'proxmoxNodeTimeView',
 		    nodename: Proxmox.NodeName
-		},
+		}
 	    ]
 	},
 	{
@@ -94,7 +94,7 @@ Ext.define('PMG.SystemConfiguration', {
 	{
 	    itemId: 'options',
             title: gettext('Options'),
-	    xtype: 'pmgSystemOptions',
+	    xtype: 'pmgSystemOptions'
 	}
     ]
 });

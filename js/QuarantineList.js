@@ -159,7 +159,7 @@ Ext.define('PMG.QuarantineList', {
 
 	control: {
 	    '#':{
-		beforedestroy: 'resetEmail',
+		beforedestroy: 'resetEmail'
 	    },
 	    'combobox[reference=email]': {
 		change: {

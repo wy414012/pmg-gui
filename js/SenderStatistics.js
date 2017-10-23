@@ -82,7 +82,7 @@ Ext.define('PMG.SenderDetails', {
 	    header: gettext('Time'),
 	    format: 'H:i:s',
 	    dataIndex: 'time'
-	},
+	}
     ],
 
     initComponent: function() {
@@ -192,7 +192,7 @@ Ext.define('PMG.SenderStatistics', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false,
+	border: false
     },
 
     controller: {
@@ -219,7 +219,7 @@ Ext.define('PMG.SenderStatistics', {
 	    layout: 'fit',
 	    flex: 1,
 
-	    listeners: { selectionchange: 'selectionChange' },
+	    listeners: { selectionchange: 'selectionChange' }
 	},
 	{
 	    xtype: 'pmgSenderDetails',

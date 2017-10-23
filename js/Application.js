@@ -31,7 +31,7 @@ Ext.define('PMG.Application', {
 	me.currentView.destroy();
 	me.currentView = Ext.create({
 	    xtype: view,
-	    targetview: me.targetview,
+	    targetview: me.targetview
 	});
 	if (skipCheck !== true) {
 	    Proxmox.Utils.checked_command(function() {}); // display subscription status

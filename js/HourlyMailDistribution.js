@@ -83,7 +83,7 @@ Ext.define('PMG.HourlyMailDistribution', {
 		{ type: 'integer', name: 'viruscount_in' },
 		{ type: 'integer', name: 'viruscount_ou' },
 		{ type: 'integer', name: 'bounces_in' },
-		{ type: 'integer', name: 'bounces_out' },
+		{ type: 'integer', name: 'bounces_out' }
 	    ]
 	});
 

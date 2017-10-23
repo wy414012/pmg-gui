@@ -30,7 +30,7 @@ Ext.define('PMG.QueueAdministration', {
 
 	control: {
 	    pmgPostfixQShape: {
-		itemdblclick: 'onSelect',
+		itemdblclick: 'onSelect'
 	    }
 	}
     },

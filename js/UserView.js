@@ -89,7 +89,7 @@ Ext.define('PMG.UserView', {
 
     listeners: {
 	scope: 'controller',
-	itemdblclick: 'onEdit',
+	itemdblclick: 'onEdit'
     },
 
     tbar: [
