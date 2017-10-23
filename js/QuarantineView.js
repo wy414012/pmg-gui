@@ -56,8 +56,8 @@ Ext.define('PMG.QuarantineView', {
 		action: 'changePath',
 		before: 'beforeChangePath',
                 conditions : {
-		    ':path'    : '(?:([%a-zA-Z0-9\-\_\s,]+))',
-		    ':subpath' : '(?:(?::)([%a-zA-Z0-9\-\_\s,]+))?'
+		    ':path'    : '(?:([%a-zA-Z0-9\\-\\_\\s,]+))',
+		    ':subpath' : '(?:(?::)([%a-zA-Z0-9\\-\\_\\s,]+))?'
 		}
 	    }
 	},
