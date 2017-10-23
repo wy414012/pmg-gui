@@ -28,7 +28,7 @@ Ext.define('PMG.SpamDetectorOptions', {
 	    header: gettext('Languages'),
 	    editor: 'PMG.SpamDetectorLanguages',
 	    renderer: function(value) {
-		return value ? value : 'all';
+		return value || 'all';
 	    }
 	};
 
