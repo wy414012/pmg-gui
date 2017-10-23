@@ -10,6 +10,23 @@ Ext.define('PMG.FetchmailEdit', {
 
     fieldDefaults: { labelWidth: 120 },
 
+    controller: {
+
+	xclass: 'Ext.app.ViewController',
+
+	onProtocolChange: function() {
+	    var protocol = this.lookupReference('protocol').getValue();
+	    var ssl = this.lookupReference('ssl').getValue();
+
+	    var port_field =  this.lookupReference('port');
+	    if (protocol === 'pop3') {
+		port_field.setValue(ssl ? 995 : 110);
+	    } else if (protocol === 'imap') {
+		port_field.setValue(ssl ? 993 : 143);
+	    }
+	}
+    },
+
     items: {
 	xtype: 'inputpanel',
 	column1: [
@@ -20,9 +37,20 @@ Ext.define('PMG.FetchmailEdit', {
 		allowBlank: false
 	    },
 	    {
+		xtype: 'proxmoxKVComboBox',
+		fieldLabel: gettext('Protocol'),
+		name: 'protocol',
+		reference: 'protocol',
+		value: 'pop3',
+		listeners: { change: 'onProtocolChange' },
+		comboItems: [['pop3', 'pop3'], ['imap', 'imap']]
+	    },
+	    {
 		xtype: 'proxmoxintegerfield',
 		name: 'port',
+		reference: 'port',
 		fieldLabel: gettext('Port'),
+		value: 110,
 		minValue: 1,
 		maxValue: 65535,
 		allowBlank: false
@@ -68,7 +96,9 @@ Ext.define('PMG.FetchmailEdit', {
 	    {
 		xtype: 'proxmoxcheckbox',
 		fieldLabel: gettext('Use SSL'),
+		listeners: { change: 'onProtocolChange' },
 		name: 'ssl',
+		reference: 'ssl',
 		uncheckedValue: 0,
 		checked: false
 	    },

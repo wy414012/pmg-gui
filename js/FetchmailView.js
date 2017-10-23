@@ -33,6 +33,17 @@ Ext.define('PMG.FetchmailView', {
 	    Proxmox.Utils.monStoreErrors(view, view.store, true);
 	},
 
+	onAdd: function() {
+	    var view = this.getView();
+
+            var win = Ext.create('PMG.FetchmailEdit', {
+		url: view.baseurl,
+		method: 'POST',
+            });
+            win.on('destroy', function() { view.store.load() });
+            win.show();
+	},
+
 	onEdit: function() {
 	    var view = this.getView();
 
@@ -55,6 +66,17 @@ Ext.define('PMG.FetchmailView', {
     },
 
     tbar: [
+        {
+	    text: gettext('Add'),
+	    reference: 'addBtn',
+	    handler: 'onAdd'
+	},
+	{
+	    xtype: 'proxmoxButton',
+	    text: gettext('Edit'),
+	    disabled: true,
+	    handler: 'onEdit'
+	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/config/fetchmail',
@@ -75,6 +97,10 @@ Ext.define('PMG.FetchmailView', {
 	    flex: 1,
 	    renderer: Ext.String.htmlEncode,
 	    dataIndex: 'server'
+	},
+	{
+	    header: gettext('Protocol'),
+	    dataIndex: 'protocol'
 	},
 	{
 	    header: gettext('User name'),
