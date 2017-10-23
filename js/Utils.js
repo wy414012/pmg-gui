@@ -670,10 +670,22 @@ Ext.define('PMG.Utils', {
 	var cselect = qs.cselect;
 	var action = qs.action;
 	var ticket = qs.ticket;
+	var dateString = qs.date;
+
+	if (dateString) {
+	    var date = new Date(dateString).getTime()/1000;
+
+	    // set from date for QuarantineList
+	    /*jslint confusion: true*/
+	    /*from is a string above and number here */
+	    PMG.QuarantineList.from = date;
+	    /*jslint confusion: false*/
+	}
 
 	delete qs.cselect;
 	delete qs.action;
 	delete qs.ticket;
+	delete qs.date;
 
 	var newsearch = Ext.Object.toQueryString(qs);
 
