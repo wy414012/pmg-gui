@@ -8,6 +8,15 @@ Ext.define('PMG.ServerAdministration', {
     border: false,
     defaults: { border: false },
 
+    controller: {
+	xclass: 'Ext.app.ViewController',
+
+        init: function(view) {
+	    var upgradeBtn = view.lookupReference('upgradeBtn');
+	    upgradeBtn.setDisabled(!(Proxmox.UserName && Proxmox.UserName === 'root@pam'));
+	}
+    },
+
     items: [
 	{
 	    xtype: 'pmgServerStatus',
@@ -29,7 +38,8 @@ Ext.define('PMG.ServerAdministration', {
             title: gettext('Updates'),
 	    upgradeBtn: {
 		xtype: 'button',
-		disabled: !(Proxmox.UserName && Proxmox.UserName === 'root@pam'),
+		reference: 'upgradeBtn',
+		disabled: true,
 		text: gettext('Upgrade'),
 		handler: function() {
 		    PMG.Utils.openVNCViewer('upgrade', Proxmox.NodeName);
