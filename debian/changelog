@@ -1,3 +1,9 @@
+proxmox-mailgateway-gui (1.0-4) unstable; urgency=medium
+
+  * countless improvements - see git
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 24 Oct 2017 08:40:04 +0200
+
 proxmox-mailgateway-gui (1.0-3) unstable; urgency=medium
 
   * ClusterAdministration.js: implement join/create
