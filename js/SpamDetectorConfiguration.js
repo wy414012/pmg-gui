@@ -18,8 +18,9 @@ Ext.define('PMG.SpamDetectorConfiguration', {
 	    xtype: 'pmgSpamQuarantineOptions'
 	},
 	{
-	    title: gettext('Theme'),
-	    html: 'Theme'
+	    title: gettext('Status'),
+	    itemId: 'status',
+	    xtype: 'pmgSpamDetectorStatus'
 	}
     ]
 });

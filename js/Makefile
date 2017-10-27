@@ -47,6 +47,7 @@ JSSRC=							\
 	SpamDetectorLanguages.js			\
 	SpamDetectorOptions.js				\
 	SpamQuarantineOptions.js			\
+	SpamDetectorStatus.js				\
 	SpamDetectorConfiguration.js			\
 	VirusDetectorOptions.js				\
 	VirusQuarantineOptions.js			\
