@@ -11,10 +11,12 @@ Ext.define('PMG.SpamDetectorConfiguration', {
     items: [
 	{
 	    title: gettext('Options'),
+	    itemId: 'options',
 	    xtype: 'pmgSpamDetectorOptions'
 	},
 	{
 	    title: gettext('Quarantine'),
+	    itemId: 'quarantine',
 	    xtype: 'pmgSpamQuarantineOptions'
 	},
 	{
