@@ -35,6 +35,7 @@ JSSRC=							\
 	RuleConfiguration.js				\
 	SystemOptions.js				\
 	Subscription.js					\
+	BackupRestore.js				\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\
 	MailProxyPorts.js				\
