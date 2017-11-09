@@ -62,7 +62,6 @@ Ext.define('PMG.BackupRestore', {
 			upid: upid
 		    });
 		    win.show();
-		    me.mon(win, 'close', function() { me.store.load(); });
 		}
 	    });
 	},
