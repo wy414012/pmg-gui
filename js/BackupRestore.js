@@ -42,6 +42,31 @@ Ext.define('PMG.BackupRestore', {
 	    });
 	},
 
+	onRestore: function() {
+	    var me = this.getView();
+	    var rec = me.getSelection()[0];
+
+	    if (!(rec && rec.data && rec.data.filename)) return;
+
+	    Proxmox.Utils.API2Request({
+		url: "/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(rec.data.filename),
+		method: 'POST',
+		waitMsgTarget: me,
+		failure: function (response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		},
+		success: function(response, opts) {
+		    var upid = response.result.data;
+
+		    var win = Ext.create('Proxmox.window.TaskViewer', {
+			upid: upid
+		    });
+		    win.show();
+		    me.mon(win, 'close', function() { me.store.load(); });
+		}
+	    });
+	},
+
 	onAfterRemove: function(btn, res) {
 	    var me = this.getView();
 	    me.store.load();
@@ -75,6 +100,12 @@ Ext.define('PMG.BackupRestore', {
 	{
 	    text: gettext('Backup'),
 	    handler: 'createBackup'
+	},
+	{
+	    xtype: 'proxmoxButton',
+	    text: gettext('Restore'),
+	    handler: 'onRestore',
+	    disabled: true
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
