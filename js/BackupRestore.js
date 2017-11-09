@@ -99,7 +99,11 @@ Ext.define('PMG.BackupRestore', {
 	    header: gettext('Filename'),
 	    width: 300,
 	    sortable: true,
-	    renderer: Ext.htmlEncode,
+	    renderer: function(filename) {
+		return "<a href='" +
+		    "/api2/json/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(filename) +
+		"'>" + Ext.htmlEncode(filename) + "</a>";
+	    },
 	    dataIndex: 'filename'
 	},
 	{
