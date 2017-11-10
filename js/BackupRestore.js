@@ -137,11 +137,7 @@ Ext.define('PMG.BackupRestore', {
 	    header: gettext('Filename'),
 	    width: 300,
 	    sortable: true,
-	    renderer: function(filename) {
-		return "<a href='" +
-		    "/api2/json/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(filename) +
-		"'>" + Ext.htmlEncode(filename) + "</a>";
-	    },
+	    renderer: Ext.htmlEncode,
 	    dataIndex: 'filename'
 	},
 	{
@@ -158,6 +154,15 @@ Ext.define('PMG.BackupRestore', {
 	    sortable: true,
 	    renderer: Proxmox.Utils.format_size,
 	    dataIndex: 'size'
+	},
+	{
+	    header: gettext('Download'),
+	    renderer: function(filename) {
+		return "<a class='download' href='" +
+		    "/api2/json/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(filename) +
+		"'><i class='fa fa-fw fa-download'</i></a>";
+	    },
+	    dataIndex: 'filename'
 	}
     ]
 });

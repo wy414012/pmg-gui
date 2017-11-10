@@ -235,3 +235,8 @@ table.dash h2 {
 table.dash td.half {
     width: 50%;
 }
+
+a.download {
+    color: inherit;
+    text-decoration: none;
+}
