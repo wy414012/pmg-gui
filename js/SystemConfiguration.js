@@ -53,7 +53,18 @@ Ext.define('PMG.SystemConfiguration', {
 	    itemId: 'backup',
 	    xtype: 'pmgBackupRestore'
 	}
-    ]
+    ],
+
+    initComponent: function() {
+	var me = this;
+
+	me.callParent();
+
+	var networktime = me.getComponent('network');
+	Ext.Array.forEach(networktime.query(), function(item) {
+	    item.relayEvents(networktime, [ 'activate', 'deactivate', 'destroy']);
+	});
+    }
 });
 
 
