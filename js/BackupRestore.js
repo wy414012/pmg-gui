@@ -3,7 +3,9 @@ Ext.define('pmg-backup-list', {
     extend: 'Ext.data.Model',
     fields: [
 	'filename',
-	{ type: 'integer', name: 'size' }
+	{ type: 'integer', name: 'size' },
+	{ type: 'date', dateFormat: 'timestamp', name: 'timestamp' }
+
     ],
     proxy: {
         type: 'proxmox',
@@ -121,7 +123,13 @@ Ext.define('PMG.BackupRestore', {
 
     store: {
 	autoLoad: true,
-	model: 'pmg-backup-list'
+	model: 'pmg-backup-list',
+	sorters: [
+	    {
+		property: 'timestamp',
+		direction: 'DESC'
+	    }
+	]
     },
 
     columns: [
@@ -135,6 +143,14 @@ Ext.define('PMG.BackupRestore', {
 		"'>" + Ext.htmlEncode(filename) + "</a>";
 	    },
 	    dataIndex: 'filename'
+	},
+	{
+	    xtype: 'datecolumn',
+	    header: gettext('Time'),
+	    width: 150,
+	    format: 'Y-m-d H:i',
+	    sortable: true,
+	    dataIndex: 'timestamp'
 	},
 	{
 	    header: gettext('Size'),
