@@ -97,6 +97,32 @@ Ext.define('PMG.RulesConfiguration', {
 	    win.show();
 	},
 
+	onFactoryDefaults: function() {
+	    var me = this;
+
+	    Ext.Msg.confirm(
+		gettext('Confirm'),
+		gettext('Reset rule database to factory defaults?'),
+		function(button) {
+		    if (button !== 'yes') {
+			return;
+		    }
+		    var url = '/config/ruledb';
+		    Proxmox.Utils.API2Request({
+			url: '/config/ruledb',
+			method: 'POST',
+			waitMsgTarget: me.getView(),
+			callback: function() {
+			    me.reload();
+			},
+			failure: function (response, opts) {
+			    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+			}
+		    });
+		}
+	    );
+	},
+
 	init: function(view) {
 	    var grid = this.lookupReference('rulegrid');
 	    Proxmox.Utils.monStoreErrors(grid, grid.getStore(), true);
@@ -152,6 +178,11 @@ Ext.define('PMG.RulesConfiguration', {
 			bind: {
 			    baseurl: '{baseUrl}'
 			}
+		    },
+		    '->',
+		    {
+			text: gettext('Factory Defaults'),
+			handler: 'onFactoryDefaults'
 		    }
 		]
 	    },

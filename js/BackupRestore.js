@@ -71,29 +71,6 @@ Ext.define('PMG.BackupRestore', {
 	onAfterRemove: function(btn, res) {
 	    var me = this.getView();
 	    me.store.load();
-	},
-
-	onFactoryDefaults: function() {
-	    var me = this.getView();
-
-	    Ext.Msg.confirm(
-		gettext('Confirm'),
-		gettext('Reset rule database to factory defaults?'),
-		function(button) {
-		    if (button !== 'yes') {
-			return;
-		    }
-		    var url = '/config/ruledb';
-		    Proxmox.Utils.API2Request({
-			url: '/config/ruledb',
-			method: 'POST',
-			waitMsgTarget: me,
-			failure: function (response, opts) {
-			    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-			}
-		    });
-		}
-	    );
 	}
     },
 
@@ -114,10 +91,6 @@ Ext.define('PMG.BackupRestore', {
 	    reference: 'removeBtn',
 	    callback: 'onAfterRemove',
 	    waitMsgTarget: true
-	},
-	{
-	    text: gettext('Factory Defaults'),
-	    handler: 'onFactoryDefaults'
 	}
     ],
 
