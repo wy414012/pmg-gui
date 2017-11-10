@@ -48,7 +48,9 @@ Ext.define('PMG.BackupRestore', {
 	    var me = this.getView();
 	    var rec = me.getSelection()[0];
 
-	    if (!(rec && rec.data && rec.data.filename)) return;
+	    if (!(rec && rec.data && rec.data.filename)) {
+		return;
+	    }
 
 	    Proxmox.Utils.API2Request({
 		url: "/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(rec.data.filename),
