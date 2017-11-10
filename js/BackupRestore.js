@@ -79,6 +79,7 @@ Ext.define('PMG.BackupRestore', {
 	    text: gettext('Backup'),
 	    handler: 'createBackup'
 	},
+	'-',
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Restore'),
