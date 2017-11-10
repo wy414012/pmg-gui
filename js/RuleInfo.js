@@ -165,7 +165,7 @@ Ext.define('PMG.RuleInfo', {
 
     viewModel: {
 	data: {
-	    baseurl: undefined
+	    baseurl: ''
 	},
 
 	stores: {

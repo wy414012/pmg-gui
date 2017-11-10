@@ -31,7 +31,7 @@ Ext.define('PMG.RulesConfiguration', {
 	selectedRuleChange: function(grid, selected, eOpts) {
 	    var me = this;
 	    var infoPanel = me.lookupReference('infopanel');
-	    var baseurl;
+	    var baseurl = '';
 
 	    if (selected.length > 0) {
 		baseurl = '/config/ruledb/rules/' + selected[0].data.id;
