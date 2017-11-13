@@ -175,6 +175,7 @@ Ext.define('PMG.Dashboard', {
 		autoLoad: true,
 		autoDestroy: true,
 		proxy: {
+		    extraParams: { list_single_node: 1 },
 		    type: 'proxmox',
 		    url: '/api2/json/config/cluster/status'
 		},
