@@ -30,6 +30,7 @@ Ext.define('PMG.SystemConfiguration', {
 		    minHeight: 200,
 		    title: gettext('Interfaces'),
 		    xtype: 'proxmoxNodeNetworkView',
+		    types: ['bond'],
 		    nodename: Proxmox.NodeName
 		},
 		{
