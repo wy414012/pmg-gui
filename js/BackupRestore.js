@@ -14,6 +14,57 @@ Ext.define('pmg-backup-list', {
     idProperty: 'filename'
 });
 
+Ext.define('PMG.RestoreWindow', {
+    extend: 'Proxmox.window.Edit',
+    xtype: 'pmgRestoreWindow',
+
+    showProgress: true,
+    title: gettext('Restore'),
+    isCreate: true,
+    method: 'POST',
+    submitText: gettext('Restore'),
+    fieldDefaults: {
+	labelWidth: 150
+    },
+    items: [
+	{
+	    xtype: 'proxmoxcheckbox',
+	    name: 'config',
+	    fieldLabel: gettext('System Configuration')
+	},
+	{
+	    xtype: 'proxmoxcheckbox',
+	    name: 'database',
+	    value: 1,
+	    uncheckedValue: 0,
+	    fieldLabel: gettext('Rule Database'),
+	    listeners: {
+		change: function(cb, value) {
+		    var me = this;
+		    me.up().down('field[name=statistic]').setDisabled(!value);
+		}
+	    }
+	},
+	{
+	    xtype: 'proxmoxcheckbox',
+	    name: 'statistic',
+	    fieldLabel: gettext('Statistic')
+	}
+    ],
+
+    initComponent: function() {
+	var me = this;
+
+	if (!me.filename) {
+	    throw "no filename given";
+	}
+
+	me.url = "/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(me.filename);
+
+	me.callParent();
+    }
+});
+
 Ext.define('PMG.BackupRestore', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgBackupRestore',
@@ -52,22 +103,9 @@ Ext.define('PMG.BackupRestore', {
 		return;
 	    }
 
-	    Proxmox.Utils.API2Request({
-		url: "/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(rec.data.filename),
-		method: 'POST',
-		waitMsgTarget: me,
-		failure: function (response, opts) {
-		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		},
-		success: function(response, opts) {
-		    var upid = response.result.data;
-
-		    var win = Ext.create('Proxmox.window.TaskViewer', {
-			upid: upid
-		    });
-		    win.show();
-		}
-	    });
+	    Ext.create('PMG.RestoreWindow', {
+		filename: rec.data.filename
+	    }).show();
 	},
 
 	onAfterRemove: function(btn, res) {
