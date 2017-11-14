@@ -100,8 +100,6 @@ Ext.define('PMG.Transport', {
 	    win.show();
 	};
 
-	/*jslint confusion: true*/
-	/*create is a function and boolean */
 	var tbar = [
             {
 		xtype: 'proxmoxButton',
@@ -116,7 +114,7 @@ Ext.define('PMG.Transport', {
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs/config/transport",
-			create: true,
+			isCreate: true,
 			subject: gettext("Transport"),
 			items: create_properties
 		    };
@@ -129,7 +127,6 @@ Ext.define('PMG.Transport', {
             },
 	    remove_btn
         ];
-	/*jslint confusion: false*/
 
 	Proxmox.Utils.monStoreErrors(me, store, true);
 

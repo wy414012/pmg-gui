@@ -1,7 +1,6 @@
 /*global Proxmox*/
 /*jslint confusion: true*/
-/* create is a function and boolean,
- * bind is a function and object,
+/* bind is a function and object,
  * callback is a function and string
  */
 Ext.define('pmg-rule-list', {
@@ -86,7 +85,7 @@ Ext.define('PMG.RulesConfiguration', {
 	    var win = Ext.create('PMG.RuleEditor', {
 		url: '/api2/extjs/config/ruledb/rules/',
 		method: 'POST',
-		create: true,
+		isCreate: true,
 		listeners: {
 		    destroy: function() {
 			me.lookupReference('rulegrid').getStore().load();

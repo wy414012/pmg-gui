@@ -102,8 +102,6 @@ Ext.define('PMG.ObjectGroupList', {
 	    waitMsgTarget: me
 	});
 
-	/*jslint confusion: true*/
-	/* create is a boolean below, a function above */
 	var tbar = [
             {
 		xtype: 'proxmoxButton',
@@ -118,7 +116,7 @@ Ext.define('PMG.ObjectGroupList', {
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs" + me.baseurl,
-			create: true,
+			isCreate: true,
 			width: 400,
 			subject: me.subject,
 			items: me.inputItems
@@ -132,7 +130,6 @@ Ext.define('PMG.ObjectGroupList', {
             },
 	    remove_btn
         ];
-	/*jslint confusion: false*/
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
 

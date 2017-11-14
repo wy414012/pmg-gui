@@ -1,7 +1,6 @@
 /*global Proxmox*/
 /*jslint confusion: true*/
-/*create is function and bool,
- * reload is function and string,
+/* reload is function and string,
  * height is number and string,
  * hidden is bool and string,
  * bind is function and object,
@@ -73,7 +72,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		xtype: 'proxmoxtextfield',
 		fieldLabel: gettext('Server'),
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		vtype: 'IP64Address',
 		name: 'server2'
 	    },
@@ -81,7 +80,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		xtype: 'proxmoxintegerfield',
 		name: 'port',
 		emptyText: gettext('Default'),
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		minValue: 1,
 		maxValue: 65535,
 		fieldLabel: gettext('Port')
@@ -112,42 +111,42 @@ Ext.define('PMG.LDAPInputPanel', {
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		name: 'basedn',
 		fieldLabel: gettext('Base DN')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		name: 'groupbasedn',
 		fieldLabel: gettext('Base DN for Groups')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		name: 'mailattr',
 		fieldLabel: gettext('EMail attribute name(s)')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		name: 'accountattr',
 		fieldLabel: gettext('Account attribute name')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		name: 'filter',
 		fieldLabel: gettext('LDAP filter')
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.create ? false : true,
+		deleteEmpty: me.isCreate ? false : true,
 		name: 'groupclass',
 		fieldLabel: gettext('Group objectclass')
 	    }
@@ -176,9 +175,9 @@ Ext.define('PMG.LDAPEdit', {
     initComponent : function() {
 	var me = this;
 
-	me.create = me.profileId ? false : true;
+	me.isCreate = me.profileId ? false : true;
 
-	if (me.create) {
+	if (me.isCreate) {
             me.url = '/api2/extjs/config/ldap';
             me.method = 'POST';
 	} else {
@@ -187,7 +186,7 @@ Ext.define('PMG.LDAPEdit', {
 	}
 
 	var ipanel = Ext.create('PMG.LDAPInputPanel', {
-	    create: me.create,
+	    isCreate: me.isCreate,
 	    profileId: me.profileId
 	});
 
@@ -199,7 +198,7 @@ Ext.define('PMG.LDAPEdit', {
 
 	me.callParent();
 
-	if (!me.create) {
+	if (!me.isCreate) {
 	    me.load({
 		success:  function(response, options) {
 		    var values = response.result.data;

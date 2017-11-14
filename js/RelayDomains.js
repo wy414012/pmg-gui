@@ -80,11 +80,10 @@ Ext.define('PMG.RelayDomains', {
 		text: gettext('Create'),
 		handler: function() {
 		    /*jslint confusion: true*/
-		    /* create is a function and boolean */
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs/config/domains",
-			create: true,
+			isCreate: true,
 			subject: gettext("Relay Domain"),
 			items: [
 			    {

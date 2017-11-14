@@ -20,7 +20,7 @@ Ext.define('PMG.UserEdit', {
 	var userid = initialConfig.userid;
 	var baseurl = '/api2/extjs/access/users';
 
-	me.create = !userid;
+	me.isCreate = !userid;
 	me.url = userid ?  baseurl + '/' + userid : baseurl;
 	me.method = userid ? 'PUT' : 'POST';
 	me.autoLoad = userid ? true : false;
@@ -40,7 +40,7 @@ Ext.define('PMG.UserEdit', {
 		fieldLabel: gettext('User name'),
 		allowBlank: false,
 		cbind: {
-		    submitValue: '{create}',
+		    submitValue: '{isCreate}',
 		    xtype: '{useridXType}'
 		}
 	    },
@@ -60,8 +60,8 @@ Ext.define('PMG.UserEdit', {
                     }
 		},
 		cbind: {
-		    hidden: '{!create}',
-		    disabled: '{!create}'
+		    hidden: '{!isCreate}',
+		    disabled: '{!isCreate}'
 		}
 	    },
 	    {
@@ -74,8 +74,8 @@ Ext.define('PMG.UserEdit', {
 		allowBlank: false,
 		submitValue: false,
 		cbind: {
-		    hidden: '{!create}',
-		    disabled: '{!create}'
+		    hidden: '{!isCreate}',
+		    disabled: '{!isCreate}'
 		}
 	    },
 	    {
@@ -117,7 +117,7 @@ Ext.define('PMG.UserEdit', {
 		name: 'firstname',
 		fieldLabel: gettext('First Name'),
 		cbind: {
-		    deleteEmpty: '{!create}'
+		    deleteEmpty: '{!isCreate}'
 		}
 	    },
 	    {
@@ -125,7 +125,7 @@ Ext.define('PMG.UserEdit', {
 		name: 'lastname',
 		fieldLabel: gettext('Last Name'),
 		cbind: {
-		    deleteEmpty: '{!create}'
+		    deleteEmpty: '{!isCreate}'
 		}
 	    },
 	    {
@@ -134,7 +134,7 @@ Ext.define('PMG.UserEdit', {
 		fieldLabel: gettext('E-Mail'),
 		vtype: 'proxmoxMail',
 		cbind: {
-		    deleteEmpty: '{!create}'
+		    deleteEmpty: '{!isCreate}'
 		}
 	    }
 	],
@@ -146,7 +146,7 @@ Ext.define('PMG.UserEdit', {
 		fieldLabel: gettext('Comment'),
 		cbind: {
 		    disabled: '{isSuperUser}',
-		    deleteEmpty: '{!create}'
+		    deleteEmpty: '{!isCreate}'
 		}
 	    },
 	    {
@@ -154,7 +154,7 @@ Ext.define('PMG.UserEdit', {
 		name: 'keys',
 		fieldLabel: gettext('Key IDs'),
 		cbind: {
-		    deleteEmpty: '{!create}'
+		    deleteEmpty: '{!isCreate}'
 		}
 	    }
 	]
@@ -170,7 +170,7 @@ Ext.define('PMG.UserEdit', {
 	    values.expire = 0;
 	}
 
-	if (me.create) {
+	if (me.isCreate) {
 	    values.userid = values.username + '@pmg';
 	}
 

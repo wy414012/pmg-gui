@@ -38,16 +38,13 @@ Ext.define('PMG.UserBlackWhiteList', {
 		});
 	    });
 
-	    /*jslint confusion: true*/
-	    /* create is an function */
 	    var config = {
 		method: 'POST',
 		url: url,
-		create: true,
+		isCreate: true,
 		isAdd: true,
 		items: items
 	    };
-	    /*jslint confusion: false*/
 
 	    if (me.listname === 'blacklist') {
 		config.subject = gettext("Blacklist");
