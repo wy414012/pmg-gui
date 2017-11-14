@@ -1,3 +1,19 @@
+proxmox-mailgateway-gui (1.0-5) unstable; urgency=medium
+
+  * Dashboard.js - fix subscription status for single node installations
+
+  * jslint fix: do not use single statements when using if
+
+  * add backup/restore GUI
+
+  * move factory defaults button to RuleConfiguration
+
+  * fix (de)activate/destroy events for system configuration
+
+  * show the update status for spamassassin rules
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 14 Nov 2017 08:37:51 +0100
+
 proxmox-mailgateway-gui (1.0-4) unstable; urgency=medium
 
   * countless improvements - see git
