@@ -1,4 +1,4 @@
-Source: proxmox-mailgateway-gui
+Source: pmg-gui
 Section: perl
 Priority: optional
 Maintainer: Proxmox Support Team <support@proxmox.com>
@@ -6,8 +6,8 @@ Build-Depends: debhelper (>= 9), perl (>= 5.10.0-19), libtemplate-perl
 Standards-Version: 3.9.5
 Homepage: http://www.proxmox.com
 
-Package: proxmox-mailgateway-gui
+Package: pmg-gui
 Architecture: all
 Depends: ${perl:Depends}, libtemplate-perl, libjs-extjs (>= 6.0.1), fonts-font-awesome, pmg-i18n, proxmox-widget-toolkit
 Description: Proxmox Mail Gateway GUI
- graphical user interface for Proxmox Mail Gateway.
+ Graphical user interface for Proxmox Mail Gateway.

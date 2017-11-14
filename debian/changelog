@@ -1,3 +1,9 @@
+pmg-gui (1.0-6) unstable; urgency=medium
+
+  * rename package to pmg-gui
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 14 Nov 2017 11:53:05 +0100
+
 proxmox-mailgateway-gui (1.0-5) unstable; urgency=medium
 
   * Dashboard.js - fix subscription status for single node installations
