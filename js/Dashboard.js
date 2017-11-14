@@ -80,7 +80,7 @@ Ext.define('PMG.Dashboard', {
 	    var bytes_in = 0;
 	    var bytes_out = 0;
 	    var ptime = 0;
-	    var avg_ptime;
+	    var avg_ptime = 'N/A';
 
 	    records.forEach(function(item) {
 		bytes_in += item.data.bytes_in;
@@ -91,12 +91,12 @@ Ext.define('PMG.Dashboard', {
 	    });
 
 	    if (count) {
-		avg_ptime = (ptime/count).toFixed(2);
+		avg_ptime = (ptime/count).toFixed(2) + " s";
 	    }
 
 	    viewModel.set('bytes_in', Proxmox.Utils.format_size(bytes_in));
 	    viewModel.set('bytes_out', Proxmox.Utils.format_size(bytes_out));
-	    viewModel.set('avg_ptime', avg_ptime + " s");
+	    viewModel.set('avg_ptime', avg_ptime);
 	},
 
 	updateClusterStats: function(store, records, success) {
