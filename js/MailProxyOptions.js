@@ -18,8 +18,8 @@ Ext.define('PMG.MailProxyOptions', {
 
 	me.add_boolean_row('helotests', gettext('SMTP HELO checks'));
 
-	me.add_boolean_row('use_rbl', gettext('Use RBL checks'),
-			   { defaultValue: 1 });
+	me.add_text_row('dnsbl_sites', gettext('DNSBL Sites'),
+			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
 
 	var render_verifyreceivers = function(value) {
 	    if (value === undefined || value === '__default__') {
