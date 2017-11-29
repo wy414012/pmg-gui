@@ -78,7 +78,7 @@ Ext.define('PMG.DomainStatistics', {
 			},
 			{
 			    text: gettext('Traffic') + ' (MB)',
-			    dataIndex: 'mbytes_in',
+			    dataIndex: 'bytes_in',
 			    renderer: function(v) {
 				return Ext.Number.toFixed(v/(1024*1024), 2);
 			    }
