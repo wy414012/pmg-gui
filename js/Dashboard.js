@@ -60,7 +60,7 @@ Ext.define('PMG.Dashboard', {
 	    viewModel.notify();
 
 	    Ext.Array.forEach(['recentmails', 'receivers'], function(item) {
-		viewModel.get(item).load();
+		viewModel.getStore(item).reload();
 	    });
 
 	    if (setState) {
