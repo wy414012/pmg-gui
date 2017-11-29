@@ -123,12 +123,12 @@ Ext.define('PMG.GeneralMailStatistics', {
 
 	res.push({
 	    name: gettext("Incoming Mail Traffic"),
-	    value: Ext.Number.toFixed(data.bytes_in/(1024*1024), 2) + ' MByte'
+	    value: Ext.Number.toFixed(data.bytes_in/(1024*1024), 2) + ' MiB'
 	});
 
 	res.push({
 	    name: gettext("Outgoing Mail Traffic"),
-	    value: Ext.Number.toFixed(data.bytes_out/(1024*1024), 2) + ' MByte'
+	    value: Ext.Number.toFixed(data.bytes_out/(1024*1024), 2) + ' MiB'
 	});
 	return res;
     },
