@@ -21,8 +21,8 @@ Ext.define('PMG.DomainStatistics', {
 	    { type: 'integer', name: 'spamcount_out' },
 	    { type: 'integer', name: 'viruscount_in' },
 	    { type: 'integer', name: 'viruscount_out' },
-	    { type: 'number', name: 'mbytes_in' },
-	    { type: 'number', name: 'mbytes_out' }
+	    { type: 'number', name: 'bytes_in' },
+	    { type: 'number', name: 'bytes_out' }
 	];
 
 	var store = Ext.create('PMG.data.StatStore', {
@@ -80,7 +80,7 @@ Ext.define('PMG.DomainStatistics', {
 			    text: gettext('Traffic') + ' (MB)',
 			    dataIndex: 'mbytes_in',
 			    renderer: function(v) {
-				return Ext.Number.toFixed(v, 2);
+				return Ext.Number.toFixed(v/(1024*1024), 2);
 			    }
 			},
 			{
@@ -122,9 +122,9 @@ Ext.define('PMG.DomainStatistics', {
 			},
 			{
 			    text: gettext('Traffic') + ' (MB)',
-			    dataIndex: 'mbytes_out',
+			    dataIndex: 'bytes_out',
 			    renderer: function(v) {
-				return Ext.Number.toFixed(v, 2);
+				return Ext.Number.toFixed(v/(1024*1024), 2);
 			    }
 			},
 			{
