@@ -1,3 +1,9 @@
+pmg-gui (1.0-12) unstable; urgency=medium
+
+  * MailTracker.js - display all receivers
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 06 Dec 2017 08:10:35 +0100
+
 pmg-gui (1.0-11) unstable; urgency=medium
 
   * SpamDetectorOptions.js: fix default for maxspamsize
