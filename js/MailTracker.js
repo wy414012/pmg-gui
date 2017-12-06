@@ -4,12 +4,14 @@ Ext.define('pmg-mail-tracker', {
     fields: [
 	'id' , 'from', 'to', 'dstatus', 'rstatus', 'qid', 'msgid', 'client',
 	{ type: 'number', name: 'size' },
-	{ type: 'date', dateFormat: 'timestamp', name: 'time' }
+	{ type: 'date', dateFormat: 'timestamp', name: 'time' },
     ],
     proxy: {
 	type: 'proxmox'
     },
-    idProperty: 'id'
+    // do not use field 'id', because "id/to" is the unique Id
+    // this way we display an entry for each receiver
+    idProperty: 'none'
 });
 
 
