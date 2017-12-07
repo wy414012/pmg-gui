@@ -157,7 +157,7 @@ Ext.define('PMG.store.NavigationStore', {
 			leaf: true
 		    },
 		    {
-			text: gettext('RBL'),
+			text: gettext('Postscreen'),
 			iconCls: 'fa fa-line-chart',
 			path: 'pmgRBLStatistics',
 			leaf: true

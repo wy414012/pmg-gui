@@ -7,25 +7,23 @@ Ext.define('PMG.RBLStatistics', {
 
     bodyPadding: '10 0 10 10',
 
-    title: gettext('Statistics') + ': ' + gettext('RBL rejects'),
+    title: gettext('Statistics') + ': ' + gettext('Postscreen'),
 
     tbar: [ { xtype: 'pmgStatTimeSelector' } ],
 
     items: [
 	{
-	    title: gettext('RBL rejects'),
+	    title: gettext('Rejects'),
 	    xtype: 'proxmoxRRDChart',
-	    legend: false,
-	    fields: [ 'count' ],
-	    fieldTitles: [
-		gettext('RBL rejects')
-	    ],
+	    fields: [ 'rbl_rejects', 'pregreet_rejects'],
+	    fieldTitles: ['RBL', 'PREGREET'],
 	    store: {
 		type: 'pmgStatStore',
 		includeTimeSpan: true,
-		staturl: "/api2/json/statistics/rblcount",
+		staturl: "/api2/json/statistics/rejectcount",
 		fields: [
-		    { type: 'integer', name: 'count' },
+		    { type: 'integer', name: 'rbl_rejects' },
+		    { type: 'integer', name: 'pregreet_rejects' },
 		    { type: 'date', dateFormat: 'timestamp', name: 'time' }
 		]
 	    }
