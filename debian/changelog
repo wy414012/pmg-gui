@@ -1,3 +1,9 @@
+pmg-gui (1.0-14) unstable; urgency=medium
+
+  * fix title in Incoming Mails graph (use 'Junk Mails')
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 07 Dec 2017 11:22:07 +0100
+
 pmg-gui (1.0-13) unstable; urgency=medium
 
   * RBLStatistics.js - show pregreet rejects, change title to 'Postscreen'
