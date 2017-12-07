@@ -176,7 +176,7 @@ Ext.define('PMG.GeneralMailStatistics', {
 		    xtype: 'proxmoxRRDChart',
 		    fields: ['count_in', 'spamcount_in', 'viruscount_in', 'bounces_in'],
 		    fieldTitles: [
-			gettext('Incoming Mails'), gettext('Spam Mails'),
+			gettext('Incoming Mails'), gettext('Junk Mails'),
 			gettext('Virus Mails'), gettext('Bounces')],
 		    store: countstore
 		}
