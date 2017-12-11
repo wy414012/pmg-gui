@@ -627,17 +627,6 @@ Ext.define('PMG.Utils', {
 	}
     },
 
-    openVNCViewer: function(consoletype, nodename) {
-	var url = Ext.urlEncode({
-	    console: consoletype, // upgrade or shell
-	    novnc: 1,
-	    node: nodename
-	});
-	var nw = window.open("?" + url, '_blank',
-			     "innerWidth=745,innerheight=427");
-	nw.focus();
-    },
-
     updateLoginData: function(data) {
 	Proxmox.CSRFPreventionToken = data.CSRFPreventionToken;
 	Proxmox.UserName = data.username;

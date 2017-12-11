@@ -21,7 +21,7 @@ Ext.define('PMG.ServerStatus', {
 	{
 	    text: gettext("Console"),
 	    handler: function() {
-		PMG.Utils.openVNCViewer('shell', Proxmox.NodeName);
+		Proxmox.Utils.openXtermJsViewer('shell', 0, Proxmox.NodeName);
 	    }
 	},
 	'->',

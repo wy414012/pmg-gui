@@ -42,7 +42,7 @@ Ext.define('PMG.ServerAdministration', {
 		disabled: true,
 		text: gettext('Upgrade'),
 		handler: function() {
-		    PMG.Utils.openVNCViewer('upgrade', Proxmox.NodeName);
+		    Proxmox.Utils.openXtermJsViewer('upgrade', 0, Proxmox.NodeName);
 		}
 	    },
 	    itemId: 'updates',
