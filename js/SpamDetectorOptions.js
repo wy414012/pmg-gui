@@ -37,6 +37,11 @@ Ext.define('PMG.SpamDetectorOptions', {
 			     minValue: 0, maxValue: 1000,
 			     deleteEmpty: true });
 
+	me.add_integer_row('clamav_heuristic_score', gettext('Heuristic Score'),
+			   { defaultValue: 3,
+			     minValue: 0, maxValue: 1000,
+			     deleteEmpty: true });
+
 	var baseurl = '/config/spam';
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
