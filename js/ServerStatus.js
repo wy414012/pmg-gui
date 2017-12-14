@@ -17,12 +17,54 @@ Ext.define('PMG.ServerStatus', {
 
     layout: 'column',
 
+    controller: {
+	xclass: 'Ext.app.ViewController',
+
+	nodeCommand: function(cmd) {
+	    var me = this.getView();
+	    Proxmox.Utils.API2Request({
+		params: { command: cmd },
+		url: '/nodes/' + Proxmox.NodeName + '/status',
+		method: 'POST',
+		waitMsgTarget: me,
+		failure: function(response, opts) {
+		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
+		}
+	    });
+	},
+
+	nodeShutdown: function() {
+	    this.nodeCommand('shutdown');
+	},
+
+	nodeReboot: function() {
+	    this.nodeCommand('reboot');
+	}
+    },
+
     tbar: [
 	{
 	    text: gettext("Console"),
+	    iconCls: 'fa fa-terminal',
 	    handler: function() {
 		Proxmox.Utils.openXtermJsViewer('shell', 0, Proxmox.NodeName);
 	    }
+	},
+	{
+	    xtype: 'proxmoxButton',
+	    text: gettext('Restart'),
+	    dangerous: true,
+	    confirmMsg: gettext('Node') + " '" + Proxmox.NodeName + "' - " + gettext('Restart'),
+	    handler: 'nodeReboot',
+	    iconCls: 'fa fa-undo'
+	},
+	{
+	    xtype: 'proxmoxButton',
+	    text: gettext('Shutdown'),
+	    dangerous: true,
+	    confirmMsg: gettext('Node') + " '" + Proxmox.NodeName + "' - " + gettext('Shutdown'),
+	    handler: 'nodeShutdown',
+	    iconCls: 'fa fa-power-off'
 	},
 	'->',
 	{
