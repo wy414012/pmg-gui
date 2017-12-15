@@ -20,6 +20,10 @@ Ext.define('PMG.ServerStatus', {
     controller: {
 	xclass: 'Ext.app.ViewController',
 
+	openConsole: function() {
+	    Proxmox.Utils.openXtermJsViewer('shell', 0, Proxmox.NodeName);
+	},
+
 	nodeCommand: function(cmd) {
 	    var me = this.getView();
 	    Proxmox.Utils.API2Request({
@@ -46,9 +50,7 @@ Ext.define('PMG.ServerStatus', {
 	{
 	    text: gettext("Console"),
 	    iconCls: 'fa fa-terminal',
-	    handler: function() {
-		Proxmox.Utils.openXtermJsViewer('shell', 0, Proxmox.NodeName);
-	    }
+	    handler: 'openConsole'
 	},
 	{
 	    xtype: 'proxmoxButton',
