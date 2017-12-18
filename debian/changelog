@@ -1,3 +1,9 @@
+pmg-gui (1.0-20) unstable; urgency=medium
+
+  * check if load is successfull in GeneralMailStatistics
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 18 Dec 2017 13:34:49 +0100
+
 pmg-gui (1.0-19) unstable; urgency=medium
 
   * bump default maxspamsize to 1M
