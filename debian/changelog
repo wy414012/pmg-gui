@@ -1,3 +1,9 @@
+pmg-gui (1.0-19) unstable; urgency=medium
+
+  * bump default maxspamsize to 1M
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 18 Dec 2017 10:33:25 +0100
+
 pmg-gui (1.0-18) unstable; urgency=medium
 
   * add BETA link to bugtracker
