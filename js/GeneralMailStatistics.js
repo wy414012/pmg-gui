@@ -202,7 +202,10 @@ Ext.define('PMG.GeneralMailStatistics', {
 	    staturl: "/api2/json/statistics/mail",
 	    fields: [ 'name', 'value', 'percentage' ],
 	    listeners: {
-		load: function(store, records) {
+		load: function(store, records, success) {
+		    if (!success || records.length <= 0) {
+			return;
+		    }
 		    var data = me.getGeneralData(records[0].data);
 		    totalgrid.store.setData(data);
 		    data = me.getInData(records[0].data);
