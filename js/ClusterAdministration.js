@@ -191,7 +191,8 @@ Ext.define('PMG.ClusterAdministration', {
 	    },
 	    store: {
 		autoLoad: true,
-		model: 'pmg-cluster'
+		model: 'pmg-cluster',
+		sorters: [ 'cid' ]
 	    },
 	    tbar: [
 		{
