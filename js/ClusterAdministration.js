@@ -277,10 +277,13 @@ Ext.define('PMG.ClusterAdministration', {
 		{
 		    header: gettext('Load average'),
 		    renderer: function(value) {
-			if (Ext.isArray(value)) {
-			    return value[0];
+			if (Ext.isDefined(value)) {
+			    if (Ext.isArray(value)) {
+				return value[0];
+			    }
+			    return value.toString();
 			}
-			return value.toString();
+			return '';
 		    },
 		    dataIndex: 'loadavg'
 		},
