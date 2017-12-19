@@ -1,3 +1,13 @@
+pmg-gui (1.0-21) unstable; urgency=medium
+
+  * ClusterAdministration.js - avoid duplicate load mask
+
+  * ClusterAdministration.js - sort nodes by cid
+
+  * ClusterAdministration.js - catch undefined value in loadavg renderer
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 19 Dec 2017 07:52:54 +0100
+
 pmg-gui (1.0-20) unstable; urgency=medium
 
   * check if load is successfull in GeneralMailStatistics
