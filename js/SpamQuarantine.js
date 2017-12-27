@@ -80,10 +80,16 @@ Ext.define('PMG.SpamQuarantine', {
 	    if (!selected.length) {
 		return;
 	    }
+	    var rec = selected[0];
 
 	    var action = button.reference;
 
-	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
+	    var receiver = list.user;
+	    if (action === 'deliver' || action === 'delete') {
+		receiver = rec.data.receiver || list.user;
+	    }
+
+	    PMG.Utils.doQuarantineAction(action, rec.data.id, receiver, function() {
 		list.getController().load();
 	    });
 	},

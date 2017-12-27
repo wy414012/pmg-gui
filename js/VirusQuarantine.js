@@ -63,10 +63,12 @@ Ext.define('PMG.VirusQuarantine', {
 	    if (!selected.length) {
 		return;
 	    }
+	    var rec = selected[0];
 
 	    var action = button.reference;
+	    var receiver = rec.data.receiver;
 
-	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
+	    PMG.Utils.doQuarantineAction(action, rec.data.id, receiver, function() {
 		list.getController().load();
 	    });
 	},

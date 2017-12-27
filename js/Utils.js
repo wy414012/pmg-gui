@@ -678,13 +678,15 @@ Ext.define('PMG.Utils', {
 	}
     },
 
-    doQuarantineAction: function(action, id, callback) {
+    doQuarantineAction: function(action, id, pmail, callback) {
+	var params = {
+	    action: action,
+	    id: id
+	};
+	if (pmail !== undefined) { params.pmail = pmail; }
 	Proxmox.Utils.API2Request({
 	    url: '/quarantine/content/',
-	    params: {
-		action: action,
-		id: id
-	    },
+	    params: params,
 	    method: 'POST',
 	    failure: function(response, opts) {
 		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
