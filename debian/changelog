@@ -1,3 +1,9 @@
+pmg-gui (1.0-24) unstable; urgency=medium
+
+  * set maxspamsize default back to 256K
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 29 Dec 2017 12:29:07 +0100
+
 pmg-gui (1.0-23) unstable; urgency=medium
 
   * revert 794e411a4f1c5a4102dc7666bcc95fe6576d6a58 (update for changed
