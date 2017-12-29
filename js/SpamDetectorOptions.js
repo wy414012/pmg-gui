@@ -20,7 +20,7 @@ Ext.define('PMG.SpamDetectorOptions', {
 			   { defaultValue: 1 });
 
 	me.add_integer_row('maxspamsize', gettext('Max Spam Size (bytes)'),
-			   { defaultValue: 1024*1024,
+			   { defaultValue: 256*1024,
 			     minValue: 64, deleteEmpty: true });
 
 	me.rows.languages = {
