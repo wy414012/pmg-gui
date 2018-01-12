@@ -1,3 +1,9 @@
+pmg-gui (1.0-25) unstable; urgency=medium
+
+  * use htmlEncode for the username
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 12 Jan 2018 11:38:02 +0100
+
 pmg-gui (1.0-24) unstable; urgency=medium
 
   * set maxspamsize default back to 256K
