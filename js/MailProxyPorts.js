@@ -40,11 +40,11 @@ Ext.define('PMG.MailProxyPorts', {
 	var me = this;
 
 	me.add_integer_row('ext_port', gettext('External SMTP Port'),
-			   { defaultValue: 26, deleteEmpty: true,
+			   { defaultValue: 25, deleteEmpty: true,
 			     minValue: 1, maxValue: 65535 });
 
 	me.add_integer_row('int_port', gettext('Internal SMTP Port'),
-			   { defaultValue: 25, deleteEmpty: true,
+			   { defaultValue: 26, deleteEmpty: true,
 			     minValue: 1, maxValue: 65535 });
 
 	me.callParent();
