@@ -1,3 +1,9 @@
+pmg-gui (1.0-26) unstable; urgency=medium
+
+  * remove BETA, do not display repoid
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 16 Jan 2018 13:52:01 +0100
+
 pmg-gui (1.0-25) unstable; urgency=medium
 
   * use htmlEncode for the username
