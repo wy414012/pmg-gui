@@ -12,9 +12,8 @@ Ext.define('PMG.view.main.VersionInfo',{
     tpl: [
 	'Mail Gateway',
 	'<tpl if="version">',
-	' {version}-{release}/{repoid}',
-	'</tpl>',
-	' <a href="https://bugzilla.proxmox.com">BETA</a>'
+	' {version}-{release}',
+	'</tpl>'
     ],
 
     initComponent: function() {
