@@ -1,3 +1,9 @@
+pmg-gui (1.0-28) unstable; urgency=medium
+
+  * MailTracker.js: set start of next day for end-time
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 18 Jan 2018 11:48:39 +0100
+
 pmg-gui (1.0-27) unstable; urgency=medium
 
   * change default mail port numbers
