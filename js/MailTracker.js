@@ -105,6 +105,15 @@ Ext.define('PMG.MailTrackerFilter', {
 		    fieldLabel: gettext('End'),
 		    reference: 'endtime',
 		    listeners: { change: 'onFilterChange' },
+		    value: (function() {
+			var now = new Date();
+			var tomorrow = new Date();
+			tomorrow.setDate(now.getDate()+1);
+			tomorrow.setHours(0);
+			tomorrow.setMinutes(0);
+			tomorrow.setSeconds(0);
+			return tomorrow;
+		    }()),
 		    xtype: 'promxoxDateTimeField'
 		},
 		{
