@@ -1,3 +1,9 @@
+pmg-gui (1.0-29) unstable; urgency=medium
+
+  * MailTracker.js: improve status text
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 19 Jan 2018 08:43:40 +0100
+
 pmg-gui (1.0-28) unstable; urgency=medium
 
   * MailTracker.js: set start of next day for end-time
