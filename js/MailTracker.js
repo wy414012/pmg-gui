@@ -345,7 +345,9 @@ Ext.define('PMG.MailTracker', {
 		if (v !== undefined && v !== '') {
 		    var vtext = PMG.Utils.mail_status_map[v] || v;
 		    icon = v;
-		    if (rstatus !== undefined && rstatus !== '') {
+		    if (v === 'Q' || v === 'B') {
+			returntext = vtext;
+		    } else  if (rstatus !== undefined && rstatus !== '') {
 			var rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
 			returntext = vtext + '/' + rtext;
 			icon = rstatus;
