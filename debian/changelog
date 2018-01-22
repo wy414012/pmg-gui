@@ -1,3 +1,9 @@
+pmg-gui (1.0-30) unstable; urgency=medium
+
+  * rebuild with updated docs (fix OnlineHelpInfo.js)
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 22 Jan 2018 09:46:49 +0100
+
 pmg-gui (1.0-29) unstable; urgency=medium
 
   * MailTracker.js: improve status text

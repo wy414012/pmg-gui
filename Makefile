@@ -1,6 +1,6 @@
 PACKAGE=pmg-gui
 PKGVER=1.0
-PKGREL=29
+PKGREL=30
 
 DEB=${PACKAGE}_${PKGVER}-${PKGREL}_all.deb
 
