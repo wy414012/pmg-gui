@@ -64,7 +64,7 @@ Ext.define('PMG.DomainStatistics', {
 		    border: false,
 		    disableSelection: true,
 		    store: store_in,
-		    emptyText: gettext('No data in database.'),
+		    emptyText: gettext('No data in database'),
 		    viewConfig: {
 			deferEmptyText: false
 		    },
@@ -108,7 +108,7 @@ Ext.define('PMG.DomainStatistics', {
 		    border: false,
 		    disableSelection: true,
 		    store: store_out,
-		    emptyText: gettext('No data in database.'),
+		    emptyText: gettext('No data in database'),
 		    viewConfig: {
 			deferEmptyText: false
 		    },

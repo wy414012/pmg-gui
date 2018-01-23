@@ -29,7 +29,7 @@ Ext.define('PMG.LDAPUserSelector', {
 		width: 100
 	    },
 	    {
-		header: gettext('EMail'),
+		header: gettext('E-Mail'),
 		dataIndex: 'pmail',
 		width: 150
 	    },

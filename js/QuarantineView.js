@@ -211,7 +211,7 @@ Ext.define('PMG.QuarantineView', {
 		    baseCls: 'x-plain',
 		    reference: 'usernameinfo',
 		    padding: '0 5',
-		    tpl: Ext.String.format(gettext("You are logged in as '{0}'"), '{username}')
+		    tpl: Ext.String.format(gettext("You are logged in as {0}"), "'{username}'")
 		},
 		{
 		    reference: 'logoutButton',

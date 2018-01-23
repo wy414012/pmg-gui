@@ -15,7 +15,7 @@ Ext.define('PMG.SpamQuarantineOptions', {
 	none: gettext('No Reports'),
 	'short': gettext('Short'),
 	verbose: gettext('Verbose'),
-	outlook: gettext('Verbose') + ' (' + gettext('Outlook 2007') + ')',
+	outlook: gettext('Verbose') + ' (Outlook 2007)',
 	custom: gettext('Custom')
     },
     

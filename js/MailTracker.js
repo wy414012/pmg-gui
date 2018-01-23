@@ -217,7 +217,7 @@ Ext.define('PMG.MailTracker', {
 
     border: false,
 
-    emptyText: gettext('No data in database.'),
+    emptyText: gettext('No data in database'),
     disableSelection: true,
 
     viewConfig: {

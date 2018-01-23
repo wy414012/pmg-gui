@@ -373,7 +373,7 @@ Ext.define('PMG.Dashboard', {
 	{
 	    height: 250,
 	    iconCls: 'fa fa-tasks',
-	    title: 'Node Resources',
+	    title: gettext('Node Resources'),
 	    bodyPadding: '0 20 0 20',
 	    layout: {
 		type: 'hbox',

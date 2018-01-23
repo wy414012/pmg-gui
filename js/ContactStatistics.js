@@ -11,7 +11,7 @@ Ext.define('PMG.ContactDetails', {
 	    xtype: 'panel',
 	    itemId: 'info',
 	    bodyPadding: 10,
-	    html: gettext('Please select a contact.')
+	    html: gettext('Please select a contact')
 	}
     ],
 
@@ -105,7 +105,7 @@ Ext.define('PMG.ContactList', {
     multiColumnSort: true,
     plugins: 'gridfilters',
 
-    emptyText: gettext('No data in database.'),
+    emptyText: gettext('No data in database'),
     viewConfig: {
 	deferEmptyText: false
     },

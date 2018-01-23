@@ -67,7 +67,7 @@ Ext.define('PMG.FetchmailEdit', {
 		xtype: 'textfield',
 		name: 'pass',
 		inputType: 'password',
-		fieldLabel: gettext('Passsword'),
+		fieldLabel: gettext('Password'),
 		allowBlank: false
 	    },
 	    {

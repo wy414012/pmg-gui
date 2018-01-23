@@ -113,7 +113,7 @@ Ext.define('PMG.ReceiverList', {
     multiColumnSort: true,
     plugins: 'gridfilters',
 
-    emptyText: gettext('No data in database.'),
+    emptyText: gettext('No data in database'),
     viewConfig: {
 	deferEmptyText: false
     },

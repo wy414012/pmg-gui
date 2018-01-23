@@ -46,7 +46,7 @@ Ext.define('PMG.dashboard.MailProcessing', {
 		'avg_ptime': 0
 	    },
 	    tpl: [
-		'<h3><i class="fa fa-clock-o"></i> ' + gettext('Avg. Processing Time') + '</h3>',
+		'<h3><i class="fa fa-clock-o"></i> ' + gettext('Avg. Mail Processing Time') + '</h3>',
 		'<p><h2>{avg_ptime}</h2></p>'
 	    ]
 	}

@@ -251,9 +251,9 @@ Ext.define('PMG.RuleInfo', {
 	    tpl: [
 		'<tpl if="selected">',
 		'<b>{name}</b><br><br>',
-		'Priority: {priority}<br>',
-		'Direction: {[PMG.Utils.format_rule_direction(values.direction)]}<br>',
-		'Active: {[Proxmox.Utils.format_boolean(values.active)]}<br>',
+		gettext('Priority') + ': {priority}<br>',
+		gettext('Direction') + ': {[PMG.Utils.format_rule_direction(values.direction)]}<br>',
+		gettext('Active') + ': {[Proxmox.Utils.format_boolean(values.active)]}<br>',
 		'<tpl else>',
 		gettext('Please select a rule.'),
 		'</tpl>'

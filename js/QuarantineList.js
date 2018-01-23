@@ -10,7 +10,7 @@ Ext.define('PMG.QuarantineList', {
 
     config: {
 	emailSelection: false,
-	notFoundText: gettext('No data in database.')
+	notFoundText: gettext('No data in database')
     },
 
     statics: {
@@ -215,7 +215,7 @@ Ext.define('PMG.QuarantineList', {
 		listConfig: {
 		    emptyText:
 			'<div class="x-grid-empty">' +
-			    gettext('No Data in Database') +
+			    gettext('No data in database') +
 			'</div>'
 		},
 		store: {

@@ -178,13 +178,13 @@ Ext.define('PMG.Utils', {
 	    iconCls: 'fa fa-envelope-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'email',
-	    subject: gettext("Email"),
+	    subject: gettext("E-Mail"),
 	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
 		    name: 'email',
-		    fieldLabel: gettext("Email")
+		    fieldLabel: gettext("E-Mail")
 		}
 	    ]
 	},
@@ -192,14 +192,14 @@ Ext.define('PMG.Utils', {
 	    iconCls: 'fa fa-envelope-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver',
-	    subject: gettext("Email"),
+	    subject: gettext("E-Mail"),
 	    receivertest: true,
 	    width: 400,
 	    items: [
 		{
 		    xtype: 'textfield',
 		    name: 'email',
-		    fieldLabel: gettext("Email")
+		    fieldLabel: gettext("E-Mail")
 		}
 	    ]
 	},
