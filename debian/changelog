@@ -1,3 +1,9 @@
+pmg-gui (1.0-31) unstable; urgency=medium
+
+  * remove outlook report style
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 01 Feb 2018 11:20:38 +0100
+
 pmg-gui (1.0-30) unstable; urgency=medium
 
   * rebuild with updated docs (fix OnlineHelpInfo.js)
