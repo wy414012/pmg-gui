@@ -40,6 +40,7 @@ Ext.define('PMG.UserEdit', {
 		fieldLabel: gettext('User name'),
 		renderer: Ext.htmlEncode,
 		allowBlank: false,
+		minLength: 4,
 		cbind: {
 		    submitValue: '{isCreate}',
 		    xtype: '{useridXType}'
