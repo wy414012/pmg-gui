@@ -1,3 +1,9 @@
+pmg-gui (1.0-32) unstable; urgency=medium
+
+  * UserEdit: add minLength of 4 to username field
+
+ -- Proxmox Support Team <support@proxmox.com>  Sat, 17 Feb 2018 10:19:07 +0100
+
 pmg-gui (1.0-31) unstable; urgency=medium
 
   * remove outlook report style
