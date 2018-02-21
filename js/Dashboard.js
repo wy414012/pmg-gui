@@ -127,9 +127,14 @@ Ext.define('PMG.Dashboard', {
 		}
 
 		// resources count
-		cpu += item.data.cpu;
-		mem += (item.data.memory.used/item.data.memory.total);
-		hd += (item.data.rootfs.used/item.data.rootfs.total);
+		cpu += item.data.cpu || 0;
+
+		var memory = item.data.memory || { used: 0, total: 1 };
+		mem += (memory.used/memory.total);
+
+		var rootfs = item.data.rootfs || { used: 0, total: 1 };
+		hd += (rootfs.used/rootfs.total);
+
 	    });
 
 	    var subscriptionPanel = me.lookup('subscription');
