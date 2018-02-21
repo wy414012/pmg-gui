@@ -113,6 +113,7 @@ Ext.define('PMG.Dashboard', {
 	    var mem = 0;
 	    var hd = 0;
 	    var count = records.length;
+	    var errors = [];
 
 	    records.forEach(function(item) {
 		// subscription level check
@@ -135,6 +136,13 @@ Ext.define('PMG.Dashboard', {
 		var rootfs = item.data.rootfs || { used: 0, total: 1 };
 		hd += (rootfs.used/rootfs.total);
 
+		if (item.data.conn_error && count > 1) {
+		    count--;
+		    errors.push({
+			name: item.data.name,
+			msg: item.data.conn_error
+		    });
+		}
 	    });
 
 	    var subscriptionPanel = me.lookup('subscription');
@@ -152,6 +160,15 @@ Ext.define('PMG.Dashboard', {
 
 	    var hdPanel = me.lookup('hd');
 	    hdPanel.updateValue(hd);
+
+	    if (errors.length && !viewmodel.get('error_shown')) {
+		var text = "";
+		errors.forEach(function(error) {
+		    text += error.name + ':<br>' + error.msg + '<br>';
+		});
+		Ext.Msg.alert(gettext('Error'), text);
+		viewmodel.set('error_shown', true);
+	    }
 	},
 
 	init: function(view) {
@@ -166,6 +183,7 @@ Ext.define('PMG.Dashboard', {
 	data: {
 	    timespan: 300, // in seconds
 	    hours: 12, // in hours
+	    error_shown: false,
 	    'bytes_in': 0,
 	    'bytes_out': 0,
 	    'avg_ptime': 0.0
