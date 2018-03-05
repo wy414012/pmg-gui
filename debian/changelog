@@ -1,3 +1,11 @@
+pmg-gui (1.0-33) unstable; urgency=medium
+
+  * collect and show errors on dashboard
+
+  * use defaults for resources in dashboard
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 05 Mar 2018 06:50:15 +0100
+
 pmg-gui (1.0-32) unstable; urgency=medium
 
   * UserEdit: add minLength of 4 to username field
