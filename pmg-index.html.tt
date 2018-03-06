@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/pve2/css/ext6-pmg.css" />
     [% IF langfile %]
     <script type='text/javascript' src='/pve2/locale/pmg-lang-[% lang %].js'></script>
+    [% ELSE %]
+    <script type='text/javascript'> function gettext(buf) { return buf; } </script>
     [%- END %]
     [% IF debug %]
     <script type="text/javascript" src="/pve2/ext6/ext-all-debug.js"></script>
