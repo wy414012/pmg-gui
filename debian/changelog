@@ -1,3 +1,9 @@
+pmg-gui (1.0-35) unstable; urgency=medium
+
+  * add new helpdesk role
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 22 Mar 2018 12:01:19 +0100
+
 pmg-gui (1.0-34) unstable; urgency=medium
 
   * add default gettext definition in case of no langfile
