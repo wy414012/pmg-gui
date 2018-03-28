@@ -39,7 +39,7 @@ Ext.define('PMG.QuarantineList', {
 	    if (PMG.QuarantineList.from != 0) {
 		from = new Date(PMG.QuarantineList.from * 1000);
 	    } else {
-		from = new Date();
+		from = new Date(Date.now() - 7*24*60*60*1000);
 	    }
 
 	    var to;
