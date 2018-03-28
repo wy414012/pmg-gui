@@ -91,13 +91,19 @@ Ext.define('PMG.SpamQuarantine', {
 	},
 
 	btnHandler: function(button, e) {
+	    var me = this;
+	    var action = button.reference;
 	    var list = this.lookupReference('list');
 	    var selected = list.getSelection();
+	    me.doAction(action, selected);
+	},
+
+	doAction: function(action, selected) {
 	    if (!selected.length) {
 		return;
 	    }
 
-	    var action = button.reference;
+	    var list = this.lookupReference('list');
 
 	    if (selected.length > 1) {
 		var idlist = [];
