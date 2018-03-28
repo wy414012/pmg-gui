@@ -680,6 +680,15 @@ Ext.define('PMG.Utils', {
     },
 
     doQuarantineAction: function(action, id, callback) {
+	var count = id.split(';').length;
+	var successMessage = "Action '{0}'";
+	if (count > 1) {
+	    successMessage += " for '{1}' items";
+	}
+	successMessage += " successful";
+
+	/*jslint confusion: true*/
+	/*format is string and function*/
 	Proxmox.Utils.API2Request({
 	    url: '/quarantine/content/',
 	    params: {
@@ -695,8 +704,7 @@ Ext.define('PMG.Utils', {
 		    closeAction: 'destroy'
 		}).show({
 		    title: gettext('Info'),
-		    message: "Action '" + action + ' ' +
-		    id + "' successful",
+		    message: Ext.String.format(successMessage, action, count),
 		    buttons: Ext.Msg.OK,
 		    icon: Ext.MessageBox.INFO
 		});
@@ -706,6 +714,7 @@ Ext.define('PMG.Utils', {
 		}
 	    }
 	});
+	/*jslint confusion: false*/
     },
 
     sender_renderer: function(value, metaData, rec) {
