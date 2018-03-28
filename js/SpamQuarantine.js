@@ -166,6 +166,35 @@ Ext.define('PMG.SpamQuarantine', {
 	    menu.showAt(event.getXY());
 	},
 
+	keyPress: function (table, record, item, index, event) {
+	    var me = this;
+	    var list = me.lookup('list');
+	    var key = event.getKey();
+	    var action = '';
+	    switch(key) {
+		case event.DELETE:
+		case 127:
+		    action = 'delete';
+		    break;
+		case Ext.event.Event.D:
+		case Ext.event.Event.D + 32:
+		    action = 'deliver';
+		    break;
+		case Ext.event.Event.W:
+		case Ext.event.Event.W + 32:
+		    action = 'whitelist';
+		    break;
+		case Ext.event.Event.B:
+		case Ext.event.Event.B + 32:
+		    action = 'blacklist';
+		    break;
+	    }
+
+	    if (action !== '') {
+		me.doAction(action, list.getSelection());
+	    }
+	},
+
 	init: function(view) {
 	    this.lookup('list').cselect = view.cselect;
 	},
@@ -179,6 +208,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    },
 	    'pmgQuarantineList': {
 		selectionChange: 'onSelectMail',
+		itemkeypress: 'keyPress',
 		rowcontextmenu: 'openContextMenu'
 	    }
 	}
