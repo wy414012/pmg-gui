@@ -153,6 +153,19 @@ Ext.define('PMG.SpamQuarantine', {
 	    grid.setVisible(!grid.isVisible());
 	},
 
+	openContextMenu: function(table, record, tr, index, event) {
+	    event.stopEvent();
+	    var me = this;
+	    var list = me.lookup('list');
+	    var menu = Ext.create('PMG.menu.SpamContextMenu', {
+		callback: function(action) {
+		    me.doAction(action, list.getSelection());
+		}
+	    });
+
+	    menu.showAt(event.getXY());
+	},
+
 	init: function(view) {
 	    this.lookup('list').cselect = view.cselect;
 	},
@@ -165,7 +178,8 @@ Ext.define('PMG.SpamQuarantine', {
 		click: 'toggleSpamInfo'
 	    },
 	    'pmgQuarantineList': {
-		selectionChange: 'onSelectMail'
+		selectionChange: 'onSelectMail',
+		rowcontextmenu: 'openContextMenu'
 	    }
 	}
     },

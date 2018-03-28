@@ -79,6 +79,7 @@ JSSRC=							\
 	ReceiverStatistics.js				\
 	ContactStatistics.js				\
 	HourlyMailDistribution.js			\
+	SpamContextMenu.js				\
 	Application.js
 
 OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
