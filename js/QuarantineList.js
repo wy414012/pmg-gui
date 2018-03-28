@@ -72,6 +72,7 @@ Ext.define('PMG.QuarantineList', {
 	load: function(callback) {
 	    var me = this;
 	    var view = me.getView();
+	    var store = view.getStore();
 	    if (view.emailSelection) {
 		if (!me.lookupReference('email').getSelection()) {
 		    // if the combobox has no selection we do not reload
@@ -79,7 +80,17 @@ Ext.define('PMG.QuarantineList', {
 		}
 		me.setEmptyText();
 	    }
-	    view.getStore().load(callback);
+	    store.load(function() {
+		if (me.savedPosition !== undefined) {
+		    if (store.getCount() - 1 < me.savedPosition) {
+			me.savedPosition = store.getCount() - 1;
+		    }
+		    view.setSelection(store.getAt(me.savedPosition));
+		}
+		if (Ext.isFunction(callback)) {
+		    callback();
+		}
+	    });
 	},
 
 	setFrom: function(from) {
@@ -161,9 +172,25 @@ Ext.define('PMG.QuarantineList', {
 	    this.lookupReference('email').queryCaching = true;
 	},
 
+
+	savePosition: function(grid, selected, eopts) {
+	    if (!selected.length) {
+		return;
+	    }
+
+	    var me = this;
+	    var view = me.getView();
+
+	    var id = view.getStore().indexOf(selected[0]);
+
+	    me.savedPosition = id;
+	},
+
+
 	control: {
 	    '#':{
-		beforedestroy: 'resetEmail'
+		beforedestroy: 'resetEmail',
+		selectionchange: 'savePosition'
 	    },
 	    'combobox[reference=email]': {
 		change: {
