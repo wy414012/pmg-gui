@@ -18,6 +18,10 @@ Ext.define('PMG.QuarantineList', {
 	to: 0
     },
 
+    selModel: {
+	selType: 'checkboxmodel'
+    },
+
     controller: {
 	xclass: 'Ext.app.ViewController',
 

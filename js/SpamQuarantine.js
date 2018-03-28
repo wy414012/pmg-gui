@@ -63,7 +63,23 @@ Ext.define('PMG.SpamQuarantine', {
 
 	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + ((raw)?'&raw=1':'');
 	    preview.setDisabled(false);
+	    this.lookupReference('raw').setDisabled(false);
+	    this.lookupReference('spam').setDisabled(false);
 	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
+	},
+
+	multiSelect: function() {
+	    var preview = this.lookupReference('preview');
+	    var raw = this.lookupReference('raw');
+	    var spam = this.lookupReference('spam');
+	    var spaminfo = this.lookupReference('spaminfo');
+
+	    preview.setDisabled(false);
+	    preview.update('<h3>' + gettext('Multiple E-Mails selected') + '</h3>');
+	    raw.setDisabled(true);
+	    spam.setDisabled(true);
+	    spam.setPressed(false);
+	    spaminfo.setVisible(false);
 	},
 
 	toggleRaw: function(button) {
@@ -83,6 +99,30 @@ Ext.define('PMG.SpamQuarantine', {
 
 	    var action = button.reference;
 
+	    if (selected.length > 1) {
+		var idlist = [];
+		selected.forEach(function(item) {
+		    idlist.push(item.data.id);
+		});
+		Ext.Msg.confirm(
+		    gettext('Confirm'),
+		    Ext.String.format(
+			gettext("Action '{0}' for '{1}' items"),
+			action, selected.length
+		    ),
+		    function(button) {
+			if (button !== 'yes') {
+			    return;
+			}
+
+			PMG.Utils.doQuarantineAction(action, idlist.join(';'), function() {
+			    list.getController().load();
+			});
+		    }
+		);
+		return;
+	    }
+
 	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
 		list.getController().load();
 	    });
@@ -91,6 +131,11 @@ Ext.define('PMG.SpamQuarantine', {
 	onSelectMail: function() {
 	    var me = this;
 	    var list = this.lookupReference('list');
+	    var selection = list.selModel.getSelection();
+	    if (selection.length > 1) {
+		me.multiSelect();
+		return;
+	    }
 	    var rec = list.selModel.getSelection()[0];
 
 	    me.updatePreview(me.raw || false, rec);
