@@ -91,7 +91,6 @@ Ext.define('PMG.VirusQuarantine', {
 	{
 	    title: gettext('Virus Quarantine'),
 	    xtype: 'pmgQuarantineList',
-	    selModel: 'rowmodel',
 	    emptyText: gettext('No data in database'),
 	    emailSelection: false,
 	    reference: 'list',

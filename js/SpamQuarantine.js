@@ -218,6 +218,7 @@ Ext.define('PMG.SpamQuarantine', {
 	{
 	    title: gettext('Spam Quarantine'),
 	    xtype: 'pmgQuarantineList',
+	    selModel: 'checkboxmodel',
 	    emailSelection: true,
 	    reference: 'list',
 	    region: 'west',
