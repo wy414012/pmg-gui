@@ -1,3 +1,17 @@
+pmg-gui (1.0-36) unstable; urgency=medium
+
+  * SpamQuarantine: add keyboard shortcuts for actions
+
+  * SpamQuarantine: add context menu
+
+  * SpamQuarantine: do not deselect when list change
+
+  * SpamQuarantine: set the default quarantine timespan to a week
+
+  * SpamQuarantine: implement multiselection of spamquarantine mails
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 29 Mar 2018 14:42:42 +0200
+
 pmg-gui (1.0-35) unstable; urgency=medium
 
   * add new helpdesk role
