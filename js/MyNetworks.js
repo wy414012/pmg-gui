@@ -114,6 +114,7 @@ Ext.define('PMG.MyNetworks', {
 	Ext.apply(me, {
 	    store: store,
 	    tbar: tbar,
+	    run_editor: run_editor,
 	    viewConfig: {
 		trackOver: false
 	    },

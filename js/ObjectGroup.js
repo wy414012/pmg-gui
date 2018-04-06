@@ -238,6 +238,7 @@ Ext.define('PMG.ObjectGroup', {
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
 
 	Ext.apply(me, {
+	    run_editor: run_editor,
 	    listeners: {
 		itemdblclick: run_editor,
 		activate: reload

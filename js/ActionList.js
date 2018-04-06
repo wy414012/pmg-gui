@@ -121,6 +121,7 @@ Ext.define('PMG.ActionList', {
 	}
 
 	Ext.apply(me, {
+	    run_editor: run_editor,
 	    columns: [
 		{
 		    header: gettext('Name'),
