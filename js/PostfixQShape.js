@@ -4,16 +4,16 @@ Ext.define('pmg-qshape', {
     fields: [
 	'domain',
 	{ type: 'integer', name: 'total'},
-	{ type: 'integer', name: '5s'},
-	{ type: 'integer', name: '10s'},
-	{ type: 'integer', name: '20s'},
-	{ type: 'integer', name: '40s'},
-	{ type: 'integer', name: '80s'},
-	{ type: 'integer', name: '160s'},
-	{ type: 'integer', name: '320s'},
-	{ type: 'integer', name: '640s'},
-	{ type: 'integer', name: '1280s'},
-	{ type: 'integer', name: '1280s+'}
+	{ type: 'integer', name: '5m'},
+	{ type: 'integer', name: '10m'},
+	{ type: 'integer', name: '20m'},
+	{ type: 'integer', name: '40m'},
+	{ type: 'integer', name: '80m'},
+	{ type: 'integer', name: '160m'},
+	{ type: 'integer', name: '320m'},
+	{ type: 'integer', name: '640m'},
+	{ type: 'integer', name: '1280m'},
+	{ type: 'integer', name: '1280m+'}
     ],
     idProperty: 'domain'
 });
@@ -124,54 +124,54 @@ Ext.define('PMG.Postfix.QShape', {
 	    dataIndex: 'total'
 	},
 	{
-	    header: '5s',
+	    header: '5m',
 	    width: 80,
-	    dataIndex: '5s'
+	    dataIndex: '5m'
 	},
 	{
-	    header: '10s',
+	    header: '10m',
 	    width: 80,
-	    dataIndex: '10s'
+	    dataIndex: '10m'
 	},
 	{
-	    header: '20s',
+	    header: '20m',
 	    width: 80,
-	    dataIndex: '20s'
+	    dataIndex: '20m'
 	},
 	{
-	    header: '40s',
+	    header: '40m',
 	    width: 80,
-	    dataIndex: '40s'
+	    dataIndex: '40m'
 	},
 	{
-	    header: '80s',
+	    header: '80m',
 	    width: 80,
-	    dataIndex: '80s'
+	    dataIndex: '80m'
 	},
 	{
-	    header: '160s',
+	    header: '160m',
 	    width: 80,
-	    dataIndex: '160s'
+	    dataIndex: '160m'
 	},
 	{
-	    header: '320s',
+	    header: '320m',
 	    width: 80,
-	    dataIndex: '320s'
+	    dataIndex: '320m'
 	},
 	{
-	    header: '640s',
+	    header: '640m',
 	    width: 80,
-	    dataIndex: '640s'
+	    dataIndex: '640m'
 	},
 	{
-	    header: '1280s',
+	    header: '1280m',
 	    width: 80,
-	    dataIndex: '1280s'
+	    dataIndex: '1280m'
 	},
 	{
-	    header: '1280s+',
+	    header: '1280m+',
 	    width: 80,
-	    dataIndex: '1280s+'
+	    dataIndex: '1280m+'
 	}
     ],
 
