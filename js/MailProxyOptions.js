@@ -22,7 +22,7 @@ Ext.define('PMG.MailProxyOptions', {
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
 
 	me.add_integer_row('dnsbl_threshold', gettext('DNSBL Threshold'),
-			{ defaultValue: 1, minValue: 0 });
+			{ deleteEmpty: true, defaultValue: 1, minValue: 0 });
 
 	var render_verifyreceivers = function(value) {
 	    if (value === undefined || value === '__default__') {
