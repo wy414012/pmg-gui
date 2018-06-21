@@ -1,3 +1,9 @@
+pmg-gui (1.0-39) unstable; urgency=medium
+
+  * Add postfix dnsbl threshold
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 21 Jun 2018 10:26:39 +0200
+
 pmg-gui (1.0-38) unstable; urgency=medium
 
   * fix bug #1707: use correct units for deferred mail queue (minutes)
