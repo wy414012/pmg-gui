@@ -21,6 +21,9 @@ Ext.define('PMG.MailProxyOptions', {
 	me.add_text_row('dnsbl_sites', gettext('DNSBL Sites'),
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
 
+	me.add_integer_row('dnsbl_threshold', gettext('DNSBL Threshold'),
+			{ defaultValue: 1, minValue: 0 });
+
 	var render_verifyreceivers = function(value) {
 	    if (value === undefined || value === '__default__') {
 		return Proxmox.Utils.noText;
