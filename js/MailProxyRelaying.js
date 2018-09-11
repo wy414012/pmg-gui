@@ -17,8 +17,58 @@ Ext.define('PMG.MailProxyRelaying', {
 
 	me.add_boolean_row('relaynomx', gettext('Disable MX lookup'));
 
-	me.add_text_row('smarthost', gettext('Smarthost'),
-			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
+	me.rows.smarthost = {
+	    required: true,
+	    multiKey: ['smarthost', 'smarthostport'],
+	    header: gettext('Smarthost'),
+	    renderer: function() {
+		var host = me.getObjectValue('smarthost', undefined);
+		var port = me.getObjectValue('smarthostport', undefined);
+		var result = '';
+		if (host) {
+		    if (port) {
+			if (host.match(Proxmox.Utils.IP6_match)) {
+			    result = "[" + host + "]:" + port;
+			} else {
+			    result = host + ':' + port;
+			}
+		    } else {
+			result = host;
+		    }
+		}
+		if (result === '') {
+		    result = Proxmox.Utils.noneText;
+		}
+		return result;
+	    },
+	    editor: {
+		xtype: 'proxmoxWindowEdit',
+		subject: gettext('Smarthost'),
+		fieldDefaults: {
+		    labelWidth: 100
+		},
+		items: [
+		    {
+			xtype: 'proxmoxtextfield',
+			name: 'smarthost',
+			deleteEmpty: true,
+			emptyText: Proxmox.Utils.noneText,
+			fieldLabel: gettext('Smarthost')
+		    },
+		    {
+			xtype: 'proxmoxintegerfield',
+			name: 'smarthostport',
+			deleteEmpty: true,
+			minValue: 1,
+			maxValue: 65535,
+			emptyText: Proxmox.Utils.defaultText,
+			fieldLabel: gettext('Port')
+		    }
+		]
+	    }
+	};
+
+	me.rows.smarthostport = { visible: false };
 
 	var baseurl = '/config/mail';
 
