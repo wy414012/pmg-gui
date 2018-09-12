@@ -1,3 +1,9 @@
+pmg-gui (1.0-40) unstable; urgency=medium
+
+  * fix #1701: add port option for smarthost
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 12 Sep 2018 06:51:41 +0200
+
 pmg-gui (1.0-39) unstable; urgency=medium
 
   * Add postfix dnsbl threshold
