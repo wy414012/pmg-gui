@@ -41,6 +41,8 @@ JSSRC=							\
 	MailProxyPorts.js				\
 	MailProxyOptions.js				\
 	MailProxyTLS.js					\
+	MailProxyTLSPanel.js				\
+	MailProxyTLSDomains.js				\
 	Transport.js					\
 	MyNetworks.js					\
 	RelayDomains.js					\
