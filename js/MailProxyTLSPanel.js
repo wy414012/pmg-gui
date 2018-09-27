@@ -7,23 +7,22 @@ Ext.define('PMG.MailProxyTLSPanel', {
 	align: 'stretch'
     },
 
+    bodyPadding: '0 0 10 0',
+    defaults: {
+	collapsible: true,
+	animCollapse: false,
+	margin: '10 10 0 10'
+    },
+
     initComponent: function() {
 	var me = this;
 
 	var tlsSettings = Ext.create('PMG.MailProxyTLS', {
-	    xtype: 'pmgMailProxyTLS',
-	    title: gettext('Settings'),
-	    border: 0,
-	    collapsible: true,
-	    padding: '0 0 20 0'
+	    title: gettext('Settings')
 	});
 
 	var tlsDomains = Ext.create('PMG.MailProxyTLSDomains', {
-	    xtype: 'pmgMailProxyTLSDomains',
-	    title: gettext('TLS Domain Policy'),
-	    border: 0,
-	    collapsible: true,
-	    padding: '0 0 20 0'
+	    title: gettext('TLS Domain Policy')
 	});
 
 	me.items = [ tlsSettings, tlsDomains ];
