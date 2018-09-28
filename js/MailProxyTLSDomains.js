@@ -29,7 +29,7 @@ Ext.define('PMG.MailProxyTLSDomains', {
 	var store = Ext.create('Proxmox.data.DiffStore', { rstore: rstore});
 
         var reload = function() {
-            store.load();
+            rstore.load();
         };
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
