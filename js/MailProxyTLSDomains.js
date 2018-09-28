@@ -2,28 +2,96 @@
 Ext.define('pmg-tls-policy', {
     extend: 'Ext.data.Model',
     fields: [ 'domain', 'policy' ],
-    idProperty: 'domain'
+    idProperty: 'domain',
+    proxy: {
+	type: 'proxmox',
+	url: '/api2/json/config/tlspolicy'
+    },
+    sorters: {
+	property: 'domain',
+	order: 'DESC'
+    }
+});
+
+Ext.define('PMG.TLSDomainEdit', {
+    extend: 'Proxmox.window.Edit',
+    xtype: 'pmgTLSDomainEdit',
+
+    subject: gettext('TLS Policy'),
+    initComponent : function() {
+	var me = this;
+
+	var isCreate = ! Ext.isDefined(me.domain);
+
+	var url = '/api2/extjs/config/tlspolicy' + (isCreate ? '' : '/' + me.domain);
+	var method = isCreate ? 'POST' : 'PUT';
+	var text = isCreate ? 'Create' : 'Edit';
+
+	var items = [
+	    {
+		xtype: isCreate ? 'proxmoxtextfield' : 'displayfield',
+		name: 'domain',
+		fieldLabel: gettext('Domain')
+	    },
+	    {
+		xtype: 'proxmoxKVComboBox',
+		name: 'policy',
+		fieldLabel: gettext('Policy'),
+		deleteEmpty: false,
+		comboItems: [
+		    [ 'none', 'none' ],
+		    [ 'may', 'may' ],
+		    [ 'encrypt', 'encrypt' ],
+		    [ 'dane', 'dane' ],
+		    [ 'dane-only', 'dane-only' ],
+		    [ 'fingerprint', 'fingerprint' ],
+		    [ 'verify', 'verify' ],
+		    [ 'secure', 'secure' ]
+		],
+		allowBlank: true,
+		value: 'encrypt'
+	    }
+	];
+
+	Ext.apply(me, {
+	    url: url,
+	    method: method,
+	    items: items,
+	    text: text
+	});
+
+	me.callParent();
+    }
 });
 
 Ext.define('PMG.MailProxyTLSDomains', {
     extend: 'Ext.grid.GridPanel',
     alias: ['widget.pmgMailProxyTLSDomains'],
 
+    viewConfig: {
+	trackOver: false
+    },
+    columns: [
+	{
+	    header: gettext('Domain'),
+	    width: 200,
+	    sortable: true,
+	    dataIndex: 'domain'
+	},
+	{
+	    header: gettext('Policy'),
+	    sortable: false,
+	    dataIndex: 'policy',
+	    flex: 1
+	}
+    ],
+
     initComponent : function() {
 	var me = this;
 
-	var baseurl = '/config/tlspolicy';
 	var rstore = Ext.create('Proxmox.data.UpdateStore', {
 	    model: 'pmg-tls-policy',
-	    storeid: 'pmg-mailproxy-tls-store-' + (++Ext.idSeed),
-	    proxy: {
-		type: 'proxmox',
-		url: '/api2/json' + baseurl
-	    },
-	    sorters: {
-		property: 'domain',
-		order: 'DESC'
-	    }
+	    storeid: 'pmg-mailproxy-tls-store-' + (++Ext.idSeed)
 	});
 
 	var store = Ext.create('Proxmox.data.DiffStore', { rstore: rstore});
@@ -34,53 +102,15 @@ Ext.define('PMG.MailProxyTLSDomains', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
-	    selModel: me.selModel,
-	    baseurl: baseurl,
-	    callback: reload,
-	    waitMsgTarget: me
-	});
-
-	var policy_selector_properties = {
-	    xtype: 'proxmoxKVComboBox',
-	    name: 'policy',
-	    fieldLabel: 'Policy',
-	    deleteEmpty: false,
-	    comboItems: [
-		[ 'none', 'none' ],
-		[ 'may', 'may' ],
-		[ 'encrypt', 'encrypt' ],
-		[ 'dane', 'dane' ],
-		[ 'dane-only', 'dane-only' ],
-		[ 'fingerprint', 'fingerprint' ],
-		[ 'verify', 'verify' ],
-		[ 'secure', 'secure' ]
-	    ],
-	    allowBlank: true,
-	    value: 'encrypt'
-	};
-
 	var run_editor = function() {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
 
-	    var config = {
-		url: '/api2/extjs' + baseurl + '/' + rec.data.domain,
-		method: 'PUT',
-		subject: gettext('TLS Policy'),
-		items: [
-		    {
-			xtype: 'displayfield',
-			name: 'domain',
-			fieldLabel: gettext('Domain')
-		    },
-		    policy_selector_properties
-		]
-	    };
-
-	    var win = Ext.createWidget('proxmoxWindowEdit', config);
+	    var win = Ext.createWidget('pmgTLSDomainEdit', {
+		domain: rec.data.domain
+	    });
 
 	    win.load();
 	    win.on('destroy', reload);
@@ -90,35 +120,26 @@ Ext.define('PMG.MailProxyTLSDomains', {
 	var tbar = [
             {
 		xtype: 'proxmoxButton',
-		text: gettext('Edit'),
 		disabled: true,
-		selModel: me.selModel,
+		text: gettext('Edit'),
 		handler: run_editor
             },
 	    {
 		text: gettext('Create'),
 		handler: function() {
-		    var config = {
-			url: '/api2/extjs' + baseurl,
-			method: 'POST',
-			subject: gettext('TLS Policy'),
-			isCreate: true,
-			items: [
-			    {
-				xtype: 'proxmoxtextfield',
-				name: 'domain',
-				fieldLabel: gettext('Domain')
-			    }, policy_selector_properties
-			]
-		    };
+		    var win = Ext.createWidget('pmgTLSDomainEdit');
 
-		    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
+		    win.load();
 		    win.on('destroy', reload);
 		    win.show();
 		}
             },
-	    remove_btn
+	    {
+		xtype: 'proxmoxStdRemoveButton',
+		baseurl: '/config/tlspolicy',
+		callback: reload,
+		waitMsgTarget: me
+	    }
         ];
 
 	Proxmox.Utils.monStoreErrors(me, store, true);
@@ -127,23 +148,6 @@ Ext.define('PMG.MailProxyTLSDomains', {
 	    store: store,
 	    tbar: tbar,
 	    run_editor: run_editor,
-	    viewConfig: {
-		trackOver: false
-	    },
-	    columns: [
-		{
-		    header: gettext('Domain'),
-		    width: 200,
-		    sortable: true,
-		    dataIndex: 'domain'
-		},
-		{
-		    header: gettext('Policy'),
-		    sortable: false,
-		    dataIndex: 'policy',
-		    flex: 1
-		}
-	    ],
 	    listeners: {
 		itemdblclick: run_editor,
 		activate: reload
