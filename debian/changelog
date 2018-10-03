@@ -1,3 +1,9 @@
+pmg-gui (1.0-42) unstable; urgency=medium
+
+  * add onlineHelp properties to all edit windows
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 03 Oct 2018 14:32:48 +0200
+
 pmg-gui (1.0-41) unstable; urgency=medium
 
   * Implement TLS Policy Setting
