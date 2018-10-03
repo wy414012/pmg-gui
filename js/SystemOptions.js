@@ -9,7 +9,8 @@ Ext.define('PMG.SystemOptions', {
 
     url: '/api2/json/config/admin',
     editorConfig: {
-	url: '/api2/extjs/config/admin'
+	url: '/api2/extjs/config/admin',
+	onlineHelp: 'pmgconfig_systemconfig'
     },
 
     controller: {
@@ -44,6 +45,7 @@ Ext.define('PMG.SystemOptions', {
 	    header: text,
 	    editor: {
 		xtype: 'proxmoxWindowEdit',
+		onlineHelp: 'pmgconfig_systemconfig',
 		subject: text,
 		items: {
 		    xtype: 'proxmoxtextfield',

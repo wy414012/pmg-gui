@@ -58,6 +58,7 @@ Ext.define('PMG.ObjectGroupList', {
 
 	var config = {
 	    url: "/api2/extjs" + me.baseurl +'/' + rec.data.id + '/config',
+	    onlineHelp: 'chapter_mailfilter',
 	    method: 'PUT',
 	    subject: me.subject,
 	    width: 400,
@@ -116,6 +117,7 @@ Ext.define('PMG.ObjectGroupList', {
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs" + me.baseurl,
+			onlineHelp: 'chapter_mailfilter',
 			isCreate: true,
 			width: 400,
 			subject: me.subject,

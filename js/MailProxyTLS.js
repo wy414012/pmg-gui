@@ -27,7 +27,8 @@ Ext.define('PMG.MailProxyTLS', {
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl
+		url: '/api2/extjs' + baseurl,
+		onlineHelp: 'pmgconfig_mailproxy_tls'
 	    },
 	    interval: 5000,
 	    cwidth1: 200,

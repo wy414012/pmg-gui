@@ -29,6 +29,7 @@ Ext.define('pmg-cluster', {
 Ext.define('PMG.ClusterJoinNodeWindow', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgClusterJoinNodeWindow',
+    onlineHelp: 'pmgcm_join',
 
     title: gettext('Cluster Join'),
 

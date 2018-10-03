@@ -116,6 +116,7 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
 
 Ext.define('PMG.SpamDetectorLanguages', {
     extend: 'Proxmox.window.Edit',
+    onlineHelp: 'pmgconfig_spamdetector',
 
     subject: 'Languages',
 

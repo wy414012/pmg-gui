@@ -45,6 +45,7 @@ Ext.define('PMG.MyNetworks', {
 
 	    var config = {
 		url: "/api2/extjs/config/mynetworks/" + rec.data.cidr,
+		onlineHelp: 'pmgconfig_mailproxy_networks',
 		method: 'PUT',
 		subject: gettext("Trusted Network"),
 		items: [
@@ -83,6 +84,7 @@ Ext.define('PMG.MyNetworks', {
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs/config/mynetworks",
+			onlineHelp: 'pmgconfig_mailproxy_networks',
 			isCreate: true,
 			subject: gettext("Trusted Network"),
 			items: [

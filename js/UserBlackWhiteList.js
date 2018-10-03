@@ -41,6 +41,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    var config = {
 		method: 'POST',
 		url: url,
+		onlineHelp: 'pmg_userblackwhitelist',
 		isCreate: true,
 		isAdd: true,
 		items: items

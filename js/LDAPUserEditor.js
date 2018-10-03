@@ -48,6 +48,7 @@ Ext.define('PMG.LDAPUserInputPanel', {
 Ext.define('PMG.LDAPUserEditor', {
     extend: 'Proxmox.window.Edit',
     alias: 'widget.pmgLDAPUserEditor',
+    onlineHelp: 'pmgconfig_ldap',
 
     width: 500,
 

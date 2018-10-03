@@ -17,6 +17,7 @@ Ext.define('pmg-backup-list', {
 Ext.define('PMG.RestoreWindow', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgRestoreWindow',
+    onlineHelp: 'chapter_pmgbackup',
 
     showProgress: true,
     title: gettext('Restore'),

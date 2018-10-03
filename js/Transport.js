@@ -88,6 +88,7 @@ Ext.define('PMG.Transport', {
 
 	    var config = {
 		url: "/api2/extjs/config/transport/" + rec.data.domain,
+		onlineHelp: 'pmgconfig_mailproxy_transports',
 		method: 'PUT',
 		subject: gettext("Transport"),
 		items: edit_properties
@@ -114,6 +115,7 @@ Ext.define('PMG.Transport', {
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs/config/transport",
+			onlineHelp: 'pmgconfig_mailproxy_transports',
 			isCreate: true,
 			subject: gettext("Transport"),
 			items: create_properties

@@ -1,6 +1,7 @@
 Ext.define('PMG.RuleEditor', {
     extend: 'Proxmox.window.Edit',
     xtype: 'ruleeditwindow',
+    onlineHelp: 'chapter_mailfilter',
 
     url: undefined,
 

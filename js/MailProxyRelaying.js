@@ -43,6 +43,7 @@ Ext.define('PMG.MailProxyRelaying', {
 	    },
 	    editor: {
 		xtype: 'proxmoxWindowEdit',
+		onlineHelp: 'pmgconfig_mailproxy_relaying',
 		subject: gettext('Smarthost'),
 		fieldDefaults: {
 		    labelWidth: 100
@@ -84,7 +85,8 @@ Ext.define('PMG.MailProxyRelaying', {
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl
+		url: '/api2/extjs' + baseurl,
+		onlineHelp: 'pmgconfig_mailproxy_relaying'
 	    },
 	    interval: 5000,
 	    cwidth1: 200,

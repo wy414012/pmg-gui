@@ -16,6 +16,7 @@ Ext.define('pmg-tls-policy', {
 Ext.define('PMG.TLSDomainEdit', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgTLSDomainEdit',
+    onlineHelp: 'pmgconfig_mailproxy_tls',
 
     subject: gettext('TLS Policy'),
     initComponent : function() {

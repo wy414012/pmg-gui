@@ -5,6 +5,7 @@ Ext.define('PMG.UserEdit', {
     extend: 'Proxmox.window.Edit',
     alias: 'widget.pmgUserEdit',
     mixins: ['Proxmox.Mixin.CBind'],
+    onlineHelp: 'pmgconfig_localuser',
 
     userid: undefined,
 

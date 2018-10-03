@@ -168,6 +168,7 @@ Ext.define('PMG.LDAPInputPanel', {
 Ext.define('PMG.LDAPEdit', {
     extend: 'Proxmox.window.Edit',
     alias: 'widget.pmgLDAPEdit',
+    onlineHelp: 'pmgconfig_ldap',
 
     subject: 'LDAP Profile',
     isAdd: true,

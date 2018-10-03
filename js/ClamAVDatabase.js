@@ -22,7 +22,8 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 	Ext.apply(me, {
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl
+		url: '/api2/extjs' + baseurl,
+		onlineHelp: 'pmgconfig_clamav'
 	    },
 	    interval: 5000,
 	    cwidth1: 200,

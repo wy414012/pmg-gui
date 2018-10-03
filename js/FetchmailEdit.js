@@ -3,6 +3,7 @@
 Ext.define('PMG.FetchmailEdit', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgFetchmailEdit',
+    onlineHelp: 'pmgconfig_fetchmail',
 
     userid: undefined,
 

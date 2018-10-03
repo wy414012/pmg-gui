@@ -126,6 +126,7 @@ Ext.define('PMG.Utils', {
 
     object_editors: {
 	1000: {
+	    onlineHelp: 'pmg_mailfilter_regex',
 	    iconCls: 'fa fa-filter',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'regex',
@@ -148,18 +149,21 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1005: {
+	    onlineHelp: 'pmgconfig_ldap',
 	    iconCls: 'fa fa-users',
 	    xtype: 'pmgLDAPGroupEditor',
 	    subdir: 'ldap',
 	    subject: gettext("LDAP Group")
 	},
 	1006: {
+	    onlineHelp: 'pmgconfig_ldap',
 	    iconCls: 'fa fa-user',
 	    xtype: 'pmgLDAPUserEditor',
 	    subdir: 'ldapuser',
 	    subject: gettext("LDAP User")
 	},
 	1009: {
+	    onlineHelp: 'pmg_mailfilter_regex',
 	    iconCls: 'fa fa-filter',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_regex',
@@ -176,6 +180,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1001: {
+	    onlineHelp: 'pmg_mailfilter_who',
 	    iconCls: 'fa fa-envelope-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'email',
@@ -190,6 +195,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1007: {
+	    onlineHelp: 'pmg_mailfilter_who',
 	    iconCls: 'fa fa-envelope-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver',
@@ -205,6 +211,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1002: {
+	    onlineHelp: 'pmg_mailfilter_who',
 	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'domain',
@@ -219,6 +226,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1008: {
+	    onlineHelp: 'pmg_mailfilter_who',
 	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'receiver_domain',
@@ -234,6 +242,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1003: {
+	    onlineHelp: 'pmg_mailfilter_who',
 	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'ip',
@@ -248,6 +257,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	1004: {
+	    onlineHelp: 'pmg_mailfilter_who',
 	    iconCls: 'fa fa-globe',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'network',
@@ -262,6 +272,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	2000: {
+	    onlineHelp: 'pmg_mailfilter_when',
 	    iconCls: 'fa fa-clock-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'timeframe',
@@ -282,6 +293,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3000: {
+	    onlineHelp: 'pmg_mailfilter_what',
 	    iconCls: 'fa fa-bullhorn',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'spamfilter',
@@ -297,6 +309,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3001: {
+	    onlineHelp: 'pmg_mailfilter_what',
 	    iconCls: 'fa fa-bug',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'virusfilter',
@@ -310,6 +323,7 @@ Ext.define('PMG.Utils', {
 	    }
 	},
 	3002: {
+	    onlineHelp: 'pmg_mailfilter_regex',
 	    iconCls: 'fa fa-code',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'matchfield',
@@ -340,6 +354,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3003: {
+	    onlineHelp: 'pmg_mailfilter_what',
 	    iconCls: 'fa fa-file-image-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'contenttype',
@@ -381,6 +396,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3004: {
+	    onlineHelp: 'pmg_mailfilter_regex',
 	    iconCls: 'fa fa-file-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'filenamefilter',
@@ -405,6 +421,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	3005: {
+	    onlineHelp: 'pmg_mailfilter_what',
 	    iconCls: 'fa fa-file-archive-o',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'archivefilter',
@@ -446,6 +463,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	4002: {
+	    onlineHelp: 'pmg_mailfilter_action',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'notification',
 	    subject: gettext('Notification'),
@@ -502,6 +520,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	4003: {
+	    onlineHelp: 'pmg_mailfilter_action',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'field',
 	    subject: gettext('Header Attribute'),
@@ -534,6 +553,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	4005: {
+	    onlineHelp: 'pmg_mailfilter_action',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'bcc',
 	    subject: gettext('BCC'),
@@ -566,6 +586,7 @@ Ext.define('PMG.Utils', {
 
 	},
 	4007: {
+	    onlineHelp: 'pmg_mailfilter_action',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'removeattachments',
 	    subject: gettext('Remove Attachments'),
@@ -601,6 +622,7 @@ Ext.define('PMG.Utils', {
 	    ]
 	},
 	4009: {
+	    onlineHelp: 'pmg_mailfilter_action',
 	    xtype: 'proxmoxWindowEdit',
 	    subdir: 'disclaimer',
 	    subject: gettext('Disclaimer'),

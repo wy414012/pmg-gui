@@ -45,6 +45,7 @@ Ext.define('PMG.RelayDomains', {
 
 	    var config = {
 		url: "/api2/extjs/config/domains/" + rec.data.domain,
+		onlineHelp: 'pmgconfig_mailproxy_relay_domains',
 		method: 'PUT',
 		subject: gettext("Relay Domain"),
 		items: [
@@ -83,6 +84,7 @@ Ext.define('PMG.RelayDomains', {
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs/config/domains",
+			onlineHelp: 'pmgconfig_mailproxy_relay_domains',
 			isCreate: true,
 			subject: gettext("Relay Domain"),
 			items: [

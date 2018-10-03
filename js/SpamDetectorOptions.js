@@ -56,7 +56,8 @@ Ext.define('PMG.SpamDetectorOptions', {
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
-		url: '/api2/extjs' + baseurl
+		url: '/api2/extjs' + baseurl,
+		onlineHelp: 'pmgconfig_spamdetector'
 	    },
 	    interval: 5000,
 	    cwidth1: 200,

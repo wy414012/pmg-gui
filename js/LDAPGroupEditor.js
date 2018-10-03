@@ -94,6 +94,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 Ext.define('PMG.LDAPGroupEditor', {
     extend: 'Proxmox.window.Edit',
     alias: 'widget.pmgLDAPGroupEditor',
+    onlineHelp: 'pmgconfig_ldap',
 
     width: 500,
 
