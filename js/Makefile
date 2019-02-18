@@ -84,6 +84,15 @@ JSSRC=							\
 	SpamContextMenu.js				\
 	Application.js
 
+# caution: order is important
+MOBILESRC=				\
+	  mobile/component.js		\
+	  mobile/loginscreen.js		\
+	  mobile/mailview.js		\
+	  mobile/quarantineview.js	\
+	  mobile/utils.js		\
+	  mobile/app.js			\
+
 OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
 	/usr/bin/asciidoc-pmg scan-extjs ${JSSRC} >$@.tmp
 	mv $@.tmp $@
@@ -95,12 +104,16 @@ pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
 	cat OnlineHelpInfo.js ${JSSRC} >$@.tmp
 	mv $@.tmp $@
 
-all: pmgmanagerlib.js
+pmgmanagerlib-mobile.js: ${MOBILESRC}
+	cat ${MOBILESRC} >$@.tmp
+	mv $@.tmp $@
+
+all: pmgmanagerlib.js pmgmanagerlib-mobile.js
 
 .PHONY: clean
 clean:
 	find . -name '*~' -exec rm {} ';'	
-	rm -rf pmgmanagerlib.js OnlineHelpInfo.js
+	rm -rf pmgmanagerlib.js pmgmanagerlib-mobile.js OnlineHelpInfo.js
 
 
 

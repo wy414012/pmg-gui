@@ -1,0 +1,46 @@
+.item-title .item-header {
+    white-space: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.empty {
+    padding: 1em;
+    color: var(--f7-label-text-color);
+}
+
+img.logo {
+    padding: 0 10px;
+    vertical-align: middle;
+    height: 64px;
+}
+
+img.logo-navbar {
+    padding: 0 10px;
+    height: 32;
+}
+
+.settings-form {
+    position: absolute;
+    bottom: calc(var(--f7-fab-margin) + var(--f7-safe-area-bottom));
+    right: calc(var(--f7-fab-margin) + var(--f7-safe-area-right));
+    z-index: 1500;
+    width: 200px;
+    background-color: var(--f7-list-bg-color);
+}
+
+.button.subscription i.icon {
+    display: inline;
+}
+
+@media only screen and (max-width: 500px) {
+    .login-screen-title {
+	font-size: 6vw;
+    }
+}
+
+@media only screen and (min-width: 500px) {
+    .login-screen-title {
+	font-size: 32px;
+    }
+}

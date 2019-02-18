@@ -17,7 +17,7 @@ IMAGES=				\
 	logo-128.png		\
 	proxmox_logo.png
 
-CSSFILES = ext6-pmg.css
+CSSFILES = ext6-pmg.css ext6-pmg-mobile.css
 
 all:
 
@@ -31,12 +31,17 @@ deb ${DEB}:
 js/pmgmanagerlib.js:
 	make -C js pmgmanagerlib.js
 
-install: pmg-index.html.tt js/pmgmanagerlib.js
+js/pmgmanagerlib-mobile.js:
+	make -C js pmgmanagerlib-mobile.js
+
+install: pmg-index.html.tt js/pmgmanagerlib.js js/pmgmanagerlib-mobile.js
 	install -d -m 755 ${WWWCSSDIR}
 	install -d -m 755 ${WWWIMAGESDIR}
 	install -d -m 755 ${WWWJSDIR}
 	install -m 0644 pmg-index.html.tt ${WWWBASEDIR}
+	install -m 0644 pmg-mobile-index.html.tt ${WWWBASEDIR}
 	install -m 0644 js/pmgmanagerlib.js ${WWWJSDIR}
+	install -m 0644 js/pmgmanagerlib-mobile.js ${WWWJSDIR}
 	for i in ${IMAGES}; do install -m 0644 images/$$i ${WWWIMAGESDIR}; done
 	for i in ${CSSFILES}; do install -m 0644 css/$$i ${WWWCSSDIR}; done
 
