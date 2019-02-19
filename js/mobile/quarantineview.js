@@ -135,6 +135,9 @@ class QuarantineView extends Component {
 		renderItem: function(item) {
 		    return me._renderItem(item);
 		},
+		height: function(item) {
+		    return me._calculateHeight(item);
+		},
 		emptyTemplate: '<div class="empty">No data in database</div>'
 	    });
 
@@ -251,6 +254,32 @@ class QuarantineView extends Component {
 	    return true;
 	}
 	return false;
+    }
+    _calculateHeight(item) {
+	var me = this;
+
+	let height = 48; // default
+
+	if (typeof item === 'object') {
+	    let type = app.theme + '-' + (item.divider? "divider" : 'item');
+	    switch (type) {
+		case 'md-divider':
+		    height = 48;
+		    break;
+		case 'md-item':
+		    height = 54;
+		    break;
+		case 'ios-divider':
+		    height = 31;
+		    break;
+		case 'ios-item':
+		    height = 53;
+		    break;
+		default: ;
+	    }
+	}
+
+	return height;
     }
     _renderItem(item) {
 	var me = this;
