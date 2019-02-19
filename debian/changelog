@@ -1,3 +1,11 @@
+pmg-gui (1.0-43) unstable; urgency=medium
+
+  * close #1671: implement mobile UI for quarantine
+
+  * depend on libjs-framework7
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 19 Feb 2019 10:12:51 +0100
+
 pmg-gui (1.0-42) unstable; urgency=medium
 
   * add onlineHelp properties to all edit windows
