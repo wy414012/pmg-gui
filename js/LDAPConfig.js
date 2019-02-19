@@ -269,7 +269,7 @@ Ext.define('PMG.LDAPConfig', {
 		items: [{
 		    xtype: 'pmgLDAPUserGrid',
 		    border: false,
-		    url: '/api2/json/config/ldap/' + name + '/groups/' +  record.data.gid
+		    url: '/api2/json/config/ldap/' + name + '/groups/' +  encodeURIComponent(record.data.gid)
 		}]
 	    }).show();
 	},
@@ -297,7 +297,7 @@ Ext.define('PMG.LDAPConfig', {
 			field: ['email', 'primary'],
 			proxy: {
 			    type: 'proxmox',
-			    url: '/api2/json/config/ldap/' + name + '/users/' +  record.data.pmail
+			    url: '/api2/json/config/ldap/' + name + '/users/' +  encodeURIComponent(record.data.pmail)
 			}
 		    },
 		    columns: [
