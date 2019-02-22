@@ -144,6 +144,7 @@ Ext.define('PMG.Utils', {
 		    labelWidth: 150,
 		    fieldLabel: gettext('Test String'),
 		    xtype: 'pmgRegexTester',
+		    wholeMatch: true,
 		    regexFieldReference: 'regex'
 		}
 	    ]
