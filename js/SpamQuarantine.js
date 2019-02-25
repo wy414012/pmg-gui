@@ -65,6 +65,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    preview.setDisabled(false);
 	    this.lookupReference('raw').setDisabled(false);
 	    this.lookupReference('spam').setDisabled(false);
+	    this.lookupReference('download').setDisabled(false);
 	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
 	},
 
@@ -73,6 +74,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    var raw = this.lookupReference('raw');
 	    var spam = this.lookupReference('spam');
 	    var spaminfo = this.lookupReference('spaminfo');
+	    var download = this.lookupReference('download');
 
 	    preview.setDisabled(false);
 	    preview.update('<h3>' + gettext('Multiple E-Mails selected') + '</h3>');
@@ -80,6 +82,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    spam.setDisabled(true);
 	    spam.setPressed(false);
 	    spaminfo.setVisible(false);
+	    download.setDisabled(true);
 	},
 
 	toggleRaw: function(button) {
@@ -153,6 +156,49 @@ Ext.define('PMG.SpamQuarantine', {
 	    grid.setVisible(!grid.isVisible());
 	},
 
+	downloadEmail: function(btn) {
+	    var me = this;
+	    var list = this.lookupReference('list');
+	    var selection = list.selModel.getSelection();
+	    if (selection.length != 1) {
+		return; // multi download is not implemented
+	    }
+	    var rec = selection[0];
+	    var url = '/api2/extjs/quarantine/content';
+	    Proxmox.Utils.API2Request({
+		url: url,
+		params: {
+		    id: rec.data.id,
+		    raw: 1
+		},
+		method: 'GET',
+		failure: function(response, opts) {
+		    Ext.Msg.alert('Error', response.htmlStatus);
+		},
+		success: function(response, opts) {
+		    var data = response.result.data;
+		    var raw = data.header;
+		    raw += '\n';
+		    raw += data.content;
+
+		    var link = Ext.DomHelper.append(document.body, {
+			tag: 'a',
+			href: 'data:message/rfc822,' + encodeURIComponent(raw),
+			css: 'display:none;visibility:hidden;height: 0px;',
+			download: rec.data.id + '.eml'
+		    });
+
+		    if (link.fireEvent) {
+			link.fireEvent('onclick');
+		    } else {
+			var evt = document.createEvent("MouseEvents");
+			evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+			link.dispatchEvent(evt);
+		    }
+		}
+	    });
+	},
+
 	openContextMenu: function(table, record, tr, index, event) {
 	    event.stopEvent();
 	    var me = this;
@@ -205,6 +251,9 @@ Ext.define('PMG.SpamQuarantine', {
 	    },
 	    'button[reference=spam]': {
 		click: 'toggleSpamInfo'
+	    },
+	    'button[reference=download]': {
+		click: 'downloadEmail'
 	    },
 	    'pmgQuarantineList': {
 		selectionChange: 'onSelectMail',
@@ -295,6 +344,13 @@ Ext.define('PMG.SpamQuarantine', {
 			    iconCls: 'fa fa-bullhorn'
 			},
 			'->',
+			{
+			    xtype: 'button',
+			    reference: 'download',
+			    text: gettext('Download'),
+			    iconCls: 'fa fa-download'
+			},
+			'-',
 			{
 			    reference: 'whitelist',
 			    text: gettext('Whitelist'),
