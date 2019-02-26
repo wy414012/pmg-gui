@@ -153,7 +153,7 @@ var PMG = {
 			resolve();
 		    }
 		} else {
-		    app.toolbar.hide('.toolbar.subscription');
+		    $$('.toolbar.subscription').remove();
 		    resolve();
 		}
 	    });
