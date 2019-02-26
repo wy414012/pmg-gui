@@ -1,3 +1,23 @@
+pmg-gui (1.0-44) unstable; urgency=medium
+
+  * add system report to gui
+
+  * show emptyText when no users are available to select
+
+  * limit userlist to the respective list
+
+  * allow multiselect for user white- and blacklist
+
+  * add download button to spam quarantine preview
+
+  * make who regex tests anchored
+
+  * mobileui: fix list height
+
+  * add missing encodeURIComponent
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 26 Feb 2019 13:19:24 +0100
+
 pmg-gui (1.0-43) unstable; urgency=medium
 
   * close #1671: implement mobile UI for quarantine
