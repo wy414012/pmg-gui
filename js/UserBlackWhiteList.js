@@ -12,6 +12,8 @@ Ext.define('PMG.UserBlackWhiteList', {
     border: false,
     listname: undefined, // 'blacklist' or 'whitelist',
 
+    selModel: 'checkboxmodel',
+
     emptyText: gettext('No data in database'),
 
     controller: {
@@ -27,6 +29,8 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    var items = [{
 		xtype: 'proxmoxtextfield',
 		name: 'address',
+		minLength: 3,
+		regex: /^[^\,\;\s]*$/, // no whitespace no , and no ;
 		fieldLabel: gettext("Address")
 	    }];
 
@@ -62,13 +66,18 @@ Ext.define('PMG.UserBlackWhiteList', {
 
 	onRemoveAddress: function() {
 	    var me = this.getView();
-	    var rec = me.selModel.getSelection()[0];
-	    if (!rec) {
+	    var records = me.selModel.getSelection();
+	    if (records.length < 1) {
 		return;
 	    }
 
+	    var url = '/quarantine/' + me.listname + '/';
+
+	    url += records.map(function(rec) {
+		return encodeURIComponent(rec.getId());
+	    }).join(',');
+
 	    var params = me.getStore().getProxy().getExtraParams() || {};
-	    var url = '/quarantine/' + me.listname + '/' + encodeURIComponent(rec.getId());
 
 	    Proxmox.Utils.API2Request({
 		url: url + '?' + Ext.Object.toQueryString(params),
@@ -146,13 +155,26 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    text: gettext('Remove'),
 	    disabled: true,
 	    handler: 'onRemoveAddress',
-	    confirmMsg: function(rec) {
-		var me = this;
+	    confirmMsg: function() {
+		var me = this.up('gridpanel');
 
-		var name = rec.getId();
-		return Ext.String.format(
-		    gettext('Are you sure you want to remove entry {0}'),
-		    "'" + Ext.String.htmlEncode(name) + "'");
+		var selection = me.selModel.getSelection();
+		var text;
+		var param;
+
+		if (selection.length > 1) {
+		    text = gettext('Are you sure you want to remove {0} entries');
+		    param = selection.length.toString();
+		} else if (selection.length > 0) {
+		    var rec = selection[0];
+		    var name = rec.getId();
+		    text = gettext('Are you sure you want to remove entry {0}');
+		    param = "'" + Ext.String.htmlEncode(name) + "'";
+		}
+
+		if (text && param) {
+		    return Ext.String.format(text, param);
+		}
 	    }
 	}
     ],
@@ -181,6 +203,9 @@ Ext.define('PMG.UserBlacklist', {
 	proxy: {
             type: 'proxmox',
             url: "/api2/json/quarantine/blacklist"
+	},
+	sorters: {
+	    property: 'address'
 	}
     },
 
@@ -215,6 +240,9 @@ Ext.define('PMG.UserWhitelist', {
 	proxy: {
             type: 'proxmox',
             url: "/api2/json/quarantine/whitelist"
+	},
+	sorters: {
+	    property: 'address'
 	}
     },
 
