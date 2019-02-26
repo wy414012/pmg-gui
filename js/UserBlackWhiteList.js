@@ -149,6 +149,12 @@ Ext.define('PMG.UserBlackWhiteList', {
 	    editable: true,
 	    reference: 'email',
 	    name: 'email',
+	    listConfig: {
+		emptyText:
+		'<div class="x-grid-empty">' +
+		gettext('No data in database') +
+		'</div>'
+	    },
 	    fieldLabel: 'E-Mail'
 	},
 	{
