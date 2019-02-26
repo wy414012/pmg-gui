@@ -103,9 +103,14 @@ Ext.define('PMG.UserBlackWhiteList', {
 	},
 
 	init: function(view) {
+	    var emailcb = this.lookupReference('email');
 	    if (PMG.view === 'quarantineview') {
-		this.lookupReference('email').setVisible(false);
+		emailcb.setVisible(false);
 		view.getStore().load();
+	    } else {
+		emailcb.getStore().getProxy().setExtraParams({
+		    list: view.listname === 'blacklist' ? 'BL' : 'WL'
+		});
 	    }
 	    Proxmox.Utils.monStoreErrors(view.getView(), view.getStore(), true);
 	},
