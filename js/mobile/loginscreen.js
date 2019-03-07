@@ -16,7 +16,7 @@ class LoginScreen extends Component {
 			<div class="item-inner">
 			  <div class="item-title item-label">Username</div>
 			  <div class="item-input-wrap">
-			    <input type="text" name="username" placeholder="{{gettext 'Username'}}" required validate>
+			    <input type="text" name="username" placeholder="` + gettext('Username') + `" required validate>
 			    <span class="input-clear-button"></span>
 			  </div>
 			</div>
@@ -25,7 +25,7 @@ class LoginScreen extends Component {
 			<div class="item-inner">
 			  <div class="item-title item-label">Password</div>
 			  <div class="item-input-wrap">
-			    <input type="password" name="password" placeholder="{{gettext 'Password'}}" required validate>
+			    <input type="password" name="password" placeholder="` + gettext('Password') + `" required validate>
 			    <span class="input-clear-button"></span>
 			  </div>
 			</div>
@@ -35,7 +35,7 @@ class LoginScreen extends Component {
 		  <div class="list">
 		    <ul>
 		      <li>
-			<input type="submit" class="button" value='{{gettext "Log In"}}'>
+			<input type="submit" class="button" value='` + gettext("Log In") + `'>
 		      </li>
 		    </ul>
 		  </div>

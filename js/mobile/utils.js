@@ -1,7 +1,3 @@
-Template7.registerHelper('gettext', function(value) {
-    return gettext(value);
-});
-
 var PMG = {
     Utils: {
 	getCookie(name) {

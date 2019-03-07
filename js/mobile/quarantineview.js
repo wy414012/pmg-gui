@@ -12,12 +12,12 @@ class QuarantineView extends Component {
 		    </div>
 		</div>
 		<div class="settings-form elevation-5 fab-morph-target">
-		    <div class="block-title block-title-medium">{{gettext "Range"}}</div>
+		    <div class="block-title block-title-medium">` + gettext("Range") + `</div>
 		    <div class="list no-hairlines-md">
 			<ul>
 			    <li class="item-content item-input">
 				<div class="item-inner">
-				    <div class="item-title item-label">{{gettext "From"}}</div>
+				    <div class="item-title item-label">` + gettext("From") + `</div>
 				    <div class="item-input-wrap">
 					<input type="date" name="from" placeholder="from" required validate>
 				    </div>
@@ -25,14 +25,14 @@ class QuarantineView extends Component {
 			    </li>
 			    <li class="item-content item-input">
 				<div class="item-inner">
-				    <div class="item-title item-label">{{gettext "To"}}</div>
+				    <div class="item-title item-label">` + gettext("To") + `</div>
 				    <div class="item-input-wrap">
 					<input type="date" name="to" placeholder="to" required validate>
 				    </div>
 				</div>
 			    </li>
 			</ul>
-			<a class="button fab-close range-form">{{gettext "OK"}}</a>
+			<a class="button fab-close range-form">` + gettext("OK") + `</a>
 		    </div>
 		</div>
 		<div class="fab fab-morph fab-right-bottom" data-morph-to=".settings-form">
@@ -47,7 +47,7 @@ class QuarantineView extends Component {
 			    <i class="icon f7-icons ios-only color-yellow">alert</i>
 			    <i class="icon material-icons md-only color-yellow">warning</i>
 			    <span class="subscription-text">
-			    {{gettext "No valid subscription"}}
+			    ` + gettext("No valid subscription") + `
 			    </span>
 			</a>
 			</div>
@@ -78,24 +78,24 @@ class QuarantineView extends Component {
 		    <a href="/mail/{{id}}/deliver" class="color-green swipeout-close">
 			<i class="icon f7-icons ios-only">paper_plane</i>
 			<i class="icon material-icons md-only">send</i>
-			&nbsp;{{gettext "Deliver"}}
+			&nbsp;` + gettext("Deliver") + `
 		    </a>
 		    <a href="/mail/{{id}}/whitelist" class="swipeout-close">
 			<i class="icon f7-icons ios-only">check</i>
 			<i class="icon material-icons md-only">check</i>
-			&nbsp;{{gettext "Whitelist"}}
+			&nbsp;` + gettext("Whitelist") + `
 		    </a>
 		</div>
 		<div class="swipeout-actions-right">
 		    <a href="/mail/{{id}}/blacklist" class="color-orange swipeout-close">
 			<i class="icon f7-icons ios-only">close</i>
 			<i class="icon material-icons md-only">close</i>
-			&nbsp;{{gettext "Blacklist"}}
+			&nbsp;` + gettext("Blacklist") + `
 		    </a>
 		    <a href="/mail/{{id}}/delete" class="color-red swipeout-close">
 			<i class="icon f7-icons ios-only">trash</i>
 			<i class="icon material-icons md-only">delete</i>
-			&nbsp;{{gettext "Delete"}}
+			&nbsp;` + gettext("Delete") + `
 		    </a>
 		</div>
 	    </li>`;

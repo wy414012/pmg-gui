@@ -26,7 +26,6 @@ var app = new Framework7({
 	    async: function(routeTo, routeFrom, resolve, reject) {
 		let action = routeTo.params.action;
 		let mailid = routeTo.params.mailid;
-		let confirmText = gettext('')
 		app.dialog.confirm(
 		    `${action}: ${mailid}`,
 		    gettext('Confirm'),
