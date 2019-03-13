@@ -65,7 +65,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		xtype: 'textfield',
 		fieldLabel: gettext('Server'),
 		allowBlank: false,
-		vtype: 'IP64Address',
+		vtype: 'DnsOrIp',
 		name: 'server1'
 	    },
 	    {
@@ -73,7 +73,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		fieldLabel: gettext('Server'),
 		allowBlank: true,
 		deleteEmpty: me.isCreate ? false : true,
-		vtype: 'IP64Address',
+		vtype: 'DnsOrIp',
 		name: 'server2'
 	    },
 	    {
