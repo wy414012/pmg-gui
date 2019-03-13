@@ -56,7 +56,8 @@ Ext.define('PMG.LDAPInputPanel', {
 		name: 'mode',
 		comboItems: [
 		    ['ldap', PMG.Utils.format_ldap_protocol('ldap')],
-		    ['ldaps', PMG.Utils.format_ldap_protocol('ldaps')]
+		    ['ldaps', PMG.Utils.format_ldap_protocol('ldaps')],
+		    ['ldap+starttls', PMG.Utils.format_ldap_protocol('ldap+starttls')]
 		],
 		value: 'ldap',
 		fieldLabel: gettext('Protocol'),

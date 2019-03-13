@@ -117,6 +117,7 @@ Ext.define('PMG.Utils', {
 	if (p === undefined) { return 'LDAP'; }
 	if (p === 'ldap') { return 'LDAP'; }
 	if (p === 'ldaps') { return 'LDAPS'; }
+	if (p === 'ldap+starttls') { return 'LDAP+STARTTLS'; }
 	return 'unknown';
     },
 
