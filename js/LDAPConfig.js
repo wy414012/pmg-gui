@@ -59,7 +59,22 @@ Ext.define('PMG.LDAPInputPanel', {
 		    ['ldaps', PMG.Utils.format_ldap_protocol('ldaps')]
 		],
 		value: 'ldap',
-		fieldLabel: gettext('Protocol')
+		fieldLabel: gettext('Protocol'),
+		listeners: {
+		    change: function(cb, value) {
+			var isldap = (value === 'ldap');
+			me.down('field[name=verify]').setVisible(!isldap);
+		    }
+		}
+	    },
+	    {
+		xtype: 'proxmoxcheckbox',
+		name: 'verify',
+		fieldLabel: gettext('Verify Certificate'),
+		hidden: true,
+		uncheckedValue: 0,
+		value: 1,
+		checked: 1
 	    },
 	    {
 		xtype: 'textfield',
@@ -205,6 +220,7 @@ Ext.define('PMG.LDAPEdit', {
 		    var values = response.result.data;
 
 		    values.enable = values.disable ? 0 : 1;
+		    values.verify = !!values.verify;
 		    ipanel.setValues(values);
 		}
 	    });
