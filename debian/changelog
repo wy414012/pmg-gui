@@ -1,3 +1,17 @@
+pmg-gui (1.0-45) unstable; urgency=medium
+
+  * add LDAP+STARTTLS as ldap protocol
+
+  * add verify certificate checkbox for ldap
+
+  * fix #1945: enable dns names for ldap servers on gui
+
+  * fix gettext invocations
+
+  * fix wrong 'no subscription' toolbar
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 18 Mar 2019 07:12:32 +0100
+
 pmg-gui (1.0-44) unstable; urgency=medium
 
   * add system report to gui
