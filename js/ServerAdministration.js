@@ -49,11 +49,10 @@ Ext.define('PMG.ServerAdministration', {
 	    nodename: Proxmox.NodeName
 	},
 	{
-	    xtype: 'proxmoxLogView',
+	    xtype: 'proxmoxJournalView',
 	    itemId: 'logs',
 	    title: gettext('Syslog'),
-	    url: "/api2/extjs/nodes/" + Proxmox.NodeName + "/syslog",
-	    log_select_timespan: 1
+	    url: "/api2/extjs/nodes/" + Proxmox.NodeName + "/journal"
 	},
 	{
 	    xtype: 'proxmoxNodeTasks',
