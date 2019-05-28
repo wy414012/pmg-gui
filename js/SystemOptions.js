@@ -64,7 +64,7 @@ Ext.define('PMG.SystemOptions', {
     initComponent : function() {
 	var me = this;
 
-	me.add_boolean_row('dailyreport', gettext('Send daily reports'),
+	me.add_boolean_row('dailyreport', gettext('Send daily admin reports'),
 			   { defaultValue: 1});
 
 	me.add_boolean_row('advfilter', gettext('Use advanced statistic filters'),

@@ -44,7 +44,7 @@ Ext.define('PMG.SpamQuarantineOptions', {
 	    return me.reportstyleTextHash[value] || value;
 	};
 
-	me.add_combobox_row('reportstyle', gettext('Report Style'), {
+	me.add_combobox_row('reportstyle', gettext('User Spamreport Style'), {
 	    defaultValue: 'verbose',
 	    renderer: render_reportstyle,
 	    comboItems: [
