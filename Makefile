@@ -1,8 +1,8 @@
-PACKAGE=pmg-gui
-PKGVER=1.0
-PKGREL=45
+include /usr/share/dpkg/pkg-info.mk
 
-DEB=${PACKAGE}_${PKGVER}-${PKGREL}_all.deb
+PACKAGE=pmg-gui
+
+DEB=${PACKAGE}_${DEB_VERSION_UPSTREAM_REVISION}_all.deb
 
 DESTDIR=
 
