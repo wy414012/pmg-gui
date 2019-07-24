@@ -1,3 +1,9 @@
+pmg-gui (2.0-1) pmg; urgency=medium
+
+  * bump vor Proxmox Mailgateway 6 based on Debian Buster
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 24 Jul 2019 20:44:37 +0200
+
 pmg-gui (1.0-45) unstable; urgency=medium
 
   * add LDAP+STARTTLS as ldap protocol
