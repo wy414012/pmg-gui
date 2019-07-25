@@ -1,3 +1,9 @@
+pmg-gui (2.0-2) pmg; urgency=medium
+
+  * bump for framework 7 version dependency
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 25 Jul 2019 19:03:54 +0200
+
 pmg-gui (2.0-1) pmg; urgency=medium
 
   * bump vor Proxmox Mailgateway 6 based on Debian Buster
