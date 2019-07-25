@@ -12,7 +12,7 @@ Package: pmg-gui
 Architecture: all
 Depends: fonts-font-awesome,
          libjs-extjs (>= 6.0.1),
-         libjs-framework7,
+         libjs-framework7 (>= 4.1.1),
          libtemplate-perl,
          pmg-i18n,
          proxmox-widget-toolkit (>= 1.0-28),

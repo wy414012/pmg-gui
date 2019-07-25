@@ -71,11 +71,12 @@ class LoginScreen extends Component {
     open(onLogin) {
 	var me = this;
 	return new Promise(function(resolve, reject) {
-	    me._form.on('formajax:beforesend', (el, data, xhr) => {
+	    me._form.on('formajax:beforesend', (e) => {
 		me.loader = app.dialog.preloader();
 	    });
 
-	    me._form.on('formajax:success', (el, data, xhr) => {
+	    me._form.on('formajax:success', (e) => {
+		let xhr = e.detail.xhr;
 		let json;
 		try {
 		    json = JSON.parse(xhr.responseText);
@@ -88,7 +89,8 @@ class LoginScreen extends Component {
 		resolve(json);
 	    });
 
-	    me._form.on('formajax:error', (el, data, xhr) => {
+	    me._form.on('formajax:error', (e) => {
+		let xhr = e.detail.xhr;
 		me.loader.close();
 		PMG.Utils.showError(xhr);
 	    });
