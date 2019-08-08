@@ -8,7 +8,7 @@ Ext.define('PMG.VirusDetectorOptions', {
 	var me = this;
 
 	me.add_boolean_row('archiveblockencrypted',
-			   gettext('Block encrypted archives'));
+			   gettext('Block encrypted archives and documents'));
 	
 	me.add_integer_row('archivemaxrec', gettext('Max recursion'),
 			   { minValue: 1, defaultValue: 5,
@@ -48,7 +48,7 @@ Ext.define('PMG.VirusDetectorOptions', {
 		onlineHelp: 'pmgconfig_clamav_options'
 	    },
 	    interval: 5000,
-	    cwidth1: 200,
+	    cwidth1: 270,
 	    listeners: {
 		itemdblclick: me.run_editor
 	    }
