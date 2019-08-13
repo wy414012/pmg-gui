@@ -1,3 +1,13 @@
+pmg-gui (2.0-3) pmg; urgency=medium
+
+  * change display for 'archiveblockencrypted'
+
+  * add beta text with link to bugzilla
+
+  * fix html entities in system report file
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 13 Aug 2019 14:37:24 +0200
+
 pmg-gui (2.0-2) pmg; urgency=medium
 
   * bump for framework 7 version dependency
