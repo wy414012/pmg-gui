@@ -182,6 +182,7 @@ Ext.define('PMG.MainView', {
 		},
 		{
 		    xtype: 'proxmoxHelpButton',
+		    text: gettext('Documentation'),
 		    hidden: false,
 		    baseCls: 'x-btn',
 		    iconCls: 'fa fa-info-circle x-btn-icon-el-default-toolbar-small ',
