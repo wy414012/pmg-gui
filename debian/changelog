@@ -1,3 +1,10 @@
+pmg-gui (2.0-4) pmg; urgency=medium
+
+  * use 'Documentation' as name for the global docs button, mirroring
+    PVE
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 23 Aug 2019 11:29:03 +0200
+
 pmg-gui (2.0-3) pmg; urgency=medium
 
   * change display for 'archiveblockencrypted'
