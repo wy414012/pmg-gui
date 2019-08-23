@@ -167,11 +167,6 @@ Ext.define('PMG.MainView', {
 		    xtype: 'versioninfo'
 		},
 		{
-		    padding: 3,
-		    xtype: 'box',
-		    html: '<a href="https://bugzilla.proxmox.com" target="_blank">BETA</a>'
-		},
-		{
 		    flex: 1
 		},
 		{
