@@ -747,6 +747,38 @@ Ext.define('PMG.Utils', {
 	/*jslint confusion: false*/
     },
 
+    render_filetype: function(value) {
+	let iconCls = 'fa-file-o';
+	let text = Proxmox.Utils.unknownText;
+
+	if (!value) {
+	    return `<i class='fa ${iconCls}'></i> ${text}`;
+	}
+
+	text = value.toString().toLowerCase();
+	let type = text.split('/')[0];
+
+	switch (type) {
+	    case 'audio':
+	    case 'image':
+	    case 'video':
+	    case 'text':
+		iconCls = `fa-file-${type}-o`;
+		break;
+	    case 'application':
+		let subtypes = ['excel', 'pdf', 'word', 'powerpoint'];
+		let found = subtypes.find(st => text.includes(st));
+		if (found !== undefined) {
+		    iconCls = `fa-file-${found}-o`;
+		}
+		break;
+	    default:
+		break;
+	}
+
+	return `<i class='fa ${iconCls}'></i> ${text}`;
+    },
+
     sender_renderer: function(value, metaData, rec) {
 	var subject = Ext.htmlEncode(value);
 	var from = Ext.htmlEncode(rec.data.from);
