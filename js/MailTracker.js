@@ -123,7 +123,7 @@ Ext.define('PMG.MailTrackerFilter', {
 		    border: false,
 		    items: [
 			{
-			    boxLabel: gettext('Include NDRs'),
+			    boxLabel: gettext('Include Empty Senders'),
 			    xtype: 'proxmoxcheckbox',
 			    listeners: { change: 'onFilterChange' },
 			    reference: 'ndr',
