@@ -620,6 +620,12 @@ Ext.define('PMG.Utils', {
 		    checked: true,
 		    name: 'all',
 		    fieldLabel: gettext("Remove all attachments")
+		},
+		{
+		    xtype: 'proxmoxcheckbox',
+		    checked: false,
+		    name: 'quarantine',
+		    fieldLabel: gettext("Copy orignal mail to Attachment Quarantine")
 		}
 	    ]
 	},
