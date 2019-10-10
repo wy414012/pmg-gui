@@ -107,6 +107,12 @@ Ext.define('PMG.store.NavigationStore', {
 			leaf: true
 		    },
 		    {
+			text: gettext('Attachment Quarantine'),
+			iconCls: 'fa fa-paperclip',
+			path: 'pmgAttachmentQuarantine',
+			leaf: true
+		    },
+		    {
 			text: gettext('User Whitelist'),
 			iconCls: 'fa fa-file-o',
 			path: 'pmgUserWhitelist',

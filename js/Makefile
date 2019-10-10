@@ -55,6 +55,8 @@ JSSRC=							\
 	VirusDetectorOptions.js				\
 	VirusQuarantineOptions.js			\
 	VirusQuarantine.js				\
+	AttachmentQuarantine.js				\
+	AttachmentGrid.js				\
 	ClamAVDatabase.js				\
 	VirusDetectorConfiguration.js			\
 	LDAPConfig.js					\
