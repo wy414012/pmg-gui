@@ -2,16 +2,17 @@
 Ext.define('pmg-domains', {
     extend: 'Ext.data.Model',
     fields: [ 'domain', 'comment' ],
-    proxy: {
-        type: 'proxmox',
-	url: "/api2/json/config/domains"
-    },
     idProperty: 'domain'
 });
 
 Ext.define('PMG.RelayDomains', {
     extend: 'Ext.grid.GridPanel',
     alias: ['widget.pmgRelayDomains'],
+
+    baseurl: '/config/domains',
+    domain_desc: gettext('Relay Domain'),
+
+    onlineHelp: 'pmgconfig_mailproxy_relay_domains',
 
     initComponent : function() {
 	var me = this;
@@ -21,7 +22,11 @@ Ext.define('PMG.RelayDomains', {
 	    sorters: {
 		property: 'domain',
 		order: 'DESC'
-	    }
+	    },
+	    proxy: {
+		type: 'proxmox',
+		url: '/api2/json' + me.baseurl
+	    },
 	});
 
         var reload = function() {
@@ -32,7 +37,7 @@ Ext.define('PMG.RelayDomains', {
 
 	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
 	    selModel: me.selModel,
-	    baseurl: '/config/domains',
+	    baseurl: me.baseurl,
 	    callback: reload,
 	    waitMsgTarget: me
 	});
@@ -44,15 +49,15 @@ Ext.define('PMG.RelayDomains', {
 	    }
 
 	    var config = {
-		url: "/api2/extjs/config/domains/" + rec.data.domain,
-		onlineHelp: 'pmgconfig_mailproxy_relay_domains',
+		url: '/api2/extjs' + me.baseurl + '/' + rec.data.domain,
+		onlineHelp: me.onlineHelp,
 		method: 'PUT',
-		subject: gettext("Relay Domain"),
+		subject: me.domain_desc,
 		items: [
 		    {
 			xtype: 'displayfield',
 			name: 'domain',
-			fieldLabel: gettext("Relay Domain")
+			fieldLabel: me.domain_desc
 		    },
 		    {
 			xtype: 'textfield',
@@ -83,15 +88,15 @@ Ext.define('PMG.RelayDomains', {
 		    /*jslint confusion: true*/
 		    var config = {
 			method: 'POST',
-			url: "/api2/extjs/config/domains",
-			onlineHelp: 'pmgconfig_mailproxy_relay_domains',
+			url: '/api2/extjs' + me.baseurl,
+			onlineHelp: me.onlineHelp,
 			isCreate: true,
 			subject: gettext("Relay Domain"),
 			items: [
 			    {
 				xtype: 'proxmoxtextfield',
 				name: 'domain',
-				fieldLabel: gettext("Relay Domain")
+				fieldLabel: me.domain_desc
 			    },
 			    {
 				xtype: 'proxmoxtextfield',
@@ -122,7 +127,7 @@ Ext.define('PMG.RelayDomains', {
 	    },
 	    columns: [
 		{
-		    header: gettext('Relay Domain'),
+		    header: me.domain_desc,
 		    width: 200,
 		    sortable: true,
 		    dataIndex: 'domain'
