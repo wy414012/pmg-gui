@@ -46,6 +46,8 @@ JSSRC=							\
 	Transport.js					\
 	MyNetworks.js					\
 	RelayDomains.js					\
+	DKIMSettings.js					\
+	MailProxyDKIMPanel.js				\
 	MailProxyConfiguration.js			\
 	SpamDetectorLanguages.js			\
 	SpamDetectorOptions.js				\

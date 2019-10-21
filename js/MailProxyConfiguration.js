@@ -45,6 +45,11 @@ Ext.define('PMG.MailProxyConfiguration', {
 	    xtype: 'pmgMailProxyTLSPanel'
 	},
 	{
+	    itemId: 'dkim',
+	    title: gettext('DKIM'),
+	    xtype: 'pmgMailProxyDKIMPanel'
+	},
+	{
 	    itemId: 'whitelist',
 	    title: gettext('Whitelist'),
 	    xtype: 'pmgObjectGroup',
