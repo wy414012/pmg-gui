@@ -26,22 +26,22 @@ Ext.define('PMG.MailProxyConfiguration', {
 	},
 	{
 	    itemId: 'options',
-            title: gettext('Options'),
+	    title: gettext('Options'),
 	    xtype: 'pmgMailProxyOptions'
 	},
 	{
 	    itemId: 'transports',
-            title: gettext('Transports'),
+	    title: gettext('Transports'),
 	    xtype: 'pmgTransport'
 	},
 	{
 	    itemId: 'networks',
-            title: gettext('Networks'),
+	    title: gettext('Networks'),
 	    xtype: 'pmgMyNetworks'
 	},
 	{
 	    itemId: 'tls',
-            title: gettext('TLS'),
+	    title: gettext('TLS'),
 	    xtype: 'pmgMailProxyTLSPanel'
 	},
 	{
