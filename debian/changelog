@@ -1,3 +1,13 @@
+pmg-gui (2.0-5) pmg; urgency=medium
+
+  * add attachment quarantine interface
+
+  * remove action objects: add checkbox for specifying if an original copy of
+    mail should be placed into attachment quarantine, if that remove action
+    triggers.
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 22 Oct 2019 07:43:46 +0200
+
 pmg-gui (2.0-4) pmg; urgency=medium
 
   * use 'Documentation' as name for the global docs button, mirroring
