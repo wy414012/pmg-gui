@@ -2,7 +2,7 @@
 Ext.define('pmg-action-list', {
     extend: 'Ext.data.Model',
     fields: [
-	'id', 'name', 'info', 'descr',
+	'id', 'name', 'info', 'descr', 'editable',
 	{ name: 'otype', type: 'integer' }
     ],
     idProperty: 'id'
@@ -69,6 +69,7 @@ Ext.define('PMG.ActionList', {
 	    getUrl: function(rec) {
 		return me.baseurl + '/objects/' + rec.data.id;
 	    },
+	    enableFn: rec => !!rec.data.editable,
 	    callback: reload,
 	    getRecordName: function(rec) { return rec.data.descr; },
 	    waitMsgTarget: me
@@ -109,6 +110,7 @@ Ext.define('PMG.ActionList', {
 		text: gettext('Edit'),
 		disabled: true,
 		selModel: me.selModel,
+		enableFn: rec => !!rec.data.editable,
 		handler: run_editor
             },
 	    remove_btn
@@ -143,6 +145,11 @@ Ext.define('PMG.ActionList', {
 		    flex: 1,
 		    dataIndex: 'info',
 		    renderer: Ext.String.htmlEncode
+		},
+		{
+		    header: gettext('Editable'),
+		    dataIndex: 'editable',
+		    renderer: Proxmox.Utils.format_boolean,
 		}
 	    ],
 	    listeners: {
