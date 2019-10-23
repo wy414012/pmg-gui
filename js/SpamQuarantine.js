@@ -164,39 +164,22 @@ Ext.define('PMG.SpamQuarantine', {
 		return; // multi download is not implemented
 	    }
 	    var rec = selection[0];
-	    var url = '/api2/extjs/quarantine/content';
-	    Proxmox.Utils.API2Request({
-		url: url,
-		params: {
-		    id: rec.data.id,
-		    raw: 1
-		},
-		method: 'GET',
-		failure: function(response, opts) {
-		    Ext.Msg.alert('Error', response.htmlStatus);
-		},
-		success: function(response, opts) {
-		    var data = response.result.data;
-		    var raw = data.header;
-		    raw += '\n';
-		    raw += data.content;
-
-		    var link = Ext.DomHelper.append(document.body, {
-			tag: 'a',
-			href: 'data:message/rfc822,' + encodeURIComponent(raw),
-			css: 'display:none;visibility:hidden;height: 0px;',
-			download: rec.data.id + '.eml'
-		    });
-
-		    if (link.fireEvent) {
-			link.fireEvent('onclick');
-		    } else {
-			var evt = document.createEvent("MouseEvents");
-			evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-			link.dispatchEvent(evt);
-		    }
-		}
+	    var url = "/api2/json/quarantine/download?mailid=" +
+			encodeURIComponent(rec.data.id);
+	    var link = Ext.DomHelper.append(document.body, {
+		tag: 'a',
+		href: url,
+		css: 'display:none;visibility:hidden;height: 0px;',
+		download: rec.data.id + '.eml'
 	    });
+
+	    if (link.fireEvent) {
+		link.fireEvent('onclick');
+	    } else {
+		var evt = document.createEvent("MouseEvents");
+		evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+		link.dispatchEvent(evt);
+	    }
 	},
 
 	openContextMenu: function(table, record, tr, index, event) {
