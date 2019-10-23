@@ -480,7 +480,7 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Description")
+		    fieldLabel: gettext("Comment")
 		},
 		{
 		    xtype: 'textfield',
@@ -537,7 +537,7 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Description")
+		    fieldLabel: gettext("Comment")
 		},
 		{
 		    xtype: 'textfield',
@@ -570,7 +570,7 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Description")
+		    fieldLabel: gettext("Comment")
 		},
 		{
 		    xtype: 'textfield',
@@ -606,7 +606,7 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Description")
+		    fieldLabel: gettext("Comment")
 		},
 		{
 		    xtype: 'textareafield',
@@ -645,7 +645,7 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Description")
+		    fieldLabel: gettext("Comment")
 		},
 		{
 		    xtype: 'textareafield',
