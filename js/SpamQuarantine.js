@@ -154,7 +154,7 @@ Ext.define('PMG.SpamQuarantine', {
 		me.multiSelect();
 		return;
 	    }
-	    var rec = list.selModel.getSelection()[0];
+	    var rec = selection[0];
 
 	    me.getViewModel().set('mailid', rec.data.id);
 	    me.updatePreview(me.raw || false, rec);
