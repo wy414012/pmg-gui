@@ -48,6 +48,15 @@ Ext.define('PMG.SpamQuarantine', {
     // from mail link
     cselect: undefined,
 
+    viewModel: {
+	parent: null,
+	data: {
+	    mailid: '',
+	},
+	formulas: {
+	    downloadMailURL: get => '/api2/json/quarantine/download?mailid=' + encodeURIComponent(get('mailid')),
+	},
+    },
     controller: {
 
 	xclass: 'Ext.app.ViewController',
@@ -147,6 +156,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    }
 	    var rec = list.selModel.getSelection()[0];
 
+	    me.getViewModel().set('mailid', rec.data.id);
 	    me.updatePreview(me.raw || false, rec);
 	    me.lookupReference('spaminfo').setID(rec);
 	},
@@ -154,32 +164,6 @@ Ext.define('PMG.SpamQuarantine', {
 	toggleSpamInfo: function(btn) {
 	    var grid = this.lookupReference('spaminfo');
 	    grid.setVisible(!grid.isVisible());
-	},
-
-	downloadEmail: function(btn) {
-	    var me = this;
-	    var list = this.lookupReference('list');
-	    var selection = list.selModel.getSelection();
-	    if (selection.length != 1) {
-		return; // multi download is not implemented
-	    }
-	    var rec = selection[0];
-	    var url = "/api2/json/quarantine/download?mailid=" +
-			encodeURIComponent(rec.data.id);
-	    var link = Ext.DomHelper.append(document.body, {
-		tag: 'a',
-		href: url,
-		css: 'display:none;visibility:hidden;height: 0px;',
-		download: rec.data.id + '.eml'
-	    });
-
-	    if (link.fireEvent) {
-		link.fireEvent('onclick');
-	    } else {
-		var evt = document.createEvent("MouseEvents");
-		evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-		link.dispatchEvent(evt);
-	    }
 	},
 
 	openContextMenu: function(table, record, tr, index, event) {
@@ -234,9 +218,6 @@ Ext.define('PMG.SpamQuarantine', {
 	    },
 	    'button[reference=spam]': {
 		click: 'toggleSpamInfo'
-	    },
-	    'button[reference=download]': {
-		click: 'downloadEmail'
 	    },
 	    'pmgQuarantineList': {
 		selectionChange: 'onSelectMail',
@@ -331,6 +312,7 @@ Ext.define('PMG.SpamQuarantine', {
 			    xtype: 'button',
 			    reference: 'download',
 			    text: gettext('Download'),
+			    bind: { href: '{downloadMailURL}' },
 			    iconCls: 'fa fa-download'
 			},
 			'-',
