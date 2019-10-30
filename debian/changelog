@@ -1,3 +1,13 @@
+pmg-gui (2.0-6) pmg; urgency=medium
+
+  * Add DKIM Tab to MailProxy configuration
+
+  * ActionList: make comment labels in edit window consistent
+
+  * SpamQuarantine: fix download of emails larger than 2 MB
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 30 Oct 2019 18:35:45 +0100
+
 pmg-gui (2.0-5) pmg; urgency=medium
 
   * add attachment quarantine interface
