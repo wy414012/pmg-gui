@@ -154,9 +154,10 @@ Ext.define('PMG.SpamQuarantine', {
 		me.multiSelect();
 		return;
 	    }
-	    var rec = selection[0];
 
-	    me.getViewModel().set('mailid', rec.data.id);
+	    var rec = selection[0] || {};
+
+	    me.getViewModel().set('mailid', rec.data ? rec.data.id : '');
 	    me.updatePreview(me.raw || false, rec);
 	    me.lookupReference('spaminfo').setID(rec);
 	},
