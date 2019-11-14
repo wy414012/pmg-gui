@@ -54,6 +54,7 @@ JSSRC=							\
 	SpamQuarantineOptions.js			\
 	SpamDetectorStatus.js				\
 	SpamDetectorConfiguration.js			\
+	SpamDetectorCustom.js				\
 	VirusDetectorOptions.js				\
 	VirusQuarantineOptions.js			\
 	VirusQuarantine.js				\

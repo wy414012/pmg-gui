@@ -23,7 +23,12 @@ Ext.define('PMG.SpamDetectorConfiguration', {
 	    title: gettext('Status'),
 	    itemId: 'status',
 	    xtype: 'pmgSpamDetectorStatus'
-	}
+	},
+	{
+	    title: gettext('Custom Scores'),
+	    itemId: 'scores',
+	    xtype: 'pmgSpamDetectorCustomScores'
+	},
     ]
 });
 
