@@ -69,6 +69,10 @@ Ext.define('PMG.MailProxyOptions', {
 			{ deleteEmpty: true, defaultValue: 'ESMTP Proxmox' });
 	/*jslint confusion: false*/
 
+	me.add_boolean_row('ndr_on_block', gettext('Send NDR on Blocked E-Mails'));
+
+	me.add_boolean_row('before_queue_filtering', gettext('Before Queue Filtering'));
+
 	var baseurl = '/config/mail';
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
