@@ -1,3 +1,16 @@
+pmg-gui (2.0-7) pmg; urgency=medium
+
+  * fix broken maillist when deleting last mail in list
+
+  * add Custom Scores panel to the Spam Detector
+
+  * fix #1652: rename NDR to empty senders in GUI
+
+  * Add 'ndr on block' and 'before queue filtering' Mail-Proxy configuration
+    options
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 15 Nov 2019 13:12:13 +0100
+
 pmg-gui (2.0-6) pmg; urgency=medium
 
   * Add DKIM Tab to MailProxy configuration
