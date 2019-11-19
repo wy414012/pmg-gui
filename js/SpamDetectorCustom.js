@@ -82,6 +82,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		taskDone: () => { me.reload(); },
 
 		title: gettext("Apply Custom Scores"),
+		onlineHelp: 'pmgconfig_spamdetector_customscores',
 
 		items: [
 		    {
@@ -109,6 +110,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		url: "/api2/extjs/config/customscores",
 		isCreate: true,
 		subject: gettext("Custom Rule Score"),
+		onlineHelp: 'pmgconfig_spamdetector_customscores',
 		items: [
 		    {
 			xtype: 'proxmoxtextfield',
@@ -153,6 +155,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		url: "/api2/extjs/config/customscores/" + rec.data.name,
 		method: 'PUT',
 		subject: gettext("Custom Rule Score"),
+		onlineHelp: 'pmgconfig_spamdetector_customscores',
 		items: [
 		    {
 			xtype: 'displayfield',
