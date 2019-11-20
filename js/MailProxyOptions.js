@@ -70,6 +70,9 @@ Ext.define('PMG.MailProxyOptions', {
 	/*jslint confusion: false*/
 
 	me.add_boolean_row('ndr_on_block', gettext('Send NDR on Blocked E-Mails'));
+	// FIXME allow to pass onlineHelp to ObjectGrid's add_xyz_row..
+	// onlineHelp: 'pmgconfig_mailproxy_before_after_queue',
+	me.rows.ndr_on_block.editor.onlineHelp = 'pmgconfig_mailproxy_before_after_queue';
 
 	var baseurl = '/config/mail';
 
