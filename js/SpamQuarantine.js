@@ -313,7 +313,13 @@ Ext.define('PMG.SpamQuarantine', {
 			    xtype: 'button',
 			    reference: 'download',
 			    text: gettext('Download'),
-			    bind: { href: '{downloadMailURL}' },
+			    setDownload: function(id) {
+				this.el.dom.download = id + ".eml";
+			    },
+			    bind: {
+				href: '{downloadMailURL}',
+				download: '{mailid}',
+			    },
 			    iconCls: 'fa fa-download'
 			},
 			'-',
