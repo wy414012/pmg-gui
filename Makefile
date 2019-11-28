@@ -19,6 +19,8 @@ IMAGES=				\
 
 CSSFILES = ext6-pmg.css ext6-pmg-mobile.css
 
+export DEB_VERSION_UPSTREAM_REVISION
+
 all:
 
 .PHONY: deb

@@ -106,7 +106,8 @@ lint: ${JSSRC}
 	jslint ${JSSRC} 
 
 pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
-	cat OnlineHelpInfo.js ${JSSRC} >$@.tmp
+	echo "// ${DEB_VERSION_UPSTREAM_REVISION}" > $@.tmp
+	cat OnlineHelpInfo.js ${JSSRC} >> $@.tmp
 	mv $@.tmp $@
 
 pmgmanagerlib-mobile.js: ${MOBILESRC}
