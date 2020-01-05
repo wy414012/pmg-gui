@@ -1,7 +1,7 @@
 /*global Proxmox*/
 Ext.define('pmg-transport', {
     extend: 'Ext.data.Model',
-    fields: [ 'domain', 'host', { name: 'port', type: 'integer' },
+    fields: [ 'domain', 'host',  'protocol', { name: 'port', type: 'integer' },
 	      { name: 'use_mx', type: 'boolean' }, 'comment' ],
     proxy: {
         type: 'proxmox',
@@ -45,6 +45,18 @@ Ext.define('PMG.Transport', {
 		fieldLabel: gettext("Host")
 	    },
 	    {
+		xtype: 'proxmoxKVComboBox',
+		name: 'protocol',
+		fieldLabel: gettext('Protocol'),
+		deleteEmpty: false,
+		comboItems: [
+			[ 'smtp', 'SMTP' ],
+			[ 'lmtp', 'LMTP' ]
+		],
+		allowBlank: true,
+		value: 'smtp'
+		},
+	    {
 		xtype: 'proxmoxintegerfield',
 		name: 'port',
 		value: 25,
@@ -57,7 +69,7 @@ Ext.define('PMG.Transport', {
 		name: 'use_mx',
 		checked: true,
 		uncheckedValue: 0,
-		fieldLabel: gettext("Use MX")
+		fieldLabel: gettext("Use MX (SMTP)")
 	    },
 	    {
 		xtype: 'textfield',
@@ -153,13 +165,19 @@ Ext.define('PMG.Transport', {
 		    dataIndex: 'host'
 		},
 		{
+		    header: gettext('Protocol'),
+		    width: 200,
+		    sortable: true,
+		    dataIndex: 'protocol'
+		},
+		{
 		    header: gettext('Port'),
 		    width: 80,
 		    sortable: false,
 		    dataIndex: 'port'
 		},
 		{
-		    header: gettext('Use MX'),
+		    header: gettext('Use MX (SMTP)'),
 		    width: 80,
 		    renderer: Proxmox.Utils.format_boolean,
 		    sortable: false,
