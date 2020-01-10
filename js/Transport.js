@@ -29,122 +29,51 @@ Ext.define('PMG.Transport', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn =  Ext.createWidget('proxmoxStdRemoveButton', {
-	    selModel: me.selModel,
-	    baseurl: '/config/transport',
-	    callback: reload,
-	    waitMsgTarget: me
-	});
-
-	var common_properties = [
-	    {
-		xtype: 'textfield',
-		name: 'host',
-		fieldLabel: gettext("Host")
-	    },
-	    {
-		xtype: 'proxmoxKVComboBox',
-		name: 'protocol',
-		fieldLabel: gettext('Protocol'),
-		deleteEmpty: false,
-		comboItems: [
-			[ 'smtp', 'SMTP' ],
-			[ 'lmtp', 'LMTP' ]
-		],
-		allowBlank: true,
-		value: 'smtp'
-		},
-	    {
-		xtype: 'proxmoxintegerfield',
-		name: 'port',
-		value: 25,
-		minValue: 1,
-		maxValue: 65535,
-		fieldLabel: gettext("Port")
-	    },
-	    {
-		xtype: 'proxmoxcheckbox',
-		name: 'use_mx',
-		checked: true,
-		uncheckedValue: 0,
-		fieldLabel: gettext("Use MX (SMTP)")
-	    },
-	    {
-		xtype: 'textfield',
-		name: 'comment',
-		fieldLabel: gettext("Comment")
-	    }
-	];
-
-	var edit_properties = common_properties.slice();
-	edit_properties.unshift({
-	    xtype: 'displayfield',
-	    name: 'domain',
-	    fieldLabel: gettext("Relay Domain")
-	});
-
-	var create_properties = common_properties.slice();
-	create_properties.unshift({
-	    xtype: 'proxmoxtextfield',
-	    name: 'domain',
-	    fieldLabel: gettext("Relay Domain")
-	});
-
 	let run_editor = function() {
 	    let rec = me.selModel.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
 
-	    var config = {
+	    let win = Ext.createWidget('pmgTransportEditor', {
 		url: "/api2/extjs/config/transport/" + rec.data.domain,
-		onlineHelp: 'pmgconfig_mailproxy_transports',
 		method: 'PUT',
-		subject: gettext("Transport"),
-		items: edit_properties
-	    };
-
-	    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
+	    });
 	    win.load();
 	    win.on('destroy', reload);
 	    win.show();
 	};
 
-	var tbar = [
-            {
-		xtype: 'proxmoxButton',
-		text: gettext('Edit'),
-		disabled: true,
-		selModel: me.selModel,
-		handler: run_editor
-            },
-            {
-		text: gettext('Create'),
-		handler: function() {
-		    var config = {
-			method: 'POST',
-			url: "/api2/extjs/config/transport",
-			onlineHelp: 'pmgconfig_mailproxy_transports',
-			isCreate: true,
-			subject: gettext("Transport"),
-			items: create_properties
-		    };
-
-		    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
-		    win.on('destroy', reload);
-		    win.show();
-		}
-            },
-	    remove_btn
-        ];
-
-	Proxmox.Utils.monStoreErrors(me, store, true);
-
 	Ext.apply(me, {
 	    store: store,
-	    tbar: tbar,
+	    tbar: [
+		{
+		    xtype: 'proxmoxButton',
+		    text: gettext('Edit'),
+		    disabled: true,
+		    selModel: me.selModel,
+		    handler: run_editor
+		},
+		{
+		    text: gettext('Create'),
+		    handler: function() {
+			let win = Ext.createWidget('pmgTransportEditor', {
+			    method: 'POST',
+			    url: "/api2/extjs/config/transport",
+			    isCreate: true,
+			});
+			win.on('destroy', reload);
+			win.show();
+		    }
+		},
+		{
+		    xtype: 'proxmoxStdRemoveButton',
+		    selModel: me.selModel,
+		    baseurl: '/config/transport',
+		    callback: reload,
+		    waitMsgTarget: me
+		},
+	    ],
 	    viewConfig: {
 		trackOver: false
 	    },
@@ -190,4 +119,65 @@ Ext.define('PMG.Transport', {
 
 	me.callParent();
     }
+});
+
+Ext.define('PMG.TransportEditor', {
+    extend: 'Proxmox.window.Edit',
+    alias: 'widget.pmgTransportEditor',
+    mixins: ['Proxmox.Mixin.CBind'],
+
+    cbindData: (cfg) => { return {
+	domainXType: cfg.method === 'POST' ? 'proxmoxtextfield' : 'displayfield',
+    }},
+
+    onlineHelp: 'pmgconfig_mailproxy_transports',
+    subject: gettext("Transport"),
+
+    items: [
+	{
+	    xtype: 'displayfield',
+	    cbind: {
+		xtype: '{domainXType}',
+	    },
+	    name: 'domain',
+	    fieldLabel: gettext("Relay Domain")
+	},
+	{
+	    xtype: 'textfield',
+	    name: 'host',
+	    fieldLabel: gettext("Host")
+	},
+	{
+	    xtype: 'proxmoxKVComboBox',
+	    name: 'protocol',
+	    fieldLabel: gettext('Protocol'),
+	    deleteEmpty: false,
+	    comboItems: [
+		[ 'smtp', 'SMTP' ],
+		[ 'lmtp', 'LMTP' ]
+	    ],
+	    allowBlank: true,
+	    value: 'smtp',
+	},
+	{
+	    xtype: 'proxmoxintegerfield',
+	    name: 'port',
+	    value: 25,
+	    minValue: 1,
+	    maxValue: 65535,
+	    fieldLabel: gettext("Port")
+	},
+	{
+	    xtype: 'proxmoxcheckbox',
+	    name: 'use_mx',
+	    checked: true,
+	    uncheckedValue: 0,
+	    fieldLabel: gettext('Use MX'),
+	},
+	{
+	    xtype: 'textfield',
+	    name: 'comment',
+	    fieldLabel: gettext("Comment")
+	},
+    ],
 });
