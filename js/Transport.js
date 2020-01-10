@@ -99,7 +99,7 @@ Ext.define('PMG.Transport', {
 		    dataIndex: 'port'
 		},
 		{
-		    header: gettext('Use MX (SMTP)'),
+		    header: gettext('Use MX'),
 		    width: 80,
 		    renderer: Proxmox.Utils.format_boolean,
 		    dataIndex: 'use_mx'
@@ -130,6 +130,14 @@ Ext.define('PMG.TransportEditor', {
 	domainXType: cfg.method === 'POST' ? 'proxmoxtextfield' : 'displayfield',
     }},
 
+    viewModel: {
+	data: {
+	    proto: 'smtp',
+	},
+	formulas: {
+	    protoIsSMTP: get => get('proto') === 'smtp',
+	},
+    },
     onlineHelp: 'pmgconfig_mailproxy_transports',
     subject: gettext("Transport"),
 
@@ -158,6 +166,9 @@ Ext.define('PMG.TransportEditor', {
 	    ],
 	    allowBlank: true,
 	    value: 'smtp',
+	    bind: {
+		value: '{proto}'
+	    },
 	},
 	{
 	    xtype: 'proxmoxintegerfield',
@@ -171,6 +182,10 @@ Ext.define('PMG.TransportEditor', {
 	    xtype: 'proxmoxcheckbox',
 	    name: 'use_mx',
 	    checked: true,
+	    bind: {
+		disabled: '{!protoIsSMTP}',
+		hidden: '{!protoIsSMTP}',
+	    },
 	    uncheckedValue: 0,
 	    fieldLabel: gettext('Use MX'),
 	},
