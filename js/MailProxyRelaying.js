@@ -4,22 +4,25 @@ Ext.define('PMG.MailProxyRelaying', {
     alias: ['widget.pmgMailProxyRelaying'],
 
     monStoreErrors: true,
- 
+
     initComponent : function() {
 	var me = this;
 
 	me.add_text_row('relay', gettext('Default Relay'),
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
 
-	me.add_integer_row('relayport', gettext('Relay Port'),
-		{ defaultValue: 25, deleteEmpty: true,
-			minValue: 1, maxValue: 65535 });
+	me.add_integer_row('relayport', gettext('Relay Port'), {
+	    defaultValue: 25,
+	    deleteEmpty: true,
+	    minValue: 1,
+	    maxValue: 65535
+	});
 
 	me.add_combobox_row('relayprotocol', gettext('Relay Protocol'), {
-		defaultValue: 'smtp',
-		comboItems: [
-		['smtp', 'SMTP' ],
-		['lmtp', 'LMTP' ]]
+	    defaultValue: 'smtp',
+	    comboItems: [
+	    ['smtp', 'SMTP' ],
+	    ['lmtp', 'LMTP' ]]
 	});
 
 
