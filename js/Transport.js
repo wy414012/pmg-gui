@@ -15,19 +15,17 @@ Ext.define('PMG.Transport', {
     alias: ['widget.pmgTransport'],
 
     initComponent : function() {
-	var me = this;
+	let me = this;
 
-	var store = new Ext.data.Store({
+	let store = new Ext.data.Store({
 	    model: 'pmg-transport',
 	    sorters: {
 		property: 'domain',
 		order: 'DESC'
 	    }
 	});
-
-        var reload = function() {
-            store.load();
-        };
+	Proxmox.Utils.monStoreErrors(me, store, true);
+	let reload = () => store.load();
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
@@ -92,8 +90,8 @@ Ext.define('PMG.Transport', {
 	    fieldLabel: gettext("Relay Domain")
 	});
 
-	var run_editor = function() {
-	    var rec = me.selModel.getSelection()[0];
+	let run_editor = function() {
+	    let rec = me.selModel.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
@@ -147,7 +145,6 @@ Ext.define('PMG.Transport', {
 	Ext.apply(me, {
 	    store: store,
 	    tbar: tbar,
-	    run_editor: run_editor,
 	    viewConfig: {
 		trackOver: false
 	    },
@@ -155,37 +152,31 @@ Ext.define('PMG.Transport', {
 		{
 		    header: gettext('Relay Domain'),
 		    width: 200,
-		    sortable: true,
 		    dataIndex: 'domain'
 		},
 		{
 		    header: gettext('Host'),
 		    width: 200,
-		    sortable: true,
 		    dataIndex: 'host'
 		},
 		{
 		    header: gettext('Protocol'),
 		    width: 200,
-		    sortable: true,
 		    dataIndex: 'protocol'
 		},
 		{
 		    header: gettext('Port'),
 		    width: 80,
-		    sortable: false,
 		    dataIndex: 'port'
 		},
 		{
 		    header: gettext('Use MX (SMTP)'),
 		    width: 80,
 		    renderer: Proxmox.Utils.format_boolean,
-		    sortable: false,
 		    dataIndex: 'use_mx'
 		},
 		{
 		    header: gettext('Comment'),
-		    sortable: false,
 		    renderer: Ext.String.htmlEncode,
 		    dataIndex: 'comment',
 		    flex: 1
