@@ -88,6 +88,39 @@ Ext.define('PMG.SelectorViewer', {
     }
 });
 
+Ext.define('PMG.SelectorList', {
+    extend: 'Ext.form.ComboBox',
+    xtype: 'pmgDKIMSelectorList',
+
+    queryMode: 'local',
+    store: {
+	fields: [ 'selector' ],
+	filterOnLoad: true,
+	proxy: {
+	    type: 'proxmox',
+	    url: '/api2/json/config/dkim/selectors'
+	},
+	sorters: [
+	    {
+		property : 'selector',
+		direction: 'ASC'
+	    }
+	]
+    },
+
+    valueField: 'selector',
+    displayField: 'selector',
+    allowBlank: false,
+
+    initComponent: function() {
+	var me = this;
+
+	me.callParent();
+	me.store.load();
+    }
+
+});
+
 Ext.define('PMG.DKIMSettings', {
     extend: 'Proxmox.grid.ObjectGrid',
     xtype: 'pmgDKIM',
@@ -120,6 +153,7 @@ Ext.define('PMG.DKIMSettings', {
 		isCreate: true,
 		method: 'POST',
 		url: '/config/dkim/selector',
+		submitText: gettext('Update'),
 		items: [
 		    {
 			xtype: 'displayfield',
@@ -128,12 +162,9 @@ Ext.define('PMG.DKIMSettings', {
 			value: gettext('Warning: You need to update the _domainkey DNS records of all signed domains!'),
 		    },
 		    {
-			xtype: 'proxmoxtextfield',
+			xtype: 'pmgDKIMSelectorList',
 			fieldLabel: selector_text,
 			name: 'selector',
-			allowBlank: false,
-			required: true,
-			defaultValue: 'pmg'
 		    },
 		    {
 			xtype: 'proxmoxKVComboBox',
