@@ -149,6 +149,11 @@ Ext.define('PMG.DKIMSettings', {
 			    ['4096', '4096'],
 			    ['8192', '8192']
 			]
+		    },
+		    {
+			xtype: 'proxmoxcheckbox',
+			name: 'force',
+			fieldLabel: gettext('Overwrite existing file'),
 		    }
 		]
 	    }
