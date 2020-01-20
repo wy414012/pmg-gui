@@ -146,7 +146,8 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    dataIndex: 'arrival_time'
 	},
 	{
-	    header: 'KByte',
+	    header: 'Size',
+	    renderer: Proxmox.Utils.format_size,
 	    width: 80,
 	    dataIndex: 'message_size'
 	},
