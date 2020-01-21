@@ -141,29 +141,29 @@ Ext.define('PMG.Postfix.MailQueue', {
     columns: [
 	{
 	    header: gettext('Time'),
-	    width: 150,
+	    flex: 2,
 	    renderer: Ext.util.Format.dateRenderer("Y-m-d H:i:s"),
 	    dataIndex: 'arrival_time'
 	},
 	{
 	    header: 'Size',
 	    renderer: Proxmox.Utils.format_size,
-	    width: 80,
+	    flex: 1,
 	    dataIndex: 'message_size'
 	},
 	{
 	    header: gettext('Sender'),
-	    width: 200,
+	    flex: 2,
 	    dataIndex: 'sender'
 	},
 	{
 	    header: gettext('Receiver'),
-	    width: 200,
+	    flex: 2,
 	    dataIndex: 'receiver'
 	},
 	{
 	    header: gettext('Reason'),
-	    flex: 1,
+	    flex: 8,
 	    dataIndex: 'reason'
 	}
     ],
