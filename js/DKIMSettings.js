@@ -100,6 +100,7 @@ Ext.define('PMG.SelectorList', {
 	    type: 'proxmox',
 	    url: '/api2/json/config/dkim/selectors'
 	},
+	autoLoad: true,
 	sorters: [
 	    {
 		property : 'selector',
@@ -111,14 +112,6 @@ Ext.define('PMG.SelectorList', {
     valueField: 'selector',
     displayField: 'selector',
     allowBlank: false,
-
-    initComponent: function() {
-	var me = this;
-
-	me.callParent();
-	me.store.load();
-    }
-
 });
 
 Ext.define('PMG.DKIMSettings', {
