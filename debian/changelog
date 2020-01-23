@@ -1,3 +1,15 @@
+pmg-gui (2.1-5) pmg; urgency=medium
+
+  * fix #2438: add support for lmtp delivery to downstream servers
+
+  * fix #2504: add checkbox for overwriting DKIM selectors
+
+  * dkim: list all available selectors
+
+  * improve UX of deferred queue listing slightly
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 23 Jan 2020 13:25:46 +0100
+
 pmg-gui (2.1-4) pmg; urgency=medium
 
   * improve browser-cache behavior for updates
