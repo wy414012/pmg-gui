@@ -31,7 +31,8 @@ Ext.define('PMG.MailProxyDKIMPanel', {
 	});
 
 	var DKIMDomains = Ext.create('PMG.DKIMDomains', {
-	    title: gettext('Sign Domains')
+	    title: gettext('Sign Domains'),
+	    flex: 1
 	});
 
 	me.items = [ DKIMSettings, DKIMDomains ];

@@ -22,7 +22,8 @@ Ext.define('PMG.MailProxyTLSPanel', {
 	});
 
 	var tlsDomains = Ext.create('PMG.MailProxyTLSDomains', {
-	    title: gettext('TLS Domain Policy')
+	    title: gettext('TLS Domain Policy'),
+	    flex: 1
 	});
 
 	me.items = [ tlsSettings, tlsDomains ];
