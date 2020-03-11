@@ -73,11 +73,10 @@ Ext.define('PMG.UserBlackWhiteList', {
 
 	    var url = '/quarantine/' + me.listname + '/';
 
-	    url += records.map(function(rec) {
-		return encodeURIComponent(rec.getId());
-	    }).join(',');
-
-	    var params = me.getStore().getProxy().getExtraParams() || {};
+	    let params = {
+		address: records.map((rec) => rec.getId()).join(','),
+	    };
+	    Ext.applyIf(params, me.getStore().getProxy().getExtraParams());
 
 	    Proxmox.Utils.API2Request({
 		url: url + '?' + Ext.Object.toQueryString(params),
