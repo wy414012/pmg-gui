@@ -1,14 +1,14 @@
 /*global Proxmox*/
 Ext.define('pmg-tls-policy', {
     extend: 'Ext.data.Model',
-    fields: [ 'domain', 'policy' ],
-    idProperty: 'domain',
+    fields: [ 'destination', 'policy' ],
+    idProperty: 'destination',
     proxy: {
 	type: 'proxmox',
 	url: '/api2/json/config/tlspolicy'
     },
     sorters: {
-	property: 'domain',
+	property: 'destination',
 	order: 'DESC'
     }
 });
@@ -22,16 +22,16 @@ Ext.define('PMG.TLSDomainEdit', {
     initComponent : function() {
 	var me = this;
 
-	var isCreate = ! Ext.isDefined(me.domain);
+	var isCreate = ! Ext.isDefined(me.destination);
 
-	var url = '/api2/extjs/config/tlspolicy' + (isCreate ? '' : '/' + me.domain);
+	var url = '/api2/extjs/config/tlspolicy' + (isCreate ? '' : '/' + me.destination);
 	var method = isCreate ? 'POST' : 'PUT';
 	var text = isCreate ? 'Create' : 'Edit';
 
 	var items = [
 	    {
 		xtype: isCreate ? 'proxmoxtextfield' : 'displayfield',
-		name: 'domain',
+		name: 'destination',
 		fieldLabel: gettext('Domain')
 	    },
 	    {
@@ -77,7 +77,7 @@ Ext.define('PMG.MailProxyTLSDomains', {
 	    header: gettext('Domain'),
 	    width: 200,
 	    sortable: true,
-	    dataIndex: 'domain'
+	    dataIndex: 'destination'
 	},
 	{
 	    header: gettext('Policy'),
@@ -110,7 +110,7 @@ Ext.define('PMG.MailProxyTLSDomains', {
 	    }
 
 	    var win = Ext.createWidget('pmgTLSDomainEdit', {
-		domain: rec.data.domain
+		destination: rec.data.destination
 	    });
 
 	    win.load();
