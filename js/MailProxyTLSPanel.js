@@ -21,16 +21,16 @@ Ext.define('PMG.MailProxyTLSPanel', {
 	    title: gettext('Settings')
 	});
 
-	var tlsDomains = Ext.create('PMG.MailProxyTLSDomains', {
-	    title: gettext('TLS Domain Policy'),
+	var tlsDestinations = Ext.create('PMG.MailProxyTLSDestinations', {
+	    title: gettext('TLS Destination Policy'),
 	    flex: 1
 	});
 
-	me.items = [ tlsSettings, tlsDomains ];
+	me.items = [ tlsSettings, tlsDestinations ];
 
 	me.callParent();
 
 	tlsSettings.relayEvents(me, ['activate', 'deactivate', 'destroy']);
-	tlsDomains.relayEvents(me, ['activate', 'deactivate', 'destroy']);
+	tlsDestinations.relayEvents(me, ['activate', 'deactivate', 'destroy']);
     }
 });

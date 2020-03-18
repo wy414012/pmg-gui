@@ -42,7 +42,7 @@ JSSRC=							\
 	MailProxyOptions.js				\
 	MailProxyTLS.js					\
 	MailProxyTLSPanel.js				\
-	MailProxyTLSDomains.js				\
+	MailProxyTLSDestinations.js			\
 	Transport.js					\
 	MyNetworks.js					\
 	RelayDomains.js					\

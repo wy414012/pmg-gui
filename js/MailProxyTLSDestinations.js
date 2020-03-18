@@ -13,9 +13,9 @@ Ext.define('pmg-tls-policy', {
     }
 });
 
-Ext.define('PMG.TLSDomainEdit', {
+Ext.define('PMG.TLSDestinationEdit', {
     extend: 'Proxmox.window.Edit',
-    xtype: 'pmgTLSDomainEdit',
+    xtype: 'pmgTLSDestinationEdit',
     onlineHelp: 'pmgconfig_mailproxy_tls',
 
     subject: gettext('TLS Policy'),
@@ -32,7 +32,7 @@ Ext.define('PMG.TLSDomainEdit', {
 	    {
 		xtype: isCreate ? 'proxmoxtextfield' : 'displayfield',
 		name: 'destination',
-		fieldLabel: gettext('Domain')
+		fieldLabel: gettext('Destination')
 	    },
 	    {
 		xtype: 'proxmoxKVComboBox',
@@ -65,16 +65,16 @@ Ext.define('PMG.TLSDomainEdit', {
     }
 });
 
-Ext.define('PMG.MailProxyTLSDomains', {
+Ext.define('PMG.MailProxyTLSDestinations', {
     extend: 'Ext.grid.GridPanel',
-    alias: ['widget.pmgMailProxyTLSDomains'],
+    alias: ['widget.pmgMailProxyTLSDestinations'],
 
     viewConfig: {
 	trackOver: false
     },
     columns: [
 	{
-	    header: gettext('Domain'),
+	    header: gettext('Destination'),
 	    width: 200,
 	    sortable: true,
 	    dataIndex: 'destination'
@@ -109,7 +109,7 @@ Ext.define('PMG.MailProxyTLSDomains', {
 		return;
 	    }
 
-	    var win = Ext.createWidget('pmgTLSDomainEdit', {
+	    var win = Ext.createWidget('pmgTLSDestinationEdit', {
 		destination: rec.data.destination
 	    });
 
@@ -128,7 +128,7 @@ Ext.define('PMG.MailProxyTLSDomains', {
 	    {
 		text: gettext('Create'),
 		handler: function() {
-		    var win = Ext.createWidget('pmgTLSDomainEdit');
+		    var win = Ext.createWidget('pmgTLSDestinationEdit');
 
 		    win.load();
 		    win.on('destroy', reload);
