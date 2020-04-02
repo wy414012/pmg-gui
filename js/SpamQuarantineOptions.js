@@ -57,6 +57,8 @@ Ext.define('PMG.SpamQuarantineOptions', {
 
 	me.add_text_row('hostname', gettext('Quarantine Host'),
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
+	me.add_integer_row('port', gettext('Quarantine port'),
+			{ deleteEmpty: true, defaultValue: Proxmox.Utils.defaultText });
 	me.add_text_row('mailfrom', gettext("EMail 'From:'"),
 			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
 
