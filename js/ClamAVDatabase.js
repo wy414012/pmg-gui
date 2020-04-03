@@ -15,6 +15,8 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 	/*defaultValue is a string above*/
 	me.add_boolean_row('safebrowsing', gettext('Google Safe Browsing'),
 			   { defaultValue: 1 });
+	me.add_boolean_row('scriptedupdates', gettext('Incremental Download'),
+			   { defaultValue: 0 });
 	/*jslint confusion: false*/
 
 	var baseurl = '/config/clamav';
