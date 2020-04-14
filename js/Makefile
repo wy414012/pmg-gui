@@ -22,6 +22,7 @@ JSSRC=							\
 	MainView.js					\
 	QuarantineList.js				\
 	SpamInfoGrid.js					\
+	MailInfo.js					\
 	SpamQuarantine.js				\
 	UserBlackWhiteList.js				\
 	QuarantineView.js				\
