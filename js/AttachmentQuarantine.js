@@ -71,12 +71,15 @@ Ext.define('PMG.AttachmentQuarantine', {
 	},
 
 	onSelectMail: function() {
-	    var me = this;
-	    var list = this.lookupReference('list');
-	    var rec = list.getSelection()[0] || {};
+	    let me = this;
+	    let list = me.lookup('list');
+	    let rec = list.getSelection()[0] || {};
+	    let mailinfo = me.lookup('mailinfo');
 
 	    me.updatePreview(me.raw || false, rec);
-	    this.lookupReference('attachmentlist').setID(rec);
+	    me.lookup('attachmentlist').setID(rec);
+	    mailinfo.setVisible(!!rec.data);
+	    mailinfo.update(rec.data);
 	},
 
 	control: {
@@ -178,7 +181,12 @@ Ext.define('PMG.AttachmentQuarantine', {
 		    maxHeight: 250,
 		    scrollable: true,
 		    reference: 'attachmentlist',
-		}
+		},
+		{
+		    xtype: 'pmgMailInfo',
+		    hidden: true,
+		    reference: 'mailinfo',
+		},
 	    ]
 	}
     ]

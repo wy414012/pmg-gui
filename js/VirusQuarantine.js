@@ -74,6 +74,15 @@ Ext.define('PMG.VirusQuarantine', {
 	onSelectMail: function() {
 	    var me = this;
 	    me.updatePreview(me.raw || false);
+	    let mailinfo = me.lookup('mailinfo');
+	    let list = me.lookup('list');
+	    let selection = list.getSelection();
+	    if (selection.length < 1) {
+		mailinfo.setVisible(false);
+		return;
+	    }
+	    mailinfo.setVisible(true);
+	    mailinfo.update(selection[0].data);
 	},
 
 	control: {
@@ -174,7 +183,12 @@ Ext.define('PMG.VirusQuarantine', {
 			    handler: 'btnHandler'
 			}
 		    ]
-		}
+		},
+		{
+		    xtype: 'pmgMailInfo',
+		    hidden: true,
+		    reference: 'mailinfo',
+		},
 	    ]
 	}
     ]

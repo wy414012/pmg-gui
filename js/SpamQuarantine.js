@@ -83,6 +83,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    var raw = this.lookupReference('raw');
 	    var spam = this.lookupReference('spam');
 	    var spaminfo = this.lookupReference('spaminfo');
+	    var mailinfo = this.lookupReference('mailinfo');
 	    var download = this.lookupReference('download');
 
 	    preview.setDisabled(false);
@@ -91,6 +92,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    spam.setDisabled(true);
 	    spam.setPressed(false);
 	    spaminfo.setVisible(false);
+	    mailinfo.setVisible(false);
 	    download.setDisabled(true);
 	},
 
@@ -160,6 +162,8 @@ Ext.define('PMG.SpamQuarantine', {
 	    me.getViewModel().set('mailid', rec.data ? rec.data.id : '');
 	    me.updatePreview(me.raw || false, rec);
 	    me.lookupReference('spaminfo').setID(rec);
+	    me.lookupReference('mailinfo').setVisible(!!rec.data);
+	    me.lookupReference('mailinfo').update(rec.data);
 	},
 
 	toggleSpamInfo: function(btn) {
@@ -353,7 +357,12 @@ Ext.define('PMG.SpamQuarantine', {
 		    xtype: 'pmgSpamInfoGrid',
 		    border: false,
 		    reference: 'spaminfo'
-		}
+		},
+		{
+		    xtype: 'pmgMailInfo',
+		    hidden: true,
+		    reference: 'mailinfo',
+		},
 	    ]
 	}
     ]
