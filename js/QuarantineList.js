@@ -224,14 +224,14 @@ Ext.define('PMG.QuarantineList', {
 	},
 	items: [
 	    {
-		fieldLabel: gettext('From'),
+		fieldLabel: gettext('Since'),
 		reference: 'from',
 		xtype: 'datefield',
 		format: 'Y-m-d',
 		name: 'from'
 	    },
 	    {
-		fieldLabel: gettext('To'),
+		fieldLabel: gettext('Until'),
 		reference: 'to',
 		xtype: 'datefield',
 		format: 'Y-m-d',
