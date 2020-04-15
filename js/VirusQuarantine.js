@@ -82,7 +82,7 @@ Ext.define('PMG.VirusQuarantine', {
 		mailinfo.setVisible(false);
 		return;
 	    }
-	    mailinfo.setVisible(true);
+	    mailinfo.setVisible(!me.raw);
 	    mailinfo.update(selection[0].data);
 	},
 

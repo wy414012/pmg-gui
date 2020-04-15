@@ -79,7 +79,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 
 	    me.updatePreview(me.raw || false, rec);
 	    me.lookup('attachmentlist').setID(rec);
-	    mailinfo.setVisible(!!rec.data);
+	    mailinfo.setVisible(!!rec.data && !me.raw);
 	    mailinfo.update(rec.data);
 	},
 

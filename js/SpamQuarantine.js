@@ -163,7 +163,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    me.getViewModel().set('mailid', rec.data ? rec.data.id : '');
 	    me.updatePreview(me.raw || false, rec);
 	    me.lookupReference('spaminfo').setID(rec);
-	    me.lookupReference('mailinfo').setVisible(!!rec.data);
+	    me.lookupReference('mailinfo').setVisible(!!rec.data && !me.raw);
 	    me.lookupReference('mailinfo').update(rec.data);
 	},
 
