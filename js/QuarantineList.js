@@ -18,6 +18,8 @@ Ext.define('PMG.QuarantineList', {
 	to: 0
     },
 
+    allowPositionSave: false,
+
     controller: {
 	xclass: 'Ext.app.ViewController',
 
@@ -67,6 +69,7 @@ Ext.define('PMG.QuarantineList', {
 
 	load: function(callback) {
 	    var me = this;
+	    me.allowPositionSave = false;
 	    var view = me.getView();
 	    var store = view.getStore();
 	    if (view.emailSelection) {
@@ -82,10 +85,13 @@ Ext.define('PMG.QuarantineList', {
 			me.savedPosition = store.getCount() - 1;
 		    }
 		    view.setSelection(store.getAt(me.savedPosition));
+		} else {
+		    view.setSelection();
 		}
 		if (Ext.isFunction(callback)) {
 		    callback();
 		}
+		me.allowPositionSave = true;
 	    });
 	},
 
@@ -117,6 +123,9 @@ Ext.define('PMG.QuarantineList', {
 	changeTime: function(field, value) {
 	    var me = this;
 	    var list = me.getView();
+
+	    me.allowPositionSave = false;
+	    me.savedPosition = undefined;
 
 	    if (!value) {
 		return;
@@ -158,18 +167,23 @@ Ext.define('PMG.QuarantineList', {
 
 	changeEmail: function(tb, value) {
 	    var me = this;
+	    me.savedPosition = undefined;
+	    me.allowPositionSave = false;
 	    me.setUser(value);
 	    me.load();
 	},
 
 	savePosition: function(grid, selected, eopts) {
+	    let me = this;
+	    if (!me.allowPositionSave) {
+		return;
+	    }
 	    if (!selected.length) {
+		me.savedPosition = undefined;
 		return;
 	    }
 
-	    var me = this;
 	    var view = me.getView();
-
 	    var id = view.getStore().indexOf(selected[0]);
 
 	    me.savedPosition = id;
