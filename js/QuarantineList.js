@@ -142,10 +142,8 @@ Ext.define('PMG.QuarantineList', {
 		return;
 	    }
 
-	    // the combobox does not know anything about the extraparams
-	    // so we disable queryCaching until we expand (and query) again
-	    combobox.queryCaching = false;
 	    combobox.getStore().getProxy().setExtraParams(params);
+	    combobox.getStore().load();
 
 	    me.load();
 	},
@@ -163,11 +161,6 @@ Ext.define('PMG.QuarantineList', {
 	    me.setUser(value);
 	    me.load();
 	},
-
-	setQueryCaching: function() {
-	    this.lookupReference('email').queryCaching = true;
-	},
-
 
 	savePosition: function(grid, selected, eopts) {
 	    if (!selected.length) {
@@ -189,11 +182,7 @@ Ext.define('PMG.QuarantineList', {
 		selectionchange: 'savePosition'
 	    },
 	    'combobox[reference=email]': {
-		change: {
-		    fn: 'changeEmail',
-		    buffer: 500
-		},
-		expand: 'setQueryCaching'
+		change: 'changeEmail',
 	    },
 	    datefield: {
 		change: {
@@ -257,11 +246,14 @@ Ext.define('PMG.QuarantineList', {
 			}
 		    ]
 		},
-		queryParam: false,
-		queryCaching: false,
-		editable: false,
+		queryMode: 'local',
+		editable: true,
+		typeAhead: true,
+		forceSelection: true,
+		autoSelect: true,
+		anyMatch: true,
+		selectOnFocus: true,
 		reference: 'email',
-		name: 'email',
 		fieldLabel: 'E-Mail'
 	    }
 	]
