@@ -24,10 +24,11 @@ Ext.define('PMG.MailInfoBox', {
 
     defaults: {
 	xtype: 'tbtext',
+	margin: '2 2 0 0 ',
     },
 
     items: [
-	{ tpl: `<b>${gettext("From")}:</b> {from}` },
-	{ tpl: `<b>${gettext("Subject")}:</b> {subject}` },
+	{ tpl: `<b class="bold">${gettext("From")}:</b> {from}` },
+	{ tpl: `<b class="bold">${gettext("Subject")}:</b> {subject}` },
     ],
 });

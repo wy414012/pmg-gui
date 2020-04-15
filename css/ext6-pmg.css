@@ -203,6 +203,10 @@ tr.bounced {
     color: #DD0;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 div.left {
     float: left;
 }
