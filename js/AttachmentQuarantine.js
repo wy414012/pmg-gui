@@ -52,6 +52,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 	    var me = this;
 	    var list = this.lookupReference('list');
 	    var rec = list.getSelection()[0] || {};
+	    me.lookup('mailinfo').setVisible(me.raw);
 	    me.raw = !me.raw;
 	    me.updatePreview(me.raw, rec);
 	},

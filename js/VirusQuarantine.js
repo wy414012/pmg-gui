@@ -53,6 +53,7 @@ Ext.define('PMG.VirusQuarantine', {
 
 	toggleRaw: function(button) {
 	    var me = this;
+	    me.lookup('mailinfo').setVisible(me.raw);
 	    me.raw = !me.raw;
 	    me.updatePreview(me.raw);
 	},

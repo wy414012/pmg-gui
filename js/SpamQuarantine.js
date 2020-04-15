@@ -98,8 +98,9 @@ Ext.define('PMG.SpamQuarantine', {
 
 	toggleRaw: function(button) {
 	    var me = this;
-	    var list = this.lookupReference('list');
+	    var list = me.lookupReference('list');
 	    var rec = list.selModel.getSelection()[0];
+	    me.lookupReference('mailinfo').setVisible(me.raw);
 	    me.raw = !me.raw;
 	    me.updatePreview(me.raw, rec);
 	},
