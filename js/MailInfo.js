@@ -12,7 +12,7 @@ Ext.define('PMG.MailInfoBox', {
 	let me = this;
 	let escaped = {};
 	for (const [key, value] of Object.entries(data)) {
-	    escaped[key] = Ext.htmlEncode(value);
+	    escaped[key] = Ext.util.Format.ellipsis(Ext.htmlEncode(value), 103);
 	}
 	me.items.each((item) => item.update(escaped));
     },
