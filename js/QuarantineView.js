@@ -130,6 +130,35 @@ Ext.define('PMG.QuarantineView', {
 	    PMG.app.logout();
 	},
 
+	changeLanguage: function() {
+	    Ext.create('Ext.window.Window', {
+		title: gettext('Language'),
+		bodyPadding: 10,
+		items: [
+		    {
+			xtype: 'proxmoxLanguageSelector',
+			fieldLabel: gettext('Language'),
+			value: Ext.util.Cookies.get('PMGLangCookie') || 'en',
+		    },
+		],
+
+		buttons: [
+		    {
+			text: gettext('OK'),
+			handler: function() {
+			    let me = this;
+			    let win = this.up('window');
+			    let value = win.down('proxmoxLanguageSelector').getValue();
+			    var dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
+			    Ext.util.Cookies.set('PMGLangCookie', value, dt);
+			    win.mask(gettext('Please wait...'), 'x-mask-loading');
+			    window.location.reload();
+			},
+		    }
+		]
+	    }).show();
+	},
+
 	navigate: function(treelist, item) {
 	    this.redirectTo(item.get('path'));
 	},
@@ -139,9 +168,12 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	control: {
-	    'button[reference=logoutButton]': {
+	    '[reference=logoutButton]': {
 		click: 'logout'
-	    }
+	    },
+	    '[reference=languageButton]': {
+		click: 'changeLanguage',
+	    },
 	},
 
 	init: function(view) {
@@ -149,7 +181,7 @@ Ext.define('PMG.QuarantineView', {
 
 	    // load username
 	    var username = Proxmox.UserName.replace(/\@quarantine$/, '');
-	    me.lookupReference('usernameinfo').update({username: username});
+	    me.lookupReference('usernameinfo').setText(username);
 
 	    // show login on requestexception
 	    // fixme: what about other errors
@@ -208,17 +240,29 @@ Ext.define('PMG.QuarantineView', {
 		    flex: 1
 		},
 		{
-		    baseCls: 'x-plain',
-		    reference: 'usernameinfo',
-		    padding: '0 5',
-		    tpl: Ext.String.format(gettext("You are logged in as {0}"), "'{username}'")
-		},
-		{
-		    reference: 'logoutButton',
 		    xtype: 'button',
-		    iconCls: 'fa fa-sign-out',
-		    text: gettext('Logout')
-		}
+		    reference: 'usernameinfo',
+		    style: {
+			// proxmox dark grey p light grey as border
+			backgroundColor: '#464d4d',
+			borderColor: '#ABBABA'
+		    },
+		    margin: '0 5 0 0',
+		    iconCls: 'fa fa-user',
+		    menu: [
+			{
+			    iconCls: 'fa fa-language',
+			    text: gettext('Language'),
+			    reference: 'languageButton',
+			},
+			'-',
+			{
+			    reference: 'logoutButton',
+			    iconCls: 'fa fa-sign-out',
+			    text: gettext('Logout')
+			},
+		    ],
+		},
 	    ]
 	},
 	{
