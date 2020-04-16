@@ -92,7 +92,7 @@ Ext.define('PMG.MainView', {
 	},
 
 	control: {
-	    'button[reference=logoutButton]': {
+	    '[reference=logoutButton]': {
 		click: 'logout'
 	    }
 	},
@@ -101,7 +101,7 @@ Ext.define('PMG.MainView', {
 	    var me = this;
 
 	    // load username
-	    me.lookupReference('usernameinfo').update({username:Proxmox.UserName});
+	    me.lookupReference('usernameinfo').setText(Proxmox.UserName);
 
 	    // show login on requestexception
 	    // fixme: what about other errors
@@ -170,12 +170,6 @@ Ext.define('PMG.MainView', {
 		    flex: 1
 		},
 		{
-		    baseCls: 'x-plain',
-		    reference: 'usernameinfo',
-		    padding: '0 5',
-		    tpl: Ext.String.format(gettext("You are logged in as {0}"), "'{username}'")
-		},
-		{
 		    xtype: 'proxmoxHelpButton',
 		    text: gettext('Documentation'),
 		    hidden: false,
@@ -186,11 +180,23 @@ Ext.define('PMG.MainView', {
 		    onlineHelp: 'pmg_documentation_index'
 		},
 		{
-		    reference: 'logoutButton',
 		    xtype: 'button',
-		    iconCls: 'fa fa-sign-out',
-		    text: gettext('Logout')
-		}
+		    reference: 'usernameinfo',
+		    style: {
+			// proxmox dark grey p light grey as border
+			backgroundColor: '#464d4d',
+			borderColor: '#ABBABA'
+		    },
+		    margin: '0 5 0 0',
+		    iconCls: 'fa fa-user',
+		    menu: [
+			{
+			    reference: 'logoutButton',
+			    iconCls: 'fa fa-sign-out',
+			    text: gettext('Logout')
+			},
+		    ],
+		},
 	    ]
 	},
 	{
