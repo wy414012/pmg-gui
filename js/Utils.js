@@ -464,6 +464,31 @@ Ext.define('PMG.Utils', {
 		}
 	    ]
 	},
+	3006: {
+	    onlineHelp: 'pmg_mailfilter_regex',
+	    iconCls: 'fa fa-file-archive-o',
+	    xtype: 'proxmoxWindowEdit',
+	    subdir: 'archivefilenamefilter',
+	    width: 400,
+	    subject: gettext('Match Archive Filename'),
+	    items: [
+		{
+		    xtype: 'textfield',
+		    name: 'filename',
+		    reference: 'filename',
+		    fieldLabel: gettext('Filename'),
+		    labelWidth: 150,
+		    allowBlank: false
+		},
+		{
+		    labelWidth: 150,
+		    fieldLabel: gettext('Test String'),
+		    wholeMatch: true,
+		    xtype: 'pmgRegexTester',
+		    regexFieldReference: 'filename'
+		}
+	    ]
+	},
 	4002: {
 	    onlineHelp: 'pmg_mailfilter_action',
 	    xtype: 'proxmoxWindowEdit',
