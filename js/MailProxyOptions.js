@@ -74,6 +74,8 @@ Ext.define('PMG.MailProxyOptions', {
 	// onlineHelp: 'pmgconfig_mailproxy_before_after_queue',
 	me.rows.ndr_on_block.editor.onlineHelp = 'pmgconfig_mailproxy_before_after_queue';
 
+	me.add_boolean_row('before_queue_filtering', gettext('Before Queue Filtering'));
+
 	var baseurl = '/config/mail';
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
