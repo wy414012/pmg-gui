@@ -91,10 +91,19 @@ Ext.define('PMG.MainView', {
 	    this.redirectTo(item.get('path'));
 	},
 
+	changeLanguage: function() {
+	    Ext.create('Proxmox.window.LanguageEditWindow', {
+		cookieName: 'PMGLangCookie'
+	    }).show();
+	},
+
 	control: {
 	    '[reference=logoutButton]': {
 		click: 'logout'
-	    }
+	    },
+	    '[reference=languageButton]': {
+		click: 'changeLanguage',
+	    },
 	},
 
 	init: function(view) {
@@ -191,6 +200,12 @@ Ext.define('PMG.MainView', {
 		    margin: '0 5 0 0',
 		    iconCls: 'fa fa-user',
 		    menu: [
+			{
+			    iconCls: 'fa fa-language',
+			    text: gettext('Language'),
+			    reference: 'languageButton',
+			},
+			'-',
 			{
 			    reference: 'logoutButton',
 			    iconCls: 'fa fa-sign-out',
