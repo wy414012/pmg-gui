@@ -131,31 +131,8 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	changeLanguage: function() {
-	    Ext.create('Ext.window.Window', {
-		title: gettext('Language'),
-		bodyPadding: 10,
-		items: [
-		    {
-			xtype: 'proxmoxLanguageSelector',
-			fieldLabel: gettext('Language'),
-			value: Ext.util.Cookies.get('PMGLangCookie') || 'en',
-		    },
-		],
-
-		buttons: [
-		    {
-			text: gettext('OK'),
-			handler: function() {
-			    let me = this;
-			    let win = this.up('window');
-			    let value = win.down('proxmoxLanguageSelector').getValue();
-			    var dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
-			    Ext.util.Cookies.set('PMGLangCookie', value, dt);
-			    win.mask(gettext('Please wait...'), 'x-mask-loading');
-			    window.location.reload();
-			},
-		    }
-		]
+	    Ext.create('Proxmox.window.LanguageEditWindow', {
+		cookieName: 'PMGLangCookie'
 	    }).show();
 	},
 
