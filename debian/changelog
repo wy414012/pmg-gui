@@ -1,3 +1,31 @@
+pmg-gui (2.1-6) pmg; urgency=medium
+
+  * fix #2579: Add flex to domain lists
+
+  * fix #2632: use alternative api call for user black/whitelist
+
+  * Add port to Spam Quarantine options to better support for reverse proxy
+    setups
+
+  * ClamAVDatabase: allow one to switch to incremental updates
+
+  * fix #2676: add a mail info box on quarantine views
+
+  * fix #2680: make Quarantine E-Mail list searchable
+
+  * fix #2667: and language option to user quarantine view
+
+  * restyle user menu and add language selection their to avoid the need of a
+    logout when wanting to change the language
+
+  * add 'Match Archive Filename' to list of what objects
+
+  * re-add checkbox for before-queue filtering
+
+  * mail proxy: add new greylisting options for IPv4/v6 and netmask
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 20 Apr 2020 17:49:33 +0200
+
 pmg-gui (2.1-5) pmg; urgency=medium
 
   * fix #2438: add support for lmtp delivery to downstream servers
