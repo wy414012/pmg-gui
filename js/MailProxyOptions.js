@@ -44,8 +44,17 @@ Ext.define('PMG.MailProxyOptions', {
 	});
 	/*jslint confusion: false*/
 
-	me.add_boolean_row('greylist', gettext('Use Greylisting'),
+	me.add_boolean_row('greylist', gettext('Use Greylisting for IPv4'),
 			   { defaultValue: 1 });
+
+	me.add_integer_row('greylistmask4', gettext('Netmask for Greylisting IPv4'),
+			   { defaultValue: 24, minValue: 0 });
+
+	me.add_boolean_row('greylist6', gettext('Use Greylisting for IPv6'),
+			   { defaultValue: 0 });
+
+	me.add_integer_row('greylistmask6', gettext('Netmask for Greylisting IPv6'),
+			   { defaultValue: 64, minValue: 0 });
 
 	me.add_boolean_row('spf', gettext('Use SPF'), { defaultValue: 1 });
 
