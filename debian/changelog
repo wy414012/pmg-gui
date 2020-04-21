@@ -1,3 +1,11 @@
+pmg-gui (1.0-46) unstable; urgency=medium
+
+  * use JournalView instead of LogView for syslog
+
+  * Make admin/user- report labels more explicit
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 21 Apr 2020 17:52:38 +0200
+
 pmg-gui (1.0-45) unstable; urgency=medium
 
   * add LDAP+STARTTLS as ldap protocol
