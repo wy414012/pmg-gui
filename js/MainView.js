@@ -170,6 +170,22 @@ Ext.define('PMG.MainView', {
 		    flex: 1
 		},
 		{
+		    id: 'eolannouncement',
+		    baseCls: 'x-plain',
+		    padding: '0 0 0 15',
+		    width: 400,
+		    html: '<a href="https://pmg.proxmox.com/pmg-docs/pmg-admin-guide.html#faq-support-table" target="_blank">'+
+			    '<i class="fa eolicon critical fa-exclamation-triangle" style="font-size: 1.5em;"></i> ' +
+			    'Support for Proxmox Mailgateway 5.2 ends on 31.07.2020</a>',
+		    autoEl: {
+			tag: 'div',
+			'data-qtip': gettext("You won't get any security fixes after the End-Of-Life date. Please consider upgrading.")
+		    }
+		},
+		{
+		    flex: 1
+		},
+		{
 		    baseCls: 'x-plain',
 		    reference: 'usernameinfo',
 		    padding: '0 5',

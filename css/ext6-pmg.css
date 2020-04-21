@@ -187,6 +187,16 @@ tr.bounced {
     background-color: #FFF4C2;
 }
 
+.eolicon {
+    position: relative;
+    float: left;
+    margin-right: 5px;
+}
+
+.critical {
+    color: #FF6C59;
+}
+
 .green {
     color: #21BF4B;
 }
