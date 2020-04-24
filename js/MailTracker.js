@@ -237,7 +237,8 @@ Ext.define('PMG.MailTracker', {
 
     store: {
 	autoDestroy: true,
-	model: 'pmg-mail-tracker'
+	model: 'pmg-mail-tracker',
+	sorters: 'time',
     },
 
     controller: {
