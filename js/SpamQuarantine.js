@@ -78,7 +78,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
 	},
 
-	multiSelect: function() {
+	multiSelect: function(selection) {
 	    var preview = this.lookupReference('preview');
 	    var raw = this.lookupReference('raw');
 	    var spam = this.lookupReference('spam');
@@ -87,7 +87,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    var download = this.lookupReference('download');
 
 	    preview.setDisabled(false);
-	    preview.update('<h3>' + gettext('Multiple E-Mails selected') + '</h3>');
+	    preview.update(`<h3 style="padding-left:5px;">${gettext('Multiple E-Mails selected')} (${selection.length})</h3>`);
 	    raw.setDisabled(true);
 	    spam.setDisabled(true);
 	    spam.setPressed(false);
@@ -154,7 +154,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    var list = this.lookupReference('list');
 	    var selection = list.selModel.getSelection();
 	    if (selection.length > 1) {
-		me.multiSelect();
+		me.multiSelect(selection);
 		return;
 	    }
 
