@@ -1,3 +1,12 @@
+pmg-gui (2.2-1) pmg; urgency=medium
+
+  * tracking center: sort by time by default and other various small
+    improvements
+
+  * spam quarantine view: show the amount of selected mails
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 24 Apr 2020 19:05:39 +0200
+
 pmg-gui (2.1-6) pmg; urgency=medium
 
   * fix #2579: Add flex to domain lists
