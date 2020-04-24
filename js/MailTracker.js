@@ -83,7 +83,6 @@ Ext.define('PMG.MailTrackerFilter', {
 	    ]
 	},
 	{
-	    width: 330,
 	    border: false,
 	    padding: 10,
 	    layout: {
