@@ -230,7 +230,7 @@ Ext.define('PMG.MailTracker', {
 
     border: false,
 
-    emptyText: gettext('No data in database'),
+    emptyText: gettext("Please enter your search parameters and press 'Search'."),
     disableSelection: true,
 
     viewConfig: {
@@ -261,6 +261,7 @@ Ext.define('PMG.MailTracker', {
 
 	onSearch: function() {
 	    var view = this.getView();
+	    view.setEmptyText(gettext('No data in database'));
 	    var filter = this.lookupReference('filter');
 	    var status = this.lookupReference('status');
 	    var params = filter.getFilterParams();
@@ -313,6 +314,14 @@ Ext.define('PMG.MailTracker', {
 		expandbody: 'showDetails'
 	    }
 	}
+    },
+
+    // extjs has no method to dynamically change the emptytext on
+    // grids, so we have to do it this way
+    setEmptyText: function(emptyText) {
+	let me = this;
+	let tableview = me.getView();
+	tableview.emptyText = `<div class="x-grid-empty">${emptyText || ""}</div>`;
     },
 
     dockedItems: [
