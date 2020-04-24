@@ -49,6 +49,10 @@ Ext.define('PMG.MailTrackerFilter', {
 	    if (value) { param[name] = value; }
 	});
 
+	// there must always be a start and endtime, otherwise the field was invalid
+	if (!param.starttime || !param.endtime) {
+	    return undefined;
+	}
 	return param;
     },
 
@@ -260,6 +264,9 @@ Ext.define('PMG.MailTracker', {
 	    var filter = this.lookupReference('filter');
 	    var status = this.lookupReference('status');
 	    var params = filter.getFilterParams();
+	    if (params === undefined) {
+		return; // something went wrong with the filters bail out
+	    }
 	    status.update(''); // clear status before load
 	    view.store.proxy.setExtraParams(params);
 	    view.store.proxy.setUrl('/api2/json/nodes/' + Proxmox.NodeName + '/tracker');
