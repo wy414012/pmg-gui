@@ -93,7 +93,12 @@ Ext.define('PMG.MailTrackerFilter', {
 		{
 		    fieldLabel: gettext('Start'),
 		    reference: 'starttime',
-		    listeners: { change: 'onFilterChange' },
+		    listeners: {
+			change: {
+			    fn: 'onFilterChange',
+			    buffer: 500,
+			},
+		    },
 		    value: (function() {
 			var now = new Date();
 			return new Date(now.getTime() - 3600000);
@@ -103,7 +108,12 @@ Ext.define('PMG.MailTrackerFilter', {
 		{
 		    fieldLabel: gettext('End'),
 		    reference: 'endtime',
-		    listeners: { change: 'onFilterChange' },
+		    listeners: {
+			change: {
+			    fn: 'onFilterChange',
+			    buffer: 500,
+			},
+		    },
 		    value: (function() {
 			var now = new Date();
 			var tomorrow = new Date();
