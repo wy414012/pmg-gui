@@ -195,7 +195,6 @@ Ext.define('PMG.Dashboard', {
 		type: 'update',
 		interval: 5000,
 		autoStart: true,
-		autoLoad: true,
 		autoDestroy: true,
 		proxy: {
 		    extraParams: { list_single_node: 1 },
@@ -211,7 +210,6 @@ Ext.define('PMG.Dashboard', {
 		interval: 5000,
 		type: 'update',
 		autoStart: true,
-		autoLoad: true,
 		autoDestroy: true,
 		proxy: {
 		    type: 'proxmox',
@@ -269,7 +267,6 @@ Ext.define('PMG.Dashboard', {
 		interval: 10000,
 		type: 'update',
 		autoStart: true,
-		autoLoad: true,
 		autoDestroy: true,
 		proxy: {
 		    type: 'proxmox',
