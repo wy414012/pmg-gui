@@ -18,7 +18,6 @@ JSSRC=							\
 	ActionList.js					\
 	RuleInfo.js					\
 	RuleEditor.js					\
-	Logo.js						\
 	MainView.js					\
 	QuarantineList.js				\
 	SpamInfoGrid.js					\
