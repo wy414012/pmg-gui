@@ -16,6 +16,6 @@ Depends: fonts-font-awesome,
          libjs-framework7 (>= 4.1.1),
          libtemplate-perl,
          pmg-i18n,
-         proxmox-widget-toolkit (>= 2.1-5),
+         proxmox-widget-toolkit (>= 2.2-2),
 Description: Proxmox Mail Gateway GUI
  Graphical user interface for Proxmox Mail Gateway.
