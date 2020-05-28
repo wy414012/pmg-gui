@@ -24,6 +24,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 	xclass: 'Ext.data.BufferedStore',
 	model: 'pmg-mailq',
 	remoteFilter: true,
+	remoteSort: true,
 	pageSize: 2000
     },
 
@@ -181,6 +182,9 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    type: 'proxmox',
 	    startParam: 'start',
 	    limitParam: 'limit',
+	    sortParam: 'sortfield',
+	    directionParam: 'sortdir',
+	    simpleSortMode: true,
 	    url: "/api2/json/nodes/" + me.nodename + "/postfix/queue/" + me.queuename
 	};
 
