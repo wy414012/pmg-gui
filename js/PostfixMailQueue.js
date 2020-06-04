@@ -1,13 +1,12 @@
-/*global Proxmox*/
 Ext.define('pmg-mailq', {
     extend: 'Ext.data.Model',
     fields: [
 	'queue_id', 'queue_name',
-	{ type: 'date',  dateFormat: 'timestamp', name: 'arrival_time'},
-	{ type: 'integer', name: 'message_size'},
-	'sender', 'receiver', 'reason'
+	{ type: 'date', dateFormat: 'timestamp', name: 'arrival_time' },
+	{ type: 'integer', name: 'message_size' },
+	'sender', 'receiver', 'reason',
     ],
-    idProperty: 'queue_id'
+    idProperty: 'queue_id',
 });
 
 Ext.define('PMG.Postfix.MailQueue', {
@@ -26,7 +25,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 	remoteFilter: true,
 	remoteSort: true,
 	sorters: 'arrival_time',
-	pageSize: 2000
+	pageSize: 2000,
     },
 
     controller: {
@@ -59,11 +58,10 @@ Ext.define('PMG.Postfix.MailQueue', {
 		    view.queuename + '/' + rec.data.queue_id,
 		method: 'POST',
 		waitMsgTarget: view,
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
-
 	},
 
 	onRemove: function(button, event, rec) {
@@ -78,9 +76,9 @@ Ext.define('PMG.Postfix.MailQueue', {
 		    view.selModel.deselectAll();
 		    view.store.load();
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -92,7 +90,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 
 	    var win = Ext.create('PMG.ViewMailHeaders', {
 		title: view.title + ' : ' + rec.data.queue_id,
-		url: url
+		url: url,
 	    });
 	    win.show();
 	},
@@ -104,12 +102,12 @@ Ext.define('PMG.Postfix.MailQueue', {
 		},
 		itemdblclick: function(grid, rec, item, index, event) {
 		    this.onHeaders(grid, event, rec);
-		}
+		},
 	    },
 	    'field[reference=filter]': {
-		change: 'onChangeFilter'
-	    }
-	}
+		change: 'onChangeFilter',
+	    },
+	},
     },
 
     tbar: [
@@ -117,27 +115,27 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    xtype: 'proxmoxButton',
 	    disabled: true,
 	    text: gettext('Headers'),
-	    handler: 'onHeaders'
+	    handler: 'onHeaders',
 	},
 	{
 	    xtype: 'proxmoxButton',
 	    disabled: true,
 	    text: gettext('Flush'),
-	    handler: 'onFlush'
+	    handler: 'onFlush',
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
-	    handler: 'onRemove'
+	    handler: 'onRemove',
 	},
 	{
 	    xtype: 'label',
-	    html: gettext('Filter') + ':'
+	    html: gettext('Filter') + ':',
 	},
 	{
 	    xtype: 'textfield',
 	    width: 300,
-	    reference: 'filter'
-	}
+	    reference: 'filter',
+	},
     ],
 
     columns: [
@@ -145,61 +143,60 @@ Ext.define('PMG.Postfix.MailQueue', {
 	    header: gettext('Time'),
 	    flex: 2,
 	    renderer: Ext.util.Format.dateRenderer("Y-m-d H:i:s"),
-	    dataIndex: 'arrival_time'
+	    dataIndex: 'arrival_time',
 	},
 	{
 	    header: 'Size',
 	    renderer: Proxmox.Utils.format_size,
 	    flex: 1,
-	    dataIndex: 'message_size'
+	    dataIndex: 'message_size',
 	},
 	{
 	    header: gettext('Sender'),
 	    flex: 2,
-	    dataIndex: 'sender'
+	    dataIndex: 'sender',
 	},
 	{
 	    header: gettext('Receiver'),
 	    flex: 2,
-	    dataIndex: 'receiver'
+	    dataIndex: 'receiver',
 	},
 	{
 	    header: gettext('Reason'),
 	    flex: 8,
-	    dataIndex: 'reason'
-	}
+	    dataIndex: 'reason',
+	},
     ],
 
     pendingLoad: false,
 
     updateProxy: function() {
-	var me = this;
+	let me = this;
 
 	if (me.pendingLoad) {
 	    return;
 	}
 
-	var proxy = {
+	let proxy = {
 	    type: 'proxmox',
 	    startParam: 'start',
 	    limitParam: 'limit',
 	    sortParam: 'sortfield',
 	    directionParam: 'sortdir',
 	    simpleSortMode: true,
-	    url: "/api2/json/nodes/" + me.nodename + "/postfix/queue/" + me.queuename
+	    url: "/api2/json/nodes/" + me.nodename + "/postfix/queue/" + me.queuename,
 	};
 
-	var filter = me.filter;
-	var nodename = me.nodename;
-	var queuename = me.queuename;
-
-	if (filter) { proxy.extraParams = { filter: filter }; }
-
+	let filter = me.filter;
+	if (filter) {
+	    proxy.extraParams = { filter: filter };
+	}
 
 	me.store.setProxy(proxy);
 
+	let nodename = me.nodename;
+	let queuename = me.queuename;
 	me.pendingLoad = true;
-
 	me.store.load(function() {
 	    me.pendingLoad = false;
 	    if (me.nodename !== nodename || me.filter !== filter || me.queuename !== queuename) {
@@ -215,7 +212,7 @@ Ext.define('PMG.Postfix.MailQueue', {
     },
 
     setNodename: function(nodename) {
-	var me = this;
+	let me = this;
 
 	me.nodename = nodename;
 
@@ -228,6 +225,6 @@ Ext.define('PMG.Postfix.MailQueue', {
 	me.queuename = queuename;
 
 	me.updateProxy();
-    }
+    },
 
 });
