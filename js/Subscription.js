@@ -1,7 +1,7 @@
 /*global Blob,Proxmox*/
 Ext.define('PMG.SubscriptionKeyEdit', {
     extend: 'Proxmox.window.Edit',
-    
+
     title: gettext('Upload Subscription Key'),
     width: 300,
     autoLoad: true,
@@ -56,29 +56,29 @@ Ext.define('PMG.Subscription', {
 	    layout: 'fit',
 	    modal: true,
 	    buttons: [
-		        '->',
-			{
-			    text: gettext('Download'),
-			    handler: function() {
-				var fileContent = Ext.String.htmlDecode(reportWindow.getComponent('system-report-view').html);
-				var fileName = getReportFileName();
+		'->',
+		{
+		    text: gettext('Download'),
+		    handler: function() {
+			var fileContent = Ext.String.htmlDecode(reportWindow.getComponent('system-report-view').html);
+			var fileName = getReportFileName();
 
-				// Internet Explorer
-				if (window.navigator.msSaveOrOpenBlob) {
-				    navigator.msSaveOrOpenBlob(new Blob([fileContent]), fileName);
-				} else {
-				    var element = document.createElement('a');
-				    element.setAttribute('href', 'data:text/plain;charset=utf-8,'
-				      + encodeURIComponent(fileContent));
-				    element.setAttribute('download', fileName);
-				    element.style.display = 'none';
-				    document.body.appendChild(element);
-				    element.click();
-				    document.body.removeChild(element);
-				}
-			    }
+			// Internet Explorer
+			if (window.navigator.msSaveOrOpenBlob) {
+			    navigator.msSaveOrOpenBlob(new Blob([fileContent]), fileName);
+			} else {
+			    var element = document.createElement('a');
+			    element.setAttribute('href', 'data:text/plain;charset=utf-8,'
+			      + encodeURIComponent(fileContent));
+			    element.setAttribute('download', fileName);
+			    element.style.display = 'none';
+			    document.body.appendChild(element);
+			    element.click();
+			    document.body.removeChild(element);
 			}
-		],
+		    }
+		}
+	    ],
 	    items: view
 	});
 
