@@ -213,7 +213,9 @@ Ext.define('PMG.Postfix.MailQueue', {
 
     setNodename: function(nodename) {
 	let me = this;
-
+	if (nodename === me.nodename) {
+	    return; // nothing to do
+	}
 	me.nodename = nodename;
 
 	me.updateProxy();
