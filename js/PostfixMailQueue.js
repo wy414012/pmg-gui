@@ -25,6 +25,7 @@ Ext.define('PMG.Postfix.MailQueue', {
 	model: 'pmg-mailq',
 	remoteFilter: true,
 	remoteSort: true,
+	sorters: 'arrival_time',
 	pageSize: 2000
     },
 
