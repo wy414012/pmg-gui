@@ -107,9 +107,7 @@ Ext.define('PMG.Subscription', {
 	var baseurl = '/nodes/' + Proxmox.NodeName + '/subscription';
 
 	var render_status = function(value) {
-
 	    var message = me.getObjectValue('message');
-
 	    if (message) {
 		return value + ": " + message;
 	    }
@@ -183,6 +181,7 @@ Ext.define('PMG.Subscription', {
 			});
 		    }
 		},
+		'-',
 		{
 		    text: gettext('System Report'),
 		    handler: function() {
