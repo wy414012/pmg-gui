@@ -1,3 +1,11 @@
+pmg-gui (2.2-2) pmg; urgency=medium
+
+  * fix #1976: allow sorting in the postfix 'Deferred Mail' queue grid
+
+  * allow to remove subscription
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 04 Jun 2020 16:50:10 +0200
+
 pmg-gui (2.2-1) pmg; urgency=medium
 
   * tracking center: sort by time by default and other various small
