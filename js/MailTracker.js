@@ -245,6 +245,7 @@ Ext.define('PMG.MailTracker', {
     plugins: [
 	{
 	    ptype: 'rowexpander',
+	    expandOnDblClick: false,
 	    rowBodyTpl: '<p class="logs">{logs}</p>'
 	}
     ],
@@ -309,9 +310,23 @@ Ext.define('PMG.MailTracker', {
 	    });
 	},
 
+	// only expand row on dblclick, but do not collapse
+	expand: function(view, record, row, rowIdx, e) {
+	    // inspired by RowExpander.js
+	    let rowNode = view.getNode(rowIdx);
+	    let normalRow = Ext.fly(rowNode);
+
+	    let collapsedCls = view.rowBodyFeature.rowCollapsedCls;
+
+	    if (normalRow.hasCls(collapsedCls)) {
+		view.rowBodyFeature.rowExpander.toggleRow(rowIdx, record);
+	    }
+	},
+
 	control: {
 	    'gridview': {
-		expandbody: 'showDetails'
+		expandbody: 'showDetails',
+		itemdblclick: 'expand',
 	    }
 	}
     },
