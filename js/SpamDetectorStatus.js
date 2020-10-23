@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-spamassassin-database', {
     extend: 'Ext.data.Model',
     fields: [

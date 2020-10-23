@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-backup-list', {
     extend: 'Ext.data.Model',
     fields: [

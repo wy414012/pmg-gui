@@ -1,4 +1,3 @@
-/*global Proxmox*/
 /*jslint confusion: true*/
 /* load is a function and string
  * hours is a number and string

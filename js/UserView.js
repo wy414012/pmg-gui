@@ -1,4 +1,3 @@
-/*global Proxmox*/
 /*jslint confusion: true*/
 /*renderer is string and function*/
 Ext.define('pmg-users', {

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.view.main.VersionInfo', {
     extend: 'Ext.Component',
     xtype: 'versioninfo',

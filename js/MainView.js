@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.MainView', {
     extend: 'Ext.container.Container',
     xtype: 'mainview',

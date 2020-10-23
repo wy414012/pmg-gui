@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.SystemOptions', {
     extend: 'Proxmox.grid.ObjectGrid',
     xtype: 'pmgSystemOptions',

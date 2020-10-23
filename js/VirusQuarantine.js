@@ -1,4 +1,3 @@
-/*global Proxmox*/
 /*jslint confusion: true*/
 /*format is a string and a function*/
 Ext.define('pmg-virus-list', {

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-transport', {
     extend: 'Ext.data.Model',
     fields: ['domain', 'host', 'protocol', { name: 'port', type: 'integer' },

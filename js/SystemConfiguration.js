@@ -1,4 +1,3 @@
-/*global Proxmox*/
 
 Ext.define('PMG.SystemConfiguration', {
     extend: 'Ext.tab.Panel',

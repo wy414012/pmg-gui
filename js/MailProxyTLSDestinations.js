@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-tls-policy', {
     extend: 'Ext.data.Model',
     fields: ['destination', 'policy'],

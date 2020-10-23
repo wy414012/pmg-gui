@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-fetchmail-users', {
     extend: 'Ext.data.Model',
     fields: [

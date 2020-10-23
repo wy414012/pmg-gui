@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.MailProxyRelaying', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgMailProxyRelaying'],

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.QuarantineList', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgQuarantineList',

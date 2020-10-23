@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-mynetworks', {
     extend: 'Ext.data.Model',
     fields: ['cidr', 'comment'],

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.RegexTester', {
     extend: 'Ext.form.FieldContainer',
     alias: 'widget.pmgRegexTester',

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 /*jslint confusion: true*/
 /* reload is function and string,
  * height is number and string,

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-cluster', {
     extend: 'Ext.data.Model',
     fields: [

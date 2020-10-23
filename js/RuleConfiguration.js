@@ -1,4 +1,3 @@
-/*global Proxmox*/
 /*jslint confusion: true*/
 /* bind is a function and object,
  * callback is a function and string

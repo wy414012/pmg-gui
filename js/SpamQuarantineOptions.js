@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.SpamQuarantineOptions', {
     extend: 'Proxmox.grid.ObjectGrid',
     alias: ['widget.pmgSpamQuarantineOptions'],

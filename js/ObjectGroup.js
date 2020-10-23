@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.ObjectGroup', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgObjectGroup',

@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('pmg-domains', {
     extend: 'Ext.data.Model',
     fields: ['domain', 'comment'],

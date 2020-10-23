@@ -1,4 +1,3 @@
-/*global Proxmox*/
 Ext.define('PMG.ServerStatus', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pmgServerStatus',
