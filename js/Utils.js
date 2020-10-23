@@ -762,6 +762,7 @@ Ext.define('PMG.Utils', {
 		    slideBackDuration: 250,
 		    slideBackAnimation: 'easeOut',
 		    iconCls: 'fa fa-check',
+		    shadow: true,
 		});
 
 		if (Ext.isFunction(callback)) {
