@@ -105,8 +105,6 @@ Ext.define('PMG.ClusterAddNodeWindow', {
     ],
 });
 
-/*jslint confusion: true*/
-/* bind is a function and object */
 Ext.define('PMG.ClusterAdministration', {
     extend: 'Ext.tab.Panel',
     xtype: 'pmgClusterAdministration',

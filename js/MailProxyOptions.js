@@ -32,8 +32,6 @@ Ext.define('PMG.MailProxyOptions', {
 	    return Proxmox.Utils.yesText + ' (' + value + ')';
 	};
 
-	/*jslint confusion: true*/
-	/*defaultValue is string and number*/
 	me.add_combobox_row('verifyreceivers', gettext('Verify Receivers'), {
 	    renderer: render_verifyreceivers,
 	    defaultValue: '__default__',
@@ -43,7 +41,6 @@ Ext.define('PMG.MailProxyOptions', {
 		['450', render_verifyreceivers('450')],
 		['550', render_verifyreceivers('550')]],
 	});
-	/*jslint confusion: false*/
 
 	me.add_boolean_row('greylist', gettext('Use Greylisting for IPv4'),
 			   { defaultValue: 1 });
@@ -73,11 +70,8 @@ Ext.define('PMG.MailProxyOptions', {
 	me.add_integer_row('message_rate_limit', gettext('Client Message Rate Limit'),
 			   { defaultValue: 0, minValue: 0 });
 
-	/*jslint confusion: true*/
-	/*defaultValue is string and number*/
 	me.add_text_row('banner', gettext('SMTPD Banner'),
 			{ deleteEmpty: true, defaultValue: 'ESMTP Proxmox' });
-	/*jslint confusion: false*/
 
 	me.add_boolean_row('ndr_on_block', gettext('Send NDR on Blocked E-Mails'));
 	// FIXME allow to pass onlineHelp to ObjectGrid's add_xyz_row..

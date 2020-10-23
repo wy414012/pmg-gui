@@ -1,10 +1,3 @@
-/*jslint confusion: true*/
-/* load is a function and string
- * hours is a number and string
- * timespan is a number and string
- * bind is a function and object
- * handler is a function and string
- */
 Ext.define('PMG.Dashboard', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgDashboard',

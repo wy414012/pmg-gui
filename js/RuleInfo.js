@@ -1,5 +1,3 @@
-/*jslint confusion: true*/
-/* bind is a function function */
 Ext.define('PMG.RuleInfo', {
     extend: 'Ext.panel.Panel',
     xtype: 'pmgRuleInfo',

@@ -17,9 +17,7 @@ Ext.define('PMG.FilterProxy', {
 	    if (filter.config.id === me.filterId) {
 		var v = filter.getValue();
 		if (v !== undefined && v !== '') {
-		    /*jslint confusion: true */
 		    params.filter = v;
-		    /*jslint confusion: false */
 		}
 	    }
 	}

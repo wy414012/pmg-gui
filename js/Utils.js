@@ -809,11 +809,8 @@ Ext.define('PMG.Utils', {
 	var from = Ext.htmlEncode(rec.data.from);
 	var sender = Ext.htmlEncode(rec.data.sender);
 	if (sender) {
-	    /*jslint confusion: true*/
-	    /*format is a string above*/
 	    from = Ext.String.format(gettext("{0} on behalf of {1}"),
 				     sender, from);
-	    /*jslint confusion: false*/
 	}
 	return '<small>' + from + '</small><br>' + subject;
     },

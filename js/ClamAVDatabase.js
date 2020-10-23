@@ -10,13 +10,10 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 	me.add_text_row('dbmirror', gettext('Database Mirror'),
 			{ deleteEmpty: true, defaultValue: 'database.clamav.net' });
 
-	/*jslint confusion: true*/
-	/*defaultValue is a string above*/
 	me.add_boolean_row('safebrowsing', gettext('Google Safe Browsing'),
 			   { defaultValue: 1 });
 	me.add_boolean_row('scriptedupdates', gettext('Incremental Download'),
 			   { defaultValue: 0 });
-	/*jslint confusion: false*/
 
 	var baseurl = '/config/clamav';
 
@@ -112,10 +109,7 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 
 	me.callParent();
 
-	/*jslint confusion: true*/
-	/*monStoreErrors is a bool above*/
 	Proxmox.Utils.monStoreErrors(me.getView(), me.store, true);
-	/*jslint confusion: false*/
     },
 });
 

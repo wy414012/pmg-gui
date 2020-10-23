@@ -1,10 +1,3 @@
-/*jslint confusion: true*/
-/* reload is function and string,
- * height is number and string,
- * hidden is bool and string,
- * bind is function and object,
- * callback is function and string
- */
 Ext.define('pmg-ldap-config', {
     extend: 'Ext.data.Model',
     fields: ['profile', 'server1', 'server2', 'comment',

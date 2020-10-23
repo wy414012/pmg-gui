@@ -79,7 +79,6 @@ Ext.define('PMG.MyNetworks', {
             {
 		text: gettext('Create'),
 		handler: function() {
-		    /*jslint confusion: true*/
 		    var config = {
 			method: 'POST',
 			url: "/api2/extjs/config/mynetworks",
@@ -99,7 +98,6 @@ Ext.define('PMG.MyNetworks', {
 			    },
 			],
 		    };
-		    /*jslint confusion: false*/
 
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
 

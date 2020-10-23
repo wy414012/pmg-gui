@@ -1,5 +1,3 @@
-/*jslint confusion: true*/
-/*format is a string and a function*/
 Ext.define('pmg-spam-archive', {
     extend: 'Ext.data.Model',
     fields: [

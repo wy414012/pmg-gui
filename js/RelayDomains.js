@@ -84,7 +84,6 @@ Ext.define('PMG.RelayDomains', {
             {
 		text: gettext('Create'),
 		handler: function() {
-		    /*jslint confusion: true*/
 		    var config = {
 			method: 'POST',
 			url: '/api2/extjs' + me.baseurl,
@@ -104,7 +103,6 @@ Ext.define('PMG.RelayDomains', {
 			    },
 			],
 		    };
-		    /*jslint confusion: false*/
 
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
 

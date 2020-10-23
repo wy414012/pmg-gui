@@ -1,5 +1,3 @@
-/*jslint confusion: true*/
-/*format is a string and a function*/
 Ext.define('pmg-attachment-list', {
     extend: 'Ext.data.Model',
     fields: ['id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',

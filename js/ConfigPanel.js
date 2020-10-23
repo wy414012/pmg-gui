@@ -177,11 +177,9 @@ Ext.define('PMG.panel.Config', {
 	me.items = me.items || [];
 
 	me.savedItems = {};
-	/*jslint confusion:true*/
 	if (me.items[0]) {
 	    me.firstItem = me.items[0].itemId;
 	}
-	/*jslint confusion:false*/
 
 	me.store = Ext.create('Ext.data.TreeStore', {
 	    root: {

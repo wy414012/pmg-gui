@@ -1,5 +1,3 @@
-/*jslint confusion: true*/
-/*value is string and number*/
 Ext.define('PMG.FetchmailEdit', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgFetchmailEdit',

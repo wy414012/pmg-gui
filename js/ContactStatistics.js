@@ -1,5 +1,3 @@
-/*jslint confusion: true*/
-/* filter is a function and object */
 Ext.define('PMG.ContactDetails', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgContactDetails',
