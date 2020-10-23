@@ -735,15 +735,6 @@ Ext.define('PMG.Utils', {
     },
 
     doQuarantineAction: function(action, id, callback) {
-	var count = id.split(';').length;
-	var successMessage = "Action '{0}'";
-	if (count > 1) {
-	    successMessage += " for '{1}' items";
-	}
-	successMessage += " successful";
-
-	/*jslint confusion: true*/
-	/*format is string and function*/
 	Proxmox.Utils.API2Request({
 	    url: '/quarantine/content/',
 	    params: {
@@ -755,13 +746,22 @@ Ext.define('PMG.Utils', {
 		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 	    },
 	    success: function(response, opts) {
-		Ext.create('Ext.window.MessageBox', {
-		    closeAction: 'destroy',
-		}).show({
-		    title: gettext('Info'),
-		    message: Ext.String.format(successMessage, action, count),
-		    buttons: Ext.Msg.OK,
-		    icon: Ext.MessageBox.INFO,
+		let count = id.split(';').length;
+		let fmt = count > 1
+		    ? gettext("Action '{0}' for '{1}' items successful")
+		    : gettext("Action '{0}' successful")
+		    ;
+		let message = Ext.String.format(fmt, action, count);
+		let title = Ext.String.format("{0} successful", Ext.String.capitalize(action));
+
+		Ext.toast({
+		    html: message,
+		    title: title,
+		    minWidth: 200,
+		    hideDuration: 250,
+		    slideBackDuration: 250,
+		    slideBackAnimation: 'easeOut',
+		    iconCls: 'fa fa-check',
 		});
 
 		if (Ext.isFunction(callback)) {
@@ -769,7 +769,6 @@ Ext.define('PMG.Utils', {
 		}
 	    },
 	});
-	/*jslint confusion: false*/
     },
 
     render_filetype: function(value) {
