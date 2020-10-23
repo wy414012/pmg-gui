@@ -103,7 +103,7 @@ OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
 	mv $@.tmp $@
 
 lint: ${JSSRC}
-	jslint ${JSSRC} 
+	eslint ${JSSRC}
 
 pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
 	echo "// ${DEB_VERSION_UPSTREAM_REVISION}" > $@.tmp
