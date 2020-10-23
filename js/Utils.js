@@ -1,4 +1,3 @@
-/*global Proxmox */
 Ext.ns('PMG');
 
 console.log("Starting PMG Manager");
@@ -18,7 +17,7 @@ Ext.define('PMG.Utils', {
 	admin: gettext('Administrator'),
 	helpdesk: gettext('Help Desk'),
 	qmanager: gettext('Quarantine Manager'),
-	audit: gettext('Auditor')
+	audit: gettext('Auditor'),
     },
 
     format_user_role: function(role) {
@@ -31,7 +30,7 @@ Ext.define('PMG.Utils', {
 	when: gettext('When Objects'),
 	action: gettext('Action Objects'),
 	from: gettext('From'),
-	to: gettext('To')
+	to: gettext('To'),
     },
 
     oclass_icon: {
@@ -40,7 +39,7 @@ Ext.define('PMG.Utils', {
 	when: '<span class="fa fa-fw fa-clock-o"></span> ',
 	action: '<span class="fa fa-fw fa-flag"></span> ',
 	from: '<span class="fa fa-fw fa-user-circle"></span> ',
-	to: '<span class="fa fa-fw fa-user-circle"></span> '
+	to: '<span class="fa fa-fw fa-user-circle"></span> ',
     },
 
     mail_status_map: {
@@ -51,7 +50,7 @@ Ext.define('PMG.Utils', {
 	G: 'greylisted',
 	A: 'accepted',
 	B: 'blocked',
-	Q: 'quarantine'
+	Q: 'quarantine',
     },
 
     icon_status_map_class: {
@@ -62,14 +61,14 @@ Ext.define('PMG.Utils', {
 	G: 'list',
 	A: 'check',
 	B: 'ban',
-	Q: 'cube'
+	Q: 'cube',
     },
 
     icon_status_map_color: {
 	2: 'green',
 	5: 'gray',
 	A: 'green',
-	B: 'red'
+	B: 'red',
     },
 
     format_status_icon: function(status) {
@@ -87,13 +86,13 @@ Ext.define('PMG.Utils', {
     rule_direction_text: {
 	0: gettext('In'),
 	1: gettext('Out'),
-	2: gettext('In & Out')
+	2: gettext('In & Out'),
     },
 
     rule_direction_icon: {
 	0: '<span class="fa fa-fw fa-long-arrow-left"></span> ',
 	1: '<span class="fa fa-fw fa-long-arrow-right"></span> ',
-	2: '<span class="fa fa-fw fa-exchange"></span> '
+	2: '<span class="fa fa-fw fa-exchange"></span> ',
     },
 
     format_rule_direction: function(dir) {
@@ -122,7 +121,7 @@ Ext.define('PMG.Utils', {
     },
 
     convert_field_to_per_min: function(value, record) {
-	return (value/(record.data.timespan/60));
+	return value/(record.data.timespan/60);
     },
 
     object_editors: {
@@ -139,30 +138,30 @@ Ext.define('PMG.Utils', {
 		    name: 'regex',
 		    labelWidth: 150,
 		    reference: 'regex',
-		    fieldLabel: gettext("Regular Expression")
+		    fieldLabel: gettext("Regular Expression"),
 		},
 		{
 		    labelWidth: 150,
 		    fieldLabel: gettext('Test String'),
 		    xtype: 'pmgRegexTester',
 		    wholeMatch: true,
-		    regexFieldReference: 'regex'
-		}
-	    ]
+		    regexFieldReference: 'regex',
+		},
+	    ],
 	},
 	1005: {
 	    onlineHelp: 'pmgconfig_ldap',
 	    iconCls: 'fa fa-users',
 	    xtype: 'pmgLDAPGroupEditor',
 	    subdir: 'ldap',
-	    subject: gettext("LDAP Group")
+	    subject: gettext("LDAP Group"),
 	},
 	1006: {
 	    onlineHelp: 'pmgconfig_ldap',
 	    iconCls: 'fa fa-user',
 	    xtype: 'pmgLDAPUserEditor',
 	    subdir: 'ldapuser',
-	    subject: gettext("LDAP User")
+	    subject: gettext("LDAP User"),
 	},
 	1009: {
 	    onlineHelp: 'pmg_mailfilter_regex',
@@ -177,9 +176,9 @@ Ext.define('PMG.Utils', {
 		    xtype: 'textfield',
 		    name: 'regex',
 		    labelWidth: 150,
-		    fieldLabel: gettext("Regular Expression")
-		}
-	    ]
+		    fieldLabel: gettext("Regular Expression"),
+		},
+	    ],
 	},
 	1001: {
 	    onlineHelp: 'pmg_mailfilter_who',
@@ -192,9 +191,9 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textfield',
 		    name: 'email',
-		    fieldLabel: gettext("E-Mail")
-		}
-	    ]
+		    fieldLabel: gettext("E-Mail"),
+		},
+	    ],
 	},
 	1007: {
 	    onlineHelp: 'pmg_mailfilter_who',
@@ -208,9 +207,9 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textfield',
 		    name: 'email',
-		    fieldLabel: gettext("E-Mail")
-		}
-	    ]
+		    fieldLabel: gettext("E-Mail"),
+		},
+	    ],
 	},
 	1002: {
 	    onlineHelp: 'pmg_mailfilter_who',
@@ -223,9 +222,9 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textfield',
 		    name: 'domain',
-		    fieldLabel: gettext("Domain")
-		}
-	    ]
+		    fieldLabel: gettext("Domain"),
+		},
+	    ],
 	},
 	1008: {
 	    onlineHelp: 'pmg_mailfilter_who',
@@ -239,9 +238,9 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textfield',
 		    name: 'domain',
-		    fieldLabel: gettext("Domain")
-		}
-	    ]
+		    fieldLabel: gettext("Domain"),
+		},
+	    ],
 	},
 	1003: {
 	    onlineHelp: 'pmg_mailfilter_who',
@@ -254,9 +253,9 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textfield',
 		    name: 'ip',
-		    fieldLabel: gettext("IP Address")
-		}
-	    ]
+		    fieldLabel: gettext("IP Address"),
+		},
+	    ],
 	},
 	1004: {
 	    onlineHelp: 'pmg_mailfilter_who',
@@ -269,9 +268,9 @@ Ext.define('PMG.Utils', {
 		{
 		    xtype: 'textfield',
 		    name: 'cidr',
-		    fieldLabel: gettext("IP Network")
-		}
-	    ]
+		    fieldLabel: gettext("IP Network"),
+		},
+	    ],
 	},
 	2000: {
 	    onlineHelp: 'pmg_mailfilter_when',
@@ -284,15 +283,15 @@ Ext.define('PMG.Utils', {
 		    xtype: 'timefield',
 		    name: 'start',
 		    format: 'H:i',
-		    fieldLabel: gettext("Start Time")
+		    fieldLabel: gettext("Start Time"),
 		},
 		{
 		    xtype: 'timefield',
 		    name: 'end',
 		    format: 'H:i',
-		    fieldLabel: gettext("End Time")
-		}
-	    ]
+		    fieldLabel: gettext("End Time"),
+		},
+	    ],
 	},
 	3000: {
 	    onlineHelp: 'pmg_mailfilter_what',
@@ -306,9 +305,9 @@ Ext.define('PMG.Utils', {
 		    name: 'spamlevel',
 		    allowBlank: false,
 		    minValue: 0,
-		    fieldLabel: gettext('Level')
-		}
-	    ]
+		    fieldLabel: gettext('Level'),
+		},
+	    ],
 	},
 	3001: {
 	    onlineHelp: 'pmg_mailfilter_what',
@@ -321,8 +320,8 @@ Ext.define('PMG.Utils', {
 	    listeners: {
 		show: function(win) {
 		    win.submit();
-		}
-	    }
+		},
+	    },
 	},
 	3002: {
 	    onlineHelp: 'pmg_mailfilter_regex',
@@ -337,7 +336,7 @@ Ext.define('PMG.Utils', {
 		    name: 'field',
 		    labelWidth: 150,
 		    allowBlank: false,
-		    fieldLabel: gettext('Field')
+		    fieldLabel: gettext('Field'),
 		},
 		{
 		    xtype: 'textfield',
@@ -345,15 +344,15 @@ Ext.define('PMG.Utils', {
 		    name: 'value',
 		    labelWidth: 150,
 		    allowBlank: false,
-		    fieldLabel: gettext('Value')
+		    fieldLabel: gettext('Value'),
 		},
 		{
 		    labelWidth: 150,
 		    fieldLabel: gettext('Test String'),
 		    xtype: 'pmgRegexTester',
-		    regexFieldReference: 'value'
-		}
-	    ]
+		    regexFieldReference: 'value',
+		},
+	    ],
 	},
 	3003: {
 	    onlineHelp: 'pmg_mailfilter_what',
@@ -375,8 +374,8 @@ Ext.define('PMG.Utils', {
 			autoLoad: true,
 			proxy: {
 			    type: 'proxmox',
-			    url: '/api2/json/config/mimetypes'
-			}
+			    url: '/api2/json/config/mimetypes',
+			},
 		    },
 		    fieldLabel: gettext('Content Type'),
 		    anyMatch: true,
@@ -385,17 +384,17 @@ Ext.define('PMG.Utils', {
 			change: function(cb, value) {
 			    var me = this;
 			    me.up().down('displayfield').setValue(value);
-			}
-		    }
+			},
+		    },
 		},
 		{
 		    xtype: 'displayfield',
 		    fieldLabel: gettext('Value'),
 		    labelWidth: 150,
 		    allowBlank: false,
-		    reset: Ext.emptyFn
-		}
-	    ]
+		    reset: Ext.emptyFn,
+		},
+	    ],
 	},
 	3004: {
 	    onlineHelp: 'pmg_mailfilter_regex',
@@ -411,16 +410,16 @@ Ext.define('PMG.Utils', {
 		    reference: 'filename',
 		    fieldLabel: gettext('Filename'),
 		    labelWidth: 150,
-		    allowBlank: false
+		    allowBlank: false,
 		},
 		{
 		    labelWidth: 150,
 		    fieldLabel: gettext('Test String'),
 		    wholeMatch: true,
 		    xtype: 'pmgRegexTester',
-		    regexFieldReference: 'filename'
-		}
-	    ]
+		    regexFieldReference: 'filename',
+		},
+	    ],
 	},
 	3005: {
 	    onlineHelp: 'pmg_mailfilter_what',
@@ -442,8 +441,8 @@ Ext.define('PMG.Utils', {
 			autoLoad: true,
 			proxy: {
 			    type: 'proxmox',
-			    url: '/api2/json/config/mimetypes'
-			}
+			    url: '/api2/json/config/mimetypes',
+			},
 		    },
 		    fieldLabel: gettext('Content Type'),
 		    anyMatch: true,
@@ -452,17 +451,17 @@ Ext.define('PMG.Utils', {
 			change: function(cb, value) {
 			    var me = this;
 			    me.up().down('displayfield').setValue(value);
-			}
-		    }
+			},
+		    },
 		},
 		{
 		    xtype: 'displayfield',
 		    fieldLabel: gettext('Value'),
 		    labelWidth: 150,
 		    allowBlank: false,
-		    reset: Ext.emptyFn
-		}
-	    ]
+		    reset: Ext.emptyFn,
+		},
+	    ],
 	},
 	3006: {
 	    onlineHelp: 'pmg_mailfilter_regex',
@@ -478,16 +477,16 @@ Ext.define('PMG.Utils', {
 		    reference: 'filename',
 		    fieldLabel: gettext('Filename'),
 		    labelWidth: 150,
-		    allowBlank: false
+		    allowBlank: false,
 		},
 		{
 		    labelWidth: 150,
 		    fieldLabel: gettext('Test String'),
 		    wholeMatch: true,
 		    xtype: 'pmgRegexTester',
-		    regexFieldReference: 'filename'
-		}
-	    ]
+		    regexFieldReference: 'filename',
+		},
+	    ],
 	},
 	4002: {
 	    onlineHelp: 'pmg_mailfilter_action',
@@ -500,26 +499,26 @@ Ext.define('PMG.Utils', {
 		    xtype: 'textfield',
 		    name: 'name',
 		    allowBlank: false,
-		    fieldLabel: gettext('Name')
+		    fieldLabel: gettext('Name'),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Comment")
+		    fieldLabel: gettext("Comment"),
 		},
 		{
 		    xtype: 'textfield',
 		    name: 'to',
 		    allowBlank: false,
 		    value: '__ADMIN__',
-		    fieldLabel: gettext('Receiver')
+		    fieldLabel: gettext('Receiver'),
 		},
 		{
 		    xtype: 'textfield',
 		    name: 'subject',
 		    allowBlank: false,
 		    value: 'Notification: __SUBJECT__',
-		    fieldLabel: gettext('Subject')
+		    fieldLabel: gettext('Subject'),
 		},
 		{
 		    xtype: 'textarea',
@@ -537,14 +536,14 @@ Ext.define('PMG.Utils', {
 			"__RULE_INFO__\n\n" +
 			"__VIRUS_INFO__\n" +
 			"__SPAM_INFO__\n",
-		    fieldLabel: gettext('Body')
+		    fieldLabel: gettext('Body'),
 		},
 		{
 		    xtype: 'proxmoxcheckbox',
 		    name: 'attach',
-		    fieldLabel: gettext("Attach orig. Mail")
-		}
-	    ]
+		    fieldLabel: gettext("Attach orig. Mail"),
+		},
+	    ],
 	},
 	4003: {
 	    onlineHelp: 'pmg_mailfilter_action',
@@ -557,27 +556,27 @@ Ext.define('PMG.Utils', {
 		    xtype: 'textfield',
 		    name: 'name',
 		    allowBlank: false,
-		    fieldLabel: gettext('Name')
+		    fieldLabel: gettext('Name'),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Comment")
+		    fieldLabel: gettext("Comment"),
 		},
 		{
 		    xtype: 'textfield',
 		    name: 'field',
 		    allowBlank: false,
-		    fieldLabel: gettext('Field')
+		    fieldLabel: gettext('Field'),
 		},
 		{
 		    xtype: 'textfield',
 		    reference: 'value',
 		    name: 'value',
 		    allowBlank: false,
-		    fieldLabel: gettext('Value')
-		}
-	    ]
+		    fieldLabel: gettext('Value'),
+		},
+	    ],
 	},
 	4005: {
 	    onlineHelp: 'pmg_mailfilter_action',
@@ -590,26 +589,26 @@ Ext.define('PMG.Utils', {
 		    xtype: 'textfield',
 		    name: 'name',
 		    allowBlank: false,
-		    fieldLabel: gettext('Name')
+		    fieldLabel: gettext('Name'),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Comment")
+		    fieldLabel: gettext("Comment"),
 		},
 		{
 		    xtype: 'textfield',
 		    name: 'target',
 		    allowBlank: false,
-		    fieldLabel: gettext("Target")
+		    fieldLabel: gettext("Target"),
 		},
 		{
 		    xtype: 'proxmoxcheckbox',
 		    checked: true,
 		    name: 'original',
-		    fieldLabel: gettext("send orig. Mail")
-		}
-	    ]
+		    fieldLabel: gettext("send orig. Mail"),
+		},
+	    ],
 
 	},
 	4007: {
@@ -619,40 +618,40 @@ Ext.define('PMG.Utils', {
 	    subject: gettext('Remove Attachments'),
 	    width: 500,
 	    fieldDefaults: {
-		labelWidth: 150
+		labelWidth: 150,
 	    },
 	    items: [
 		{
 		    xtype: 'textfield',
 		    name: 'name',
 		    allowBlank: false,
-		    fieldLabel: gettext('Name')
+		    fieldLabel: gettext('Name'),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Comment")
+		    fieldLabel: gettext("Comment"),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'text',
 		    grow: true,
 		    growMax: 250,
-		    fieldLabel: gettext("Text Replacement")
+		    fieldLabel: gettext("Text Replacement"),
 		},
 		{
 		    xtype: 'proxmoxcheckbox',
 		    checked: true,
 		    name: 'all',
-		    fieldLabel: gettext("Remove all attachments")
+		    fieldLabel: gettext("Remove all attachments"),
 		},
 		{
 		    xtype: 'proxmoxcheckbox',
 		    checked: false,
 		    name: 'quarantine',
-		    fieldLabel: gettext("Copy orignal mail to Attachment Quarantine")
-		}
-	    ]
+		    fieldLabel: gettext("Copy orignal mail to Attachment Quarantine"),
+		},
+	    ],
 	},
 	4009: {
 	    onlineHelp: 'pmg_mailfilter_action',
@@ -665,53 +664,50 @@ Ext.define('PMG.Utils', {
 		    xtype: 'textfield',
 		    name: 'name',
 		    allowBlank: false,
-		    fieldLabel: gettext('Name')
+		    fieldLabel: gettext('Name'),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'info',
-		    fieldLabel: gettext("Comment")
+		    fieldLabel: gettext("Comment"),
 		},
 		{
 		    xtype: 'textareafield',
 		    name: 'disclaimer',
 		    grow: true,
 		    growMax: 250,
-		    fieldLabel: gettext("Disclaimer")
-		}
-	    ]
-	}
+		    fieldLabel: gettext("Disclaimer"),
+		},
+	    ],
+	},
     },
 
     updateLoginData: function(data) {
 	Proxmox.CSRFPreventionToken = data.CSRFPreventionToken;
 	Proxmox.UserName = data.username;
-	Ext.util.Cookies.set('PMGAuthCookie', data.ticket, null, '/', null, true );
+	Ext.util.Cookies.set('PMGAuthCookie', data.ticket, null, '/', null, true);
     },
 
     quarantineActionExtracted: false,
 
     extractQuarantineAction: function() {
-
-	if (PMG.Utils.quarantineActionExtracted) { return; }
+	if (PMG.Utils.quarantineActionExtracted) {
+	    return null;
+	}
 
 	PMG.Utils.quarantineActionExtracted = true;
 
-	var qs = Ext.Object.fromQueryString(location.search);
+	let qs = Ext.Object.fromQueryString(location.search);
 
-	var cselect = qs.cselect;
-	var action = qs.action;
-	var ticket = qs.ticket;
-	var dateString = qs.date;
+	let cselect = qs.cselect;
+	let action = qs.action;
+	let dateString = qs.date;
 
 	if (dateString) {
-	    var date = new Date(dateString).getTime()/1000;
+	    let date = new Date(dateString).getTime()/1000;
 
 	    // set from date for QuarantineList
-	    /*jslint confusion: true*/
-	    /*from is a string above and number here */
 	    PMG.QuarantineList.from = date;
-	    /*jslint confusion: false*/
 	}
 
 	delete qs.cselect;
@@ -726,12 +722,16 @@ Ext.define('PMG.Utils', {
 	newurl += location.hash;
 
 	if (window.history) {
-	    window.history.pushState({ path:newurl }, '', newurl);
+	    window.history.pushState({ path: newurl }, '', newurl);
 	}
 
 	if (action || cselect) {
-	    return { action: action, cselect: cselect };
+	    return {
+		action: action,
+		cselect: cselect,
+	    };
 	}
+	return null;
     },
 
     doQuarantineAction: function(action, id, callback) {
@@ -748,26 +748,26 @@ Ext.define('PMG.Utils', {
 	    url: '/quarantine/content/',
 	    params: {
 		action: action,
-		id: id
+		id: id,
 	    },
 	    method: 'POST',
 	    failure: function(response, opts) {
 		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 	    },
 	    success: function(response, opts) {
-		var win = Ext.create('Ext.window.MessageBox',{
-		    closeAction: 'destroy'
+		Ext.create('Ext.window.MessageBox', {
+		    closeAction: 'destroy',
 		}).show({
 		    title: gettext('Info'),
 		    message: Ext.String.format(successMessage, action, count),
 		    buttons: Ext.Msg.OK,
-		    icon: Ext.MessageBox.INFO
+		    icon: Ext.MessageBox.INFO,
 		});
 
 		if (Ext.isFunction(callback)) {
 		    callback();
 		}
-	    }
+	    },
 	});
 	/*jslint confusion: false*/
     },
@@ -781,7 +781,7 @@ Ext.define('PMG.Utils', {
 	}
 
 	text = value.toString().toLowerCase();
-	let type = text.split('/')[0];
+	const type = text.split('/')[0];
 
 	switch (type) {
 	    case 'audio':
@@ -790,13 +790,13 @@ Ext.define('PMG.Utils', {
 	    case 'text':
 		iconCls = `fa-file-${type}-o`;
 		break;
-	    case 'application':
-		let subtypes = ['excel', 'pdf', 'word', 'powerpoint'];
+	    case 'application': {
+		const subtypes = ['excel', 'pdf', 'word', 'powerpoint'];
 		let found = subtypes.find(st => text.includes(st));
 		if (found !== undefined) {
 		    iconCls = `fa-file-${found}-o`;
 		}
-		break;
+	    } break;
 	    default:
 		break;
 	}
@@ -822,5 +822,5 @@ Ext.define('PMG.Utils', {
 	var me = this;
 
 	// do whatever you want here
-    }
+    },
 });
