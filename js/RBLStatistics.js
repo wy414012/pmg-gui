@@ -9,13 +9,13 @@ Ext.define('PMG.RBLStatistics', {
 
     title: gettext('Statistics') + ': ' + gettext('Postscreen'),
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     items: [
 	{
 	    title: gettext('Rejects'),
 	    xtype: 'proxmoxRRDChart',
-	    fields: [ 'rbl_rejects', 'pregreet_rejects'],
+	    fields: ['rbl_rejects', 'pregreet_rejects'],
 	    fieldTitles: ['RBL', 'PREGREET'],
 	    store: {
 		type: 'pmgStatStore',
@@ -24,9 +24,9 @@ Ext.define('PMG.RBLStatistics', {
 		fields: [
 		    { type: 'integer', name: 'rbl_rejects' },
 		    { type: 'integer', name: 'pregreet_rejects' },
-		    { type: 'date', dateFormat: 'timestamp', name: 'time' }
-		]
-	    }
-	}
-    ]
+		    { type: 'date', dateFormat: 'timestamp', name: 'time' },
+		],
+	    },
+	},
+    ],
 });

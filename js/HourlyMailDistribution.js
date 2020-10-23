@@ -11,11 +11,11 @@ Ext.define('PMG.MailDistChart', {
 	title: gettext('Count'),
 	position: 'left',
 	grid: true,
-	minimum: 0
+	minimum: 0,
     }, {
 	type: 'category',
 	position: 'bottom',
-	fields: ['index']
+	fields: ['index'],
     }],
 
     initComponent: function() {
@@ -44,10 +44,10 @@ Ext.define('PMG.MailDistChart', {
 		    tooltip.setHtml('Time: ' + start.toString() +
 				    ' - ' + end.toString() + '<br>' +
 				    'Count: ' + record.get(item.field));
-		}
-	    }
+		},
+	    },
 	});
-    }
+    },
 });
 
 Ext.define('PMG.HourlyMailDistribution', {
@@ -60,14 +60,14 @@ Ext.define('PMG.HourlyMailDistribution', {
     bodyPadding: '10 0 0 0',
     defaults: {
 	width: 700,
-	padding: '0 0 10 10'
+	padding: '0 0 10 10',
     },
 
     layout: 'column',
 
     title: gettext('Statistics') + ': ' + gettext('Hourly Distribution'),
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     initComponent: function() {
 	var me = this;
@@ -84,8 +84,8 @@ Ext.define('PMG.HourlyMailDistribution', {
 		{ type: 'integer', name: 'viruscount_in' },
 		{ type: 'integer', name: 'viruscount_ou' },
 		{ type: 'integer', name: 'bounces_in' },
-		{ type: 'integer', name: 'bounces_out' }
-	    ]
+		{ type: 'integer', name: 'bounces_out' },
+	    ],
 	});
 
 	me.items = [
@@ -93,18 +93,18 @@ Ext.define('PMG.HourlyMailDistribution', {
 		xtype: 'pmgMailDistChart',
 		title: gettext('Incoming Mails'),
 		field: 'count_in',
-		store: store
+		store: store,
 	    },
 	    {
 		xtype: 'pmgMailDistChart',
 		title: gettext('Outgoing Mails'),
 		field: 'count_out',
-		store: store
-	    }
+		store: store,
+	    },
 	];
 
 	me.callParent();
 
 	me.on('destroy', store.destroy, store);
-    }
+    },
 });

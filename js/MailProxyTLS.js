@@ -4,7 +4,7 @@ Ext.define('PMG.MailProxyTLS', {
 
     monStoreErrors: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.add_boolean_row('tls', gettext('Enable TLS'));
@@ -23,18 +23,18 @@ Ext.define('PMG.MailProxyTLS', {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		handler: function() { me.run_editor(); },
-		selModel: me.selModel
+		selModel: me.selModel,
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
 		url: '/api2/extjs' + baseurl,
-		onlineHelp: 'pmgconfig_mailproxy_tls'
+		onlineHelp: 'pmgconfig_mailproxy_tls',
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
 	    listeners: {
-		itemdblclick: me.run_editor
-	    }
+		itemdblclick: me.run_editor,
+	    },
 	});
 
 	me.callParent();
@@ -42,5 +42,5 @@ Ext.define('PMG.MailProxyTLS', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
-    }
+    },
 });

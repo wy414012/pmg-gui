@@ -1,16 +1,16 @@
 /*global Proxmox*/
 Ext.define('pmg-tls-policy', {
     extend: 'Ext.data.Model',
-    fields: [ 'destination', 'policy' ],
+    fields: ['destination', 'policy'],
     idProperty: 'destination',
     proxy: {
 	type: 'proxmox',
-	url: '/api2/json/config/tlspolicy'
+	url: '/api2/json/config/tlspolicy',
     },
     sorters: {
 	property: 'destination',
-	order: 'DESC'
-    }
+	order: 'DESC',
+    },
 });
 
 Ext.define('PMG.TLSDestinationEdit', {
@@ -19,10 +19,10 @@ Ext.define('PMG.TLSDestinationEdit', {
     onlineHelp: 'pmgconfig_mailproxy_tls',
 
     subject: gettext('TLS Policy'),
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
-	var isCreate = ! Ext.isDefined(me.destination);
+	var isCreate = !Ext.isDefined(me.destination);
 
 	var url = '/api2/extjs/config/tlspolicy' + (isCreate ? '' : '/' + me.destination);
 	var method = isCreate ? 'POST' : 'PUT';
@@ -32,7 +32,7 @@ Ext.define('PMG.TLSDestinationEdit', {
 	    {
 		xtype: isCreate ? 'proxmoxtextfield' : 'displayfield',
 		name: 'destination',
-		fieldLabel: gettext('Destination')
+		fieldLabel: gettext('Destination'),
 	    },
 	    {
 		xtype: 'proxmoxKVComboBox',
@@ -40,29 +40,29 @@ Ext.define('PMG.TLSDestinationEdit', {
 		fieldLabel: gettext('Policy'),
 		deleteEmpty: false,
 		comboItems: [
-		    [ 'none', 'none' ],
-		    [ 'may', 'may' ],
-		    [ 'encrypt', 'encrypt' ],
-		    [ 'dane', 'dane' ],
-		    [ 'dane-only', 'dane-only' ],
-		    [ 'fingerprint', 'fingerprint' ],
-		    [ 'verify', 'verify' ],
-		    [ 'secure', 'secure' ]
+		    ['none', 'none'],
+		    ['may', 'may'],
+		    ['encrypt', 'encrypt'],
+		    ['dane', 'dane'],
+		    ['dane-only', 'dane-only'],
+		    ['fingerprint', 'fingerprint'],
+		    ['verify', 'verify'],
+		    ['secure', 'secure'],
 		],
 		allowBlank: true,
-		value: 'encrypt'
-	    }
+		value: 'encrypt',
+	    },
 	];
 
 	Ext.apply(me, {
 	    url: url,
 	    method: method,
 	    items: items,
-	    text: text
+	    text: text,
 	});
 
 	me.callParent();
-    }
+    },
 });
 
 Ext.define('PMG.MailProxyTLSDestinations', {
@@ -70,32 +70,32 @@ Ext.define('PMG.MailProxyTLSDestinations', {
     alias: ['widget.pmgMailProxyTLSDestinations'],
 
     viewConfig: {
-	trackOver: false
+	trackOver: false,
     },
     columns: [
 	{
 	    header: gettext('Destination'),
 	    width: 200,
 	    sortable: true,
-	    dataIndex: 'destination'
+	    dataIndex: 'destination',
 	},
 	{
 	    header: gettext('Policy'),
 	    sortable: false,
 	    dataIndex: 'policy',
-	    flex: 1
-	}
+	    flex: 1,
+	},
     ],
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	var rstore = Ext.create('Proxmox.data.UpdateStore', {
 	    model: 'pmg-tls-policy',
-	    storeid: 'pmg-mailproxy-tls-store-' + (++Ext.idSeed)
+	    storeid: 'pmg-mailproxy-tls-store-' + ++Ext.idSeed,
 	});
 
-	var store = Ext.create('Proxmox.data.DiffStore', { rstore: rstore});
+	var store = Ext.create('Proxmox.data.DiffStore', { rstore: rstore });
 
         var reload = function() {
             rstore.load();
@@ -110,7 +110,7 @@ Ext.define('PMG.MailProxyTLSDestinations', {
 	    }
 
 	    var win = Ext.createWidget('pmgTLSDestinationEdit', {
-		destination: rec.data.destination
+		destination: rec.data.destination,
 	    });
 
 	    win.load();
@@ -123,7 +123,7 @@ Ext.define('PMG.MailProxyTLSDestinations', {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		text: gettext('Edit'),
-		handler: run_editor
+		handler: run_editor,
             },
 	    {
 		text: gettext('Create'),
@@ -133,14 +133,14 @@ Ext.define('PMG.MailProxyTLSDestinations', {
 		    win.load();
 		    win.on('destroy', reload);
 		    win.show();
-		}
+		},
             },
 	    {
 		xtype: 'proxmoxStdRemoveButton',
 		baseurl: '/config/tlspolicy',
 		callback: reload,
-		waitMsgTarget: me
-	    }
+		waitMsgTarget: me,
+	    },
         ];
 
 	Proxmox.Utils.monStoreErrors(me, store, true);
@@ -151,13 +151,13 @@ Ext.define('PMG.MailProxyTLSDestinations', {
 	    run_editor: run_editor,
 	    listeners: {
 		itemdblclick: run_editor,
-		activate: reload
-	    }
+		activate: reload,
+	    },
 	});
 
 	me.on('activate', rstore.startUpdate);
 	me.on('destroy', rstore.stopUpdate);
 	me.on('deactivate', rstore.stopUpdate);
 	me.callParent();
-    }
+    },
 });

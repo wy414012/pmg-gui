@@ -3,75 +3,75 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
     alias: 'widget.pmgSpamDetectorLanguagesInputPanel',
 
     languages: [
-	[ 'af', 'Afrikaans' ],
-	[ 'am', 'Amharic' ],
-	[ 'ar', 'Arabic' ],
-	[ 'be', 'Byelorussian' ],
-	[ 'bg', 'Bulgarian' ],
-	[ 'bs', 'Bosnian' ],
-	[ 'ca', 'Catalan' ],
-	[ 'cs', 'Czech' ],
-	[ 'cy', 'Welsh' ],
-	[ 'da', 'Danish' ],
-	[ 'de', 'German' ],
-	[ 'el', 'Greek' ],
-	[ 'en', 'English' ],
-	[ 'eo', 'Esperanto' ],
-	[ 'es', 'Spanish' ],
-	[ 'et', 'Estonian' ],
-	[ 'eu', 'Basque' ],
-	[ 'fa', 'Persian' ],
-	[ 'fi', 'Finnish' ],
-	[ 'fr', 'French' ],
-	[ 'fy', 'Frisian' ],
-	[ 'ga', 'Irish' ],
-	[ 'gd', 'Scottish' ],
-	[ 'he', 'Hebrew' ],
-	[ 'hi', 'Hindi' ],
-	[ 'hr', 'Croatian' ],
-	[ 'hu', 'Hungarian' ],
-	[ 'hy', 'Armenian' ],
-	[ 'id', 'Indonesian' ],
-	[ 'is', 'Icelandic' ],
-	[ 'it', 'Italian' ],
-	[ 'ja', 'Japanese' ],
-	[ 'ka', 'Georgian' ],
-	[ 'ko', 'Korean' ],
-	[ 'la', 'Latin' ],
-	[ 'lt', 'Lithuanian' ],
-	[ 'lv', 'Latvian' ],
-	[ 'mr', 'Marathi' ],
-	[ 'ms', 'Malay' ],
-	[ 'ne', 'Nepali' ],
-	[ 'nl', 'Dutch' ],
-	[ 'no', 'Norwegian' ],
-	[ 'pl', 'Polish' ],
-	[ 'pt', 'Portuguese' ],
-	[ 'qu', 'Quechua' ],
-	[ 'Rhaeto', 'Romance' ],
-	[ 'ro', 'Romanian' ],
-	[ 'ru', 'Russian' ],
-	[ 'sa', 'Sanskrit' ],
-	[ 'sco', 'Scots' ],
-	[ 'sk', 'Slovak' ],
-	[ 'sl', 'Slovenian' ],
-	[ 'sq', 'Albanian' ],
-	[ 'sr', 'Serbian' ],
-	[ 'sv', 'Swedish' ],
-	[ 'sw', 'Swahili' ],
-	[ 'ta', 'Tamil' ],
-	[ 'th', 'Thai' ],
-	[ 'tl', 'Tagalog' ],
-	[ 'tr', 'Turkish' ],
-	[ 'uk', 'Ukrainian' ],
-	[ 'vi', 'Vietnamese' ],
-	[ 'yi', 'Yiddish' ],
-	[ 'zh', 'Chinese' ]
+	['af', 'Afrikaans'],
+	['am', 'Amharic'],
+	['ar', 'Arabic'],
+	['be', 'Byelorussian'],
+	['bg', 'Bulgarian'],
+	['bs', 'Bosnian'],
+	['ca', 'Catalan'],
+	['cs', 'Czech'],
+	['cy', 'Welsh'],
+	['da', 'Danish'],
+	['de', 'German'],
+	['el', 'Greek'],
+	['en', 'English'],
+	['eo', 'Esperanto'],
+	['es', 'Spanish'],
+	['et', 'Estonian'],
+	['eu', 'Basque'],
+	['fa', 'Persian'],
+	['fi', 'Finnish'],
+	['fr', 'French'],
+	['fy', 'Frisian'],
+	['ga', 'Irish'],
+	['gd', 'Scottish'],
+	['he', 'Hebrew'],
+	['hi', 'Hindi'],
+	['hr', 'Croatian'],
+	['hu', 'Hungarian'],
+	['hy', 'Armenian'],
+	['id', 'Indonesian'],
+	['is', 'Icelandic'],
+	['it', 'Italian'],
+	['ja', 'Japanese'],
+	['ka', 'Georgian'],
+	['ko', 'Korean'],
+	['la', 'Latin'],
+	['lt', 'Lithuanian'],
+	['lv', 'Latvian'],
+	['mr', 'Marathi'],
+	['ms', 'Malay'],
+	['ne', 'Nepali'],
+	['nl', 'Dutch'],
+	['no', 'Norwegian'],
+	['pl', 'Polish'],
+	['pt', 'Portuguese'],
+	['qu', 'Quechua'],
+	['Rhaeto', 'Romance'],
+	['ro', 'Romanian'],
+	['ru', 'Russian'],
+	['sa', 'Sanskrit'],
+	['sco', 'Scots'],
+	['sk', 'Slovak'],
+	['sl', 'Slovenian'],
+	['sq', 'Albanian'],
+	['sr', 'Serbian'],
+	['sv', 'Swedish'],
+	['sw', 'Swahili'],
+	['ta', 'Tamil'],
+	['th', 'Thai'],
+	['tl', 'Tagalog'],
+	['tr', 'Turkish'],
+	['uk', 'Ukrainian'],
+	['vi', 'Vietnamese'],
+	['yi', 'Yiddish'],
+	['zh', 'Chinese'],
     ],
 
     onGetValues: function(values) {
 	if (!values.languages) {
-	    values['delete'] = 'languages';
+	    values.delete = 'languages';
 	} else if (Ext.isArray(values.languages)) {
 	    /*jslint confusion: true*/
 	    /*languages is an array and string here*/
@@ -83,7 +83,7 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
     },
 
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.column1 = [];
@@ -97,7 +97,7 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
 		xtype: 'checkboxfield',
 		inputValue: me.languages[i][0],
 		boxLabel: me.languages[i][1],
-		name: 'languages'
+		name: 'languages',
 	    };
 	    if ((i % 4) === 0) {
 		me.column1.push(config);
@@ -111,7 +111,7 @@ Ext.define('PMG.SpamDetectorLanguagesInputPanel', {
 	}
 
 	me.callParent();
-    }
+    },
 });
 
 Ext.define('PMG.SpamDetectorLanguages', {
@@ -120,7 +120,7 @@ Ext.define('PMG.SpamDetectorLanguages', {
 
     subject: 'Languages',
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.items = Ext.create('PMG.SpamDetectorLanguagesInputPanel');
@@ -132,7 +132,7 @@ Ext.define('PMG.SpamDetectorLanguages', {
 		var value = response.result.data.languages || '';
 		var languages = value.split(/[\ \,\;]+/);
 		me.setValues({ languages: languages });
-	    }
+	    },
 	});
-    }
+    },
 });

@@ -4,16 +4,16 @@
 Ext.define('pmg-users', {
     extend: 'Ext.data.Model',
     fields: [
-	'userid', 'firstname', 'lastname' , 'email', 'comment',
+	'userid', 'firstname', 'lastname', 'email', 'comment',
 	'role', 'keys', 'realm',
 	{ type: 'boolean', name: 'enable' },
-	{ type: 'date', dateFormat: 'timestamp', name: 'expire' }
+	{ type: 'date', dateFormat: 'timestamp', name: 'expire' },
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/access/users"
+	url: "/api2/json/access/users",
     },
-    idProperty: 'userid'
+    idProperty: 'userid',
 });
 
 Ext.define('PMG.UserView', {
@@ -26,13 +26,13 @@ Ext.define('PMG.UserView', {
 	sorters: [
 	    {
 		property: 'realm',
-		direction: 'ASC'
+		direction: 'ASC',
 	    },
 	    {
 		property: 'userid',
-		direction: 'ASC'
-	    }
-	]
+		direction: 'ASC',
+	    },
+	],
     },
 
     controller: {
@@ -67,7 +67,7 @@ Ext.define('PMG.UserView', {
 	    var rec = view.selModel.getSelection()[0];
 
             var win = Ext.create('PMG.UserEdit', {
-		userid: rec.data.userid
+		userid: rec.data.userid,
             });
             win.on('destroy', function() { view.reload(); });
             win.show();
@@ -76,8 +76,8 @@ Ext.define('PMG.UserView', {
 	onPassword: function(btn, event, rec) {
 	    var view = this.getView();
 
-	    var win = Ext.create('Proxmox.window.PasswordEdit',{
-                userid: rec.data.userid
+	    var win = Ext.create('Proxmox.window.PasswordEdit', {
+                userid: rec.data.userid,
 	    });
             win.on('destroy', function() { view.reload(); });
 	    win.show();
@@ -86,39 +86,39 @@ Ext.define('PMG.UserView', {
 	onAfterRemove: function(btn, res) {
 	    var view = this.getView();
 	    view.reload();
-	}
+	},
     },
 
     listeners: {
 	scope: 'controller',
-	itemdblclick: 'onEdit'
+	itemdblclick: 'onEdit',
     },
 
     tbar: [
         {
 	    text: gettext('Add'),
 	    reference: 'addBtn',
-	    handler: 'onAdd'
+	    handler: 'onAdd',
 	},
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),
 	    disabled: true,
-	    handler: 'onEdit'
+	    handler: 'onEdit',
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/access/users',
 	    reference: 'removeBtn',
 	    callback: 'onAfterRemove',
-	    waitMsgTarget: true
+	    waitMsgTarget: true,
 	},
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Password'),
 	    disabled: true,
-	    handler: 'onPassword'
-	}
+	    handler: 'onPassword',
+	},
     ],
 
     columns: [
@@ -127,54 +127,54 @@ Ext.define('PMG.UserView', {
 	    width: 200,
 	    sortable: true,
 	    renderer: 'renderUsername',
-	    dataIndex: 'userid'
+	    dataIndex: 'userid',
 	},
 	{
 	    header: gettext('Realm'),
 	    width: 100,
 	    sortable: true,
-	    dataIndex: 'realm'
+	    dataIndex: 'realm',
 	},
 	{
 	    header: gettext('Role'),
 	    width: 150,
 	    sortable: true,
 	    renderer: PMG.Utils.format_user_role,
-	    dataIndex: 'role'
+	    dataIndex: 'role',
 	},
 	{
 	    header: gettext('Enabled'),
 	    width: 80,
 	    sortable: true,
 	    renderer: Proxmox.Utils.format_boolean,
-	    dataIndex: 'enable'
+	    dataIndex: 'enable',
 	},
 	{
 	    header: gettext('Expire'),
 	    width: 80,
 	    sortable: true,
 	    renderer: Proxmox.Utils.format_expire,
-	    dataIndex: 'expire'
+	    dataIndex: 'expire',
 	},
 	{
 	    header: gettext('Name'),
 	    width: 150,
 	    sortable: true,
 	    renderer: 'renderFullName',
-	    dataIndex: 'firstname'
+	    dataIndex: 'firstname',
 	},
 	{
 	    header: gettext('Comment'),
 	    sortable: false,
 	    renderer: Ext.String.htmlEncode,
 	    dataIndex: 'comment',
-	    flex: 1
-	}
+	    flex: 1,
+	},
     ],
 
     reload: function() {
 	var me = this;
 
 	me.store.load();
-    }
+    },
 });

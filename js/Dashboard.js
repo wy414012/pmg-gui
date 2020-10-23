@@ -21,7 +21,7 @@ Ext.define('PMG.Dashboard', {
 		width: 300,
 		title: gettext('Dashboard Options'),
 		layout: {
-		    type: 'auto'
+		    type: 'auto',
 		},
 		items: [{
 		    xtype: 'form',
@@ -36,7 +36,7 @@ Ext.define('PMG.Dashboard', {
 			minValue: 1,
 			maxValue: 24,
 			value: viewModel.get('hours'),
-			fieldLabel: gettext('Hours to show')
+			fieldLabel: gettext('Hours to show'),
 		    }],
 		    buttons: [{
 			text: gettext('Save'),
@@ -47,9 +47,9 @@ Ext.define('PMG.Dashboard', {
 			    var hours = win.down('#hours').getValue();
 			    me.setHours(hours, true);
 			    win.close();
-			}
-		    }]
-		}]
+			},
+		    }],
+		}],
 	    }).show();
 	},
 
@@ -131,16 +131,16 @@ Ext.define('PMG.Dashboard', {
 		cpu += item.data.cpu || 0;
 
 		var memory = item.data.memory || { used: 0, total: 1 };
-		mem += (memory.used/memory.total);
+		mem += memory.used/memory.total;
 
 		var rootfs = item.data.rootfs || { used: 0, total: 1 };
-		hd += (rootfs.used/rootfs.total);
+		hd += rootfs.used/rootfs.total;
 
 		if (item.data.conn_error && count > 1) {
 		    count--;
 		    errors.push({
 			name: item.data.name,
-			msg: item.data.conn_error
+			msg: item.data.conn_error,
 		    });
 		}
 	    });
@@ -176,7 +176,7 @@ Ext.define('PMG.Dashboard', {
 	    var sp = Ext.state.Manager.getProvider();
 	    var hours = sp.get('dashboard-hours') || 12;
 	    me.setHours(hours, false);
-	}
+	},
     },
 
     viewModel: {
@@ -186,7 +186,7 @@ Ext.define('PMG.Dashboard', {
 	    error_shown: false,
 	    'bytes_in': 0,
 	    'bytes_out': 0,
-	    'avg_ptime': 0.0
+	    'avg_ptime': 0.0,
 	},
 
 	stores: {
@@ -199,11 +199,11 @@ Ext.define('PMG.Dashboard', {
 		proxy: {
 		    extraParams: { list_single_node: 1 },
 		    type: 'proxmox',
-		    url: '/api2/json/config/cluster/status'
+		    url: '/api2/json/config/cluster/status',
 		},
 		listeners: {
-		    load: 'updateClusterStats'
-		}
+		    load: 'updateClusterStats',
+		},
 	    },
 	    recentmails: {
 		storeid: 'dash-recent',
@@ -216,51 +216,51 @@ Ext.define('PMG.Dashboard', {
 		    url: '/api2/json/statistics/recent',
 		    extraParams: {
 			hours: '{hours}',
-			timespan: '{timespan}'
-		    }
+			timespan: '{timespan}',
+		    },
 		},
 		fields: [
 		    {
 			type: 'number', name: 'count',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'count_in',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'count_out',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'spam',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'spam_in',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'spam_out',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'virus',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    {
 			type: 'number', name: 'virus_in',
-			convert: PMG.Utils.convert_field_to_per_min
+			convert: PMG.Utils.convert_field_to_per_min,
 		    },
 		    { type: 'integer', name: 'virus_out' },
 		    { type: 'integer', name: 'bytes_in' },
 		    { type: 'integer', name: 'bytes_out' },
 		    { type: 'number', name: 'ptimesum' },
-		    { type: 'date', dateFormat: 'timestamp', name: 'time' }
+		    { type: 'date', dateFormat: 'timestamp', name: 'time' },
 		],
 		listeners: {
-		    load: 'updateMailStats'
-		}
+		    load: 'updateMailStats',
+		},
 	    },
 	    receivers: {
 		storeid: 'dash-receivers',
@@ -272,24 +272,24 @@ Ext.define('PMG.Dashboard', {
 		    type: 'proxmox',
 		    url: '/api2/json/statistics/recentreceivers',
 		    extraParams: {
-			hours: '{hours}'
-		    }
+			hours: '{hours}',
+		    },
 		},
 		fields: [
 		    { type: 'integer', name: 'count' },
-		    { type: 'string', name: 'receiver' }
-		]
-	    }
-	}
+		    { type: 'string', name: 'receiver' },
+		],
+	    },
+	},
     },
 
     bind: {
 	title: gettext('Dashboard') + ' (' +
-	    Ext.String.format(gettext('{0} hours'), '{hours}') + ')'
+	    Ext.String.format(gettext('{0} hours'), '{hours}') + ')',
     },
 
     layout: {
-	type: 'column'
+	type: 'column',
     },
     border: false,
 
@@ -298,14 +298,14 @@ Ext.define('PMG.Dashboard', {
     defaults: {
 	columnWidth: 0.5,
 	xtype: 'panel',
-	margin: '0 20 20 0'
+	margin: '0 20 20 0',
     },
 
     tools: [
 	{
 	    type: 'gear',
-	    handler: 'openDashboardOptions'
-	}
+	    handler: 'openDashboardOptions',
+	},
     ],
 
     scrollable: true,
@@ -318,53 +318,53 @@ Ext.define('PMG.Dashboard', {
 	    title: gettext('E-Mail Volume'),
 	    layout: {
 		type: 'vbox',
-		align: 'stretch'
+		align: 'stretch',
 	    },
 	    defaults: {
 		xtype: 'pmgMiniGraph',
 		bind: {
-		    store: '{recentmails}'
-		}
+		    store: '{recentmails}',
+		},
 	    },
 	    items: [
 		{
 		    fields: ['count'],
-		    fieldTitles: [ gettext('Mails / min') ],
+		    fieldTitles: [gettext('Mails / min')],
 		    seriesConfig: {
-			colors: [ '#00617F' ],
+			colors: ['#00617F'],
 			style: {
 			    opacity: 0.60,
-			    lineWidth: 1
+			    lineWidth: 1,
 			},
 			highlightCfg: {
 			    opacity: 1,
-			    scaling: 1
-			}
-		    }
+			    scaling: 1,
+			},
+		    },
 		},
 		{
 		    fields: ['spam'],
-		    fieldTitles: [ gettext('Spam / min') ],
+		    fieldTitles: [gettext('Spam / min')],
 		    seriesConfig: {
-			colors: [ '#E67300' ],
+			colors: ['#E67300'],
 			style: {
 			    opacity: 0.60,
-			    lineWidth: 1
+			    lineWidth: 1,
 			},
 			highlightCfg: {
 			    opacity: 1,
-			    scaling: 1
-			}
-		    }
-		}
-	    ]
+			    scaling: 1,
+			},
+		    },
+		},
+	    ],
 	},
 	{
 	    xtype: 'container',
 	    height: 300,
 	    layout: {
 		type: 'vbox',
-		align: 'stretch'
+		align: 'stretch',
 	    },
 	    items: [
 		{
@@ -376,9 +376,9 @@ Ext.define('PMG.Dashboard', {
 			data: {
 			    'bytes_in': '{bytes_in}',
 			    'bytes_out': '{bytes_out}',
-			    'avg_ptime': '{avg_ptime}'
-			}
-		    }
+			    'avg_ptime': '{avg_ptime}',
+			},
+		    },
 		},
 		{
 		    iconCls: 'fa fa-ticket',
@@ -386,9 +386,9 @@ Ext.define('PMG.Dashboard', {
 		    reference: 'subscription',
 		    xtype: 'pmgSubscriptionInfo',
 		    margin: '10 0 0 0',
-		    height: 110
-		}
-	    ]
+		    height: 110,
+		},
+	    ],
 	},
 	{
 	    height: 250,
@@ -397,27 +397,27 @@ Ext.define('PMG.Dashboard', {
 	    bodyPadding: '0 20 0 20',
 	    layout: {
 		type: 'hbox',
-		align: 'center'
+		align: 'center',
 	    },
 	    defaults: {
 		xtype: 'proxmoxGauge',
 		spriteFontSize: '20px',
-		flex: 1
+		flex: 1,
 	    },
 	    items: [
 		{
 		    title: gettext('CPU'),
-		    reference: 'cpu'
+		    reference: 'cpu',
 		},
 		{
 		    title: gettext('Memory'),
-		    reference: 'mem'
+		    reference: 'mem',
 		},
 		{
 		    title: gettext('Storage'),
-		    reference: 'hd'
-		}
-	    ]
+		    reference: 'hd',
+		},
+	    ],
 	},
 	{
 	    height: 250,
@@ -428,12 +428,12 @@ Ext.define('PMG.Dashboard', {
 	    layout: {
 		type: 'vbox',
 		pack: 'center',
-		align: 'stretch'
+		align: 'stretch',
 	    },
 	    items: [{
 		xtype: 'grid',
 		bind: {
-		    store: '{receivers}'
+		    store: '{receivers}',
 		},
 
 		emptyText: gettext('No data in database'),
@@ -446,22 +446,22 @@ Ext.define('PMG.Dashboard', {
 		columnLines: false,
 		rowLines: false,
 		viewConfig: {
-		    stripeRows: false
+		    stripeRows: false,
 		},
 
 		columns: [
 		    {
 			dataIndex: 'receiver',
 			flex: 1,
-			text: gettext('Receiver')
+			text: gettext('Receiver'),
 		    },
 		    {
 			dataIndex: 'count',
 			align: 'right',
-			text: gettext('Count')
-		    }
-		]
-	    }]
-	}
-    ]
+			text: gettext('Count'),
+		    },
+		],
+	    }],
+	},
+    ],
 });

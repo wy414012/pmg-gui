@@ -16,13 +16,13 @@ Ext.define('PMG.SystemConfiguration', {
 	    layout: {
 		type: 'vbox',
 		align: 'stretch',
-		multi: true
+		multi: true,
 	    },
 	    bodyPadding: '0 0 10 0',
 	    defaults: {
 		collapsible: true,
 		animCollapse: false,
-		margin: '10 10 0 10'
+		margin: '10 10 0 10',
 	    },
 	    items: [
 		{
@@ -31,29 +31,29 @@ Ext.define('PMG.SystemConfiguration', {
 		    title: gettext('Interfaces'),
 		    xtype: 'proxmoxNodeNetworkView',
 		    types: ['bond'],
-		    nodename: Proxmox.NodeName
+		    nodename: Proxmox.NodeName,
 		},
 		{
 		    title: gettext('DNS'),
 		    xtype: 'proxmoxNodeDNSView',
-		    nodename: Proxmox.NodeName
+		    nodename: Proxmox.NodeName,
 		},
 		{
 		    title: gettext('Time'),
 		    xtype: 'proxmoxNodeTimeView',
-		    nodename: Proxmox.NodeName
-		}
-	    ]
+		    nodename: Proxmox.NodeName,
+		},
+	    ],
 	},
 	{
 	    itemId: 'options',
             title: gettext('Options'),
-	    xtype: 'pmgSystemOptions'
+	    xtype: 'pmgSystemOptions',
 	},
 	{
 	    itemId: 'backup',
-	    xtype: 'pmgBackupRestore'
-	}
+	    xtype: 'pmgBackupRestore',
+	},
     ],
 
     initComponent: function() {
@@ -63,9 +63,9 @@ Ext.define('PMG.SystemConfiguration', {
 
 	var networktime = me.getComponent('network');
 	Ext.Array.forEach(networktime.query(), function(item) {
-	    item.relayEvents(networktime, [ 'activate', 'deactivate', 'destroy']);
+	    item.relayEvents(networktime, ['activate', 'deactivate', 'destroy']);
 	});
-    }
+    },
 });
 
 

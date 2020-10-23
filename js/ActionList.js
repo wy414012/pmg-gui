@@ -3,9 +3,9 @@ Ext.define('pmg-action-list', {
     extend: 'Ext.data.Model',
     fields: [
 	'id', 'name', 'info', 'descr', 'editable',
-	{ name: 'otype', type: 'integer' }
+	{ name: 'otype', type: 'integer' },
     ],
-    idProperty: 'id'
+    idProperty: 'id',
 });
 
 Ext.define('PMG.ActionList', {
@@ -21,19 +21,19 @@ Ext.define('PMG.ActionList', {
 
     enableButtons: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.store = new Ext.data.Store({
 	    model: 'pmg-action-list',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json" + me.baseurl + '/objects'
+		url: "/api2/json" + me.baseurl + '/objects',
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC'
-	    }
+		order: 'DESC',
+	    },
 	});
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
@@ -72,13 +72,12 @@ Ext.define('PMG.ActionList', {
 	    enableFn: rec => !!rec.data.editable,
 	    callback: reload,
 	    getRecordName: function(rec) { return rec.data.descr; },
-	    waitMsgTarget: me
+	    waitMsgTarget: me,
 	});
 
 	var menu_items = [];
 
 	Ext.Array.each(me.otype_list, function(otype) {
-
 	    var editor = PMG.Utils.object_editors[otype];
 
 	    var config = Ext.apply({ method: 'POST' }, editor);
@@ -94,7 +93,7 @@ Ext.define('PMG.ActionList', {
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
 		    win.on('destroy', reload);
 		    win.show();
-		}
+		},
 	    });
 	});
 
@@ -102,8 +101,8 @@ Ext.define('PMG.ActionList', {
 	    {
 		text: gettext('Add'),
 		menu: new Ext.menu.Menu({
-		    items: menu_items
-		})
+		    items: menu_items,
+		}),
 	    },
             {
 		xtype: 'proxmoxButton',
@@ -111,9 +110,9 @@ Ext.define('PMG.ActionList', {
 		disabled: true,
 		selModel: me.selModel,
 		enableFn: rec => !!rec.data.editable,
-		handler: run_editor
+		handler: run_editor,
             },
-	    remove_btn
+	    remove_btn,
         ];
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
@@ -130,27 +129,27 @@ Ext.define('PMG.ActionList', {
 		    sortable: true,
 		    width: 200,
 		    dataIndex: 'name',
-		    renderer: Ext.String.htmlEncode
+		    renderer: Ext.String.htmlEncode,
 		},
 		{
 		    header: gettext('Description'),
 		    sortable: true,
 		    width: 300,
 		    dataIndex: 'descr',
-		    renderer: Ext.String.htmlEncode
+		    renderer: Ext.String.htmlEncode,
 		},
 		{
 		    header: gettext('Comment'),
 		    sortable: false,
 		    flex: 1,
 		    dataIndex: 'info',
-		    renderer: Ext.String.htmlEncode
+		    renderer: Ext.String.htmlEncode,
 		},
 		{
 		    header: gettext('Editable'),
 		    dataIndex: 'editable',
 		    renderer: Proxmox.Utils.format_boolean,
-		}
+		},
 	    ],
 	    listeners: {
 		itemdblclick: function() {
@@ -158,12 +157,12 @@ Ext.define('PMG.ActionList', {
 			run_editor();
 		    }
 		},
-		activate: reload
-	    }
+		activate: reload,
+	    },
 	});
 
 	me.callParent();
 
 	reload(); // initial load
-    }
+    },
 });

@@ -1,19 +1,19 @@
 /*global Proxmox*/
-Ext.define('PMG.view.main.VersionInfo',{
+Ext.define('PMG.view.main.VersionInfo', {
     extend: 'Ext.Component',
     xtype: 'versioninfo',
 
     makeApiCall: true,
 
     data: {
-	version: false
+	version: false,
     },
 
     tpl: [
 	'Mail Gateway',
 	'<tpl if="version">',
 	' {version}',
-	'</tpl>'
+	'</tpl>',
     ],
 
     initComponent: function() {
@@ -26,8 +26,8 @@ Ext.define('PMG.view.main.VersionInfo',{
 		method: 'GET',
 		success: function(response) {
 		    me.update(response.result.data);
-		}
+		},
 	    });
 	}
-    }
+    },
 });

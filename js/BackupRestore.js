@@ -4,14 +4,14 @@ Ext.define('pmg-backup-list', {
     fields: [
 	'filename',
 	{ type: 'integer', name: 'size' },
-	{ type: 'date', dateFormat: 'timestamp', name: 'timestamp' }
+	{ type: 'date', dateFormat: 'timestamp', name: 'timestamp' },
 
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/nodes/" + Proxmox.NodeName + "/backup"
+	url: "/api2/json/nodes/" + Proxmox.NodeName + "/backup",
     },
-    idProperty: 'filename'
+    idProperty: 'filename',
 });
 
 Ext.define('PMG.RestoreWindow', {
@@ -25,13 +25,13 @@ Ext.define('PMG.RestoreWindow', {
     method: 'POST',
     submitText: gettext('Restore'),
     fieldDefaults: {
-	labelWidth: 150
+	labelWidth: 150,
     },
     items: [
 	{
 	    xtype: 'proxmoxcheckbox',
 	    name: 'config',
-	    fieldLabel: gettext('System Configuration')
+	    fieldLabel: gettext('System Configuration'),
 	},
 	{
 	    xtype: 'proxmoxcheckbox',
@@ -43,14 +43,14 @@ Ext.define('PMG.RestoreWindow', {
 		change: function(cb, value) {
 		    var me = this;
 		    me.up().down('field[name=statistic]').setDisabled(!value);
-		}
-	    }
+		},
+	    },
 	},
 	{
 	    xtype: 'proxmoxcheckbox',
 	    name: 'statistic',
-	    fieldLabel: gettext('Statistic')
-	}
+	    fieldLabel: gettext('Statistic'),
+	},
     ],
 
     initComponent: function() {
@@ -63,7 +63,7 @@ Ext.define('PMG.RestoreWindow', {
 	me.url = "/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(me.filename);
 
 	me.callParent();
-    }
+    },
 });
 
 Ext.define('PMG.BackupRestore', {
@@ -81,18 +81,18 @@ Ext.define('PMG.BackupRestore', {
 		url: "/nodes/" + Proxmox.NodeName + "/backup",
 		method: 'POST',
 		waitMsgTarget: me,
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		},
 		success: function(response, opts) {
 		    var upid = response.result.data;
 
 		    var win = Ext.create('Proxmox.window.TaskViewer', {
-			upid: upid
+			upid: upid,
 		    });
 		    win.show();
 		    me.mon(win, 'close', function() { me.store.load(); });
-		}
+		},
 	    });
 	},
 
@@ -105,35 +105,35 @@ Ext.define('PMG.BackupRestore', {
 	    }
 
 	    Ext.create('PMG.RestoreWindow', {
-		filename: rec.data.filename
+		filename: rec.data.filename,
 	    }).show();
 	},
 
 	onAfterRemove: function(btn, res) {
 	    var me = this.getView();
 	    me.store.load();
-	}
+	},
     },
 
     tbar: [
 	{
 	    text: gettext('Backup'),
-	    handler: 'createBackup'
+	    handler: 'createBackup',
 	},
 	'-',
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Restore'),
 	    handler: 'onRestore',
-	    disabled: true
+	    disabled: true,
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/nodes/' + Proxmox.NodeName + '/backup',
 	    reference: 'removeBtn',
 	    callback: 'onAfterRemove',
-	    waitMsgTarget: true
-	}
+	    waitMsgTarget: true,
+	},
     ],
 
     store: {
@@ -142,9 +142,9 @@ Ext.define('PMG.BackupRestore', {
 	sorters: [
 	    {
 		property: 'timestamp',
-		direction: 'DESC'
-	    }
-	]
+		direction: 'DESC',
+	    },
+	],
     },
 
     columns: [
@@ -153,7 +153,7 @@ Ext.define('PMG.BackupRestore', {
 	    width: 300,
 	    sortable: true,
 	    renderer: Ext.htmlEncode,
-	    dataIndex: 'filename'
+	    dataIndex: 'filename',
 	},
 	{
 	    xtype: 'datecolumn',
@@ -161,14 +161,14 @@ Ext.define('PMG.BackupRestore', {
 	    width: 150,
 	    format: 'Y-m-d H:i',
 	    sortable: true,
-	    dataIndex: 'timestamp'
+	    dataIndex: 'timestamp',
 	},
 	{
 	    header: gettext('Size'),
 	    width: 100,
 	    sortable: true,
 	    renderer: Proxmox.Utils.format_size,
-	    dataIndex: 'size'
+	    dataIndex: 'size',
 	},
 	{
 	    header: gettext('Download'),
@@ -177,7 +177,7 @@ Ext.define('PMG.BackupRestore', {
 		    "/api2/json/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(filename) +
 		"'><i class='fa fa-fw fa-download'</i></a>";
 	    },
-	    dataIndex: 'filename'
-	}
-    ]
+	    dataIndex: 'filename',
+	},
+    ],
 });

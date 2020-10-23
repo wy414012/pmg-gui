@@ -5,7 +5,7 @@ Ext.define('PMG.DomainStatistics', {
 
     title: gettext('Statistics') + ': ' + gettext('Domain'),
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     layout: 'fit',
     border: false,
@@ -22,22 +22,22 @@ Ext.define('PMG.DomainStatistics', {
 	    { type: 'integer', name: 'viruscount_in' },
 	    { type: 'integer', name: 'viruscount_out' },
 	    { type: 'number', name: 'bytes_in' },
-	    { type: 'number', name: 'bytes_out' }
+	    { type: 'number', name: 'bytes_out' },
 	];
 
 	var store = Ext.create('PMG.data.StatStore', {
 	    staturl: '/api2/json/statistics/domains',
-	    fields: fields
+	    fields: fields,
 	});
 
 	var store_in = Ext.create('Ext.data.ArrayStore', {
 	    fields: fields,
-	    filters: [ function(item) { return item.data.count_in > 0; } ]
+	    filters: [function(item) { return item.data.count_in > 0; }],
 	});
 
 	var store_out = Ext.create('Ext.data.ArrayStore', {
 	    fields: fields,
-	    filters: [ function(item) { return item.data.count_out > 0; } ]
+	    filters: [function(item) { return item.data.count_out > 0; }],
 	});
 
 	store.on('load', function(s, records, successful) {
@@ -66,7 +66,7 @@ Ext.define('PMG.DomainStatistics', {
 		    store: store_in,
 		    emptyText: gettext('No data in database'),
 		    viewConfig: {
-			deferEmptyText: false
+			deferEmptyText: false,
 		    },
 		    columns: [
 			{
@@ -74,33 +74,33 @@ Ext.define('PMG.DomainStatistics', {
 				gettext('Receiver') + ')',
 			    flex: 1,
 			    renderer: render_domain,
-			    dataIndex: 'domain'
+			    dataIndex: 'domain',
 			},
 			{
 			    text: gettext('Traffic') + ' (MB)',
 			    dataIndex: 'bytes_in',
 			    renderer: function(v) {
 				return Ext.Number.toFixed(v/(1024*1024), 2);
-			    }
+			    },
 			},
 			{
 			    text: gettext('Count'),
 			    columns: [
 				{
 				    text: gettext('Mail'),
-				    dataIndex: 'count_in'
+				    dataIndex: 'count_in',
 				},
 				{
 				    header: gettext('Virus'),
-				    dataIndex: 'viruscount_in'
+				    dataIndex: 'viruscount_in',
 				},
 				{
 				    header: gettext('Spam'),
-				    dataIndex: 'spamcount_in'
-				}
-			    ]
-			}
-		    ]
+				    dataIndex: 'spamcount_in',
+				},
+			    ],
+			},
+		    ],
 		},
 		{
 		    xtype: 'grid',
@@ -110,7 +110,7 @@ Ext.define('PMG.DomainStatistics', {
 		    store: store_out,
 		    emptyText: gettext('No data in database'),
 		    viewConfig: {
-			deferEmptyText: false
+			deferEmptyText: false,
 		    },
 		    columns: [
 			{
@@ -118,31 +118,31 @@ Ext.define('PMG.DomainStatistics', {
 				gettext('Receiver') + ')',
 			    flex: 1,
 			    renderer: render_domain,
-			    dataIndex: 'domain'
+			    dataIndex: 'domain',
 			},
 			{
 			    text: gettext('Traffic') + ' (MB)',
 			    dataIndex: 'bytes_out',
 			    renderer: function(v) {
 				return Ext.Number.toFixed(v/(1024*1024), 2);
-			    }
+			    },
 			},
 			{
 			    text: gettext('Count'),
 			    columns: [
 				{
 				    text: gettext('Mail'),
-				    dataIndex: 'count_out'
+				    dataIndex: 'count_out',
 				},
 				{
 				    header: gettext('Virus'),
-				    dataIndex: 'viruscount_out'
-				}
-			    ]
-			}
-		    ]
-		}
-	    ]
+				    dataIndex: 'viruscount_out',
+				},
+			    ],
+			},
+		    ],
+		},
+	    ],
 	}];
 
 	me.callParent();
@@ -150,5 +150,5 @@ Ext.define('PMG.DomainStatistics', {
 	Proxmox.Utils.monStoreErrors(me, store);
 
 	me.on('destroy', store.destroy, store);
-    }
+    },
 });

@@ -8,20 +8,20 @@
  */
 Ext.define('pmg-ldap-config', {
     extend: 'Ext.data.Model',
-    fields: [ 'profile', 'server1', 'server2', 'comment',
+    fields: ['profile', 'server1', 'server2', 'comment',
 	      'mode', 'binddn', 'bindpw', 'basedn', 'groupbasedn',
 	      'filter', 'accountattr', 'mailattr',
-	      { name: 'port',  type: 'integer' },
-	      { name: 'gcount',  type: 'integer' },
-	      { name: 'mcount',  type: 'integer' },
-	      { name: 'ucount',  type: 'integer' },
-	      { name: 'disable',  type: 'boolean' }
+	      { name: 'port', type: 'integer' },
+	      { name: 'gcount', type: 'integer' },
+	      { name: 'mcount', type: 'integer' },
+	      { name: 'ucount', type: 'integer' },
+	      { name: 'disable', type: 'boolean' },
 	    ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/ldap"
+	url: "/api2/json/config/ldap",
     },
-    idProperty: 'profile'
+    idProperty: 'profile',
 });
 
 Ext.define('PMG.LDAPInputPanel', {
@@ -39,7 +39,7 @@ Ext.define('PMG.LDAPInputPanel', {
 	return values;
     },
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.column1 = [
@@ -49,7 +49,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		value: me.profileId || '',
 		name: 'profile',
 		vtype: 'StorageId',
-		allowBlank: false
+		allowBlank: false,
 	    },
 	    {
 		xtype: 'proxmoxKVComboBox',
@@ -57,16 +57,16 @@ Ext.define('PMG.LDAPInputPanel', {
 		comboItems: [
 		    ['ldap', PMG.Utils.format_ldap_protocol('ldap')],
 		    ['ldaps', PMG.Utils.format_ldap_protocol('ldaps')],
-		    ['ldap+starttls', PMG.Utils.format_ldap_protocol('ldap+starttls')]
+		    ['ldap+starttls', PMG.Utils.format_ldap_protocol('ldap+starttls')],
 		],
 		value: 'ldap',
 		fieldLabel: gettext('Protocol'),
 		listeners: {
 		    change: function(cb, value) {
-			var isldap = (value === 'ldap');
+			var isldap = value === 'ldap';
 			me.down('field[name=verify]').setVisible(!isldap);
-		    }
-		}
+		    },
+		},
 	    },
 	    {
 		xtype: 'proxmoxcheckbox',
@@ -75,45 +75,45 @@ Ext.define('PMG.LDAPInputPanel', {
 		hidden: true,
 		uncheckedValue: 0,
 		value: 1,
-		checked: 1
+		checked: 1,
 	    },
 	    {
 		xtype: 'textfield',
 		fieldLabel: gettext('Server'),
 		allowBlank: false,
 		vtype: 'DnsOrIp',
-		name: 'server1'
+		name: 'server1',
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		fieldLabel: gettext('Server'),
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		vtype: 'DnsOrIp',
-		name: 'server2'
+		name: 'server2',
 	    },
 	    {
 		xtype: 'proxmoxintegerfield',
 		name: 'port',
 		emptyText: gettext('Default'),
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		minValue: 1,
 		maxValue: 65535,
-		fieldLabel: gettext('Port')
+		fieldLabel: gettext('Port'),
 	    },
 	    {
 		xtype: 'textfield',
 		name: 'binddn',
 		allowBlank: true,
-		fieldLabel: gettext('User name')
+		fieldLabel: gettext('User name'),
 	    },
 	    {
 		xtype: 'textfield',
 		inputType: 'password',
 		allowBlank: true,
 		name: 'bindpw',
-		fieldLabel: gettext('Password')
-	    }
+		fieldLabel: gettext('Password'),
+	    },
 	];
 
 	me.column2 = [
@@ -122,50 +122,50 @@ Ext.define('PMG.LDAPInputPanel', {
 		name: 'enable',
 		checked: true,
 		uncheckedValue: 0,
-		fieldLabel: gettext('Enable')
+		fieldLabel: gettext('Enable'),
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		name: 'basedn',
-		fieldLabel: gettext('Base DN')
+		fieldLabel: gettext('Base DN'),
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		name: 'groupbasedn',
-		fieldLabel: gettext('Base DN for Groups')
+		fieldLabel: gettext('Base DN for Groups'),
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		name: 'mailattr',
-		fieldLabel: gettext('EMail attribute name(s)')
+		fieldLabel: gettext('EMail attribute name(s)'),
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		name: 'accountattr',
-		fieldLabel: gettext('Account attribute name')
+		fieldLabel: gettext('Account attribute name'),
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		name: 'filter',
-		fieldLabel: gettext('LDAP filter')
+		fieldLabel: gettext('LDAP filter'),
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		allowBlank: true,
-		deleteEmpty: me.isCreate ? false : true,
+		deleteEmpty: !me.isCreate,
 		name: 'groupclass',
-		fieldLabel: gettext('Group objectclass')
-	    }
+		fieldLabel: gettext('Group objectclass'),
+	    },
 	];
 
 	me.columnB = [
@@ -173,12 +173,12 @@ Ext.define('PMG.LDAPInputPanel', {
 		xtype: 'textfield',
 		fieldLabel: gettext('Comment'),
 		allowBlank: true,
-		name: 'comment'
-	    }
+		name: 'comment',
+	    },
 	];
 
 	me.callParent();
-    }
+    },
 });
 
 Ext.define('PMG.LDAPEdit', {
@@ -189,10 +189,10 @@ Ext.define('PMG.LDAPEdit', {
     subject: 'LDAP Profile',
     isAdd: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
-	me.isCreate = me.profileId ? false : true;
+	me.isCreate = !me.profileId;
 
 	if (me.isCreate) {
             me.url = '/api2/extjs/config/ldap';
@@ -204,29 +204,29 @@ Ext.define('PMG.LDAPEdit', {
 
 	var ipanel = Ext.create('PMG.LDAPInputPanel', {
 	    isCreate: me.isCreate,
-	    profileId: me.profileId
+	    profileId: me.profileId,
 	});
 
-	me.items = [ ipanel ];
+	me.items = [ipanel];
 
 	me.fieldDefaults = {
-	    labelWidth: 150
+	    labelWidth: 150,
 	};
 
 	me.callParent();
 
 	if (!me.isCreate) {
 	    me.load({
-		success:  function(response, options) {
+		success: function(response, options) {
 		    var values = response.result.data;
 
 		    values.enable = values.disable ? 0 : 1;
 		    values.verify = !!values.verify;
 		    ipanel.setValues(values);
-		}
+		},
 	    });
 	}
-    }
+    },
 });
 
 Ext.define('PMG.LDAPUserGrid', {
@@ -236,26 +236,26 @@ Ext.define('PMG.LDAPUserGrid', {
     emptyText: gettext('No data in database'),
     store: {
 	autoDestroy: true,
-	fields: [ 'dn', 'account', 'pmail' ],
+	fields: ['dn', 'account', 'pmail'],
 	proxy: { type: 'proxmox' },
-	sorters: [ 'dn' ]
+	sorters: ['dn'],
     },
     columns: [
 	{
 	    text: 'DN',
 	    dataIndex: 'dn',
-	    flex: 1
+	    flex: 1,
 	},
 	{
 	    text: gettext('Account'),
 	    dataIndex: 'account',
-	    flex: 1
+	    flex: 1,
 	},
 	{
 	    text: gettext('Primary E-Mail'),
 	    dataIndex: 'pmail',
-	    flex: 1
-	}
+	    flex: 1,
+	},
     ],
 
     initComponent: function() {
@@ -265,7 +265,7 @@ Ext.define('PMG.LDAPUserGrid', {
 	    me.getStore().getProxy().setUrl(me.url);
 	    me.getStore().load();
 	}
-    }
+    },
 });
 
 Ext.define('PMG.LDAPConfig', {
@@ -286,8 +286,8 @@ Ext.define('PMG.LDAPConfig', {
 		items: [{
 		    xtype: 'pmgLDAPUserGrid',
 		    border: false,
-		    url: '/api2/json/config/ldap/' + name + '/groups/' +  encodeURIComponent(record.data.gid)
-		}]
+		    url: '/api2/json/config/ldap/' + name + '/groups/' + encodeURIComponent(record.data.gid),
+		}],
 	    }).show();
 	},
 
@@ -314,13 +314,13 @@ Ext.define('PMG.LDAPConfig', {
 			field: ['email', 'primary'],
 			proxy: {
 			    type: 'proxmox',
-			    url: '/api2/json/config/ldap/' + name + '/users/' +  encodeURIComponent(record.data.pmail)
-			}
+			    url: '/api2/json/config/ldap/' + name + '/users/' + encodeURIComponent(record.data.pmail),
+			},
 		    },
 		    columns: [
-			{ dataIndex: 'email', text: gettext('E-Mail address'), flex: 1 }
-		    ]
-		}]
+			{ dataIndex: 'email', text: gettext('E-Mail address'), flex: 1 },
+		    ],
+		}],
 	    }).show();
 	},
 
@@ -370,22 +370,22 @@ Ext.define('PMG.LDAPConfig', {
 	control: {
 	    'grid[reference=grid]': {
 		selectionchange: 'showInfo',
-		load: 'reload'
+		load: 'reload',
 	    },
 	    'grid[reference=groupgrid]': {
-		itemdblclick: 'openUserList'
+		itemdblclick: 'openUserList',
 	    },
 	    'grid[reference=usergrid]': {
-		itemdblclick: 'openUserMails'
-	    }
-	}
+		itemdblclick: 'openUserMails',
+	    },
+	},
     },
 
     viewModel: {
 	data: {
 	    name: '',
-	    selected: false
-	}
+	    selected: false,
+	},
     },
 
     layout: 'border',
@@ -395,7 +395,7 @@ Ext.define('PMG.LDAPConfig', {
 	    region: 'center',
 	    reference: 'grid',
 	    xtype: 'pmgLDAPConfigGrid',
-	    border: false
+	    border: false,
 	},
 	{
 	    xtype: 'tabpanel',
@@ -406,7 +406,7 @@ Ext.define('PMG.LDAPConfig', {
 	    split: true,
 	    region: 'south',
 	    bind: {
-		hidden: '{!selected}'
+		hidden: '{!selected}',
 	    },
 	    items: [
 		{
@@ -418,23 +418,23 @@ Ext.define('PMG.LDAPConfig', {
 			xtype: 'proxmoxButton',
 			text: gettext('Show Users'),
 			handler: 'showUsers',
-			disabled: true
+			disabled: true,
 		    }],
 		    store: {
 			fields: ['dn', 'gid'],
 			proxy: { type: 'proxmox' },
-			sorters: [ 'dn' ]
+			sorters: ['dn'],
 		    },
 		    bind: {
-			title: Ext.String.format(gettext("Groups of '{0}'"), '{name}')
+			title: Ext.String.format(gettext("Groups of '{0}'"), '{name}'),
 		    },
 		    columns: [
 			{
 			    text: 'DN',
 			    dataIndex: 'dn',
-			    flex: 1
-			}
-		    ]
+			    flex: 1,
+			},
+		    ],
 		},
 		{
 		    xtype: 'pmgLDAPUserGrid',
@@ -444,15 +444,15 @@ Ext.define('PMG.LDAPConfig', {
 			xtype: 'proxmoxButton',
 			text: gettext('Show E-Mail addresses'),
 			handler: 'showEmails',
-			disabled: true
+			disabled: true,
 		    }],
 		    bind: {
-			title: Ext.String.format(gettext("Users of '{0}'"), '{name}')
-		    }
-		}
-	    ]
-	}
-    ]
+			title: Ext.String.format(gettext("Users of '{0}'"), '{name}'),
+		    },
+		},
+	    ],
+	},
+    ],
 
 });
 
@@ -472,7 +472,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    }
 
 	    var win = Ext.createWidget('pmgLDAPEdit', {
-		profileId: rec.data.profile
+		profileId: rec.data.profile,
 	    });
 	    win.on('destroy', me.reload, me);
 	    win.load();
@@ -504,24 +504,24 @@ Ext.define('PMG.LDAPConfigGrid', {
 		callback: function() {
 		    me.reload();
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
 	init: function(view) {
 	    var me = this;
 	    Proxmox.Utils.monStoreErrors(view, view.getStore(), true);
-	}
+	},
     },
 
     store: {
 	model: 'pmg-ldap-config',
 	sorters: [{
 	    property: 'profile',
-	    order: 'DESC'
-	}]
+	    order: 'DESC',
+	}],
     },
 
     tbar: [
@@ -529,16 +529,16 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),
 	    disabled: true,
-	    handler: 'run_editor'
+	    handler: 'run_editor',
 	},
 	{
 	    text: gettext('Create'),
-	    handler: 'newProfile'
+	    handler: 'newProfile',
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/config/ldap',
-	    callback: 'reload'
+	    callback: 'reload',
 	},
 	{
 	    xtype: 'proxmoxButton',
@@ -547,13 +547,13 @@ Ext.define('PMG.LDAPConfigGrid', {
 		return !rec.data.disable;
 	    },
 	    disabled: true,
-	    handler: 'sync'
-	}
+	    handler: 'sync',
+	},
     ],
 
     listeners: {
 	itemdblclick: 'run_editor',
-	activate: 'reload'
+	activate: 'reload',
     },
 
     columns: [
@@ -561,13 +561,13 @@ Ext.define('PMG.LDAPConfigGrid', {
 	    header: gettext('Profile Name'),
 	    sortable: true,
 	    width: 120,
-	    dataIndex: 'profile'
+	    dataIndex: 'profile',
 	},
 	{
 	    header: gettext('Protocol'),
 	    sortable: true,
 	    dataIndex: 'mode',
-	    renderer: PMG.Utils.format_ldap_protocol
+	    renderer: PMG.Utils.format_ldap_protocol,
 	},
 	{
 	    header: gettext('Server'),
@@ -578,40 +578,40 @@ Ext.define('PMG.LDAPConfigGrid', {
 		    return value + '<br>' + rec.data.server2;
 		}
 		return value;
-	    }
+	    },
 	},
 	{
 	    header: gettext('Enabled'),
 	    width: 80,
 	    sortable: true,
 	    dataIndex: 'disable',
-	    renderer: Proxmox.Utils.format_neg_boolean
+	    renderer: Proxmox.Utils.format_neg_boolean,
 	},
 	{
 	    header: gettext('Comment'),
 	    sortable: false,
 	    renderer: Ext.String.htmlEncode,
 	    dataIndex: 'comment',
-	    flex: 1
+	    flex: 1,
 	},
 	{
 	    header: gettext('Accounts'),
 	    width: 80,
 	    sortable: true,
-	    dataIndex: 'ucount'
+	    dataIndex: 'ucount',
 	},
 	{
 	    header: gettext('Addresses'),
 	    width: 80,
 	    sortable: true,
-	    dataIndex: 'mcount'
+	    dataIndex: 'mcount',
 	},
 	{
 	    header: gettext('Groups'),
 	    width: 80,
 	    sortable: true,
-	    dataIndex: 'gcount'
-	}
-    ]
+	    dataIndex: 'gcount',
+	},
+    ],
 
 });

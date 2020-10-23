@@ -1,27 +1,27 @@
 /*global Proxmox*/
 Ext.define('pmg-mynetworks', {
     extend: 'Ext.data.Model',
-    fields: [ 'cidr', 'comment' ],
+    fields: ['cidr', 'comment'],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/mynetworks"
+	url: "/api2/json/config/mynetworks",
     },
-    idProperty: 'cidr'
+    idProperty: 'cidr',
 });
 
 Ext.define('PMG.MyNetworks', {
     extend: 'Ext.grid.GridPanel',
     alias: ['widget.pmgMyNetworks'],
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	var store = new Ext.data.Store({
 	    model: 'pmg-mynetworks',
 	    sorters: {
 		property: 'cidr',
-		order: 'DESC'
-	    }
+		order: 'DESC',
+	    },
 	});
 
         var reload = function() {
@@ -30,11 +30,11 @@ Ext.define('PMG.MyNetworks', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn =  Ext.createWidget('proxmoxStdRemoveButton', {
+	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
 	    selModel: me.selModel,
 	    baseurl: '/config/mynetworks',
 	    callback: reload,
-	    waitMsgTarget: me
+	    waitMsgTarget: me,
 	});
 
 	var run_editor = function() {
@@ -52,14 +52,14 @@ Ext.define('PMG.MyNetworks', {
 		    {
 			xtype: 'displayfield',
 			name: 'cidr',
-			fieldLabel: 'CIDR'
+			fieldLabel: 'CIDR',
 		    },
 		    {
 			xtype: 'textfield',
 			name: 'comment',
-			fieldLabel: gettext("Comment")
-		    }
-		]
+			fieldLabel: gettext("Comment"),
+		    },
+		],
 	    };
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
@@ -75,7 +75,7 @@ Ext.define('PMG.MyNetworks', {
 		text: gettext('Edit'),
 		disabled: true,
 		selModel: me.selModel,
-		handler: run_editor
+		handler: run_editor,
             },
             {
 		text: gettext('Create'),
@@ -91,14 +91,14 @@ Ext.define('PMG.MyNetworks', {
 			    {
 				xtype: 'proxmoxtextfield',
 				name: 'cidr',
-				fieldLabel: 'CIDR'
+				fieldLabel: 'CIDR',
 			    },
 			    {
 				xtype: 'proxmoxtextfield',
 				name: 'comment',
-				fieldLabel: gettext("Comment")
-			    }
-			]
+				fieldLabel: gettext("Comment"),
+			    },
+			],
 		    };
 		    /*jslint confusion: false*/
 
@@ -106,9 +106,9 @@ Ext.define('PMG.MyNetworks', {
 
 		    win.on('destroy', reload);
 		    win.show();
-		}
+		},
             },
-	    remove_btn
+	    remove_btn,
         ];
 
 	Proxmox.Utils.monStoreErrors(me, store, true);
@@ -118,29 +118,29 @@ Ext.define('PMG.MyNetworks', {
 	    tbar: tbar,
 	    run_editor: run_editor,
 	    viewConfig: {
-		trackOver: false
+		trackOver: false,
 	    },
 	    columns: [
 		{
 		    header: gettext('Trusted Network'),
 		    width: 200,
 		    sortable: true,
-		    dataIndex: 'cidr'
+		    dataIndex: 'cidr',
 		},
 		{
 		    header: gettext('Comment'),
 		    sortable: false,
 		    renderer: Ext.String.htmlEncode,
 		    dataIndex: 'comment',
-		    flex: 1
-		}
+		    flex: 1,
+		},
 	    ],
 	    listeners: {
 		itemdblclick: run_editor,
-		activate: reload
-	    }
+		activate: reload,
+	    },
 	});
 
 	me.callParent();
-    }
+    },
 });

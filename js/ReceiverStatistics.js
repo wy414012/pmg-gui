@@ -11,8 +11,8 @@ Ext.define('PMG.ReceiverDetails', {
 	    xtype: 'panel',
 	    itemId: 'info',
 	    bodyPadding: 10,
-	    html: gettext('Please select a receiver.')
-	}
+	    html: gettext('Please select a receiver.'),
+	},
     ],
 
     disableSelection: true,
@@ -45,19 +45,19 @@ Ext.define('PMG.ReceiverDetails', {
 	    { type: 'integer', name: 'bytes' },
 	    { type: 'boolean', name: 'blocked' },
 	    { type: 'integer', name: 'spamlevel' },
-            { type: 'date', dateFormat: 'timestamp', name: 'time' }
+            { type: 'date', dateFormat: 'timestamp', name: 'time' },
 	],
 	proxy: {
 	    type: 'pmgfilterproxy',
 	    filterId: 'x-gridfilter-sender',
-	    sortParam: 'orderby'
+	    sortParam: 'orderby',
 	},
 	sorters: [
 	    {
 		property: 'time',
-		direction: 'ASC'
-	    }
-	]
+		direction: 'ASC',
+	    },
+	],
     },
 
     columns: [
@@ -66,33 +66,33 @@ Ext.define('PMG.ReceiverDetails', {
 	    renderer: Ext.htmlEncode,
 	    flex: 1,
 	    filter: { type: 'string' },
-	    dataIndex: 'sender'
+	    dataIndex: 'sender',
 	},
 	{
 	    header: gettext('Size') + ' (KB)',
 	    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
-	    dataIndex: 'bytes'
+	    dataIndex: 'bytes',
 	},
 	{
 	    xtype: 'datecolumn',
 	    header: gettext('Date'),
 	    format: 'Y-m-d',
-	    dataIndex: 'time'
+	    dataIndex: 'time',
 	},
 	{
 	    xtype: 'datecolumn',
 	    header: gettext('Time'),
 	    format: 'H:i:s',
-	    dataIndex: 'time'
+	    dataIndex: 'time',
 	},
 	{
 	    header: gettext('Virus info'),
-	    dataIndex: 'virusinfo'
+	    dataIndex: 'virusinfo',
 	},
 	{
 	    header: gettext('Score'),
-	    dataIndex: 'spamlevel'
-	}
+	    dataIndex: 'spamlevel',
+	},
     ],
 
     initComponent: function() {
@@ -100,7 +100,7 @@ Ext.define('PMG.ReceiverDetails', {
 	me.callParent();
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
-    }
+    },
 });
 
 Ext.define('PMG.ReceiverList', {
@@ -115,10 +115,10 @@ Ext.define('PMG.ReceiverList', {
 
     emptyText: gettext('No data in database'),
     viewConfig: {
-	deferEmptyText: false
+	deferEmptyText: false,
     },
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     store: {
 	type: 'pmgStatStore',
@@ -129,27 +129,27 @@ Ext.define('PMG.ReceiverList', {
 	    'receiver',
 	    { type: 'integer', name: 'count' },
 	    { type: 'integer', name: 'bytes' },
-	    { type: 'integer', name: 'viruscount' }
+	    { type: 'integer', name: 'viruscount' },
 	],
 	proxy: {
 	    type: 'pmgfilterproxy',
 	    sortParam: 'orderby',
-	    filterId: 'x-gridfilter-receiver'
+	    filterId: 'x-gridfilter-receiver',
 	},
 	sorters: [
 	    {
 		property: 'count',
-		direction: 'DESC'
+		direction: 'DESC',
 	    },
 	    {
 		property: 'bytes',
-		direction: 'DESC'
+		direction: 'DESC',
 	    },
 	    {
 		property: 'receiver',
-		direction: 'ASC'
-	    }
-	]
+		direction: 'ASC',
+	    },
+	],
     },
 
     columns: [
@@ -162,33 +162,33 @@ Ext.define('PMG.ReceiverList', {
 		type: 'string',
 		itemDefaults: {
 		    // any Ext.form.field.Text configs accepted
-		}
-	    }
+		},
+	    },
 	},
 	{
 	    text: gettext('Count'),
 	    columns: [
 		{
 		    text: gettext('Mail'),
-		    dataIndex: 'count'
+		    dataIndex: 'count',
 		},
 		{
 		    header: gettext('Virus'),
-		    dataIndex: 'viruscount'
+		    dataIndex: 'viruscount',
 		},
 		{
 		    header: gettext('Spam'),
-		    dataIndex: 'spamcount'
-		}
-	    ]
+		    dataIndex: 'spamcount',
+		},
+	    ],
 	},
 	{
 	    text: gettext('Size') + ' (KB)',
 	    dataIndex: 'bytes',
 	    renderer: function(v) {
 		return Ext.Number.toFixed(v/1024, 0);
-	    }
-	}
+	    },
+	},
    ],
 
     initComponent: function() {
@@ -196,7 +196,7 @@ Ext.define('PMG.ReceiverList', {
 	me.callParent();
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
-    }
+    },
 });
 
 Ext.define('PMG.ReceiverStatistics', {
@@ -206,14 +206,14 @@ Ext.define('PMG.ReceiverStatistics', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false
+	border: false,
     },
 
     controller: {
 	xclass: 'Ext.app.ViewController',
 
 	selectionChange: function(grid, selected, eOpts) {
-	    var details =  this.lookupReference('details');
+	    var details = this.lookupReference('details');
 	    if (selected.length > 0) {
 		var receiver = selected[0].data.receiver;
 		var url = "/api2/json/statistics/receiver/" +
@@ -222,7 +222,7 @@ Ext.define('PMG.ReceiverStatistics', {
 	    } else {
 		details.setUrl();
 	    }
-	}
+	},
     },
 
     items: [
@@ -233,14 +233,14 @@ Ext.define('PMG.ReceiverStatistics', {
 	    layout: 'fit',
 	    flex: 1,
 
-	    listeners: { selectionchange: 'selectionChange' }
+	    listeners: { selectionchange: 'selectionChange' },
 	},
 	{
 	    xtype: 'pmgReceiverDetails',
 	    region: 'east',
 	    reference: 'details',
 	    split: true,
-	    flex: 1
-	}
-    ]
+	    flex: 1,
+	},
+    ],
 });

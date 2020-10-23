@@ -30,9 +30,9 @@ Ext.define('PMG.RuleInfo', {
 		success: function(response, opts) {
 		    me.setRuleInfo(response.result.data);
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -52,12 +52,12 @@ Ext.define('PMG.RuleInfo', {
 			    callback: function() {
 				me.reload();
 			    },
-			    failure: function (response, opts) {
+			    failure: function(response, opts) {
 				Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-			    }
+			    },
 			});
 		    }
-		}
+		},
 	    );
 	},
 
@@ -65,7 +65,7 @@ Ext.define('PMG.RuleInfo', {
 	    var me = this;
 	    var baseurl = me.getViewModel().get('baseurl');
 	    var url = baseurl + '/' + type;
-	    var id = (type === 'action')?record.data.ogroup:record.data.id;
+	    var id = type === 'action'?record.data.ogroup:record.data.id;
 	    Proxmox.Utils.API2Request({
 		url: url,
 		params: { ogroup: id },
@@ -74,9 +74,9 @@ Ext.define('PMG.RuleInfo', {
 		callback: function() {
 		    me.reload();
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -86,18 +86,14 @@ Ext.define('PMG.RuleInfo', {
 	    var viewmodel = me.getViewModel();
 
 	    if (ruledata === undefined) {
-
 		viewmodel.set('selectedRule', null);
 		viewmodel.get('objects').setData([]);
-
 	    } else {
-
 		ruledata.name = Ext.String.htmlEncode(ruledata.name);
 		viewmodel.set('selectedRule', ruledata);
 
 		var data = [];
 		Ext.Array.each(['from', 'to', 'when', 'what', 'action'], function(oc) {
-
 		    var store = viewmodel.get(oc + 'objects');
 		    if (ruledata[oc] === undefined || store === undefined) { return; }
 
@@ -108,15 +104,15 @@ Ext.define('PMG.RuleInfo', {
 
 		    var ids = Ext.Array.pluck(ruledata[oc], 'id');
 		    // for the actions, we have a different id field
-		    var idField = (oc === 'action')?'ogroup':'id';
+		    var idField = oc === 'action'?'ogroup':'id';
 		    store.clearFilter();
 		    store.addFilter({
-			filterFn:function(record){
+			filterFn: function(record) {
 			    // FIXME
 			    // actions have the ogroup as a string
 			    // -> parseInt
-			    return (ids.indexOf(parseInt(record.data[idField], 10)) === -1);
-			}
+			    return ids.indexOf(parseInt(record.data[idField], 10)) === -1;
+			},
 		    });
 		    store.load();
 		    Ext.Array.each(ruledata[oc], function(og) {
@@ -155,79 +151,79 @@ Ext.define('PMG.RuleInfo', {
 
 	control: {
 	    'grid[reference=usedobjects]': {
-		drop: 'addDrop'
+		drop: 'addDrop',
 	    },
 	    'tabpanel[reference=availobjects] > grid': {
-		drop: 'removeDrop'
-	    }
-	}
+		drop: 'removeDrop',
+	    },
+	},
     },
 
     viewModel: {
 	data: {
-	    baseurl: ''
+	    baseurl: '',
 	},
 
 	stores: {
 	    objects: {
 		fields: ['oclass', 'name', 'typeid'],
 		groupField: 'oclass',
-		sorters: 'name'
+		sorters: 'name',
 	    },
 
 	    actionobjects: {
 		model: 'pmg-action-list',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/action/objects"
+		    url: "/api2/json/config/ruledb/action/objects",
 		},
-		sorters: 'name'
+		sorters: 'name',
 	    },
 	    fromobjects: {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/who"
+		    url: "/api2/json/config/ruledb/who",
 		},
-		sorters: 'name'
+		sorters: 'name',
 	    },
 	    toobjects: {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/who"
+		    url: "/api2/json/config/ruledb/who",
 		},
-		sorters: 'name'
+		sorters: 'name',
 	    },
 	    whatobjects: {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/what"
+		    url: "/api2/json/config/ruledb/what",
 		},
-		sorters: 'name'
+		sorters: 'name',
 	    },
 	    whenobjects: {
 		model: 'pmg-object-group',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/ruledb/when"
+		    url: "/api2/json/config/ruledb/when",
 		},
-		sorters: 'name'
-	    }
-	}
+		sorters: 'name',
+	    },
+	},
     },
 
 
     defaults: {
-	padding: '5 10 5 10'
+	padding: '5 10 5 10',
     },
 
     bodyPadding: '5 0 5 0',
 
     layout: {
 	type: 'vbox',
-	align: 'stretch'
+	align: 'stretch',
     },
 
     scrollable: true,
@@ -237,7 +233,7 @@ Ext.define('PMG.RuleInfo', {
 	    xtype: 'panel',
 	    bodyPadding: '10 10 10 10',
 	    data: {
-		name: ''
+		name: '',
 	    },
 	    bind: {
 		data: {
@@ -245,8 +241,8 @@ Ext.define('PMG.RuleInfo', {
 		    priority: '{selectedRule.priority}',
 		    active: '{selectedRule.active}',
 		    direction: '{selectedRule.direction}',
-		    selected: '{selectedRule}'
-		}
+		    selected: '{selectedRule}',
+		},
 	    },
 	    tpl: [
 		'<tpl if="selected">',
@@ -256,8 +252,8 @@ Ext.define('PMG.RuleInfo', {
 		gettext('Active') + ': {[Proxmox.Utils.format_boolean(values.active)]}<br>',
 		'<tpl else>',
 		gettext('Please select a rule.'),
-		'</tpl>'
-	    ]
+		'</tpl>',
+	    ],
 	},
 	{
 	    xtype: 'grid',
@@ -270,8 +266,8 @@ Ext.define('PMG.RuleInfo', {
 		enableGroupingMenu: false,
 		collapsible: false,
 		groupHeaderTpl: [
-		    '{[PMG.Utils.format_oclass(values.name)]}'
-		]
+		    '{[PMG.Utils.format_oclass(values.name)]}',
+		],
 	    }],
 
 	    title: gettext('Used Objects'),
@@ -287,21 +283,21 @@ Ext.define('PMG.RuleInfo', {
 		    dropZone: {
 			indicatorHtml: '',
 			indicatorCls: '',
-			handleNodeDrop: Ext.emptyFn
-		    }
-		}
+			handleNodeDrop: Ext.emptyFn,
+		    },
+		},
 	    },
 
 	    columns: [
 		{
 		    header: gettext('Type'),
 		    dataIndex: 'oclass',
-		    hidden: true
+		    hidden: true,
 		},
 		{
 		    header: gettext('Name'),
 		    dataIndex: 'name',
-		    flex: 1
+		    flex: 1,
 		},
 		{
 		    text: '',
@@ -312,16 +308,16 @@ Ext.define('PMG.RuleInfo', {
 			{
 			    iconCls: 'fa fa-fw fa-minus-circle',
 			    tooltip: gettext('Remove'),
-			    handler: 'removeIconClick'
-			}
-		    ]
-		}
+			    handler: 'removeIconClick',
+			},
+		    ],
+		},
 	    ],
 
 	    bind: {
 		store: '{objects}',
-		hidden: '{!selectedRule}'
-	    }
+		hidden: '{!selectedRule}',
+	    },
 	},
 	{
 	    xtype: 'tabpanel',
@@ -329,7 +325,7 @@ Ext.define('PMG.RuleInfo', {
 	    reference: 'availobjects',
 	    hidden: true,
 	    bind: {
-		hidden: '{!selectedRule}'
+		hidden: '{!selectedRule}',
 	    },
 	    defaults: {
 		xtype: 'grid',
@@ -344,15 +340,15 @@ Ext.define('PMG.RuleInfo', {
 			dropZone: {
 			    indicatorHtml: '',
 			    indicatorCls: '',
-			    handleNodeDrop: Ext.emptyFn
-			}
-		    }
+			    handleNodeDrop: Ext.emptyFn,
+			},
+		    },
 		},
 		columns: [
 		    {
 			header: gettext('Name'),
 			dataIndex: 'name',
-			flex: 1
+			flex: 1,
 		    },
 		    {
 			text: '',
@@ -363,54 +359,54 @@ Ext.define('PMG.RuleInfo', {
 			    {
 				iconCls: 'fa fa-fw fa-plus-circle',
 				tooltip: gettext('Add'),
-				handler: 'addIconClick'
-			    }
-			]
-		    }
-		]
+				handler: 'addIconClick',
+			    },
+			],
+		    },
+		],
 	    },
 	    items: [
 		{
 		    title: gettext('Action'),
 		    bind: {
-			store: '{actionobjects}'
+			store: '{actionobjects}',
 		    },
 		    type: 'action',
-		    iconCls: 'fa fa-flag'
+		    iconCls: 'fa fa-flag',
 		},
 		{
 		    title: gettext('From'),
 		    iconCls: 'fa fa-user-circle',
 		    type: 'from',
 		    bind: {
-			store: '{fromobjects}'
-		    }
+			store: '{fromobjects}',
+		    },
 		},
 		{
 		    title: gettext('To'),
 		    iconCls: 'fa fa-user-circle',
 		    type: 'to',
 		    bind: {
-			store: '{toobjects}'
-		    }
+			store: '{toobjects}',
+		    },
 		},
 		{
 		    title: gettext('What'),
 		    iconCls: 'fa fa-cube',
 		    type: 'what',
 		    bind: {
-			store: '{whatobjects}'
-		    }
+			store: '{whatobjects}',
+		    },
 		},
 		{
 		    title: gettext('When'),
 		    iconCls: 'fa fa-clock-o',
 		    type: 'when',
 		    bind: {
-			store: '{whenobjects}'
-		    }
-		}
-	    ]
-	}
-    ]
+			store: '{whenobjects}',
+		    },
+		},
+	    ],
+	},
+    ],
 });

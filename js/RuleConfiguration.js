@@ -9,9 +9,9 @@ Ext.define('pmg-rule-list', {
 	'id', 'name',
 	{ name: 'active', type: 'boolean' },
 	{ name: 'direction', type: 'integer' },
-	{ name: 'priority', type: 'integer' }
+	{ name: 'priority', type: 'integer' },
     ],
-    idProperty: 'id'
+    idProperty: 'id',
 });
 
 Ext.define('PMG.RulesConfiguration', {
@@ -21,7 +21,7 @@ Ext.define('PMG.RulesConfiguration', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false
+	border: false,
     },
 
     controller: {
@@ -51,8 +51,8 @@ Ext.define('PMG.RulesConfiguration', {
 		listeners: {
 		    destroy: function() {
 			gridView.getStore().load();
-		    }
-		}
+		    },
+		},
 	    });
 	    win.load();
 	    win.show();
@@ -63,7 +63,7 @@ Ext.define('PMG.RulesConfiguration', {
 	    Proxmox.Utils.API2Request({
 		url: '/config/ruledb/rules/' + record.data.id + '/config',
 		params: {
-		    active: record.data.active ? 0 : 1
+		    active: record.data.active ? 0 : 1,
 		},
 		method: 'PUT',
 		callback: function() {
@@ -71,11 +71,11 @@ Ext.define('PMG.RulesConfiguration', {
 		},
 		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
-	reload: function(){
+	reload: function() {
 	    var me = this;
 	    me.lookupReference('rulegrid').getStore().load();
 	},
@@ -89,8 +89,8 @@ Ext.define('PMG.RulesConfiguration', {
 		listeners: {
 		    destroy: function() {
 			me.lookupReference('rulegrid').getStore().load();
-		    }
-		}
+		    },
+		},
 	    });
 	    win.load();
 	    win.show();
@@ -114,11 +114,11 @@ Ext.define('PMG.RulesConfiguration', {
 			callback: function() {
 			    me.reload();
 			},
-			failure: function (response, opts) {
+			failure: function(response, opts) {
 			    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-			}
+			},
 		    });
-		}
+		},
 	    );
 	},
 
@@ -130,19 +130,19 @@ Ext.define('PMG.RulesConfiguration', {
 	control: {
 	    'grid[reference=rulegrid]': {
 		itemdblclick: 'showEditWindow',
-		selectionchange: 'selectedRuleChange'
+		selectionchange: 'selectedRuleChange',
 	    },
 	    'button[reference=addButton]': {
-		click: 'addRule'
-	    }
-	}
+		click: 'addRule',
+	    },
+	},
     },
 
     viewModel: {
 	data: {
 	    selectedRule: undefined,
-	    baseUrl: '/config/ruledb/rules'
-	}
+	    baseUrl: '/config/ruledb/rules',
+	},
     },
 
     items: [
@@ -154,10 +154,10 @@ Ext.define('PMG.RulesConfiguration', {
 	    region: 'center',
 
 	    bind: {
-		selection: '{selectedRule}'
+		selection: '{selectedRule}',
 	    },
 
-	    dockedItems:{
+	    dockedItems: {
 		xtype: 'toolbar',
 		reference: 'mytb',
 		items: [
@@ -165,7 +165,7 @@ Ext.define('PMG.RulesConfiguration', {
 			xtype: 'button',
 			text: gettext('Add'),
 			iconCls: 'fa fa-plus-circle',
-			reference: 'addButton'
+			reference: 'addButton',
 		    },
 		    {
 			xtype: 'proxmoxStdRemoveButton',
@@ -175,21 +175,21 @@ Ext.define('PMG.RulesConfiguration', {
 			callback: 'reload',
 			getRecordName: function(rec) { return rec.data.name; },
 			bind: {
-			    baseurl: '{baseUrl}'
-			}
+			    baseurl: '{baseUrl}',
+			},
 		    },
 		    '->',
 		    {
 			text: gettext('Factory Defaults'),
-			handler: 'onFactoryDefaults'
-		    }
-		]
+			handler: 'onFactoryDefaults',
+		    },
+		],
 	    },
 
 	    viewConfig: {
 		getRowClass: function(record, rowIndex) {
 		    return record.get('active') ? 'enabled' : 'disabled';
-		}
+		},
 	    },
 
 	    store: {
@@ -198,17 +198,17 @@ Ext.define('PMG.RulesConfiguration', {
 		reference: 'rulesStore',
 		proxy: {
 		    type: 'proxmox',
-		    url: '/api2/json/config/ruledb/rules'
+		    url: '/api2/json/config/ruledb/rules',
 		},
 		sorters: [
 		    {
 			property: 'priority',
-			direction: 'DESC'
+			direction: 'DESC',
 		    },
 		    {
-			property: 'name'
-		    }
-		]
+			property: 'name',
+		    },
+		],
 	    },
 
 	    sortableColumns: false,
@@ -216,21 +216,21 @@ Ext.define('PMG.RulesConfiguration', {
 		{
 		    text: 'Active',
 		    dataIndex: 'active',
-		    hidden : true
+		    hidden: true,
 		},
 		{
 		    text: 'Name',
 		    dataIndex: 'name',
-		    flex: 1
+		    flex: 1,
 		},
 		{
 		    text: 'Priority',
-		    dataIndex: 'priority'
+		    dataIndex: 'priority',
 		},
 		{
 		    text: 'Direction',
 		    dataIndex: 'direction',
-		    renderer: PMG.Utils.format_rule_direction
+		    renderer: PMG.Utils.format_rule_direction,
 		},
 		{
 		    text: '',
@@ -241,27 +241,27 @@ Ext.define('PMG.RulesConfiguration', {
 			{
 			    iconCls: 'fa fa-fw fa-pencil',
 			    tooltip: 'Edit',
-			    handler: 'editIconClick'
+			    handler: 'editIconClick',
 			},
 			{
 			    getClass: function(val, meta, rec) {
 				return 'fa fa-fw fa-' + (rec.get('active') ? 'toggle-on' : 'toggle-off');
 			    },
 			    getTip: function(val, meta, rec) {
-				return (rec.get('active') ? 'Deactivate' : 'Activate');
+				return rec.get('active') ? 'Deactivate' : 'Activate';
 			    },
-			    handler: 'toggleIconClick'
-			}
-		    ]
-		}
-	    ]
+			    handler: 'toggleIconClick',
+			},
+		    ],
+		},
+	    ],
 	},
 	{
 	    region: 'east',
 	    reference: 'infopanel',
 	    xtype: 'pmgRuleInfo',
 	    split: true,
-	    width: 440
-	}
-    ]
+	    width: 440,
+	},
+    ],
 });

@@ -3,30 +3,30 @@ Ext.define('pmg-qshape', {
     extend: 'Ext.data.Model',
     fields: [
 	'domain',
-	{ type: 'integer', name: 'total'},
-	{ type: 'integer', name: '5m'},
-	{ type: 'integer', name: '10m'},
-	{ type: 'integer', name: '20m'},
-	{ type: 'integer', name: '40m'},
-	{ type: 'integer', name: '80m'},
-	{ type: 'integer', name: '160m'},
-	{ type: 'integer', name: '320m'},
-	{ type: 'integer', name: '640m'},
-	{ type: 'integer', name: '1280m'},
-	{ type: 'integer', name: '1280m+'}
+	{ type: 'integer', name: 'total' },
+	{ type: 'integer', name: '5m' },
+	{ type: 'integer', name: '10m' },
+	{ type: 'integer', name: '20m' },
+	{ type: 'integer', name: '40m' },
+	{ type: 'integer', name: '80m' },
+	{ type: 'integer', name: '160m' },
+	{ type: 'integer', name: '320m' },
+	{ type: 'integer', name: '640m' },
+	{ type: 'integer', name: '1280m' },
+	{ type: 'integer', name: '1280m+' },
     ],
-    idProperty: 'domain'
+    idProperty: 'domain',
 });
 
 Ext.define('PMG.Postfix.QShape', {
     extend: 'Ext.grid.GridPanel',
     alias: 'widget.pmgPostfixQShape',
 
-    nodename : undefined,
+    nodename: undefined,
 
     store: {
 	autoLoad: true,
-	model: 'pmg-qshape'
+	model: 'pmg-qshape',
     },
 
     controller: {
@@ -49,9 +49,9 @@ Ext.define('PMG.Postfix.QShape', {
 		success: function(response, opts) {
 		    view.store.load();
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -65,9 +65,9 @@ Ext.define('PMG.Postfix.QShape', {
 		success: function(response, opts) {
 		    view.store.load();
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -78,9 +78,9 @@ Ext.define('PMG.Postfix.QShape', {
 		url: '/api2/extjs/nodes/' + view.nodename + '/postfix/discard_verify_cache',
 		method: 'POST',
 		waitMsgTarget: view,
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -88,15 +88,15 @@ Ext.define('PMG.Postfix.QShape', {
 	    '#': {
 		activate: function() {
 		    this.view.store.load(); // reload
-		}
-	    }
-	}
+		},
+	    },
+	},
     },
 
     tbar: [
         {
 	    text: gettext('Flush Queue'),
-	    handler: 'onFlush'
+	    handler: 'onFlush',
 	},
 	{
 	    xtype: 'proxmoxButton',
@@ -104,75 +104,75 @@ Ext.define('PMG.Postfix.QShape', {
 	    dangerous: true,
 	    confirmMsg: "Are you sure you want to delete all deferred mails?",
 	    selModel: null,
-	    handler: 'onDeleteAll'
+	    handler: 'onDeleteAll',
 	},
 	{
 	    text: gettext('Discard address verification database'),
-	    handler: 'onDiscardVerifyDatabase'
-	}
+	    handler: 'onDiscardVerifyDatabase',
+	},
     ],
 
     columns: [
 	{
 	    header: gettext('Domain'),
 	    width: 200,
-	    dataIndex: 'domain'
+	    dataIndex: 'domain',
 	},
 	{
 	    header: gettext('Total'),
 	    width: 80,
-	    dataIndex: 'total'
+	    dataIndex: 'total',
 	},
 	{
 	    header: '5m',
 	    width: 80,
-	    dataIndex: '5m'
+	    dataIndex: '5m',
 	},
 	{
 	    header: '10m',
 	    width: 80,
-	    dataIndex: '10m'
+	    dataIndex: '10m',
 	},
 	{
 	    header: '20m',
 	    width: 80,
-	    dataIndex: '20m'
+	    dataIndex: '20m',
 	},
 	{
 	    header: '40m',
 	    width: 80,
-	    dataIndex: '40m'
+	    dataIndex: '40m',
 	},
 	{
 	    header: '80m',
 	    width: 80,
-	    dataIndex: '80m'
+	    dataIndex: '80m',
 	},
 	{
 	    header: '160m',
 	    width: 80,
-	    dataIndex: '160m'
+	    dataIndex: '160m',
 	},
 	{
 	    header: '320m',
 	    width: 80,
-	    dataIndex: '320m'
+	    dataIndex: '320m',
 	},
 	{
 	    header: '640m',
 	    width: 80,
-	    dataIndex: '640m'
+	    dataIndex: '640m',
 	},
 	{
 	    header: '1280m',
 	    width: 80,
-	    dataIndex: '1280m'
+	    dataIndex: '1280m',
 	},
 	{
 	    header: '1280m+',
 	    width: 80,
-	    dataIndex: '1280m+'
-	}
+	    dataIndex: '1280m+',
+	},
     ],
 
     setNodename: function(nodename) {
@@ -182,10 +182,10 @@ Ext.define('PMG.Postfix.QShape', {
 
 	me.store.setProxy({
 	    type: 'proxmox',
-	    url: "/api2/json/nodes/" + me.nodename + "/postfix/qshape"
+	    url: "/api2/json/nodes/" + me.nodename + "/postfix/qshape",
 	});
 
 	me.store.load();
-    }
+    },
 
 });

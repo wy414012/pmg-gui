@@ -10,7 +10,7 @@ Ext.define('PMG.SystemOptions', {
     url: '/api2/json/config/admin',
     editorConfig: {
 	url: '/api2/extjs/config/admin',
-	onlineHelp: 'pmgconfig_systemconfig'
+	onlineHelp: 'pmgconfig_systemconfig',
     },
 
     controller: {
@@ -19,18 +19,18 @@ Ext.define('PMG.SystemOptions', {
 	onEdit: function() {
 	    var me = this.getView();
 	    me.run_editor();
-	}
+	},
     },
 
     tbar: [{
 	text: gettext('Edit'),
 	xtype: 'proxmoxButton',
 	disabled: true,
-	handler: 'onEdit'
+	handler: 'onEdit',
     }],
 
     listeners: {
-	itemdblclick: 'onEdit'
+	itemdblclick: 'onEdit',
     },
 
     add_proxy_row: function(name, text, opts) {
@@ -55,20 +55,20 @@ Ext.define('PMG.SystemOptions', {
 		    emptyText: Proxmox.Utils.noneText,
 		    labelWidth: Proxmox.Utils.compute_min_label_width(
 			text, opts.labelWidth),
-		    fieldLabel: text
-		}
-	    }
+		    fieldLabel: text,
+		},
+	    },
 	};
     },
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.add_boolean_row('dailyreport', gettext('Send daily admin reports'),
-			   { defaultValue: 1});
+			   { defaultValue: 1 });
 
 	me.add_boolean_row('advfilter', gettext('Use advanced statistic filters'),
-			   { defaultValue: 1});
+			   { defaultValue: 1 });
 
 	me.add_integer_row('statlifetime', gettext('User statistic lifetime (days)'),
 			   { minValue: 1, defaultValue: 7, deleteEmpty: true });
@@ -83,5 +83,5 @@ Ext.define('PMG.SystemOptions', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
-    }
+    },
 });

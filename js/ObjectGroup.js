@@ -36,11 +36,8 @@ Ext.define('PMG.ObjectGroup', {
 	me.ogdata = ogdata;
 
 	if (me.ogdata === undefined) {
-
 	    me.down('#oginfo').update(me.emptyText);
-
 	} else {
-
 	    var html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
 	    html += "<br><br>";
 	    html += Ext.String.htmlEncode(Ext.String.trim(me.ogdata.info));
@@ -59,30 +56,30 @@ Ext.define('PMG.ObjectGroup', {
 	me.down('#addMenuButton').setDisabled(false);
     },
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.store = new Ext.data.Store({
 	    model: 'pmg-object-list',
 	    proxy: {
-		type: 'proxmox'
+		type: 'proxmox',
 	    },
 	    sorters: [
 		{
-		    property : 'receivertest'
+		    property: 'receivertest',
 		},
 		{
-		    property : 'otype',
-		    direction: 'ASC'
-		}
-	    ]
+		    property: 'otype',
+		    direction: 'ASC',
+		},
+	    ],
 	});
 
 	me.columns = [{
 	    header: gettext('Type'),
 	    dataIndex: 'otype',
 	    renderer: PMG.Utils.format_otype,
-	    width: 200
+	    width: 200,
 	}];
 
 	if (me.showDirection) {
@@ -91,7 +88,7 @@ Ext.define('PMG.ObjectGroup', {
 		dataIndex: 'receivertest',
 		renderer: function(value) {
 		    return value ? PMG.Utils.receiverText : PMG.Utils.senderText;
-		}
+		},
 	    });
 	}
 
@@ -99,7 +96,7 @@ Ext.define('PMG.ObjectGroup', {
 	    header: gettext('Value'),
 	    dataIndex: 'descr',
 	    renderer: Ext.String.htmlEncode,
-	    flex: 1
+	    flex: 1,
 	});
 
 	var reload = function() {
@@ -118,13 +115,13 @@ Ext.define('PMG.ObjectGroup', {
 		return PMG.Utils.format_otype(rec.data.otype) +
 		    ': ' + rec.data.descr;
 	    },
-	    waitMsgTarget: me
+	    waitMsgTarget: me,
 	});
 
 	var full_subject = function(subject, receivertest) {
 	    if (me.showDirection) {
-		var direction = receivertest ?
-		    PMG.Utils.receiverText : PMG.Utils.senderText;
+		var direction = receivertest
+		    ? PMG.Utils.receiverText : PMG.Utils.senderText;
 
 		return subject + ' (' + direction + ')';
 	    } else {
@@ -157,7 +154,6 @@ Ext.define('PMG.ObjectGroup', {
 	var menu_items = [];
 
 	Ext.Array.each(me.otype_list, function(otype) {
-
 	    var editor = PMG.Utils.object_editors[otype];
 
 	    var config = Ext.apply({ method: 'POST' }, editor);
@@ -174,7 +170,7 @@ Ext.define('PMG.ObjectGroup', {
 		    var win = Ext.create(config);
 		    win.on('destroy', reload);
 		    win.show();
-		}
+		},
 	    });
 	});
 
@@ -189,8 +185,8 @@ Ext.define('PMG.ObjectGroup', {
 		    disabled: true,
 		    itemId: 'addMenuButton',
 		    menu: {
-			items: menu_items
-		    }
+			items: menu_items,
+		    },
 		},
 		{
 		    xtype: 'proxmoxButton',
@@ -199,19 +195,19 @@ Ext.define('PMG.ObjectGroup', {
 		    selModel: me.selModel,
 		    enableFn: function(rec) {
 			var editor = PMG.Utils.object_editors[rec.data.otype];
-			return (editor && !editor.uneditable);
+			return editor && !editor.uneditable;
 		    },
-		    handler: run_editor
+		    handler: run_editor,
 		},
-		remove_btn
-	    ]
+		remove_btn,
+	    ],
 	});
 
 	me.dockedItems.push({
 	    dock: 'top',
 	    border: 1,
 	    layout: 'anchor',
-	    hidden: me.hideGroupInfo ? true : false,
+	    hidden: !!me.hideGroupInfo,
 	    itemId: 'ogdata',
 	    items: [
 		{
@@ -228,11 +224,11 @@ Ext.define('PMG.ObjectGroup', {
 				me.fireEvent('dblclickOGInfo', me, e, t, me.ogdata);
 			    },
 			    element: 'el',
-			    scope: this
-			}
-		    }
-		}
-	    ]
+			    scope: this,
+			},
+		    },
+		},
+	    ],
 	});
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
@@ -241,8 +237,8 @@ Ext.define('PMG.ObjectGroup', {
 	    run_editor: run_editor,
 	    listeners: {
 		itemdblclick: run_editor,
-		activate: reload
-	    }
+		activate: reload,
+	    },
 	});
 
 	me.callParent();
@@ -252,5 +248,5 @@ Ext.define('PMG.ObjectGroup', {
 	if (me.baseurl) {
 	    me.setBaseUrl(me.baseurl); // configure store, load()
 	}
-    }
+    },
 });

@@ -14,12 +14,12 @@ Ext.define('PMG.dashboard.MiniGraph', {
 	    grid: true,
 	    majorTickSteps: 2,
 	    label: {
-		fillStyle: '#5f5f5f'
+		fillStyle: '#5f5f5f',
 	    },
 	    style: {
 		axisLine: false,
-		majorTickSize: 0
-	    }
+		majorTickSize: 0,
+	    },
 	},
 	{
 	    type: 'time',
@@ -27,15 +27,15 @@ Ext.define('PMG.dashboard.MiniGraph', {
 	    dateFormat: 'H:i',
 	    fields: ['time'],
 	    label: {
-		fillStyle: '#5f5f5f'
+		fillStyle: '#5f5f5f',
 	    },
 	    style: {
 		axisLine: false,
-		majorTickSize: 0
-	    }
-	}
+		majorTickSize: 0,
+	    },
+	},
     ],
     border: false,
     flex: 1,
-    noTool: true
+    noTool: true,
 });

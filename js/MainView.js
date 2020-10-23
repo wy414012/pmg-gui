@@ -11,11 +11,11 @@ Ext.define('PMG.MainView', {
 	    ':path:subpath': {
 		action: 'changePath',
 		before: 'beforeChangePath',
-                conditions : {
-		    ':path'    : '(?:([%a-zA-Z0-9\\-\\_\\s,]+))',
-		    ':subpath' : '(?:(?::)([%a-zA-Z0-9\\-\\_\\s,]+))?'
-		}
-	    }
+                conditions: {
+		    ':path': '(?:([%a-zA-Z0-9\\-\\_\\s,]+))',
+		    ':subpath': '(?:(?::)([%a-zA-Z0-9\\-\\_\\s,]+))?',
+		},
+	    },
 	},
 
 	beforeChangePath: function(path, subpath, action) {
@@ -48,7 +48,7 @@ Ext.define('PMG.MainView', {
 	    action.resume();
 	},
 
-	changePath: function(path,subpath) {
+	changePath: function(path, subpath) {
 	    var me = this;
 	    var contentpanel = me.lookupReference('contentpanel');
 	    var lastpanel = contentpanel.getLayout().getActiveItem();
@@ -80,7 +80,6 @@ Ext.define('PMG.MainView', {
 	    if (lastpanel) {
 		contentpanel.remove(lastpanel, { destroy: true });
 	    }
-
 	},
 
 	logout: function() {
@@ -93,13 +92,13 @@ Ext.define('PMG.MainView', {
 
 	changeLanguage: function() {
 	    Ext.create('Proxmox.window.LanguageEditWindow', {
-		cookieName: 'PMGLangCookie'
+		cookieName: 'PMGLangCookie',
 	    }).show();
 	},
 
 	control: {
 	    '[reference=logoutButton]': {
-		click: 'logout'
+		click: 'logout',
 	    },
 	    '[reference=languageButton]': {
 		click: 'changeLanguage',
@@ -131,7 +130,7 @@ Ext.define('PMG.MainView', {
 		    Ext.Ajax.request({
 			params: {
 			    username: Proxmox.UserName,
-			    password: ticket
+			    password: ticket,
 			},
 			url: '/api2/json/access/ticket',
 			method: 'POST',
@@ -141,17 +140,16 @@ Ext.define('PMG.MainView', {
 			success: function(response, opts) {
 			    var obj = Ext.decode(response.responseText);
 			    PMG.Utils.updateLoginData(obj.data);
-			}
+			},
 		    });
 		},
-		interval: 15*60*1000
+		interval: 15*60*1000,
 	    });
 
 	    // select treeitem and load page from url fragment
 	    var token = Ext.util.History.getToken() || 'pmgDashboard';
 	    this.redirectTo(token, true);
-
-	}
+	},
     },
 
     plugins: 'viewport',
@@ -164,20 +162,20 @@ Ext.define('PMG.MainView', {
 	    xtype: 'container',
 	    layout: {
 		type: 'hbox',
-		align: 'middle'
+		align: 'middle',
 	    },
 	    margin: '2 0 2 5',
 	    height: 38,
 	    items: [
 		{
-		    xtype: 'proxmoxlogo'
+		    xtype: 'proxmoxlogo',
 		},
 		{
 		    padding: '0 0 0 5',
-		    xtype: 'versioninfo'
+		    xtype: 'versioninfo',
 		},
 		{
-		    flex: 1
+		    flex: 1,
 		},
 		{
 		    xtype: 'proxmoxHelpButton',
@@ -187,7 +185,7 @@ Ext.define('PMG.MainView', {
 		    iconCls: 'fa fa-info-circle x-btn-icon-el-default-toolbar-small ',
 		    margin: '0 5 0 0',
 		    listenToGlobalEvent: false,
-		    onlineHelp: 'pmg_documentation_index'
+		    onlineHelp: 'pmg_documentation_index',
 		},
 		{
 		    xtype: 'button',
@@ -195,7 +193,7 @@ Ext.define('PMG.MainView', {
 		    style: {
 			// proxmox dark grey p light grey as border
 			backgroundColor: '#464d4d',
-			borderColor: '#ABBABA'
+			borderColor: '#ABBABA',
 		    },
 		    margin: '0 5 0 0',
 		    iconCls: 'fa fa-user',
@@ -209,11 +207,11 @@ Ext.define('PMG.MainView', {
 			{
 			    reference: 'logoutButton',
 			    iconCls: 'fa fa-sign-out',
-			    text: gettext('Logout')
+			    text: gettext('Logout'),
 			},
 		    ],
 		},
-	    ]
+	    ],
 	},
 	{
 	    xtype: 'panel',
@@ -222,7 +220,7 @@ Ext.define('PMG.MainView', {
 	    region: 'west',
 	    layout: {
 		type: 'vbox',
-		align: 'stretch'
+		align: 'stretch',
 	    },
 	    items: [{
 		xtype: 'navigationtree',
@@ -232,20 +230,20 @@ Ext.define('PMG.MainView', {
 		// because of a bug where a viewcontroller does not detect
 		// the selectionchange event of a treelist
 		listeners: {
-		    selectionchange: 'navigate'
-		}
+		    selectionchange: 'navigate',
+		},
 	    }, {
 		xtype: 'box',
 		cls: 'x-treelist-nav',
-		flex: 1
-	    }]
+		flex: 1,
+	    }],
 	},
 	{
 	    xtype: 'panel',
 	    layout: { type: 'card' },
 	    region: 'center',
 	    border: false,
-	    reference: 'contentpanel'
-	}
-    ]
+	    reference: 'contentpanel',
+	},
+    ],
 });

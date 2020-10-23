@@ -5,17 +5,17 @@ Ext.define('PMG.QuarantineList', {
 
     emptyText: gettext('No E-Mail address selected'),
     viewConfig: {
-	deferEmptyText: false
+	deferEmptyText: false,
     },
 
     config: {
 	emailSelection: false,
-	notFoundText: gettext('No data in database')
+	notFoundText: gettext('No data in database'),
     },
 
     statics: {
 	from: 0,
-	to: 0
+	to: 0,
     },
 
     allowPositionSave: false,
@@ -142,7 +142,6 @@ Ext.define('PMG.QuarantineList', {
 		me.setFrom(val);
 		params.starttime = val;
 		to.setMinValue(value);
-
 	    } else if (field.name === 'to') {
 		me.setTo(val);
 		params.endtime = val + 24*60*60;
@@ -191,36 +190,36 @@ Ext.define('PMG.QuarantineList', {
 
 
 	control: {
-	    '#':{
+	    '#': {
 		beforedestroy: 'resetEmail',
-		selectionchange: 'savePosition'
+		selectionchange: 'savePosition',
 	    },
 	    'combobox[reference=email]': {
 		change: 'changeEmail',
 	    },
 	    datefield: {
 		change: {
-		    fn: 'changeTime'
-		}
-	    }
+		    fn: 'changeTime',
+		},
+	    },
 
-	}
+	},
     },
 
     features: [
 	{
 	    ftype: 'grouping',
-	    groupHeaderTpl: '{columnName}: {name} ({children.length})'
-	}
+	    groupHeaderTpl: '{columnName}: {name} ({children.length})',
+	},
     ],
 
     tbar: {
 	layout: {
 	    type: 'vbox',
-	    align: 'stretch'
+	    align: 'stretch',
 	},
 	defaults: {
-	    margin: 2
+	    margin: 2,
 	},
 	items: [
 	    {
@@ -228,14 +227,14 @@ Ext.define('PMG.QuarantineList', {
 		reference: 'from',
 		xtype: 'datefield',
 		format: 'Y-m-d',
-		name: 'from'
+		name: 'from',
 	    },
 	    {
 		fieldLabel: gettext('Until'),
 		reference: 'to',
 		xtype: 'datefield',
 		format: 'Y-m-d',
-		name: 'to'
+		name: 'to',
 	    },
 	    {
 		xtype: 'combobox',
@@ -246,19 +245,19 @@ Ext.define('PMG.QuarantineList', {
 		    emptyText:
 			'<div class="x-grid-empty">' +
 			    gettext('No data in database') +
-			'</div>'
+			'</div>',
 		},
 		store: {
 		    proxy: {
 			type: 'proxmox',
-			url: '/api2/json/quarantine/spamusers'
+			url: '/api2/json/quarantine/spamusers',
 		    },
 		    fields: [
 			{
 			    name: 'mail',
-			    renderer: Ext.htmlEncode
-			}
-		    ]
+			    renderer: Ext.htmlEncode,
+			},
+		    ],
 		},
 		queryMode: 'local',
 		editable: true,
@@ -268,8 +267,8 @@ Ext.define('PMG.QuarantineList', {
 		anyMatch: true,
 		selectOnFocus: true,
 		reference: 'email',
-		fieldLabel: 'E-Mail'
-	    }
-	]
-    }
+		fieldLabel: 'E-Mail',
+	    },
+	],
+    },
 });

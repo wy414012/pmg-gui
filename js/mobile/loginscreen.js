@@ -99,7 +99,7 @@ class LoginScreen extends Component {
 		delete me._autoLogin;
 		me._screen.on('open', () => {
 		    me._form.trigger('submit');
-		})
+		});
 	    }
 
 	    me._screen.open();

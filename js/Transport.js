@@ -1,28 +1,28 @@
 /*global Proxmox*/
 Ext.define('pmg-transport', {
     extend: 'Ext.data.Model',
-    fields: [ 'domain', 'host',  'protocol', { name: 'port', type: 'integer' },
-	      { name: 'use_mx', type: 'boolean' }, 'comment' ],
+    fields: ['domain', 'host', 'protocol', { name: 'port', type: 'integer' },
+	      { name: 'use_mx', type: 'boolean' }, 'comment'],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/transport"
+	url: "/api2/json/config/transport",
     },
-    idProperty: 'domain'
+    idProperty: 'domain',
 });
 
 Ext.define('PMG.Transport', {
     extend: 'Ext.grid.GridPanel',
     alias: ['widget.pmgTransport'],
 
-    initComponent : function() {
+    initComponent: function() {
 	let me = this;
 
 	let store = new Ext.data.Store({
 	    model: 'pmg-transport',
 	    sorters: {
 		property: 'domain',
-		order: 'DESC'
-	    }
+		order: 'DESC',
+	    },
 	});
 	Proxmox.Utils.monStoreErrors(me, store, true);
 	let reload = () => store.load();
@@ -52,7 +52,7 @@ Ext.define('PMG.Transport', {
 		    text: gettext('Edit'),
 		    disabled: true,
 		    selModel: me.selModel,
-		    handler: run_editor
+		    handler: run_editor,
 		},
 		{
 		    text: gettext('Create'),
@@ -64,61 +64,61 @@ Ext.define('PMG.Transport', {
 			});
 			win.on('destroy', reload);
 			win.show();
-		    }
+		    },
 		},
 		{
 		    xtype: 'proxmoxStdRemoveButton',
 		    selModel: me.selModel,
 		    baseurl: '/config/transport',
 		    callback: reload,
-		    waitMsgTarget: me
+		    waitMsgTarget: me,
 		},
 	    ],
 	    viewConfig: {
-		trackOver: false
+		trackOver: false,
 	    },
 	    columns: [
 		{
 		    header: gettext('Relay Domain'),
 		    width: 200,
-		    dataIndex: 'domain'
+		    dataIndex: 'domain',
 		},
 		{
 		    header: gettext('Host'),
 		    width: 200,
-		    dataIndex: 'host'
+		    dataIndex: 'host',
 		},
 		{
 		    header: gettext('Protocol'),
 		    width: 200,
-		    dataIndex: 'protocol'
+		    dataIndex: 'protocol',
 		},
 		{
 		    header: gettext('Port'),
 		    width: 80,
-		    dataIndex: 'port'
+		    dataIndex: 'port',
 		},
 		{
 		    header: gettext('Use MX'),
 		    width: 80,
 		    renderer: Proxmox.Utils.format_boolean,
-		    dataIndex: 'use_mx'
+		    dataIndex: 'use_mx',
 		},
 		{
 		    header: gettext('Comment'),
 		    renderer: Ext.String.htmlEncode,
 		    dataIndex: 'comment',
-		    flex: 1
-		}
+		    flex: 1,
+		},
 	    ],
 	    listeners: {
 		itemdblclick: run_editor,
-		activate: reload
-	    }
+		activate: reload,
+	    },
 	});
 
 	me.callParent();
-    }
+    },
 });
 
 Ext.define('PMG.TransportEditor', {
@@ -126,9 +126,9 @@ Ext.define('PMG.TransportEditor', {
     alias: 'widget.pmgTransportEditor',
     mixins: ['Proxmox.Mixin.CBind'],
 
-    cbindData: (cfg) => { return {
+    cbindData: (cfg) => ({
 	domainXType: cfg.method === 'POST' ? 'proxmoxtextfield' : 'displayfield',
-    }},
+    }),
 
     viewModel: {
 	data: {
@@ -148,12 +148,12 @@ Ext.define('PMG.TransportEditor', {
 		xtype: '{domainXType}',
 	    },
 	    name: 'domain',
-	    fieldLabel: gettext("Relay Domain")
+	    fieldLabel: gettext("Relay Domain"),
 	},
 	{
 	    xtype: 'textfield',
 	    name: 'host',
-	    fieldLabel: gettext("Host")
+	    fieldLabel: gettext("Host"),
 	},
 	{
 	    xtype: 'proxmoxKVComboBox',
@@ -161,13 +161,13 @@ Ext.define('PMG.TransportEditor', {
 	    fieldLabel: gettext('Protocol'),
 	    deleteEmpty: false,
 	    comboItems: [
-		[ 'smtp', 'SMTP' ],
-		[ 'lmtp', 'LMTP' ]
+		['smtp', 'SMTP'],
+		['lmtp', 'LMTP'],
 	    ],
 	    allowBlank: true,
 	    value: 'smtp',
 	    bind: {
-		value: '{proto}'
+		value: '{proto}',
 	    },
 	},
 	{
@@ -176,7 +176,7 @@ Ext.define('PMG.TransportEditor', {
 	    value: 25,
 	    minValue: 1,
 	    maxValue: 65535,
-	    fieldLabel: gettext("Port")
+	    fieldLabel: gettext("Port"),
 	},
 	{
 	    xtype: 'proxmoxcheckbox',
@@ -192,7 +192,7 @@ Ext.define('PMG.TransportEditor', {
 	{
 	    xtype: 'textfield',
 	    name: 'comment',
-	    fieldLabel: gettext("Comment")
+	    fieldLabel: gettext("Comment"),
 	},
     ],
 });

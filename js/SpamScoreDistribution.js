@@ -7,7 +7,7 @@ Ext.define('PMG.SpamScoreDistribution', {
 
     title: gettext('Statistics') + ': ' + gettext('Spam Scores'),
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     store: {
 	xclass: 'PMG.data.StatStore',
@@ -23,21 +23,21 @@ Ext.define('PMG.SpamScoreDistribution', {
 		    } else {
 			return PMG.Utils.scoreText + ' ' + rec.data.level.toString();
 		    }
-		}
-	    }
-	]
+		},
+	    },
+	],
     },
 
     columns: [
 	{
 	    header: PMG.Utils.scoreText,
 	    flex: 1,
-	    dataIndex: 'label'
+	    dataIndex: 'label',
 	},
 	{
 	    header: gettext("Count"),
 	    width: 150,
-	    dataIndex: 'count'
+	    dataIndex: 'count',
 	},
 	{
 	    header: gettext("Percentage"),
@@ -47,8 +47,8 @@ Ext.define('PMG.SpamScoreDistribution', {
 	    dataIndex: 'ratio',
 	    widget: {
 		xtype: 'progressbarwidget',
-		textTpl: ['{percent:number("0")}%' ]
-	    }
-	}
-    ]
+		textTpl: ['{percent:number("0")}%'],
+	    },
+	},
+    ],
 });

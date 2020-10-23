@@ -10,7 +10,7 @@ Ext.define('PMG.store.NavigationStore', {
 		text: gettext('Dashboard'),
 		iconCls: 'fa fa-tachometer',
 		path: 'pmgDashboard',
-		leaf: true
+		leaf: true,
 	    },
 	    {
 		text: gettext('Mail Filter'),
@@ -22,27 +22,27 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Action Objects'),
 			iconCls: 'fa fa-flag',
 			path: 'pmgActionList',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Who Objects'),
 			iconCls: 'fa fa-user-circle',
 			path: 'pmgWhoConfiguration',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('What Objects'),
 			iconCls: 'fa fa-cube',
 			path: 'pmgWhatConfiguration',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('When Objects'),
 			iconCls: 'fa fa-clock-o',
 			path: 'pmgWhenConfiguration',
-			leaf: true
-		    }
-		]
+			leaf: true,
+		    },
+		],
 	    },
 	    {
 		text: gettext('Configuration'),
@@ -54,39 +54,39 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Mail Proxy'),
 			iconCls: 'fa fa-envelope-o',
 			path: 'pmgMailProxyConfiguration',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Spam Detector'),
 			iconCls: 'fa fa-bullhorn',
 			path: 'pmgSpamDetectorConfiguration',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Virus Detector'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusDetectorConfiguration',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('User Management'),
 			iconCls: 'fa fa-users',
 			path: 'pmgUserManagement',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Cluster'),
 			iconCls: 'fa fa-server',
 			path: 'pmgClusterAdministration',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Subscription'),
 			iconCls: 'fa fa-support',
 			path: 'pmgSubscription',
-			leaf: true
-		    }
-		]
+			leaf: true,
+		    },
+		],
 	    },
 	    {
 		text: gettext('Administration'),
@@ -98,45 +98,45 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Spam Quarantine'),
 			iconCls: 'fa fa-bullhorn',
 			path: 'pmgSpamQuarantine',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Virus Quarantine'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusQuarantine',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Attachment Quarantine'),
 			iconCls: 'fa fa-paperclip',
 			path: 'pmgAttachmentQuarantine',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('User Whitelist'),
 			iconCls: 'fa fa-file-o',
 			path: 'pmgUserWhitelist',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('User Blacklist'),
 			iconCls: 'fa fa-file',
 			path: 'pmgUserBlacklist',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Tracking Center'),
 			iconCls: 'fa fa-map-o',
 			path: 'pmgMailTracker',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Queues'),
 			iconCls: 'fa fa-bars',
 			path: 'pmgQueueAdministration',
-			leaf: true
-		    }
-		]
+			leaf: true,
+		    },
+		],
 	    },
 	    {
 		text: gettext('Statistics'),
@@ -148,54 +148,54 @@ Ext.define('PMG.store.NavigationStore', {
 			text: gettext('Spam Scores'),
 			iconCls: 'fa fa-table',
 			path: 'pmgSpamScoreDistribution',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Virus  Charts'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusCharts',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Hourly Distribution'),
 			iconCls: 'fa fa-area-chart',
 			path: 'pmgHourlyMailDistribution',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Postscreen'),
 			iconCls: 'fa fa-line-chart',
 			path: 'pmgRBLStatistics',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Domain'),
 			iconCls: 'fa fa-table',
 			path: 'pmgDomainStatistics',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Sender'),
 			iconCls: 'fa fa-table',
 			path: 'pmgSenderStatistics',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Receiver'),
 			iconCls: 'fa fa-table',
 			path: 'pmgReceiverStatistics',
-			leaf: true
+			leaf: true,
 		    },
 		    {
 			text: gettext('Contact'),
 			iconCls: 'fa fa-table',
 			path: 'pmgContactStatistics',
-			leaf: true
-		    }
-		]
-	    }
-	]
-    }
+			leaf: true,
+		    },
+		],
+	    },
+	],
+    },
 });
 
 Ext.define('PMG.view.main.NavigationTree', {
@@ -212,5 +212,5 @@ Ext.define('PMG.view.main.NavigationTree', {
     expanderOnly: true,
     expanderFirst: false,
     store: 'NavigationStore',
-    ui: 'nav'
+    ui: 'nav',
 });

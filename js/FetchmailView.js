@@ -5,13 +5,13 @@ Ext.define('pmg-fetchmail-users', {
 	'id', 'protocol', 'port', 'server', 'user', 'pass', 'target',
 	'ssl', 'keep',
 	{ type: 'integer', name: 'interval' },
-	{ type: 'boolean', name: 'enable' }
+	{ type: 'boolean', name: 'enable' },
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/fetchmail"
+	url: "/api2/json/config/fetchmail",
     },
-    idProperty: 'id'
+    idProperty: 'id',
 });
 
 Ext.define('PMG.FetchmailView', {
@@ -23,7 +23,7 @@ Ext.define('PMG.FetchmailView', {
     store: {
 	autoDestroy: true,
 	autoLoad: true,
-	model: 'pmg-fetchmail-users'
+	model: 'pmg-fetchmail-users',
     },
 
     controller: {
@@ -39,7 +39,7 @@ Ext.define('PMG.FetchmailView', {
 
             var win = Ext.create('PMG.FetchmailEdit', {
 		url: view.baseurl,
-		method: 'POST'
+		method: 'POST',
             });
             win.on('destroy', function() { view.store.load(); });
             win.show();
@@ -54,7 +54,7 @@ Ext.define('PMG.FetchmailView', {
 		userid: rec.data.id,
 		url: view.baseurl + '/' + rec.data.id,
 		method: 'PUT',
-		autoLoad: true
+		autoLoad: true,
             });
             win.on('destroy', function() { view.store.load(); });
             win.show();
@@ -63,33 +63,33 @@ Ext.define('PMG.FetchmailView', {
 	onAfterRemove: function(btn, res) {
 	    var view = this.getView();
 	    view.store.load();
-	}
+	},
     },
 
     tbar: [
         {
 	    text: gettext('Add'),
 	    reference: 'addBtn',
-	    handler: 'onAdd'
+	    handler: 'onAdd',
 	},
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),
 	    disabled: true,
-	    handler: 'onEdit'
+	    handler: 'onEdit',
 	},
 	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/config/fetchmail',
 	    reference: 'removeBtn',
 	    callback: 'onAfterRemove',
-	    waitMsgTarget: true
-	}
+	    waitMsgTarget: true,
+	},
     ],
 
     listeners: {
 	//scope: 'controller',
-	itemdblclick: 'onEdit'
+	itemdblclick: 'onEdit',
     },
 
     columns: [
@@ -97,33 +97,33 @@ Ext.define('PMG.FetchmailView', {
 	    header: gettext('Server'),
 	    flex: 1,
 	    renderer: Ext.String.htmlEncode,
-	    dataIndex: 'server'
+	    dataIndex: 'server',
 	},
 	{
 	    header: gettext('Protocol'),
-	    dataIndex: 'protocol'
+	    dataIndex: 'protocol',
 	},
 	{
 	    header: gettext('User name'),
 	    flex: 1,
 	    renderer: Ext.String.htmlEncode,
-	    dataIndex: 'user'
+	    dataIndex: 'user',
 	},
 	{
 	    header: gettext('Deliver to'),
 	    flex: 1,
 	    renderer: Ext.String.htmlEncode,
-	    dataIndex: 'target'
+	    dataIndex: 'target',
 	},
 	{
 	    header: gettext('Enabled'),
 	    sortable: true,
 	    renderer: Proxmox.Utils.format_boolean,
-	    dataIndex: 'enable'
+	    dataIndex: 'enable',
 	},
 	{
 	    header: gettext('Interval'),
-	    dataIndex: 'interval'
-	}
-     ]
+	    dataIndex: 'interval',
+	},
+     ],
 });

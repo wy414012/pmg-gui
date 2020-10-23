@@ -5,7 +5,7 @@ Ext.define('PMG.MailProxyRelaying', {
 
     monStoreErrors: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.add_text_row('relay', gettext('Default Relay'),
@@ -15,14 +15,14 @@ Ext.define('PMG.MailProxyRelaying', {
 	    defaultValue: 25,
 	    deleteEmpty: true,
 	    minValue: 1,
-	    maxValue: 65535
+	    maxValue: 65535,
 	});
 
 	me.add_combobox_row('relayprotocol', gettext('Relay Protocol'), {
 	    defaultValue: 'smtp',
 	    comboItems: [
-	    ['smtp', 'SMTP' ],
-	    ['lmtp', 'LMTP' ]]
+	    ['smtp', 'SMTP'],
+	    ['lmtp', 'LMTP']],
 	});
 
 
@@ -57,7 +57,7 @@ Ext.define('PMG.MailProxyRelaying', {
 		onlineHelp: 'pmgconfig_mailproxy_relaying',
 		subject: gettext('Smarthost'),
 		fieldDefaults: {
-		    labelWidth: 100
+		    labelWidth: 100,
 		},
 		items: [
 		    {
@@ -65,7 +65,7 @@ Ext.define('PMG.MailProxyRelaying', {
 			name: 'smarthost',
 			deleteEmpty: true,
 			emptyText: Proxmox.Utils.noneText,
-			fieldLabel: gettext('Smarthost')
+			fieldLabel: gettext('Smarthost'),
 		    },
 		    {
 			xtype: 'proxmoxintegerfield',
@@ -74,10 +74,10 @@ Ext.define('PMG.MailProxyRelaying', {
 			minValue: 1,
 			maxValue: 65535,
 			emptyText: Proxmox.Utils.defaultText,
-			fieldLabel: gettext('Port')
-		    }
-		]
-	    }
+			fieldLabel: gettext('Port'),
+		    },
+		],
+	    },
 	};
 
 	me.rows.smarthostport = { visible: false };
@@ -92,18 +92,18 @@ Ext.define('PMG.MailProxyRelaying', {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		handler: function() { me.run_editor(); },
-		selModel: me.selModel
+		selModel: me.selModel,
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
 		url: '/api2/extjs' + baseurl,
-		onlineHelp: 'pmgconfig_mailproxy_relaying'
+		onlineHelp: 'pmgconfig_mailproxy_relaying',
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
 	    listeners: {
-		itemdblclick: me.run_editor
-	    }
+		itemdblclick: me.run_editor,
+	    },
 	});
 
 	me.callParent();
@@ -111,5 +111,5 @@ Ext.define('PMG.MailProxyRelaying', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
-    }
+    },
 });

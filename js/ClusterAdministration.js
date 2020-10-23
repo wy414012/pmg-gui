@@ -6,24 +6,26 @@ Ext.define('pmg-cluster', {
 	'fingerprint', { type: 'integer', name: 'cid' },
 	{ type: 'boolean', name: 'insync' },
 	'memory', 'loadavg', 'uptime', 'rootfs', 'conn_error', 'level',
-	{ type: 'number', name: 'memory_per',
+	{
+ type: 'number', name: 'memory_per',
 	  calculate: function(data) {
 	      var mem = data.memory;
 	      return Ext.isObject(mem) ? mem.used/mem.total : 0;
-	  }
+	  },
 	},
-	{ type: 'number', name: 'rootfs_per',
+	{
+ type: 'number', name: 'rootfs_per',
 	  calculate: function(data) {
 	      var du = data.rootfs;
 	      return Ext.isObject(du) ? du.used/du.total : 0;
-	  }
-	}
+	  },
+	},
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/config/cluster/status"
+	url: "/api2/json/config/cluster/status",
     },
-    idProperty: 'cid'
+    idProperty: 'cid',
 });
 
 Ext.define('PMG.ClusterJoinNodeWindow', {
@@ -43,20 +45,20 @@ Ext.define('PMG.ClusterJoinNodeWindow', {
 	{
 	    xtype: 'textfield',
 	    fieldLabel: 'IP Address',
-	    name: 'master_ip'
+	    name: 'master_ip',
 	},
 	{
 	    xtype: 'textfield',
 	    inputType: 'password',
 	    fieldLabel: gettext('Password'),
-	    name: 'password'
+	    name: 'password',
 	},
 	{
 	    xtype: 'textfield',
 	    fieldLabel: gettext('Fingerprint'),
-	    name: 'fingerprint'
-	}
-    ]
+	    name: 'fingerprint',
+	},
+    ],
 });
 
 Ext.define('PMG.ClusterAddNodeWindow', {
@@ -79,7 +81,7 @@ Ext.define('PMG.ClusterAddNodeWindow', {
 	    xtype: 'component',
 	    border: false,
 	    padding: '10 10 10 10',
-	    html: gettext("Please use the 'Join' button on the node you want to add, using the following IP address and fingerprint.")
+	    html: gettext("Please use the 'Join' button on the node you want to add, using the following IP address and fingerprint."),
 	},
 	{
 	    xtype: 'container',
@@ -91,17 +93,17 @@ Ext.define('PMG.ClusterAddNodeWindow', {
 		    xtype: 'textfield',
 		    fieldLabel: gettext('IP Address'),
 		    cbind: { value: '{ipAddress}' },
-		    editable: false
+		    editable: false,
 		},
 		{
 		    xtype: 'textfield',
 		    fieldLabel: gettext('Fingerprint'),
 		    cbind: { value: '{fingerprint}' },
-		    editable: false
-		}
-	    ]
-	}
-    ]
+		    editable: false,
+		},
+	    ],
+	},
+    ],
 });
 
 /*jslint confusion: true*/
@@ -119,8 +121,8 @@ Ext.define('PMG.ClusterAdministration', {
 	parent: null,
 	data: {
 	    nodecount: 0,
-	    master: null
-	}
+	    master: null,
+	},
     },
 
     items: [
@@ -158,7 +160,7 @@ Ext.define('PMG.ClusterAdministration', {
 			url: '/config/cluster/create',
 			method: 'POST',
 			waitMsgTarget: view,
-			failure: function (response, opts) {
+			failure: function(response, opts) {
 			    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 			},
 			success: function(response, options) {
@@ -166,7 +168,7 @@ Ext.define('PMG.ClusterAdministration', {
 			    var win = Ext.create('Proxmox.window.TaskProgress', { upid: upid });
 			    win.show();
 			    win.on('destroy', function() { view.store.load(); });
-			}
+			},
 		    });
 		},
 
@@ -184,16 +186,16 @@ Ext.define('PMG.ClusterAdministration', {
 
 		    var win = Ext.create('PMG.ClusterAddNodeWindow', {
 			ipAddress: vm.get('master').get('ip'),
-			fingerprint: vm.get('master').get('fingerprint')
+			fingerprint: vm.get('master').get('fingerprint'),
 		    });
 
 		    win.show();
-		}
+		},
 	    },
 	    store: {
 		autoLoad: true,
 		model: 'pmg-cluster',
-		sorters: [ 'cid' ]
+		sorters: ['cid'],
 	    },
 	    tbar: [
 		{
@@ -201,47 +203,47 @@ Ext.define('PMG.ClusterAdministration', {
 		    reference: 'createButton',
 		    handler: 'onCreate',
 		    bind: {
-			disabled: '{nodecount}'
-		    }
+			disabled: '{nodecount}',
+		    },
 		},
 		{
 		    text: gettext('Add'),
 		    reference: 'addButton',
 		    handler: 'onAdd',
 		    bind: {
-			disabled: '{!master}'
-		    }
+			disabled: '{!master}',
+		    },
 		},
 		{
 		    text: gettext('Join'),
 		    reference: 'joinButton',
 		    handler: 'onJoin',
 		    bind: {
-			disabled: '{nodecount}'
-		    }
-		}
+			disabled: '{nodecount}',
+		    },
+		},
 	    ],
 	    columns: [
 		{
 		    header: gettext('Node'),
 		    width: 150,
-		    dataIndex: 'name'
+		    dataIndex: 'name',
 		},
 		{
 		    header: gettext('Role'),
 		    width: 100,
-		    dataIndex: 'type'
+		    dataIndex: 'type',
 		},
 		{
 		    header: gettext('ID'),
 		    width: 80,
-		    dataIndex: 'cid'
+		    dataIndex: 'cid',
 		},
 		{
 
 		    header: gettext('IP'),
 		    width: 150,
-		    dataIndex: 'ip'
+		    dataIndex: 'ip',
 		},
 		{
 		    header: gettext('State'),
@@ -254,27 +256,27 @@ Ext.define('PMG.ClusterAdministration', {
 			}
 			if (d.conn_error) {
 			    metaData.tdCls = 'x-form-invalid-field';
-			    var html = '<p>' +  Ext.htmlEncode(d.conn_error) + '</p>';
+			    var html = '<p>' + Ext.htmlEncode(d.conn_error) + '</p>';
 			    html = html.replace(/\n/g, '<br>');
 			    metaData.tdAttr = 'data-qwidth=600 data-qtitle="ERROR" data-qtip="' +
-				html.replace(/\"/g,'&quot;') + '"';
+				html.replace(/\"/g, '&quot;') + '"';
 			    state = 'error';
 			}
 			return state;
 		    },
-		    dataIndex: 'insync'
+		    dataIndex: 'insync',
 		},
 		{
 		    header: gettext('Subscription'),
 		    width: 120,
 		    renderer: Proxmox.Utils.format_subscription_level,
-		    dataIndex: 'level'
+		    dataIndex: 'level',
 		},
 		{
 		    header: gettext('Uptime'),
 		    width: 150,
 		    renderer: Proxmox.Utils.render_uptime,
-		    dataIndex: 'uptime'
+		    dataIndex: 'uptime',
 		},
 		{
 		    header: gettext('Load average'),
@@ -287,27 +289,27 @@ Ext.define('PMG.ClusterAdministration', {
 			}
 			return '';
 		    },
-		    dataIndex: 'loadavg'
+		    dataIndex: 'loadavg',
 		},
 		{
 		    xtype: 'widgetcolumn',
 		    widget: {
 			xtype: 'progressbarwidget',
-			textTpl: '{value:percent}'
+			textTpl: '{value:percent}',
 		    },
 		    header: gettext('RAM usage'),
-		    dataIndex: 'memory_per'
+		    dataIndex: 'memory_per',
 		},
 		{
 		    xtype: 'widgetcolumn',
 		    widget: {
 			xtype: 'progressbarwidget',
-			textTpl: '{value:percent}'
+			textTpl: '{value:percent}',
 		    },
 		    header: gettext('HD space'),
-		    dataIndex: 'rootfs_per'
-		}
-	    ]
-	}
-    ]
+		    dataIndex: 'rootfs_per',
+		},
+	    ],
+	},
+    ],
 });

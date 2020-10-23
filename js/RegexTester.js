@@ -17,9 +17,9 @@ Ext.define('PMG.RegexTester', {
 	xtype: 'textfield',
 	submitValue: false,
 	name: 'teststring',
-	isDirty: function () { return false; },
-	reset: Ext.emptyFn
-    },{
+	isDirty: function() { return false; },
+	reset: Ext.emptyFn,
+    }, {
 	margin: '0 0 0 5',
 	xtype: 'button',
 	text: 'Test',
@@ -39,7 +39,7 @@ Ext.define('PMG.RegexTester', {
 		waitMsgTarget: me.up('window'),
 		params: {
 		    regex: regex,
-		    text: me.down('textfield[name=teststring]').getValue()
+		    text: me.down('textfield[name=teststring]').getValue(),
 		},
 		method: 'POST',
 		success: function(response) {
@@ -49,14 +49,14 @@ Ext.define('PMG.RegexTester', {
 			    ' (elapsed time: ' +
 			    response.result.data + 'ms' + ')',
 			buttons: Ext.Msg.OK,
-			icon: Ext.MessageBox.INFO
+			icon: Ext.MessageBox.INFO,
 		    });
 		},
 		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
-	}
+	},
     }],
 
     initComponent: function() {
@@ -67,6 +67,5 @@ Ext.define('PMG.RegexTester', {
 	}
 
 	me.callParent();
-
-    }
+    },
 });

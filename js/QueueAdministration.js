@@ -30,9 +30,9 @@ Ext.define('PMG.QueueAdministration', {
 
 	control: {
 	    pmgPostfixQShape: {
-		itemdblclick: 'onSelect'
-	    }
-	}
+		itemdblclick: 'onSelect',
+	    },
+	},
     },
 
     items: [
@@ -40,14 +40,14 @@ Ext.define('PMG.QueueAdministration', {
 	    title: gettext('Summary'),
 	    nodename: Proxmox.NodeName,
 	    itemId: 'qshape',
-	    xtype: 'pmgPostfixQShape'
+	    xtype: 'pmgPostfixQShape',
 	},
 	{
 	    title: gettext('Deferred Mail'),
 	    nodename: Proxmox.NodeName,
 	    reference: 'mailq',
 	    itemId: 'mailqueue',
-	    xtype: 'pmgPostfixMailQueue'
-	}
-    ]
+	    xtype: 'pmgPostfixMailQueue',
+	},
+    ],
 });

@@ -6,18 +6,18 @@ Ext.define('pmg-spam-archive', {
     fields: [
 	{ type: 'number', name: 'spamavg' },
 	{ type: 'integer', name: 'count' },
-        { type: 'date', dateFormat: 'timestamp', name: 'day' }
+        { type: 'date', dateFormat: 'timestamp', name: 'day' },
     ],
     proxy: {
         type: 'proxmox',
-        url: "/api2/json/quarantine/spam"
+        url: "/api2/json/quarantine/spam",
     },
-    idProperty: 'day'
+    idProperty: 'day',
 });
 
 Ext.define('pmg-spam-list', {
     extend: 'Ext.data.Model',
-    fields: [ 'id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',
+    fields: ['id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',
 	{ type: 'number', name: 'spamlevel' },
 	{ type: 'integer', name: 'bytes' },
 	{ type: 'date', dateFormat: 'timestamp', name: 'time' },
@@ -26,14 +26,14 @@ Ext.define('pmg-spam-list', {
 	    name: 'day',
 	    convert: function(v, rec) {
 		return Ext.Date.format(rec.get('time'), 'Y-m-d');
-	    }, depends: ['time']
-	}
+	    }, depends: ['time'],
+	},
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/quarantine/spam"
+	url: "/api2/json/quarantine/spam",
     },
-    idProperty: 'id'
+    idProperty: 'id',
 });
 
 Ext.define('PMG.SpamQuarantine', {
@@ -64,13 +64,13 @@ Ext.define('PMG.SpamQuarantine', {
 	updatePreview: function(raw, rec) {
 	    var preview = this.lookupReference('preview');
 
-	    if (!rec || !rec.data || !rec.data.id)  {
+	    if (!rec || !rec.data || !rec.data.id) {
 		preview.update('');
 		preview.setDisabled(true);
 		return;
 	    }
 
-	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + ((raw)?'&raw=1':'');
+	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + (raw?'&raw=1':'');
 	    preview.setDisabled(false);
 	    this.lookupReference('raw').setDisabled(false);
 	    this.lookupReference('spam').setDisabled(false);
@@ -129,7 +129,7 @@ Ext.define('PMG.SpamQuarantine', {
 		    gettext('Confirm'),
 		    Ext.String.format(
 			gettext("Action '{0}' for '{1}' items"),
-			action, selected.length
+			action, selected.length,
 		    ),
 		    function(button) {
 			if (button !== 'yes') {
@@ -139,7 +139,7 @@ Ext.define('PMG.SpamQuarantine', {
 			PMG.Utils.doQuarantineAction(action, idlist.join(';'), function() {
 			    list.getController().load();
 			});
-		    }
+		    },
 		);
 		return;
 	    }
@@ -179,18 +179,18 @@ Ext.define('PMG.SpamQuarantine', {
 	    var menu = Ext.create('PMG.menu.SpamContextMenu', {
 		callback: function(action) {
 		    me.doAction(action, list.getSelection());
-		}
+		},
 	    });
 
 	    menu.showAt(event.getXY());
 	},
 
-	keyPress: function (table, record, item, index, event) {
+	keyPress: function(table, record, item, index, event) {
 	    var me = this;
 	    var list = me.lookup('list');
 	    var key = event.getKey();
 	    var action = '';
-	    switch(key) {
+	    switch (key) {
 		case event.DELETE:
 		case 127:
 		    action = 'delete';
@@ -220,17 +220,17 @@ Ext.define('PMG.SpamQuarantine', {
 
 	control: {
 	    'button[reference=raw]': {
-		click: 'toggleRaw'
+		click: 'toggleRaw',
 	    },
 	    'button[reference=spam]': {
-		click: 'toggleSpamInfo'
+		click: 'toggleSpamInfo',
 	    },
 	    'pmgQuarantineList': {
 		selectionChange: 'onSelectMail',
 		itemkeypress: 'keyPress',
-		rowcontextmenu: 'openContextMenu'
-	    }
-	}
+		rowcontextmenu: 'openContextMenu',
+	    },
+	},
     },
 
     items: [
@@ -250,8 +250,8 @@ Ext.define('PMG.SpamQuarantine', {
 		groupDir: 'DESC',
 		sorters: [{
 		    property: 'time',
-		    direction: 'DESC'
-		}]
+		    direction: 'DESC',
+		}],
 	    },
 
 	    columns: [
@@ -259,33 +259,33 @@ Ext.define('PMG.SpamQuarantine', {
 		    header: gettext('Sender/Subject'),
 		    dataIndex: 'subject',
 		    renderer: PMG.Utils.sender_renderer,
-		    flex: 1
+		    flex: 1,
 		},
 		{
 		    header: gettext('Score'),
 		    dataIndex: 'spamlevel',
 		    align: 'right',
-		    width: 70
+		    width: 70,
 		},
 		{
 		    header: gettext('Size') + ' (KB)',
 		    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
 		    dataIndex: 'bytes',
 		    align: 'right',
-		    width: 90
+		    width: 90,
 		},
 		{
 		    header: gettext('Date'),
 		    dataIndex: 'day',
-		    hidden: true
+		    hidden: true,
 		},
 		{
 		    xtype: 'datecolumn',
 		    header: gettext('Time'),
 		    dataIndex: 'time',
-		    format: 'H:i:s'
-		}
-	    ]
+		    format: 'H:i:s',
+		},
+	    ],
 	},
 	{
 	    title: gettext('Selected Mail'),
@@ -304,14 +304,14 @@ Ext.define('PMG.SpamQuarantine', {
 			    reference: 'raw',
 			    text: gettext('Toggle Raw'),
 			    enableToggle: true,
-			    iconCls: 'fa fa-file-code-o'
+			    iconCls: 'fa fa-file-code-o',
 			},
 			{
 			    xtype: 'button',
 			    reference: 'spam',
 			    text: gettext('Toggle Spam Info'),
 			    enableToggle: true,
-			    iconCls: 'fa fa-bullhorn'
+			    iconCls: 'fa fa-bullhorn',
 			},
 			'->',
 			{
@@ -325,46 +325,46 @@ Ext.define('PMG.SpamQuarantine', {
 				href: '{downloadMailURL}',
 				download: '{mailid}',
 			    },
-			    iconCls: 'fa fa-download'
+			    iconCls: 'fa fa-download',
 			},
 			'-',
 			{
 			    reference: 'whitelist',
 			    text: gettext('Whitelist'),
 			    iconCls: 'fa fa-check',
-			    handler: 'btnHandler'
+			    handler: 'btnHandler',
 			},
 			{
 			    reference: 'blacklist',
 			    text: gettext('Blacklist'),
 			    iconCls: 'fa fa-times',
-			    handler: 'btnHandler'
+			    handler: 'btnHandler',
 			},
 			{
 			    reference: 'deliver',
 			    text: gettext('Deliver'),
 			    iconCls: 'fa fa-paper-plane-o',
-			    handler: 'btnHandler'
+			    handler: 'btnHandler',
 			},
 			{
 			    reference: 'delete',
 			    text: gettext('Delete'),
 			    iconCls: 'fa fa-trash-o',
-			    handler: 'btnHandler'
-			}
-		    ]
+			    handler: 'btnHandler',
+			},
+		    ],
 		},
 		{
 		    xtype: 'pmgSpamInfoGrid',
 		    border: false,
-		    reference: 'spaminfo'
+		    reference: 'spaminfo',
 		},
 		{
 		    xtype: 'pmgMailInfo',
 		    hidden: true,
 		    reference: 'mailinfo',
 		},
-	    ]
-	}
-    ]
+	    ],
+	},
+    ],
 });

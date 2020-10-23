@@ -55,7 +55,7 @@ Ext.define('PMG.data.StatStore', {
     },
 
     proxy: {
-	type: 'proxmox'
+	type: 'proxmox',
     },
 
     autoReload: true,
@@ -74,5 +74,5 @@ Ext.define('PMG.data.StatStore', {
 	me.callParent([config]);
 
 	me.reload();
-   }
+   },
 });

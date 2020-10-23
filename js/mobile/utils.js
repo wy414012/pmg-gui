@@ -23,12 +23,12 @@ var PMG = {
 	},
 	authOK(options) {
 	    var authCookie = PMG.Utils.getCookie('PMGAuthCookie') || "";
-	    return (authCookie.substr(0,7) === 'PMGQUAR' && Proxmox.UserName !== '');
+	    return authCookie.substr(0, 7) === 'PMGQUAR' && Proxmox.UserName !== '';
 	},
 	isoToUnix(iso) {
 	    let fields = iso.split('-').map((field) => parseInt(field, 10));
 	    // monthIndex starts at 0
-	    let date = new Date(fields[0],fields[1]-1, fields[2]);
+	    let date = new Date(fields[0], fields[1]-1, fields[2]);
 	    return Math.round(date.getTime()/1000);
 	},
 	unixToIso(unix) {
@@ -65,7 +65,7 @@ var PMG = {
 		    ${errorText}
 		    `,
 		closeButton: true,
-		destroyOnClose: true
+		destroyOnClose: true,
 	    });
 	},
 	extractParams() {
@@ -98,7 +98,7 @@ var PMG = {
 		window.history.replaceState(
 			window.history.state,
 			document.title,
-			location.pathname + (queryString? "?" + queryString : '')
+			location.pathname + (queryString? "?" + queryString : ''),
 		);
 	    }
 
@@ -118,7 +118,7 @@ var PMG = {
 		    },
 		    error: (xhr, status) => {
 			reject(xhr);
-		    }
+		    },
 		});
 	    });
 	},
@@ -143,7 +143,7 @@ var PMG = {
 			    gettext("No valid subscription"),
 			    () => {
 				resolve(data);
-			    }
+			    },
 			);
 		    } else {
 			resolve();
@@ -153,7 +153,7 @@ var PMG = {
 		    resolve();
 		}
 	    });
-	}
-    }
+	},
+    },
 };
 

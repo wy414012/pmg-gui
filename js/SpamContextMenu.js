@@ -10,7 +10,7 @@ Ext.define('PMG.menu.SpamContextMenu', {
 	    if (Ext.isFunction(me.callback)) {
 		me.callback(btn.action);
 	    }
-	}
+	},
     },
 
     items: [
@@ -18,26 +18,26 @@ Ext.define('PMG.menu.SpamContextMenu', {
 	    text: gettext('Deliver'),
 	    iconCls: 'fa fa-fw fa-paper-plane-o',
 	    action: 'deliver',
-	    handler: 'callCallback'
+	    handler: 'callCallback',
 	},
 	{
 	    text: gettext('Delete'),
 	    iconCls: 'fa fa-fw fa-trash-o',
 	    action: 'delete',
-	    handler: 'callCallback'
+	    handler: 'callCallback',
 	},
 	{ xtype: 'menuseparator' },
 	{
 	    text: gettext('Whitelist'),
 	    iconCls: 'fa fa-fw fa-check',
 	    action: 'whitelist',
-	    handler: 'action'
+	    handler: 'action',
 	},
 	{
 	    text: gettext('Blacklist'),
 	    iconCls: 'fa fa-fw fa-times',
 	    action: 'blacklist',
-	    handler: 'action'
-	}
-    ]
+	    handler: 'action',
+	},
+    ],
 });

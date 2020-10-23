@@ -7,7 +7,7 @@ Ext.define('PMG.DKIMEnableEdit', {
 	    xtype: 'displayfield',
 	    userCls: 'pmx-hint',
 	    value: gettext('You need to create a Selector before enabling DKIM Signing'),
-	    hidden: true
+	    hidden: true,
 	},
 	{
 	    xtype: 'proxmoxcheckbox',
@@ -17,12 +17,12 @@ Ext.define('PMG.DKIMEnableEdit', {
 	    checked: false,
 	    deleteDefaultValue: false,
 	    fieldLabel: gettext('Sign Outgoing Mails'),
-	}
+	},
     ],
     listeners: {
 	'show': function() {
 	    var me = this;
-	    var disablefn = function(errormsg){
+	    var disablefn = function(errormsg) {
 		Ext.Msg.alert(gettext('Error'), errormsg);
 		me.down('displayfield').setVisible(true);
 		me.down('proxmoxcheckbox').setDisabled(true);
@@ -30,19 +30,19 @@ Ext.define('PMG.DKIMEnableEdit', {
 	    };
 
 	    Proxmox.Utils.API2Request({
-		url : '/config/dkim/selector',
-		method : 'GET',
-		failure : function(response, opts) {
-		    disablefn(response.htmlStatus)
+		url: '/config/dkim/selector',
+		method: 'GET',
+		failure: function(response, opts) {
+		    disablefn(response.htmlStatus);
 		},
-		success : function(response, opts) {
+		success: function(response, opts) {
 		    if (!Ext.isDefined(response.result.data.record)) {
 			disablefn('Could not read private key - please create a selector first!');
 		    }
-		}
+		},
 	    });
-	}
-    }
+	},
+    },
 });
 
 Ext.define('PMG.SelectorViewer', {
@@ -59,12 +59,12 @@ Ext.define('PMG.SelectorViewer', {
 	{
 	    xtype: 'displayfield',
 	    fieldLabel: gettext('Selector'),
-	    name: 'selector'
+	    name: 'selector',
 	},
 	{
 	    xtype: 'displayfield',
 	    fieldLabel: gettext('Key Size'),
-	    name: 'keysize'
+	    name: 'keysize',
 	},
 	{
 	    xtype: 'textarea',
@@ -74,8 +74,8 @@ Ext.define('PMG.SelectorViewer', {
 	    growMax: 400,
 	    fieldLabel: gettext('DNS TXT Record'),
 	    name: 'record',
-	    value: 'Could not read private key!'
-	}
+	    value: 'Could not read private key!',
+	},
     ],
 
     initComponent: function() {
@@ -85,7 +85,7 @@ Ext.define('PMG.SelectorViewer', {
 
 	// hide OK/Reset button, because we just want to show data
 	me.down('toolbar[dock=bottom]').setVisible(false);
-    }
+    },
 });
 
 Ext.define('PMG.SelectorList', {
@@ -94,19 +94,19 @@ Ext.define('PMG.SelectorList', {
 
     queryMode: 'local',
     store: {
-	fields: [ 'selector' ],
+	fields: ['selector'],
 	filterOnLoad: true,
 	proxy: {
 	    type: 'proxmox',
-	    url: '/api2/json/config/dkim/selectors'
+	    url: '/api2/json/config/dkim/selectors',
 	},
 	autoLoad: true,
 	sorters: [
 	    {
-		property : 'selector',
-		direction: 'ASC'
-	    }
-	]
+		property: 'selector',
+		direction: 'ASC',
+	    },
+	],
     },
 
     valueField: 'selector',
@@ -120,7 +120,7 @@ Ext.define('PMG.DKIMSettings', {
 
     monStoreErrors: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.rows = {};
@@ -133,7 +133,7 @@ Ext.define('PMG.DKIMSettings', {
 	    editor: {
 		xtype: 'pmgDKIMEnableEdit',
 		subject: enable_sign_text,
-	    }
+	    },
 	};
 
 	var selector_text = gettext('Selector');
@@ -171,16 +171,16 @@ Ext.define('PMG.DKIMSettings', {
 			    ['1024', '1024'],
 			    ['2048', '2048'],
 			    ['4096', '4096'],
-			    ['8192', '8192']
-			]
+			    ['8192', '8192'],
+			],
 		    },
 		    {
 			xtype: 'proxmoxcheckbox',
 			name: 'force',
 			fieldLabel: gettext('Overwrite existing file'),
-		    }
-		]
-	    }
+		    },
+		],
+	    },
 	};
 
 	me.add_boolean_row('dkim_sign_all_mail', gettext('Sign all Outgoing Mail'));
@@ -206,18 +206,18 @@ Ext.define('PMG.DKIMSettings', {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		handler: function() { me.run_editor(); },
-		selModel: me.selModel
+		selModel: me.selModel,
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
 		url: '/api2/extjs' + baseurl,
-		onlineHelp: 'pmgconfig_mailproxy_dkim'
+		onlineHelp: 'pmgconfig_mailproxy_dkim',
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
 	    listeners: {
-		itemdblclick: me.run_editor
-	    }
+		itemdblclick: me.run_editor,
+	    },
 	});
 
 	me.callParent();
@@ -225,6 +225,6 @@ Ext.define('PMG.DKIMSettings', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
-    }
+    },
 });
 

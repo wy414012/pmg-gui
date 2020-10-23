@@ -2,16 +2,16 @@
 Ext.define('pmg-mail-tracker', {
     extend: 'Ext.data.Model',
     fields: [
-	'id' , 'from', 'to', 'dstatus', 'rstatus', 'qid', 'msgid', 'client',
+	'id', 'from', 'to', 'dstatus', 'rstatus', 'qid', 'msgid', 'client',
 	{ type: 'number', name: 'size' },
-	{ type: 'date', dateFormat: 'timestamp', name: 'time' }
+	{ type: 'date', dateFormat: 'timestamp', name: 'time' },
     ],
     proxy: {
-	type: 'proxmox'
+	type: 'proxmox',
     },
     // do not use field 'id', because "id/to" is the unique Id
     // this way we display an entry for each receiver
-    idProperty: 'none'
+    idProperty: 'none',
 });
 
 
@@ -20,7 +20,7 @@ Ext.define('PMG.MailTrackerFilter', {
     xtype: 'pmgMailTrackerFilter',
 
     layout: {
-	type: 'hbox'
+	type: 'hbox',
     },
 
     controller: {
@@ -36,7 +36,7 @@ Ext.define('PMG.MailTrackerFilter', {
 	    if (e.getKey() == e.ENTER) {
 		this.onFilterChange();
 	    }
-	}
+	},
     },
 
     getFilterParams: function() {
@@ -63,35 +63,35 @@ Ext.define('PMG.MailTrackerFilter', {
 	    padding: 10,
 	    layout: {
 		type: 'vbox',
-		align: 'stretch'
+		align: 'stretch',
 	    },
 	    items: [
 		{
 		    fieldLabel: gettext('Sender'),
 		    xtype: 'textfield',
 		    listeners: { specialkey: 'onSpecialKey' },
-		    reference: 'from'
+		    reference: 'from',
 		},
 		{
 		    fieldLabel: gettext('Receiver'),
 		    xtype: 'textfield',
 		    listeners: { specialkey: 'onSpecialKey' },
-		    reference: 'target'
+		    reference: 'target',
 		},
 		{
 		    fieldLabel: gettext('Filter'),
 		    xtype: 'textfield',
 		    listeners: { specialkey: 'onSpecialKey' },
-		    reference: 'xfilter'
-		}
-	    ]
+		    reference: 'xfilter',
+		},
+	    ],
 	},
 	{
 	    border: false,
 	    padding: 10,
 	    layout: {
 		type: 'vbox',
-		align: 'stretch'
+		align: 'stretch',
 	    },
 	    items: [
 		{
@@ -107,7 +107,7 @@ Ext.define('PMG.MailTrackerFilter', {
 			var now = new Date();
 			return new Date(now.getTime() - 3600000);
 		    }()),
-		    xtype: 'promxoxDateTimeField'
+		    xtype: 'promxoxDateTimeField',
 		},
 		{
 		    fieldLabel: gettext('End'),
@@ -127,11 +127,11 @@ Ext.define('PMG.MailTrackerFilter', {
 			tomorrow.setSeconds(0);
 			return tomorrow;
 		    }()),
-		    xtype: 'promxoxDateTimeField'
+		    xtype: 'promxoxDateTimeField',
 		},
 		{
 		    layout: {
-			type: 'hbox'
+			type: 'hbox',
 		    },
 		    border: false,
 		    items: [
@@ -140,7 +140,7 @@ Ext.define('PMG.MailTrackerFilter', {
 			    xtype: 'proxmoxcheckbox',
 			    listeners: { change: 'onFilterChange' },
 			    reference: 'ndr',
-			    name: 'ndrs'
+			    name: 'ndrs',
 			},
 			{
 			    boxLabel: gettext('Include Greylist'),
@@ -148,13 +148,13 @@ Ext.define('PMG.MailTrackerFilter', {
 			    listeners: { change: 'onFilterChange' },
 			    margin: { left: 20 },
 			    reference: 'greylist',
-			    name: 'greylist'
-			}
-		    ]
-		}
-	    ]
-	}
-    ]
+			    name: 'greylist',
+			},
+		    ],
+		},
+	    ],
+	},
+    ],
 });
 
 Ext.define('PMG.MaiLogWindow', {
@@ -172,7 +172,7 @@ Ext.define('PMG.MaiLogWindow', {
     scrollable: true,
 
     layout: {
-	type: 'auto'
+	type: 'auto',
     },
     modal: true,
     bodyPadding: 5,
@@ -197,11 +197,11 @@ Ext.define('PMG.MaiLogWindow', {
 		});
 		logs += "</pre>";
 		me.update(logs);
-	    }
+	    },
 	});
     },
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	if (!me.logid) {
@@ -219,7 +219,7 @@ Ext.define('PMG.MaiLogWindow', {
 
 	me.setHtml('Loading...');
 	me.load();
-    }
+    },
 });
 
 Ext.define('PMG.MailTracker', {
@@ -239,15 +239,15 @@ Ext.define('PMG.MailTracker', {
 	getRowClass: function(record, index) {
 	    var status = record.data.rstatus || record.data.dstatus;
 	    return PMG.Utils.mail_status_map[status];
-	}
+	},
     },
 
     plugins: [
 	{
 	    ptype: 'rowexpander',
 	    expandOnDblClick: false,
-	    rowBodyTpl: '<p class="logs">{logs}</p>'
-	}
+	    rowBodyTpl: '<p class="logs">{logs}</p>',
+	},
     ],
 
     store: {
@@ -295,7 +295,7 @@ Ext.define('PMG.MailTracker', {
 		url: '/nodes/' + Proxmox.NodeName + '/tracker/' + record.data.id,
 		waitMsgTarget: view,
 		failure: function(response, opts) {
-		    record.set('logs',gettext('Error') + " " + response.htmlStatus);
+		    record.set('logs', gettext('Error') + " " + response.htmlStatus);
 		},
 		success: function(response, opts) {
 		    var data = response.result.data;
@@ -306,7 +306,7 @@ Ext.define('PMG.MailTracker', {
 		    });
 
 		    record.set('logs', logs);
-		}
+		},
 	    });
 	},
 
@@ -327,8 +327,8 @@ Ext.define('PMG.MailTracker', {
 	    'gridview': {
 		expandbody: 'showDetails',
 		itemdblclick: 'expand',
-	    }
-	}
+	    },
+	},
     },
 
     // extjs has no method to dynamically change the emptytext on
@@ -343,17 +343,17 @@ Ext.define('PMG.MailTracker', {
 	{
 	    xtype: 'pmgMailTrackerFilter',
 	    reference: 'filter',
-	    listeners:  { filterChanged: 'onSearch' },
+	    listeners: { filterChanged: 'onSearch' },
 	    border: false,
-	    dock: 'top'
+	    dock: 'top',
 	},
 	{
 	    xtype: 'toolbar',
 	    items: [
 		{ text: 'Search', handler: 'onSearch' },
-		{ xtype: 'component', html: '', reference: 'status' }
-	    ]
-	}
+		{ xtype: 'component', html: '', reference: 'status' },
+	    ],
+	},
     ],
 
     columns: [
@@ -362,19 +362,19 @@ Ext.define('PMG.MailTracker', {
 	    header: gettext('Time'),
 	    width: 120,
 	    dataIndex: 'time',
-	    format: 'M d H:i:s'
+	    format: 'M d H:i:s',
 	},
 	{
 	    header: gettext('From'),
 	    flex: 1,
 	    dataIndex: 'from',
-	    renderer: Ext.htmlEncode
+	    renderer: Ext.htmlEncode,
 	},
 	{
 	    header: gettext('To'),
 	    flex: 1,
 	    dataIndex: 'to',
-	    renderer: Ext.htmlEncode
+	    renderer: Ext.htmlEncode,
 	},
 	{
 	    header: gettext('Status'),
@@ -388,7 +388,7 @@ Ext.define('PMG.MailTracker', {
 		    icon = v;
 		    if (v === 'Q' || v === 'B') {
 			returntext = vtext;
-		    } else  if (rstatus !== undefined && rstatus !== '') {
+		    } else if (rstatus !== undefined && rstatus !== '') {
 			var rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
 			returntext = vtext + '/' + rtext;
 			icon = rstatus;
@@ -401,27 +401,27 @@ Ext.define('PMG.MailTracker', {
 
 		return PMG.Utils.format_status_icon(icon) + returntext;
 	    },
-	    dataIndex: 'dstatus'
+	    dataIndex: 'dstatus',
 	},
 	{
 	    header: gettext('Size'),
 	    hidden: true,
-	    dataIndex: 'size'
+	    dataIndex: 'size',
 	},
 	{
 	    header: 'MSGID',
 	    width: 300,
 	    hidden: true,
 	    dataIndex: 'msgid',
-	    renderer: Ext.htmlEncode
+	    renderer: Ext.htmlEncode,
 	},
 	{
 	    header: gettext('Client'),
 	    width: 200,
 	    hidden: true,
 	    dataIndex: 'client',
-	    renderer: Ext.htmlEncode
-	}
+	    renderer: Ext.htmlEncode,
+	},
     ],
 
     initComponent: function() {
@@ -430,5 +430,5 @@ Ext.define('PMG.MailTracker', {
 	me.callParent();
 
 	Proxmox.Utils.monStoreErrors(me.getView(), me.store);
-    }
+    },
 });

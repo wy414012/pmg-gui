@@ -3,18 +3,18 @@ Ext.define('PMG.LDAPGroupSelector', {
     alias: 'widget.pmgLDAPGroupSelector',
 
     profile: undefined,
-    
+
     queryMode: 'local',
 
     store: {
-	fields: [ 'dn' ],
+	fields: ['dn'],
 	filterOnLoad: true,
 	sorters: [
 	    {
-		property : 'dn',
-		direction: 'ASC'
-	    }
-	]
+		property: 'dn',
+		direction: 'ASC',
+	    },
+	],
     },
 
     valueField: 'dn',
@@ -35,12 +35,12 @@ Ext.define('PMG.LDAPGroupSelector', {
 
 	me.store.setProxy({
 	    type: 'proxmox',
-	    url: '/api2/json/config/ldap/' + me.profile + '/groups'
+	    url: '/api2/json/config/ldap/' + me.profile + '/groups',
 	});
 
 	me.store.load();
     },
-    
+
     initComponent: function() {
 	var me = this;
 
@@ -49,6 +49,6 @@ Ext.define('PMG.LDAPGroupSelector', {
 	if (me.profile !== undefined) {
 	    me.setProfile(me.profile, true);
 	}
-    }
+    },
 });
 

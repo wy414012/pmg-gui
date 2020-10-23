@@ -3,16 +3,16 @@ Ext.define('PMG.LDAPUserSelector', {
     alias: 'widget.pmgLDAPUserSelector',
 
     profile: undefined,
-    
+
     store: {
-	fields: [ 'account', 'pmail', 'dn' ],
+	fields: ['account', 'pmail', 'dn'],
 	filterOnLoad: true,
 	sorters: [
 	    {
-		property : 'account',
-		direction: 'ASC'
-	    }
-	]
+		property: 'account',
+		direction: 'ASC',
+	    },
+	],
     },
 
     valueField: 'account',
@@ -26,21 +26,21 @@ Ext.define('PMG.LDAPUserSelector', {
 		header: gettext('Account'),
 		dataIndex: 'account',
 		hideable: false,
-		width: 100
+		width: 100,
 	    },
 	    {
 		header: gettext('E-Mail'),
 		dataIndex: 'pmail',
-		width: 150
+		width: 150,
 	    },
 	    {
 		header: 'DN',
 		dataIndex: 'dn',
-		width: 200
-	    }
-	]
+		width: 200,
+	    },
+	],
     },
-    
+
     setProfile: function(profile, force) {
 	var me = this;
 
@@ -54,12 +54,12 @@ Ext.define('PMG.LDAPUserSelector', {
 
 	me.store.setProxy({
 	    type: 'proxmox',
-	    url: '/api2/json/config/ldap/' + me.profile + '/users'
+	    url: '/api2/json/config/ldap/' + me.profile + '/users',
 	});
 
 	me.store.load();
     },
-    
+
     initComponent: function() {
 	var me = this;
 
@@ -68,6 +68,6 @@ Ext.define('PMG.LDAPUserSelector', {
 	if (me.profile !== undefined) {
 	    me.setProfile(me.profile, true);
 	}
-    }
+    },
 });
 

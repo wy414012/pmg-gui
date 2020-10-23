@@ -23,24 +23,24 @@ Ext.define('PMG.QuarantineNavigationTree', {
 			    text: gettext('Whitelist'),
 			    iconCls: 'fa fa-file-o',
 			    path: 'pmgUserWhitelist',
-			    leaf: true
+			    leaf: true,
 			},
 			{
 			    text: gettext('Blacklist'),
 			    iconCls: 'fa fa-file',
 			    path: 'pmgUserBlacklist',
-			    leaf: true
-			}
-		    ]
-		}
-	    ]
-	}
+			    leaf: true,
+			},
+		    ],
+		},
+	    ],
+	},
     },
 
     animation: false,
     expanderOnly: true,
     expanderFirst: false,
-    ui: 'nav'
+    ui: 'nav',
 });
 
 Ext.define('PMG.QuarantineView', {
@@ -55,11 +55,11 @@ Ext.define('PMG.QuarantineView', {
 	    ':path:subpath': {
 		action: 'changePath',
 		before: 'beforeChangePath',
-                conditions : {
-		    ':path'    : '(?:([%a-zA-Z0-9\\-\\_\\s,]+))',
-		    ':subpath' : '(?:(?::)([%a-zA-Z0-9\\-\\_\\s,]+))?'
-		}
-	    }
+                conditions: {
+		    ':path': '(?:([%a-zA-Z0-9\\-\\_\\s,]+))',
+		    ':subpath': '(?:(?::)([%a-zA-Z0-9\\-\\_\\s,]+))?',
+		},
+	    },
 	},
 
 	beforeChangePath: function(path, subpath, action) {
@@ -92,7 +92,7 @@ Ext.define('PMG.QuarantineView', {
 	    action.resume();
 	},
 
-	changePath: function(path,subpath) {
+	changePath: function(path, subpath) {
 	    var me = this;
 	    var contentpanel = me.lookupReference('contentpanel');
 	    var lastpanel = contentpanel.getLayout().getActiveItem();
@@ -132,7 +132,7 @@ Ext.define('PMG.QuarantineView', {
 
 	changeLanguage: function() {
 	    Ext.create('Proxmox.window.LanguageEditWindow', {
-		cookieName: 'PMGLangCookie'
+		cookieName: 'PMGLangCookie',
 	    }).show();
 	},
 
@@ -146,7 +146,7 @@ Ext.define('PMG.QuarantineView', {
 
 	control: {
 	    '[reference=logoutButton]': {
-		click: 'logout'
+		click: 'logout',
 	    },
 	    '[reference=languageButton]': {
 		click: 'changeLanguage',
@@ -183,17 +183,17 @@ Ext.define('PMG.QuarantineView', {
 		}
 	    } else {
 		// select treeitem and load page from url fragment
-		
+
 		token = Ext.util.History.getToken() || 'pmgSpamQuarantine';
 		this.redirectTo(token, true);
 	    }
-	}
+	},
     },
 
     plugins: 'viewport',
 
     layout: {
-	type: 'border'
+	type: 'border',
     },
 
     items: [
@@ -202,20 +202,20 @@ Ext.define('PMG.QuarantineView', {
 	    xtype: 'container',
 	    layout: {
 		type: 'hbox',
-		align: 'middle'
+		align: 'middle',
 	    },
 	    margin: '2 0 2 5',
 	    height: 38,
 	    items: [
 		{
-		    xtype: 'proxmoxlogo'
+		    xtype: 'proxmoxlogo',
 		},
 		{
 		    padding: '0 0 0 5',
-		    xtype: 'versioninfo'
+		    xtype: 'versioninfo',
 		},
 		{
-		    flex: 1
+		    flex: 1,
 		},
 		{
 		    xtype: 'button',
@@ -223,7 +223,7 @@ Ext.define('PMG.QuarantineView', {
 		    style: {
 			// proxmox dark grey p light grey as border
 			backgroundColor: '#464d4d',
-			borderColor: '#ABBABA'
+			borderColor: '#ABBABA',
 		    },
 		    margin: '0 5 0 0',
 		    iconCls: 'fa fa-user',
@@ -237,11 +237,11 @@ Ext.define('PMG.QuarantineView', {
 			{
 			    reference: 'logoutButton',
 			    iconCls: 'fa fa-sign-out',
-			    text: gettext('Logout')
+			    text: gettext('Logout'),
 			},
 		    ],
 		},
-	    ]
+	    ],
 	},
 	{
 	    xtype: 'quarantinenavigationtree',
@@ -253,17 +253,17 @@ Ext.define('PMG.QuarantineView', {
 	    // because of a bug where a viewcontroller does not detect
 	    // the selectionchange event of a treelist
 	    listeners: {
-		selectionchange: 'navigate'
-	    }
+		selectionchange: 'navigate',
+	    },
 	},
 	{
 	    xtype: 'panel',
 	    layout: {
-		type: 'card'
+		type: 'card',
 	    },
 	    region: 'center',
 	    border: false,
-	    reference: 'contentpanel'
-	}
-    ]
+	    reference: 'contentpanel',
+	},
+    ],
 });

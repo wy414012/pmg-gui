@@ -1,4 +1,4 @@
-Ext.define('PMG.grid.SpamInfoGrid',{
+Ext.define('PMG.grid.SpamInfoGrid', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgSpamInfoGrid',
 
@@ -6,11 +6,11 @@ Ext.define('PMG.grid.SpamInfoGrid',{
 
     store: {
 	autoDestroy: true,
-	fields: [ 'desc', 'name', { type: 'number', name: 'score' } ],
+	fields: ['desc', 'name', { type: 'number', name: 'score' }],
 	proxy: {
 	    type: 'proxmox',
-	    root: 'data.spaminfo'
-	}
+	    root: 'data.spaminfo',
+	},
     },
 
     setID: function(rec) {
@@ -28,7 +28,7 @@ Ext.define('PMG.grid.SpamInfoGrid',{
     hidden: true,
 
     features: [{
-	ftype: 'summary'
+	ftype: 'summary',
     }],
 
     columns: [
@@ -39,7 +39,7 @@ Ext.define('PMG.grid.SpamInfoGrid',{
 	    summaryType: 'count',
 	    summaryRenderer: function(value, summaryData, dataIndex, metaData) {
 		return gettext('Spamscore');
-	    }
+	    },
 	},
 	{
 	    text: gettext('Score'),
@@ -48,12 +48,12 @@ Ext.define('PMG.grid.SpamInfoGrid',{
 	    summaryType: 'sum',
 	    summaryRenderer: function(value, summaryData, dataIndex, metaData) {
 		return Ext.util.Format.round(value, 5);
-	    }
+	    },
 	},
 	{
 	    text: gettext('Description'),
 	    dataIndex: 'desc',
-	    flex: 3
-	}
-    ]
+	    flex: 3,
+	},
+    ],
 });

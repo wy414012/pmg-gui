@@ -22,13 +22,13 @@ Ext.define('PMG.UserEdit', {
 	var baseurl = '/api2/extjs/access/users';
 
 	me.isCreate = !userid;
-	me.url = userid ?  baseurl + '/' + userid : baseurl;
+	me.url = userid ? baseurl + '/' + userid : baseurl;
 	me.method = userid ? 'PUT' : 'POST';
-	me.autoLoad = userid ? true : false;
+	me.autoLoad = !!userid;
 
 	return {
 	    useridXType: userid ? 'displayfield' : 'textfield',
-	    isSuperUser: userid === 'root@pam'
+	    isSuperUser: userid === 'root@pam',
 	};
     },
 
@@ -44,8 +44,8 @@ Ext.define('PMG.UserEdit', {
 		minLength: 4,
 		cbind: {
 		    submitValue: '{isCreate}',
-		    xtype: '{useridXType}'
-		}
+		    xtype: '{useridXType}',
+		},
 	    },
 	    {
 		xtype: 'textfield',
@@ -55,17 +55,17 @@ Ext.define('PMG.UserEdit', {
 		allowBlank: false,
 		name: 'password',
 		listeners: {
-                    change: function(field){
+                    change: function(field) {
 			field.next().validate();
                     },
-                    blur: function(field){
+                    blur: function(field) {
 			field.next().validate();
-                    }
+                    },
 		},
 		cbind: {
 		    hidden: '{!isCreate}',
-		    disabled: '{!isCreate}'
-		}
+		    disabled: '{!isCreate}',
+		},
 	    },
 	    {
 		xtype: 'textfield',
@@ -78,8 +78,8 @@ Ext.define('PMG.UserEdit', {
 		submitValue: false,
 		cbind: {
 		    hidden: '{!isCreate}',
-		    disabled: '{!isCreate}'
-		}
+		    disabled: '{!isCreate}',
+		},
 	    },
 	    {
 		xtype: 'pmgRoleSelector',
@@ -87,8 +87,8 @@ Ext.define('PMG.UserEdit', {
 		allowBlank: false,
 		fieldLabel: gettext('Role'),
 		cbind: {
-		    disabled: '{isSuperUser}'
-		}
+		    disabled: '{isSuperUser}',
+		},
 	    },
 	    {
                 xtype: 'datefield',
@@ -98,8 +98,8 @@ Ext.define('PMG.UserEdit', {
 		submitFormat: 'U',
                 fieldLabel: gettext('Expire'),
 		cbind: {
-		    disabled: '{isSuperUser}'
-		}
+		    disabled: '{isSuperUser}',
+		},
             },
 	    {
 		xtype: 'proxmoxcheckbox',
@@ -109,9 +109,9 @@ Ext.define('PMG.UserEdit', {
 		defaultValue: 1,
 		checked: true,
 		cbind: {
-		    disabled: '{isSuperUser}'
-		}
-	    }
+		    disabled: '{isSuperUser}',
+		},
+	    },
 	],
 
 	column2: [
@@ -120,16 +120,16 @@ Ext.define('PMG.UserEdit', {
 		name: 'firstname',
 		fieldLabel: gettext('First Name'),
 		cbind: {
-		    deleteEmpty: '{!isCreate}'
-		}
+		    deleteEmpty: '{!isCreate}',
+		},
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'lastname',
 		fieldLabel: gettext('Last Name'),
 		cbind: {
-		    deleteEmpty: '{!isCreate}'
-		}
+		    deleteEmpty: '{!isCreate}',
+		},
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
@@ -137,9 +137,9 @@ Ext.define('PMG.UserEdit', {
 		fieldLabel: gettext('E-Mail'),
 		vtype: 'proxmoxMail',
 		cbind: {
-		    deleteEmpty: '{!isCreate}'
-		}
-	    }
+		    deleteEmpty: '{!isCreate}',
+		},
+	    },
 	],
 
 	columnB: [
@@ -149,18 +149,18 @@ Ext.define('PMG.UserEdit', {
 		fieldLabel: gettext('Comment'),
 		cbind: {
 		    disabled: '{isSuperUser}',
-		    deleteEmpty: '{!isCreate}'
-		}
+		    deleteEmpty: '{!isCreate}',
+		},
 	    },
 	    {
 		xtype: 'proxmoxtextfield',
 		name: 'keys',
 		fieldLabel: gettext('Key IDs'),
 		cbind: {
-		    deleteEmpty: '{!isCreate}'
-		}
-	    }
-	]
+		    deleteEmpty: '{!isCreate}',
+		},
+	    },
+	],
     },
 
     getValues: function(dirtyOnly) {
@@ -199,5 +199,5 @@ Ext.define('PMG.UserEdit', {
 	}
 
 	me.callParent([values]);
-    }
+    },
 });

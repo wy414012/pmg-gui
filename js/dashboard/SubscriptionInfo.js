@@ -4,11 +4,11 @@ Ext.define('PMG.dashboard.SubscriptionInfo', {
 
     data: {
 	icon: 'question-circle',
-	message: gettext('Unknown')
+	message: gettext('Unknown'),
     },
 
     style: {
-	cursor: 'pointer'
+	cursor: 'pointer',
     },
 
     setSubStatus: function(status) {
@@ -20,11 +20,11 @@ Ext.define('PMG.dashboard.SubscriptionInfo', {
 		data.icon = 'check green';
 		data.message = gettext('Your subscription status is valid.');
 		break;
-	    case 1: 
+	    case 1:
 		data.icon = 'exclamation-triangle yellow';
 		data.message = gettext('Warning: Your subscription levels are not the same.');
 		break;
-	    case 0: 
+	    case 0:
 		data.icon = 'times-circle red';
 		data.message = gettext('You have at least one node without subscription.');
 		break;
@@ -38,7 +38,7 @@ Ext.define('PMG.dashboard.SubscriptionInfo', {
 	'<tr><td class="center">',
 	'<i class="fa fa-3x fa-{icon}"></i>',
 	'</td><td class="center">{message}</td></tr>',
-	'</table>'
+	'</table>',
     ],
 
     listeners: {
@@ -47,7 +47,7 @@ Ext.define('PMG.dashboard.SubscriptionInfo', {
 	    fn: function() {
 		var mainview = this.component.up('mainview');
 		mainview.getController().redirectTo('pmgSubscription');
-	    }
-	}
-    }
+	    },
+	},
+    },
 });

@@ -4,18 +4,20 @@ Ext.define('PMG.VirusQuarantineOptions', {
 
     monStoreErrors: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.add_integer_row('lifetime', gettext('Lifetime (days)'),
-			   { minValue: 1, defaultValue: 7,
-			     deleteEmpty: true });
+			   {
+ minValue: 1, defaultValue: 7,
+			     deleteEmpty: true,
+});
 
 	me.add_boolean_row('viewimages', gettext('View images'),
-			   { defaultValue: 1});
+			   { defaultValue: 1 });
 
 	me.add_boolean_row('allowhrefs', gettext('Allow HREFs'),
-			   {defaultValue: 1 });
+			   { defaultValue: 1 });
 
 	var baseurl = '/config/virusquar';
 
@@ -27,18 +29,18 @@ Ext.define('PMG.VirusQuarantineOptions', {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		handler: function() { me.run_editor(); },
-		selModel: me.selModel
+		selModel: me.selModel,
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
 		url: '/api2/extjs' + baseurl,
-		onlineHelp: 'pmgconfig_clamav_quarantine'
+		onlineHelp: 'pmgconfig_clamav_quarantine',
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
 	    listeners: {
-		itemdblclick: me.run_editor
-	    }
+		itemdblclick: me.run_editor,
+	    },
 	});
 
 	me.callParent();
@@ -46,5 +48,5 @@ Ext.define('PMG.VirusQuarantineOptions', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
-    }
+    },
 });

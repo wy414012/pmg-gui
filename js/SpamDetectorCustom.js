@@ -1,7 +1,7 @@
 Ext.define('pmg-sa-custom', {
     extend: 'Ext.data.Model',
-    fields: [ 'name', 'score', 'comment', 'digest' ],
-    idProperty: 'name'
+    fields: ['name', 'score', 'comment', 'digest'],
+    idProperty: 'name',
 });
 
 Ext.define('PMG.SpamDetectorCustomScores', {
@@ -44,7 +44,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		    vm.set('digest', digestel.digest);
 		    vm.set('applied', !changes);
 		    vm.set('changetext', `<pre>${changes || ''}</pre>`);
-		}
+		},
 	    });
 	},
 
@@ -96,8 +96,8 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 			xtype: 'hiddenfield',
 			name: 'digest',
 			value: vm.get('digest'),
-		    }
-		]
+		    },
+		],
 	    }).show();
 	},
 
@@ -116,26 +116,26 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 			xtype: 'proxmoxtextfield',
 			name: 'name',
 			allowBlank: false,
-			fieldLabel: gettext('Name')
+			fieldLabel: gettext('Name'),
 		    },
 		    {
 			xtype: 'numberfield',
 			name: 'score',
 			allowBlank: false,
-			fieldLabel: gettext('Score')
+			fieldLabel: gettext('Score'),
 		    },
 
 		    {
 			xtype: 'proxmoxtextfield',
 			name: 'comment',
-			fieldLabel: gettext("Comment")
+			fieldLabel: gettext("Comment"),
 		    },
 		    {
 			xtype: 'hiddenfield',
 			name: 'digest',
 			value: vm.get('digest'),
-		    }
-		]
+		    },
+		],
 	    });
 
 	    win.on('destroy', me.reload, me);
@@ -160,26 +160,26 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		    {
 			xtype: 'displayfield',
 			name: 'name',
-			fieldLabel: gettext('Name')
+			fieldLabel: gettext('Name'),
 		    },
 		    {
 			xtype: 'numberfield',
 			name: 'score',
 			allowBlank: false,
-			fieldLabel: gettext('Score')
+			fieldLabel: gettext('Score'),
 		    },
 
 		    {
 			xtype: 'proxmoxtextfield',
 			name: 'comment',
-			fieldLabel: gettext("Comment")
+			fieldLabel: gettext("Comment"),
 		    },
 		    {
 			xtype: 'hiddenfield',
 			name: 'digest',
 			value: vm.get('digest'),
-		    }
-		]
+		    },
+		],
 	    });
 
 	    win.load();
@@ -206,11 +206,11 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		model: 'pmg-sa-custom',
 		proxy: {
 		    type: 'proxmox',
-		    url: "/api2/json/config/customscores"
+		    url: "/api2/json/config/customscores",
 		},
 		sorters: {
 		    property: 'name',
-		}
+		},
 	    },
 
 	    tbar: [
@@ -218,7 +218,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		    xtype: 'proxmoxButton',
 		    text: gettext('Edit'),
 		    disabled: true,
-		    handler: 'run_editor'
+		    handler: 'run_editor',
 		},
 		{
 		    text: gettext('Create'),
@@ -230,7 +230,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 			let digest = this.up('grid').digest;
 			let url = `/config/customscores/${rec.getId()}`;
 			if (digest) {
-			    url += `?digest=${digest}`
+			    url += `?digest=${digest}`;
 			}
 			return url;
 		    },
@@ -255,11 +255,11 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 			disabled: '{applied}',
 		    },
 		    handler: 'restart',
-		}
+		},
 	    ],
 
 	    viewConfig: {
-		trackOver: false
+		trackOver: false,
 	    },
 
 	    columns: [
@@ -267,26 +267,26 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		    header: gettext('Name'),
 		    width: 200,
 		    sortable: true,
-		    dataIndex: 'name'
+		    dataIndex: 'name',
 		},
 		{
 		    header: gettext('Score'),
 		    width: 200,
 		    sortable: true,
-		    dataIndex: 'score'
+		    dataIndex: 'score',
 		},
 		{
 		    header: gettext('Comment'),
 		    sortable: false,
 		    renderer: Ext.String.htmlEncode,
 		    dataIndex: 'comment',
-		    flex: 1
-		}
+		    flex: 1,
+		},
 	    ],
 
 	    listeners: {
 		itemdblclick: 'run_editor',
-	    }
+	    },
 	},
 	{
 	    xtype: 'panel',
@@ -297,15 +297,15 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 	    hidden: true,
 	    bind: {
 		hidden: '{applied}',
-		html: '{changetext}'
+		html: '{changetext}',
 	    },
 	    reference: 'changes',
 	    tbar: [
 		gettext('Pending changes') + ' (' +
-		gettext('Please restart pmg-smtp-filter to activate changes') + ')'
+		gettext('Please restart pmg-smtp-filter to activate changes') + ')',
 	    ],
 	    split: true,
-	}
+	},
     ],
 
 });

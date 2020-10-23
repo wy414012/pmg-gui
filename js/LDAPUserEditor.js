@@ -12,7 +12,7 @@ Ext.define('PMG.LDAPUserInputPanel', {
 
 	me.callParent([values]);
     },
-    
+
     controller: {
 
 	xclass: 'Ext.app.ViewController',
@@ -24,9 +24,9 @@ Ext.define('PMG.LDAPUserInputPanel', {
 
 	control: {
 	    'field[name=profile]': {
-		change: 'changeProfile'
-	    }
-	}
+		change: 'changeProfile',
+	    },
+	},
     },
 
     items: [
@@ -34,15 +34,15 @@ Ext.define('PMG.LDAPUserInputPanel', {
 	    xtype: 'pmgLDAPProfileSelector',
 	    name: 'profile',
 	    reference: 'profileField',
-	    fieldLabel: gettext("Profile")
+	    fieldLabel: gettext("Profile"),
 	},
 	{
 	    xtype: 'pmgLDAPUserSelector',
 	    name: 'account',
 	    reference: 'accountField',
-	    fieldLabel: gettext("Account")
-	}
-    ]
+	    fieldLabel: gettext("Account"),
+	},
+    ],
 });
 
 Ext.define('PMG.LDAPUserEditor', {
@@ -52,5 +52,5 @@ Ext.define('PMG.LDAPUserEditor', {
 
     width: 500,
 
-    items: [{ xtype: 'pmgLDAPUserInputPanel' }]
+    items: [{ xtype: 'pmgLDAPUserInputPanel' }],
 });

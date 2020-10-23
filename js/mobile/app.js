@@ -10,16 +10,16 @@ var app = new Framework7({
 		if (routeTo.params.path === 'mail') {
 		    let mail = new MailView();
 		    resolve({
-			template: mail.getTpl()
-		    },{
+			template: mail.getTpl(),
+		    }, {
 			context: {
-			    mailid: routeTo.params.subpath
-			}
+			    mailid: routeTo.params.subpath,
+			},
 		    });
 		} else {
 		    reject();
 		}
-	    }
+	    },
 	},
 	{
 	    path: '/mail/:mailid/:action',
@@ -36,10 +36,10 @@ var app = new Framework7({
 			    url: '/api2/json/quarantine/content/',
 			    data: {
 				action: action,
-				id: mailid
+				id: mailid,
 			    },
 			    headers: {
-				CSRFPreventionToken: Proxmox.CSRFPreventionToken
+				CSRFPreventionToken: Proxmox.CSRFPreventionToken,
 			    },
 			    success: (data, status, xhr) => {
 				loader.close();
@@ -48,13 +48,12 @@ var app = new Framework7({
 				    gettext("Info"),
 				    () => {
 					if (action === 'delete' ||
-					    action === 'deliver')
-					{
+					    action === 'deliver') {
 					    // refresh the main list when a mail
 					    // got deleted or delivered
 					    app.ptr.refresh();
 					}
-				    }
+				    },
 				);
 				reject();
 			    },
@@ -62,16 +61,16 @@ var app = new Framework7({
 				loader.close();
 				PMG.Utils.showError(xhr);
 				reject();
-			    }
-			})
+			    },
+			});
 		    },
 		    () => {
 			reject();
-		    }
+		    },
 		);
-	    }
-	}
-    ]
+	    },
+	},
+    ],
 });
 
 let quarlist = new QuarantineView();

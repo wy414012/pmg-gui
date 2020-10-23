@@ -12,8 +12,8 @@ Ext.define('PMG.SubscriptionKeyEdit', {
 	xtype: 'textfield',
 	name: 'key',
 	value: '',
-	fieldLabel: gettext('Subscription Key')
-    }
+	fieldLabel: gettext('Subscription Key'),
+    },
 });
 
 Ext.define('PMG.Subscription', {
@@ -27,7 +27,7 @@ Ext.define('PMG.Subscription', {
     onlineHelp: 'getting_help',
 
     viewConfig: {
-	enableTextSelection: true
+	enableTextSelection: true,
     },
 
     showReport: function() {
@@ -35,7 +35,7 @@ Ext.define('PMG.Subscription', {
 
 	var getReportFileName = function() {
 	    var now = Ext.Date.format(new Date(), 'D-d-F-Y-G-i');
-	    return Proxmox.NodeName + '-report-'  + now + '.txt';
+	    return Proxmox.NodeName + '-report-' + now + '.txt';
 	};
 
 	var view = Ext.createWidget('component', {
@@ -45,8 +45,8 @@ Ext.define('PMG.Subscription', {
 		'background-color': 'white',
 		'white-space': 'pre',
 		'font-family': 'monospace',
-		padding: '5px'
-	    }
+		padding: '5px',
+	    },
 	});
 
 	var reportWindow = Ext.create('Ext.window.Window', {
@@ -76,10 +76,10 @@ Ext.define('PMG.Subscription', {
 			    element.click();
 			    document.body.removeChild(element);
 			}
-		    }
-		}
+		    },
+		},
 	    ],
-	    items: view
+	    items: view,
 	});
 
 	Proxmox.Utils.API2Request({
@@ -93,11 +93,11 @@ Ext.define('PMG.Subscription', {
 		var report = Ext.htmlEncode(response.result.data);
 		reportWindow.show();
 		view.update(report);
-	    }
+	    },
 	});
     },
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	var reload = function() {
@@ -116,46 +116,46 @@ Ext.define('PMG.Subscription', {
 
 	var rows = {
 	    productname: {
-		header: gettext('Type')
+		header: gettext('Type'),
 	    },
 	    key: {
-		header: gettext('Subscription Key')
+		header: gettext('Subscription Key'),
 	    },
 	    status: {
 		header: gettext('Status'),
-		renderer: render_status
+		renderer: render_status,
 	    },
 	    message: {
-		visible: false
+		visible: false,
 	    },
 	    serverid: {
-		header: gettext('Server ID')
+		header: gettext('Server ID'),
 	    },
 	    sockets: {
-		header: gettext('Sockets')
+		header: gettext('Sockets'),
 	    },
 	    checktime: {
 		header: gettext('Last checked'),
-		renderer: Proxmox.Utils.render_timestamp
+		renderer: Proxmox.Utils.render_timestamp,
 	    },
 	    nextduedate: {
-		header: gettext('Next due date')
-	    }
+		header: gettext('Next due date'),
+	    },
 	};
 
 	Ext.apply(me, {
 	    url: '/api2/json' + baseurl,
 	    cwidth1: 170,
-	    tbar: [ 
+	    tbar: [
 		{
 		    text: gettext('Upload Subscription Key'),
 		    handler: function() {
 			var win = Ext.create('PMG.SubscriptionKeyEdit', {
-			    url: '/api2/extjs/' + baseurl 
+			    url: '/api2/extjs/' + baseurl,
 			});
 			win.show();
 			win.on('destroy', reload);
-		    }
+		    },
 		},
 		{
 		    text: gettext('Remove Subscription'),
@@ -177,23 +177,23 @@ Ext.define('PMG.Subscription', {
 			    failure: function(response, opts) {
 				Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 			    },
-			    callback: reload
+			    callback: reload,
 			});
-		    }
+		    },
 		},
 		'-',
 		{
 		    text: gettext('System Report'),
 		    handler: function() {
-			Proxmox.Utils.checked_command(function (){ me.showReport(); });
-		    }
-		}
+			Proxmox.Utils.checked_command(function() { me.showReport(); });
+		    },
+		},
 	    ],
-	    rows: rows
+	    rows: rows,
 	});
 
 	me.callParent();
 
 	reload();
-    }
+    },
 });

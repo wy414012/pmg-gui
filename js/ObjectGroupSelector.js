@@ -9,7 +9,7 @@ Ext.define('PMG.ObjectGroupSelector', {
 
     rulegroup: undefined,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	if (!me.rulegroup) {
@@ -46,8 +46,8 @@ Ext.define('PMG.ObjectGroupSelector', {
 		listeners: {
 		    itemdblclick: function(view, rec) {
 			me.fireEvent('selectObjectGroup', me, rec);
-		    }
-		}
+		    },
+		},
 	    };
 	} else {
 	    me.items = {
@@ -57,11 +57,11 @@ Ext.define('PMG.ObjectGroupSelector', {
 		listeners: {
 		    itemdblclick: function(view, rec) {
 			me.fireEvent('selectObjectGroup', me, rec);
-		    }
-		}
+		    },
+		},
 	    };
 	}
 
 	me.callParent();
-    }
+    },
 });

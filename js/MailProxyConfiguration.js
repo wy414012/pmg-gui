@@ -12,42 +12,42 @@ Ext.define('PMG.MailProxyConfiguration', {
 	{
 	    itemId: 'relaying',
 	    title: gettext('Relaying'),
-	    xtype: 'pmgMailProxyRelaying'
+	    xtype: 'pmgMailProxyRelaying',
 	},
 	{
 	    itemId: 'relaydomains',
 	    title: gettext('Relay Domains'),
-	    xtype: 'pmgRelayDomains'
+	    xtype: 'pmgRelayDomains',
 	},
 	{
 	    itemId: 'ports',
 	    title: gettext('Ports'),
-	    xtype: 'pmgMailProxyPorts'
+	    xtype: 'pmgMailProxyPorts',
 	},
 	{
 	    itemId: 'options',
 	    title: gettext('Options'),
-	    xtype: 'pmgMailProxyOptions'
+	    xtype: 'pmgMailProxyOptions',
 	},
 	{
 	    itemId: 'transports',
 	    title: gettext('Transports'),
-	    xtype: 'pmgTransport'
+	    xtype: 'pmgTransport',
 	},
 	{
 	    itemId: 'networks',
 	    title: gettext('Networks'),
-	    xtype: 'pmgMyNetworks'
+	    xtype: 'pmgMyNetworks',
 	},
 	{
 	    itemId: 'tls',
 	    title: gettext('TLS'),
-	    xtype: 'pmgMailProxyTLSPanel'
+	    xtype: 'pmgMailProxyTLSPanel',
 	},
 	{
 	    itemId: 'dkim',
 	    title: gettext('DKIM'),
-	    xtype: 'pmgMailProxyDKIMPanel'
+	    xtype: 'pmgMailProxyDKIMPanel',
 	},
 	{
 	    itemId: 'whitelist',
@@ -56,9 +56,9 @@ Ext.define('PMG.MailProxyConfiguration', {
 	    hideGroupInfo: true,
 	    showDirection: true,
 	    otype_list: [1000, 1009, 1001, 1007, 1002, 1008, 1003, 1004],
-	    baseurl: '/config/whitelist'
-	}
-   ]
+	    baseurl: '/config/whitelist',
+	},
+   ],
 });
 
 

@@ -4,41 +4,41 @@ Ext.define('PMG.VirusCharts', {
     xtype: 'pmgVirusCharts',
 
     title: gettext('Statistics') + ': ' + gettext('Virus Charts'),
-    
+
     border: false,
     disableSelection: true,
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     emptyText: gettext('No data in database'),
     viewConfig: {
-	deferEmptyText: false
+	deferEmptyText: false,
     },
 
     store: {
 	xclass: 'PMG.data.StatStore',
-	fields: [ 'name', 'count' ],
-	staturl: "/api2/json/statistics/virus"
+	fields: ['name', 'count'],
+	staturl: "/api2/json/statistics/virus",
     },
 
     columns: [
 	{
 	    header: gettext('Name'),
 	    flex: 1,
-	    dataIndex: 'name'
+	    dataIndex: 'name',
 	},
 	{
 	    header: gettext('Count'),
 	    width: 150,
-	    dataIndex: 'count'
-	}
+	    dataIndex: 'count',
+	},
     ],
 
     initComponent: function() {
 	var me = this;
-	
+
 	me.callParent();
-	
+
 	Proxmox.Utils.monStoreErrors(me, me.store);
-    }
+    },
 });

@@ -11,8 +11,8 @@ Ext.define('PMG.SenderDetails', {
 	    xtype: 'panel',
 	    itemId: 'info',
 	    bodyPadding: 10,
-	    html: gettext('Please select a sender.')
-	}
+	    html: gettext('Please select a sender.'),
+	},
     ],
 
     disableSelection: true,
@@ -45,19 +45,19 @@ Ext.define('PMG.SenderDetails', {
 	    { type: 'integer', name: 'bytes' },
 	    { type: 'boolean', name: 'blocked' },
 	    { type: 'integer', name: 'spamlevel' },
-            { type: 'date', dateFormat: 'timestamp', name: 'time' }
+            { type: 'date', dateFormat: 'timestamp', name: 'time' },
 	],
 	proxy: {
 	    type: 'pmgfilterproxy',
 	    filterId: 'x-gridfilter-receiver',
-	    sortParam: 'orderby'
+	    sortParam: 'orderby',
 	},
 	sorters: [
 	    {
 		property: 'time',
-		direction: 'ASC'
-	    }
-	]
+		direction: 'ASC',
+	    },
+	],
     },
 
     columns: [
@@ -66,25 +66,25 @@ Ext.define('PMG.SenderDetails', {
 	    renderer: Ext.htmlEncode,
 	    flex: 1,
 	    filter: { type: 'string' },
-	    dataIndex: 'receiver'
+	    dataIndex: 'receiver',
 	},
 	{
 	    header: gettext('Size') + ' (KB)',
 	    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
-	    dataIndex: 'bytes'
+	    dataIndex: 'bytes',
 	},
 	{
 	    xtype: 'datecolumn',
 	    header: gettext('Date'),
 	    format: 'Y-m-d',
-	    dataIndex: 'time'
+	    dataIndex: 'time',
 	},
 	{
 	    xtype: 'datecolumn',
 	    header: gettext('Time'),
 	    format: 'H:i:s',
-	    dataIndex: 'time'
-	}
+	    dataIndex: 'time',
+	},
     ],
 
     initComponent: function() {
@@ -92,7 +92,7 @@ Ext.define('PMG.SenderDetails', {
 	me.callParent();
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
-    }
+    },
 });
 
 Ext.define('PMG.SenderList', {
@@ -107,10 +107,10 @@ Ext.define('PMG.SenderList', {
 
     emptyText: gettext('No data in database'),
     viewConfig: {
-	deferEmptyText: false
+	deferEmptyText: false,
     },
 
-    tbar: [ { xtype: 'pmgStatTimeSelector' } ],
+    tbar: [{ xtype: 'pmgStatTimeSelector' }],
 
     store: {
 	type: 'pmgStatStore',
@@ -121,27 +121,27 @@ Ext.define('PMG.SenderList', {
 	    'sender',
 	    { type: 'integer', name: 'count' },
 	    { type: 'integer', name: 'bytes' },
-	    { type: 'integer', name: 'viruscount' }
+	    { type: 'integer', name: 'viruscount' },
 	],
 	proxy: {
 	    type: 'pmgfilterproxy',
 	    sortParam: 'orderby',
-	    filterId: 'x-gridfilter-sender'
+	    filterId: 'x-gridfilter-sender',
 	},
 	sorters: [
 	    {
 		property: 'count',
-		direction: 'DESC'
+		direction: 'DESC',
 	    },
 	    {
 		property: 'bytes',
-		direction: 'DESC'
+		direction: 'DESC',
 	    },
 	    {
 		property: 'sender',
-		direction: 'ASC'
-	    }
-	]
+		direction: 'ASC',
+	    },
+	],
     },
 
     columns: [
@@ -154,29 +154,29 @@ Ext.define('PMG.SenderList', {
 		type: 'string',
 		itemDefaults: {
 		    // any Ext.form.field.Text configs accepted
-		}
-	    }
+		},
+	    },
 	},
 	{
 	    text: gettext('Count'),
 	    columns: [
 		{
 		    text: gettext('Mail'),
-		    dataIndex: 'count'
+		    dataIndex: 'count',
 		},
 		{
 		    header: gettext('Virus'),
-		    dataIndex: 'viruscount'
-		}
-	    ]
+		    dataIndex: 'viruscount',
+		},
+	    ],
 	},
 	{
 	    text: gettext('Size') + ' (KB)',
 	    dataIndex: 'bytes',
 	    renderer: function(v) {
 		return Ext.Number.toFixed(v/1024, 0);
-	    }
-	}
+	    },
+	},
     ],
 
     initComponent: function() {
@@ -184,7 +184,7 @@ Ext.define('PMG.SenderList', {
 	me.callParent();
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
-    }
+    },
 });
 
 Ext.define('PMG.SenderStatistics', {
@@ -194,14 +194,14 @@ Ext.define('PMG.SenderStatistics', {
     layout: 'border',
     border: false,
     defaults: {
-	border: false
+	border: false,
     },
 
     controller: {
 	xclass: 'Ext.app.ViewController',
 
 	selectionChange: function(grid, selected, eOpts) {
-	    var details =  this.lookupReference('details');
+	    var details = this.lookupReference('details');
 	    if (selected.length > 0) {
 		var sender = selected[0].data.sender;
 		var url = "/api2/json/statistics/sender/" +
@@ -210,7 +210,7 @@ Ext.define('PMG.SenderStatistics', {
 	    } else {
 		details.setUrl();
 	    }
-	}
+	},
     },
 
     items: [
@@ -221,14 +221,14 @@ Ext.define('PMG.SenderStatistics', {
 	    layout: 'fit',
 	    flex: 1,
 
-	    listeners: { selectionchange: 'selectionChange' }
+	    listeners: { selectionchange: 'selectionChange' },
 	},
 	{
 	    xtype: 'pmgSenderDetails',
 	    region: 'east',
 	    reference: 'details',
 	    split: true,
-	    flex: 1
-	}
-    ]
+	    flex: 1,
+	},
+    ],
 });

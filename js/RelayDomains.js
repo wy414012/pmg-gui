@@ -1,8 +1,8 @@
 /*global Proxmox*/
 Ext.define('pmg-domains', {
     extend: 'Ext.data.Model',
-    fields: [ 'domain', 'comment' ],
-    idProperty: 'domain'
+    fields: ['domain', 'comment'],
+    idProperty: 'domain',
 });
 
 Ext.define('PMG.RelayDomains', {
@@ -14,18 +14,18 @@ Ext.define('PMG.RelayDomains', {
 
     onlineHelp: 'pmgconfig_mailproxy_relay_domains',
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	var store = new Ext.data.Store({
 	    model: 'pmg-domains',
 	    sorters: {
 		property: 'domain',
-		order: 'DESC'
+		order: 'DESC',
 	    },
 	    proxy: {
 		type: 'proxmox',
-		url: '/api2/json' + me.baseurl
+		url: '/api2/json' + me.baseurl,
 	    },
 	});
 
@@ -39,7 +39,7 @@ Ext.define('PMG.RelayDomains', {
 	    selModel: me.selModel,
 	    baseurl: me.baseurl,
 	    callback: reload,
-	    waitMsgTarget: me
+	    waitMsgTarget: me,
 	});
 
 	var run_editor = function() {
@@ -57,14 +57,14 @@ Ext.define('PMG.RelayDomains', {
 		    {
 			xtype: 'displayfield',
 			name: 'domain',
-			fieldLabel: me.domain_desc
+			fieldLabel: me.domain_desc,
 		    },
 		    {
 			xtype: 'textfield',
 			name: 'comment',
-			fieldLabel: gettext("Comment")
-		    }
-		]
+			fieldLabel: gettext("Comment"),
+		    },
+		],
 	    };
 
 	    var win = Ext.createWidget('proxmoxWindowEdit', config);
@@ -80,7 +80,7 @@ Ext.define('PMG.RelayDomains', {
 		text: gettext('Edit'),
 		disabled: true,
 		selModel: me.selModel,
-		handler: run_editor
+		handler: run_editor,
             },
             {
 		text: gettext('Create'),
@@ -96,14 +96,14 @@ Ext.define('PMG.RelayDomains', {
 			    {
 				xtype: 'proxmoxtextfield',
 				name: 'domain',
-				fieldLabel: me.domain_desc
+				fieldLabel: me.domain_desc,
 			    },
 			    {
 				xtype: 'proxmoxtextfield',
 				name: 'comment',
-				fieldLabel: gettext("Comment")
-			    }
-			]
+				fieldLabel: gettext("Comment"),
+			    },
+			],
 		    };
 		    /*jslint confusion: false*/
 
@@ -111,9 +111,9 @@ Ext.define('PMG.RelayDomains', {
 
 		    win.on('destroy', reload);
 		    win.show();
-		}
+		},
             },
-	    remove_btn
+	    remove_btn,
         ];
 
 	Proxmox.Utils.monStoreErrors(me, store, true);
@@ -123,29 +123,29 @@ Ext.define('PMG.RelayDomains', {
 	    tbar: tbar,
 	    run_editor: run_editor,
 	    viewConfig: {
-		trackOver: false
+		trackOver: false,
 	    },
 	    columns: [
 		{
 		    header: me.domain_desc,
 		    width: 200,
 		    sortable: true,
-		    dataIndex: 'domain'
+		    dataIndex: 'domain',
 		},
 		{
 		    header: gettext('Comment'),
 		    sortable: false,
 		    renderer: Ext.String.htmlEncode,
 		    dataIndex: 'comment',
-		    flex: 1
-		}
+		    flex: 1,
+		},
 	    ],
 	    listeners: {
 		itemdblclick: run_editor,
-		activate: reload
-	    }
+		activate: reload,
+	    },
 	});
 
 	me.callParent();
-    }
+    },
 });

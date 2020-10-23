@@ -1,6 +1,6 @@
 Ext.define('PMG.FilterProxy', {
     extend: 'Proxmox.RestProxy',
-    alias : 'proxy.pmgfilterproxy',
+    alias: 'proxy.pmgfilterproxy',
 
     filterId: undefined, // 'x-gridfilter-XXXXX'
 
@@ -24,5 +24,5 @@ Ext.define('PMG.FilterProxy', {
 	    }
 	}
 	return params;
-    }
+    },
 });

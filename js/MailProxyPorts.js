@@ -8,7 +8,7 @@ Ext.define('PMG.MailProxyPorts', {
 
     editorConfig: {
 	url: '/api2/extjs/config/mail',
-	onlineHelp: 'pmgconfig_mailproxy_ports'
+	onlineHelp: 'pmgconfig_mailproxy_ports',
     },
 
     interval: 5000,
@@ -21,11 +21,11 @@ Ext.define('PMG.MailProxyPorts', {
 
 	onEdit: function() {
 	    this.getView().run_editor();
-	}
+	},
     },
 
     listeners: {
-	itemdblclick: 'onEdit'
+	itemdblclick: 'onEdit',
     },
 
     tbar: [
@@ -33,25 +33,29 @@ Ext.define('PMG.MailProxyPorts', {
 	    text: gettext('Edit'),
 	    xtype: 'proxmoxButton',
 	    disabled: true,
-	    handler: 'onEdit'
-	}
+	    handler: 'onEdit',
+	},
     ],
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.add_integer_row('ext_port', gettext('External SMTP Port'),
-			   { defaultValue: 25, deleteEmpty: true,
-			     minValue: 1, maxValue: 65535 });
+			   {
+ defaultValue: 25, deleteEmpty: true,
+			     minValue: 1, maxValue: 65535,
+});
 
 	me.add_integer_row('int_port', gettext('Internal SMTP Port'),
-			   { defaultValue: 26, deleteEmpty: true,
-			     minValue: 1, maxValue: 65535 });
+			   {
+ defaultValue: 26, deleteEmpty: true,
+			     minValue: 1, maxValue: 65535,
+});
 
 	me.callParent();
 
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
-    }
+    },
 });

@@ -56,9 +56,9 @@ Ext.define('PMG.LoginView', {
 			loginForm.unmask();
 			Ext.MessageBox.alert(
 			    gettext('Error'),
-			    gettext('Login failed. Please try again')
+			    gettext('Login failed. Please try again'),
 			);
-		    }
+		    },
 		});
 	    }
 	},
@@ -72,18 +72,18 @@ Ext.define('PMG.LoginView', {
 		    var loginwin = this.lookupReference('loginwindow');
 		    loginwin.mask(gettext('Please wait...'), 'x-mask-loading');
 		    window.location.reload();
-		}
+		},
 	    },
 	    'button[reference=loginButton]': {
-		click: 'submitForm'
-	    }
-	}
+		click: 'submitForm',
+	    },
+	},
     },
 
     plugins: 'viewport',
 
     layout: {
-	type: 'border'
+	type: 'border',
     },
 
     items: [
@@ -92,22 +92,22 @@ Ext.define('PMG.LoginView', {
 	    xtype: 'container',
 	    layout: {
 		type: 'hbox',
-		align: 'middle'
+		align: 'middle',
 	    },
 	    margin: '2 5 2 5',
 	    height: 38,
 	    items: [
 		{
-		    xtype: 'proxmoxlogo'
+		    xtype: 'proxmoxlogo',
 		},
 		{
 		    xtype: 'versioninfo',
-		    makeApiCall: false
-		}
-	    ]
+		    makeApiCall: false,
+		},
+	    ],
 	},
 	{
-	    region: 'center'
+	    region: 'center',
 	},
 	{
 	    xtype: 'window',
@@ -120,7 +120,7 @@ Ext.define('PMG.LoginView', {
 	    defaultFocus: 'usernameField',
 
 	    layout: {
-		type: 'auto'
+		type: 'auto',
 	    },
 
 	    title: gettext('Proxmox Mail Gateway Login'),
@@ -129,7 +129,7 @@ Ext.define('PMG.LoginView', {
 		{
 		    xtype: 'form',
 		    layout: {
-			type: 'form'
+			type: 'form',
 		    },
 		    defaultButton: 'loginButton',
 		    url: '/api2/extjs/access/ticket',
@@ -137,7 +137,7 @@ Ext.define('PMG.LoginView', {
 
 		    fieldDefaults: {
 			labelAlign: 'right',
-			allowBlank: false
+			allowBlank: false,
 		    },
 
 		    items: [
@@ -146,38 +146,38 @@ Ext.define('PMG.LoginView', {
 			    fieldLabel: gettext('User name'),
 			    name: 'username',
 			    itemId: 'usernameField',
-			    reference: 'usernameField'
+			    reference: 'usernameField',
 			},
 			{
 			    xtype: 'textfield',
 			    inputType: 'password',
 			    fieldLabel: gettext('Password'),
 			    name: 'password',
-			    reference: 'passwordField'
+			    reference: 'passwordField',
 			},
 			{
 			    xtype: 'proxmoxLanguageSelector',
 			    fieldLabel: gettext('Language'),
 			    value: Ext.util.Cookies.get('PMGLangCookie') || 'en',
 			    name: 'lang',
-			    submitValue: false
+			    submitValue: false,
 			},
 			{
 			    xtype: 'hiddenfield',
 			    reference: 'realmfield',
 			    name: 'realm',
-			    value: 'pmg'
-                        }
+			    value: 'pmg',
+                        },
 		    ],
 		    buttons: [
 			{
 			    text: gettext('Login'),
 			    reference: 'loginButton',
-			    formBind: true
-			}
-		    ]
-		}
-	    ]
-	}
-    ]
+			    formBind: true,
+			},
+		    ],
+		},
+	    ],
+	},
+    ],
 });

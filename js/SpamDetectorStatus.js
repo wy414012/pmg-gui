@@ -4,9 +4,9 @@ Ext.define('pmg-spamassassin-database', {
     fields: [
 	'channel', 'version', 'update_version',
 	{ name: 'update_avail', type: 'boolean' },
-	{ name: 'last_updated', type: 'date', dateFormat: 'timestamp' }
+	{ name: 'last_updated', type: 'date', dateFormat: 'timestamp' },
     ],
-    idProperty: 'channel'
+    idProperty: 'channel',
 });
 
 Ext.define('PMG.SpamDetectorStatusGrid', {
@@ -16,26 +16,26 @@ Ext.define('PMG.SpamDetectorStatusGrid', {
     title: gettext('Status'),
 
     viewConfig: {
-	trackOver: false
+	trackOver: false,
     },
     columns: [
 	{
 	    header: gettext('Channel'),
 	    sortable: true,
 	    flex: 1,
-	    dataIndex: 'channel'
+	    dataIndex: 'channel',
 	},
 	{
 	    header: gettext('Last Update'),
 	    sortable: true,
 	    flex: 2,
-	    dataIndex: 'last_updated'
+	    dataIndex: 'last_updated',
 	},
 	{
 	    header: gettext('Version'),
 	    flex: 1,
 	    sortable: true,
-	    dataIndex: 'version'
+	    dataIndex: 'version',
 	},
 	{
 	    header: gettext('Update Available'),
@@ -48,15 +48,15 @@ Ext.define('PMG.SpamDetectorStatusGrid', {
 		} else {
 		    return Proxmox.Utils.yesText + ' (' + record.data.update_version + ')';
 		}
-	    }
-	}
+	    },
+	},
     ],
 
     listeners: {
 	activate: function() {
 	    var me = this;
 	    me.store.load();
-	}
+	},
     },
 
     tbar: [
@@ -74,33 +74,33 @@ Ext.define('PMG.SpamDetectorStatusGrid', {
 			var upid = response.result.data;
 
 			var win = Ext.create('Proxmox.window.TaskViewer', {
-			    upid: upid
+			    upid: upid,
 			});
 			win.show();
 			me.mon(win, 'close', function() { me.store.load(); });
-		    }
+		    },
 		});
-	    }
-	}
+	    },
+	},
     ],
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.store = Ext.create('Ext.data.Store', {
 	    model: 'pmg-spamassassin-database',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json/nodes/" + Proxmox.NodeName + "/spamassassin/rules"
+		url: "/api2/json/nodes/" + Proxmox.NodeName + "/spamassassin/rules",
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC'
-	    }
+		order: 'DESC',
+	    },
 	});
 
 	me.callParent();
 
 	Proxmox.Utils.monStoreErrors(me.getView(), me.store, true);
-    }
+    },
 });

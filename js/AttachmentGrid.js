@@ -1,13 +1,13 @@
-Ext.define('PMG.grid.AttachmentGrid',{
+Ext.define('PMG.grid.AttachmentGrid', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgAttachmentGrid',
 
     store: {
 	autoDestroy: true,
-	fields: [ 'name', 'content-type', 'size' ],
+	fields: ['name', 'content-type', 'size'],
 	proxy: {
 	    type: 'proxmox',
-	}
+	},
     },
 
     setID: function(rec) {
@@ -56,6 +56,6 @@ Ext.define('PMG.grid.AttachmentGrid',{
 		return "<a target='_blank' class='download' download='"+ rec.data.name +"' href='" +
 		url + "'><i class='fa fa-fw fa-download'</i></a>";
 	    },
-	}
-    ]
+	},
+    ],
 });

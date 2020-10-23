@@ -12,24 +12,24 @@ Ext.define('PMG.SpamDetectorConfiguration', {
 	{
 	    title: gettext('Options'),
 	    itemId: 'options',
-	    xtype: 'pmgSpamDetectorOptions'
+	    xtype: 'pmgSpamDetectorOptions',
 	},
 	{
 	    title: gettext('Quarantine'),
 	    itemId: 'quarantine',
-	    xtype: 'pmgSpamQuarantineOptions'
+	    xtype: 'pmgSpamQuarantineOptions',
 	},
 	{
 	    title: gettext('Status'),
 	    itemId: 'status',
-	    xtype: 'pmgSpamDetectorStatus'
+	    xtype: 'pmgSpamDetectorStatus',
 	},
 	{
 	    title: gettext('Custom Scores'),
 	    itemId: 'scores',
-	    xtype: 'pmgSpamDetectorCustomScores'
+	    xtype: 'pmgSpamDetectorCustomScores',
 	},
-    ]
+    ],
 });
 
 

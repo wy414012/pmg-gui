@@ -1,8 +1,8 @@
 /*global Proxmox*/
 Ext.define('pmg-object-group', {
     extend: 'Ext.data.Model',
-    fields: [ 'id', 'name', 'info' ],
-    idProperty: 'id'
+    fields: ['id', 'name', 'info'],
+    idProperty: 'id',
 });
 
 Ext.define('pmg-object-list', {
@@ -10,9 +10,9 @@ Ext.define('pmg-object-list', {
     fields: [
 	'id', 'descr',
 	{ name: 'otype', type: 'integer' },
-	{ name: 'receivertest', type: 'boolean' }
+	{ name: 'receivertest', type: 'boolean' },
     ],
-    idProperty: 'id'
+    idProperty: 'id',
 });
 
 
@@ -33,13 +33,13 @@ Ext.define('PMG.ObjectGroupList', {
 	    xtype: 'textfield',
 	    name: 'name',
 	    allowBlank: false,
-	    fieldLabel: gettext('Name')
+	    fieldLabel: gettext('Name'),
 	},
 	{
 	    xtype: 'textareafield',
 	    name: 'info',
-	    fieldLabel: gettext("Description")
-	}
+	    fieldLabel: gettext("Description"),
+	},
     ],
 
     reload: function() {
@@ -62,7 +62,7 @@ Ext.define('PMG.ObjectGroupList', {
 	    method: 'PUT',
 	    subject: me.subject,
 	    width: 400,
-	    items: me.inputItems
+	    items: me.inputItems,
 	};
 
 	var win = Ext.createWidget('proxmoxWindowEdit', config);
@@ -72,7 +72,7 @@ Ext.define('PMG.ObjectGroupList', {
 	win.show();
     },
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	if (!me.ogclass) {
@@ -85,12 +85,12 @@ Ext.define('PMG.ObjectGroupList', {
 	    model: 'pmg-object-group',
 	    proxy: {
 		type: 'proxmox',
-		url: "/api2/json" + me.baseurl
+		url: "/api2/json" + me.baseurl,
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC'
-	    }
+		order: 'DESC',
+	    },
 	});
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
@@ -100,7 +100,7 @@ Ext.define('PMG.ObjectGroupList', {
 	    baseurl: me.baseurl,
 	    callback: function() { me.reload(); },
 	    getRecordName: function(rec) { return rec.data.name; },
-	    waitMsgTarget: me
+	    waitMsgTarget: me,
 	});
 
 	var tbar = [
@@ -109,7 +109,7 @@ Ext.define('PMG.ObjectGroupList', {
 		text: gettext('Edit'),
 		disabled: true,
 		selModel: me.selModel,
-		handler: function() { me.run_editor(); }
+		handler: function() { me.run_editor(); },
             },
             {
 		text: gettext('Create'),
@@ -121,16 +121,16 @@ Ext.define('PMG.ObjectGroupList', {
 			isCreate: true,
 			width: 400,
 			subject: me.subject,
-			items: me.inputItems
+			items: me.inputItems,
 		    };
 
 		    var win = Ext.createWidget('proxmoxWindowEdit', config);
 
 		    win.on('destroy', me.reload, me);
 		    win.show();
-		}
+		},
             },
-	    remove_btn
+	    remove_btn,
         ];
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
@@ -146,8 +146,8 @@ Ext.define('PMG.ObjectGroupList', {
 		    sortable: true,
 		    flex: 1,
 		    dataIndex: 'name',
-		    renderer: Ext.String.htmlEncode
-		}
+		    renderer: Ext.String.htmlEncode,
+		},
 	    ],
 	    listeners: {
 		itemdblclick: function() {
@@ -155,12 +155,12 @@ Ext.define('PMG.ObjectGroupList', {
 			me.run_editor();
 		    }
 		},
-		activate: function() { me.reload(); }
-	    }
+		activate: function() { me.reload(); },
+	    },
 	});
 
 	me.callParent();
 
 	me.reload(); // initial load
-    }
+    },
 });

@@ -138,7 +138,7 @@ class QuarantineView extends Component {
 		height: function(item) {
 		    return me._calculateHeight(item);
 		},
-		emptyTemplate: '<div class="empty">No data in database</div>'
+		emptyTemplate: '<div class="empty">No data in database</div>',
 	    });
 
 	    // setup pull to refresh
@@ -162,9 +162,9 @@ class QuarantineView extends Component {
 			sorter: {
 			    property: 'time',
 			    numeric: true,
-			    direction: 'DESC'
+			    direction: 'DESC',
 			},
-			grouperFn: (val) => PMG.Utils.unixToIso(val['time'])
+			grouperFn: (val) => PMG.Utils.unixToIso(val.time),
 		    });
 		}).catch(PMG.Utils.showError).then(() => {
 		    e.detail();
@@ -199,9 +199,7 @@ class QuarantineView extends Component {
 		me._loginScreen.close();
 		PMG.Utils.setLoginInfo(data);
 		return PMG.Utils.getSubscriptionInfo();
-	    }).then(data => {
-		return PMG.Utils.checkSubscription(data, showPopup);
-	    }).then(data => {
+	    }).then(data => PMG.Utils.checkSubscription(data, showPopup)).then(data => {
 		app.ptr.refresh();
 		if (mail) {
 		    let url = "/mail/" + mail + "/" + (action || "");
@@ -214,7 +212,7 @@ class QuarantineView extends Component {
 	    main: me.config.mainView !== undefined ? me.config.mainView : true,
 	    url: '/',
 	    pushState: true,
-	    pushStateAnimateOnLoad: true
+	    pushStateAnimateOnLoad: true,
 	});
     }
     setStarttime(starttime) {
@@ -228,13 +226,13 @@ class QuarantineView extends Component {
 	    date = new Date(PMG.Utils.isoToUnix(starttime)*1000);
 	}
 	// starttime is at beginning of date
-	date.setHours(0,0,0,0);
+	date.setHours(0, 0, 0, 0);
 	let result = Math.round(date.getTime()/1000);
 	if (result !== me.starttime) {
 	    me.starttime = result;
 	    return true;
 	}
-	return false
+	return false;
     }
     setEndtime(endtime) {
 	var me = this;
@@ -275,7 +273,7 @@ class QuarantineView extends Component {
 		case 'ios-item':
 		    height = 53;
 		    break;
-		default: ;
+		default:
 	    }
 	}
 
@@ -284,7 +282,7 @@ class QuarantineView extends Component {
     _renderItem(item) {
 	var me = this;
 
-	if(typeof item === 'object') {
+	if (typeof item === 'object') {
 	    if (item.skel) {
 		return item.divider? me.skelDividerTpl : me.skelTpl;
 	    } else if (item.divider) {
@@ -305,13 +303,13 @@ class QuarantineView extends Component {
 		let prop = options.sorter.property;
 		let numeric = options.sorter.numeric;
 		let dir = options.sorter.direction === "ASC" ? 1 : -1;
-		items.sort((a,b) => {
+		items.sort((a, b) => {
 		    let result;
 
 		    if (numeric) {
 			result = a[prop] - b[prop];
 		    } else {
-			result = a[prop] === b[prop] ? 0 : (a[prop] < b[prop] ? 1 : -1);
+			result = a[prop] === b[prop] ? 0 : a[prop] < b[prop] ? 1 : -1;
 		    }
 
 		    return result * dir;
@@ -326,9 +324,9 @@ class QuarantineView extends Component {
 		let item = items[i+offset];
 		let curgroup = options.grouperFn(item);
 		if (curgroup != lastgroup) {
-		    me.vList.insertItemBefore(i+(offset++), {
+		    me.vList.insertItemBefore(i+offset++, {
 			divider: true,
-			group: curgroup
+			group: curgroup,
 		    });
 		    lastgroup = curgroup;
 		}
@@ -342,7 +340,7 @@ class QuarantineView extends Component {
 		url: '/api2/json/quarantine/spam',
 		data: {
 		    starttime: me.starttime,
-		    endtime: me.endtime
+		    endtime: me.endtime,
 		},
 		dataType: 'json',
 		success: (response, status, xhr) => {
@@ -350,7 +348,7 @@ class QuarantineView extends Component {
 		},
 		error: xhr => {
 		    reject(xhr);
-		}
+		},
 	    });
 	});
     }

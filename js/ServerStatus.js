@@ -12,7 +12,7 @@ Ext.define('PMG.ServerStatus', {
     bodyPadding: '10 0 0 0',
     defaults: {
 	width: 700,
-	padding: '0 0 10 10'
+	padding: '0 0 10 10',
     },
 
     layout: 'column',
@@ -33,7 +33,7 @@ Ext.define('PMG.ServerStatus', {
 		waitMsgTarget: me,
 		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
 	},
 
@@ -43,14 +43,14 @@ Ext.define('PMG.ServerStatus', {
 
 	nodeReboot: function() {
 	    this.nodeCommand('reboot');
-	}
+	},
     },
 
     tbar: [
 	{
 	    text: gettext("Console"),
 	    iconCls: 'fa fa-terminal',
-	    handler: 'openConsole'
+	    handler: 'openConsole',
 	},
 	{
 	    xtype: 'proxmoxButton',
@@ -58,7 +58,7 @@ Ext.define('PMG.ServerStatus', {
 	    dangerous: true,
 	    confirmMsg: gettext('Node') + " '" + Proxmox.NodeName + "' - " + gettext('Restart'),
 	    handler: 'nodeReboot',
-	    iconCls: 'fa fa-undo'
+	    iconCls: 'fa fa-undo',
 	},
 	{
 	    xtype: 'proxmoxButton',
@@ -66,12 +66,12 @@ Ext.define('PMG.ServerStatus', {
 	    dangerous: true,
 	    confirmMsg: gettext('Node') + " '" + Proxmox.NodeName + "' - " + gettext('Shutdown'),
 	    handler: 'nodeShutdown',
-	    iconCls: 'fa fa-power-off'
+	    iconCls: 'fa fa-power-off',
 	},
 	'->',
 	{
-	    xtype: 'proxmoxRRDTypeSelector'
-	}
+	    xtype: 'proxmoxRRDTypeSelector',
+	},
     ],
 
     initComponent: function() {
@@ -88,14 +88,14 @@ Ext.define('PMG.ServerStatus', {
 		    name: 'cpu',
 		    convert: function(val) {
 			return val*100;
-		    }
+		    },
 		},
 		{
 		    type: 'number',
 		    name: 'iowait',
 		    convert: function(val) {
 			return val*100;
-		    }
+		    },
 		},
 		{ type: 'number', name: 'memtotal' },
 		{ type: 'number', name: 'memused' },
@@ -105,8 +105,8 @@ Ext.define('PMG.ServerStatus', {
 		{ type: 'number', name: 'rootused' },
 		{ type: 'number', name: 'netin' },
 		{ type: 'number', name: 'netout' },
-		{ type: 'date', dateFormat: 'timestamp', name: 'time' }
-	    ]
+		{ type: 'date', dateFormat: 'timestamp', name: 'time' },
+	    ],
 	});
 
 	Ext.apply(me, {
@@ -115,49 +115,49 @@ Ext.define('PMG.ServerStatus', {
 		    xtype: 'proxmoxRRDChart',
 		    title: gettext('CPU usage'),
 		    unit: 'percent',
-		    fields: ['cpu','iowait'],
+		    fields: ['cpu', 'iowait'],
 		    fieldTitles: [gettext('CPU usage'), gettext('IO delay')],
-		    store: rrdstore
+		    store: rrdstore,
 		},
 		{
 		    xtype: 'proxmoxRRDChart',
 		    title: gettext('Server load'),
 		    fields: ['loadavg'],
 		    fieldTitles: [gettext('Load average')],
-		    store: rrdstore
+		    store: rrdstore,
 		},
 		{
 		    xtype: 'proxmoxRRDChart',
 		    title: gettext('Memory usage'),
 		    unit: 'bytes',
-		    fields: ['memtotal','memused'],
+		    fields: ['memtotal', 'memused'],
 		    fieldTitles: [gettext('Total'), gettext('Used')],
-		    store: rrdstore
+		    store: rrdstore,
 		},
 		{
 		    xtype: 'proxmoxRRDChart',
 		    title: gettext('Swap usage'),
 		    unit: 'bytes',
-		    fields: ['swaptotal','swapused'],
+		    fields: ['swaptotal', 'swapused'],
 		    fieldTitles: [gettext('Total'), gettext('Used')],
-		    store: rrdstore
+		    store: rrdstore,
 		},
 		{
 		    xtype: 'proxmoxRRDChart',
 		    title: gettext('Network traffic'),
 		    unit: 'bytespersecond',
-		    fields: ['netin','netout'],
+		    fields: ['netin', 'netout'],
 		    fieldTitles: [gettext('Ingress'), gettext('Egress')],
-		    store: rrdstore
+		    store: rrdstore,
 		},
 		{
 		    xtype: 'proxmoxRRDChart',
 		    title: gettext('Disk usage'),
 		    unit: 'bytes',
-		    fields: ['roottotal','rootused'],
+		    fields: ['roottotal', 'rootused'],
 		    fieldTitles: [gettext('Total'), gettext('Used')],
-		    store: rrdstore
-		}
+		    store: rrdstore,
+		},
 	    ],
 	    listeners: {
 		activate: function() {
@@ -165,10 +165,10 @@ Ext.define('PMG.ServerStatus', {
 		},
 		destroy: function() {
 		    rrdstore.stopUpdate();
-		}
-	    }
+		},
+	    },
 	});
 	me.callParent();
-   }
+   },
 });
-    
+

@@ -14,13 +14,13 @@ Ext.define('PMG.ServerAdministration', {
         init: function(view) {
 	    var upgradeBtn = view.lookupReference('upgradeBtn');
 	    upgradeBtn.setDisabled(!(Proxmox.UserName && Proxmox.UserName === 'root@pam'));
-	}
+	},
     },
 
     items: [
 	{
 	    xtype: 'pmgServerStatus',
-	    itemId: 'status'
+	    itemId: 'status',
 	},
 	{
 	    xtype: 'proxmoxNodeServiceView',
@@ -29,9 +29,9 @@ Ext.define('PMG.ServerAdministration', {
 	    startOnlyServices: {
 		syslog: true,
 		pmgproxy: true,
-		pmgdaemon: true
+		pmgdaemon: true,
 	    },
-	    nodename: Proxmox.NodeName
+	    nodename: Proxmox.NodeName,
 	},
 	{
 	    xtype: 'proxmoxNodeAPT',
@@ -43,25 +43,25 @@ Ext.define('PMG.ServerAdministration', {
 		text: gettext('Upgrade'),
 		handler: function() {
 		    Proxmox.Utils.openXtermJsViewer('upgrade', 0, Proxmox.NodeName);
-		}
+		},
 	    },
 	    itemId: 'updates',
-	    nodename: Proxmox.NodeName
+	    nodename: Proxmox.NodeName,
 	},
 	{
 	    xtype: 'proxmoxJournalView',
 	    itemId: 'logs',
 	    title: gettext('Syslog'),
-	    url: "/api2/extjs/nodes/" + Proxmox.NodeName + "/journal"
+	    url: "/api2/extjs/nodes/" + Proxmox.NodeName + "/journal",
 	},
 	{
 	    xtype: 'proxmoxNodeTasks',
 	    itemId: 'tasks',
 	    title: gettext('Tasks'),
 	    height: 'auto',
-	    nodename: Proxmox.NodeName
-	}
-    ]
+	    nodename: Proxmox.NodeName,
+	},
+    ],
 });
 
 

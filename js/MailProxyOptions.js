@@ -5,12 +5,14 @@ Ext.define('PMG.MailProxyOptions', {
 
     monStoreErrors: true,
 
-    initComponent : function() {
+    initComponent: function() {
 	var me = this;
 
 	me.add_integer_row('maxsize', gettext('Message Size (bytes)'),
-			   { defaultValue: 1024*1024*10,
-			     minValue: 1024, deleteEmpty: true });
+			   {
+ defaultValue: 1024*1024*10,
+			     minValue: 1024, deleteEmpty: true,
+});
 
 	me.add_boolean_row('rejectunknown', gettext('Reject Unknown Clients'));
 
@@ -38,9 +40,9 @@ Ext.define('PMG.MailProxyOptions', {
 	    defaultValue: '__default__',
 	    deleteEmpty: true,
 	    comboItems: [
-		['__default__', render_verifyreceivers('__default__') ],
-		['450', render_verifyreceivers('450') ],
-		['550', render_verifyreceivers('550') ]]
+		['__default__', render_verifyreceivers('__default__')],
+		['450', render_verifyreceivers('450')],
+		['550', render_verifyreceivers('550')]],
 	});
 	/*jslint confusion: false*/
 
@@ -95,18 +97,18 @@ Ext.define('PMG.MailProxyOptions', {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		handler: function() { me.run_editor(); },
-		selModel: me.selModel
+		selModel: me.selModel,
 	    }],
 	    url: '/api2/json' + baseurl,
 	    editorConfig: {
 		url: '/api2/extjs' + baseurl,
-		onlineHelp: 'pmgconfig_mailproxy_options'
+		onlineHelp: 'pmgconfig_mailproxy_options',
 	    },
 	    interval: 5000,
 	    cwidth1: 200,
 	    listeners: {
-		itemdblclick: me.run_editor
-	    }
+		itemdblclick: me.run_editor,
+	    },
 	});
 
 	me.callParent();
@@ -114,5 +116,5 @@ Ext.define('PMG.MailProxyOptions', {
 	me.on('activate', me.rstore.startUpdate);
 	me.on('destroy', me.rstore.stopUpdate);
 	me.on('deactivate', me.rstore.stopUpdate);
-    }
+    },
 });

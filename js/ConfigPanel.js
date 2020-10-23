@@ -53,7 +53,7 @@ Ext.define('PMG.panel.Config', {
 	style: {
 	    backgroundColor: '#f5f5f5',
 	    padding: 0,
-	    margin: 0
+	    margin: 0,
 	},
 	items: {
 	    xtype: 'treelist',
@@ -91,9 +91,9 @@ Ext.define('PMG.panel.Config', {
 		    } else {
 			info.toggle = true;
 		    }
-		}
-	    }
-	}
+		},
+	    },
+	},
     }],
 
     firstItem: '',
@@ -185,17 +185,17 @@ Ext.define('PMG.panel.Config', {
 
 	me.store = Ext.create('Ext.data.TreeStore', {
 	    root: {
-		expanded: true
-	    }
+		expanded: true,
+	    },
 	});
 	var root = me.store.getRoot();
-	me.items.forEach(function(item){
-	    var treeitem = Ext.create('Ext.data.TreeModel',{
+	me.items.forEach(function(item) {
+	    var treeitem = Ext.create('Ext.data.TreeModel', {
 		id: item.itemId,
 		text: item.title,
 		iconCls: item.iconCls,
 		leaf: true,
-		expanded: item.expandedOnInit
+		expanded: item.expandedOnInit,
 	    });
 	    item.header = false;
 	    if (me.savedItems[item.itemId] !== undefined) {
@@ -236,7 +236,7 @@ Ext.define('PMG.panel.Config', {
 	me.defaults = me.defaults || {};
 	Ext.apply(me.defaults, {
 	    viewFilter: me.viewFilter,
-	    border: 0
+	    border: 0,
 	});
 
 	me.callParent();
@@ -270,5 +270,5 @@ Ext.define('PMG.panel.Config', {
 	if (stateid) {
 	    me.mon(me.sp, 'statechange', statechange);
 	}
-    }
+    },
 });

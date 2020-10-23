@@ -6,7 +6,7 @@ Ext.define('PMG.Application', {
     appProperty: 'app',
 
     stores: [
-	'NavigationStore'
+	'NavigationStore',
     ],
 
     layout: 'fit',
@@ -31,7 +31,7 @@ Ext.define('PMG.Application', {
 	me.currentView.destroy();
 	me.currentView = Ext.create({
 	    xtype: view,
-	    targetview: me.targetview
+	    targetview: me.targetview,
 	});
 	if (skipCheck !== true) {
 	    Proxmox.Utils.checked_command(function() {}); // display subscription status
@@ -68,9 +68,9 @@ Ext.define('PMG.Application', {
 	PMG.view = me.view;
 	me.currentView = Ext.create({
 	    xtype: me.view,
-	    targetview: me.targetview
+	    targetview: me.targetview,
 	});
-    }
+    },
 });
 
 Ext.application('PMG.Application');

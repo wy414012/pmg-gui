@@ -40,7 +40,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 	    groupField.setDisabled(value !== 'group');
 	    groupField.setVisible(value === 'group');
 	    var profileField = this.lookupReference('profileField');
-	    var enabled = ((value != 'any') && (value != 'none'));
+	    var enabled = (value != 'any') && (value != 'none');
 	    profileField.setDisabled(!enabled);
 	    profileField.setVisible(enabled);
 	},
@@ -52,12 +52,12 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 
 	control: {
 	    'field[name=mode]': {
-		change: 'changeMode'
+		change: 'changeMode',
 	    },
 	    'field[name=profile]': {
-		change: 'changeProfile'
-	    }
-	}
+		change: 'changeProfile',
+	    },
+	},
     },
 
     items: [
@@ -66,29 +66,29 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 	    name: 'mode',
 	    value: 'group',
 	    comboItems: [
-		[ 'group', gettext('Group member') ],
-		[ 'profile-any', gettext('Existing LDAP address')],
-		[ 'any', gettext('Existing LDAP address') +
-		  ', any profile' ],
-		[ 'profile-none', gettext('Unknown LDAP address')],
-		[ 'none', gettext('Unknown LDAP address') +
-		  ', any profile' ]
+		['group', gettext('Group member')],
+		['profile-any', gettext('Existing LDAP address')],
+		['any', gettext('Existing LDAP address') +
+		  ', any profile'],
+		['profile-none', gettext('Unknown LDAP address')],
+		['none', gettext('Unknown LDAP address') +
+		  ', any profile'],
 	    ],
-	    fieldLabel: gettext("Match")
+	    fieldLabel: gettext("Match"),
 	},
 	{
 	    xtype: 'pmgLDAPProfileSelector',
 	    name: 'profile',
 	    reference: 'profileField',
-	    fieldLabel: gettext("Profile")
+	    fieldLabel: gettext("Profile"),
 	},
 	{
 	    xtype: 'pmgLDAPGroupSelector',
 	    name: 'group',
 	    reference: 'groupField',
-	    fieldLabel: gettext("Group")
-	}
-    ]
+	    fieldLabel: gettext("Group"),
+	},
+    ],
 });
 
 Ext.define('PMG.LDAPGroupEditor', {
@@ -98,5 +98,5 @@ Ext.define('PMG.LDAPGroupEditor', {
 
     width: 500,
 
-    items: [{ xtype: 'pmgLDAPGroupInputPanel' }]
+    items: [{ xtype: 'pmgLDAPGroupInputPanel' }],
 });

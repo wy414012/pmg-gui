@@ -15,7 +15,7 @@ Ext.define('PMG.ViewMailHeaders', {
 
     layout: {
 	type: 'vbox',
-	align: 'stretch'
+	align: 'stretch',
     },
 
     controller: {
@@ -23,7 +23,6 @@ Ext.define('PMG.ViewMailHeaders', {
 	xclass: 'Ext.app.ViewController',
 
 	init: function(view) {
-
 	    var panel = view.lookupReference('contentPanel');
 	    var fromField =
 	    Proxmox.Utils.API2Request({
@@ -46,13 +45,12 @@ Ext.define('PMG.ViewMailHeaders', {
 		    }
 		    panel.update(Ext.String.htmlEncode(data));
 		},
-		failure: function (response, opts) {
+		failure: function(response, opts) {
 		    view.destroy();
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		}
+		},
 	    });
-
-	}
+	},
     },
 
     items: [
@@ -61,25 +59,25 @@ Ext.define('PMG.ViewMailHeaders', {
 	    fieldLabel: gettext('From'),
 	    reference: 'fromField',
 	    focusable: false,
-	    exitable: false
+	    exitable: false,
 	},
 	{
 	    xtype: 'textfield',
 	    fieldLabel: gettext('To'),
 	    reference: 'toField',
 	    focusable: false,
-	    exitable: false
+	    exitable: false,
 	},
 	{
 	    xtype: 'textfield',
 	    fieldLabel: gettext('Subject'),
 	    reference: 'subjectField',
 	    focusable: false,
-	    exitable: false
+	    exitable: false,
 	},
 	{
 	    xtype: 'displayfield',
-	    fieldLabel: gettext('Header')
+	    fieldLabel: gettext('Header'),
 	},
 	{
 	    xtype: 'panel',
@@ -87,7 +85,7 @@ Ext.define('PMG.ViewMailHeaders', {
 	    reference: 'contentPanel',
 	    flex: 1,
 	    autoScroll: true,
-	    bodyStyle: 'white-space:pre'
-	}
-    ]
+	    bodyStyle: 'white-space:pre',
+	},
+    ],
 });

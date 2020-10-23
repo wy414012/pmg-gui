@@ -21,13 +21,13 @@ Ext.define('PMG.FetchmailEdit', {
 	    var protocol = this.lookupReference('protocol').getValue();
 	    var ssl = this.lookupReference('ssl').getValue();
 
-	    var port_field =  this.lookupReference('port');
+	    var port_field = this.lookupReference('port');
 	    if (protocol === 'pop3') {
 		port_field.setValue(ssl ? 995 : 110);
 	    } else if (protocol === 'imap') {
 		port_field.setValue(ssl ? 993 : 143);
 	    }
-	}
+	},
     },
 
     items: {
@@ -37,7 +37,7 @@ Ext.define('PMG.FetchmailEdit', {
 		xtype: 'textfield',
 		name: 'server',
 		fieldLabel: gettext('Server'),
-		allowBlank: false
+		allowBlank: false,
 	    },
 	    {
 		xtype: 'proxmoxKVComboBox',
@@ -46,7 +46,7 @@ Ext.define('PMG.FetchmailEdit', {
 		reference: 'protocol',
 		value: 'pop3',
 		listeners: { change: 'onProtocolChange' },
-		comboItems: [['pop3', 'pop3'], ['imap', 'imap']]
+		comboItems: [['pop3', 'pop3'], ['imap', 'imap']],
 	    },
 	    {
 		xtype: 'proxmoxintegerfield',
@@ -56,27 +56,27 @@ Ext.define('PMG.FetchmailEdit', {
 		value: 110,
 		minValue: 1,
 		maxValue: 65535,
-		allowBlank: false
+		allowBlank: false,
 	    },
 	    {
 		xtype: 'textfield',
 		name: 'user',
 		fieldLabel: gettext('Username'),
-		allowBlank: false
+		allowBlank: false,
 	    },
 	    {
 		xtype: 'textfield',
 		name: 'pass',
 		inputType: 'password',
 		fieldLabel: gettext('Password'),
-		allowBlank: false
+		allowBlank: false,
 	    },
 	    {
 		xtype: 'textfield',
 		name: 'target',
 		fieldLabel: gettext('Deliver to'),
-		allowBlank: false
-	    }
+		allowBlank: false,
+	    },
 
 	],
 	column2: [
@@ -85,7 +85,7 @@ Ext.define('PMG.FetchmailEdit', {
 		fieldLabel: gettext('Enabled'),
 		name: 'enable',
 		uncheckedValue: 0,
-		checked: true
+		checked: true,
 	    },
 	    {
 		xtype: 'proxmoxintegerfield',
@@ -94,7 +94,7 @@ Ext.define('PMG.FetchmailEdit', {
 		value: 1,
 		minValue: 1,
 		maxValue: 24*12*7,
-		allowBlank: false
+		allowBlank: false,
 	    },
 	    {
 		xtype: 'proxmoxcheckbox',
@@ -103,15 +103,15 @@ Ext.define('PMG.FetchmailEdit', {
 		name: 'ssl',
 		reference: 'ssl',
 		uncheckedValue: 0,
-		checked: false
+		checked: false,
 	    },
 	    {
 		xtype: 'proxmoxcheckbox',
 		fieldLabel: gettext('Keep old mails'),
 		name: 'keep',
 		uncheckedValue: 0,
-		checked: false
-	    }
-	]
-    }
+		checked: false,
+	    },
+	],
+    },
 });

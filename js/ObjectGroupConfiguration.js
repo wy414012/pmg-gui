@@ -3,18 +3,18 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 
     ogclass: undefined, // who, when, what
     otype_list: [],
-    
+
     layout: 'border',
     border: false,
-    
-    initComponent : function() {
+
+    initComponent: function() {
 	var me = this;
 
 	if (me.ogclass === undefined) {
 	    throw "undefined object group class";
 	}
-	
-	if (!(PMG.Utils.oclass_text[me.ogclass])) {
+
+	if (!PMG.Utils.oclass_text[me.ogclass]) {
 	    throw "unknown object group class";
 	}
 
@@ -25,9 +25,9 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	    title: PMG.Utils.oclass_text[me.ogclass],
 	    border: false,
 	    split: true,
-	    region: 'west'
+	    region: 'west',
 	});
-	
+
 	var right = Ext.create('PMG.ObjectGroup', {
 	    otype_list: me.otype_list,
 	    border: false,
@@ -38,10 +38,9 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 		    var rec = left.selModel.getSelection()[0];
 		    if (rec && rec.data && rec.data.id === ogdata.id) {
 			left.run_editor();
-			return;
 		    }
-		}
-	    }
+		},
+	    },
 	});
 
 	me.mon(left.store, "refresh", function() {
@@ -63,11 +62,11 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 	    var baseurl = '/config/ruledb/' + me.ogclass + '/' + rec.data.id;
 	    right.setBaseUrl(baseurl);
 	});
-	
-	me.items = [ left, right ];
+
+	me.items = [left, right];
 
 	me.callParent();
-    }
+    },
 });
 
 Ext.define('PMG.WhoConfiguration', {
@@ -75,7 +74,7 @@ Ext.define('PMG.WhoConfiguration', {
     xtype: 'pmgWhoConfiguration',
 
     ogclass: 'who',
-    otype_list: [1000, 1001, 1002, 1003, 1004, 1005, 1006]
+    otype_list: [1000, 1001, 1002, 1003, 1004, 1005, 1006],
 });
 
 Ext.define('PMG.WhenConfiguration', {
@@ -83,7 +82,7 @@ Ext.define('PMG.WhenConfiguration', {
     xtype: 'pmgWhenConfiguration',
 
     ogclass: 'when',
-    otype_list: [2000]
+    otype_list: [2000],
 });
 
 Ext.define('PMG.WhatConfiguration', {
@@ -91,6 +90,6 @@ Ext.define('PMG.WhatConfiguration', {
     xtype: 'pmgWhatConfiguration',
 
     ogclass: 'what',
-    otype_list: [3000, 3001, 3002, 3003, 3004, 3005, 3006]
+    otype_list: [3000, 3001, 3002, 3003, 3004, 3005, 3006],
 });
 

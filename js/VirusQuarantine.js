@@ -3,7 +3,7 @@
 /*format is a string and a function*/
 Ext.define('pmg-virus-list', {
     extend: 'Ext.data.Model',
-    fields: [ 'id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',
+    fields: ['id', 'envelope_sender', 'from', 'sender', 'receiver', 'subject',
 	{ type: 'integer', name: 'bytes' },
 	{ type: 'string', name: 'virusname' },
 	{ type: 'date', dateFormat: 'timestamp', name: 'time' },
@@ -12,14 +12,14 @@ Ext.define('pmg-virus-list', {
 	    name: 'day',
 	    convert: function(v, rec) {
 		return Ext.Date.format(rec.get('time'), 'Y-m-d');
-	    }, depends: ['time']
-	}
+	    }, depends: ['time'],
+	},
     ],
     proxy: {
         type: 'proxmox',
-	url: "/api2/json/quarantine/virus"
+	url: "/api2/json/quarantine/virus",
     },
-    idProperty: 'id'
+    idProperty: 'id',
 });
 
 Ext.define('PMG.VirusQuarantine', {
@@ -40,13 +40,13 @@ Ext.define('PMG.VirusQuarantine', {
 	    var rec = list.selModel.getSelection()[0];
 	    var preview = this.lookupReference('preview');
 
-	    if (!rec || !rec.data || !rec.data.id)  {
+	    if (!rec || !rec.data || !rec.data.id) {
 		preview.update('');
 		preview.setDisabled(true);
 		return;
 	    }
 
-	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + ((raw)?'&raw=1':'');
+	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + (raw?'&raw=1':'');
 	    preview.setDisabled(false);
 	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
 	},
@@ -88,12 +88,12 @@ Ext.define('PMG.VirusQuarantine', {
 
 	control: {
 	    'button[reference=raw]': {
-		click: 'toggleRaw'
+		click: 'toggleRaw',
 	    },
 	    'pmgQuarantineList': {
-		selectionChange: 'onSelectMail'
-	    }
-	}
+		selectionChange: 'onSelectMail',
+	    },
+	},
 
     },
 
@@ -114,8 +114,8 @@ Ext.define('PMG.VirusQuarantine', {
 		groupDir: 'DESC',
 		sorters: [{
 		    property: 'time',
-		    direction: 'DESC'
-		}]
+		    direction: 'DESC',
+		}],
 	    },
 
 	    columns: [
@@ -123,33 +123,33 @@ Ext.define('PMG.VirusQuarantine', {
 		    header: gettext('Sender/Subject'),
 		    dataIndex: 'subject',
 		    renderer: PMG.Utils.sender_renderer,
-		    flex: 1
+		    flex: 1,
 		},
 		{
 		    header: gettext('Virus'),
 		    dataIndex: 'virusname',
 		    align: 'right',
-		    width: 70
+		    width: 70,
 		},
 		{
 		    header: gettext('Size') + ' (KB)',
 		    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
 		    dataIndex: 'bytes',
 		    align: 'right',
-		    width: 90
+		    width: 90,
 		},
 		{
 		    header: gettext('Date'),
 		    dataIndex: 'day',
-		    hidden: true
+		    hidden: true,
 		},
 		{
 		    xtype: 'datecolumn',
 		    header: gettext('Time'),
 		    dataIndex: 'time',
-		    format: 'H:m:s'
-		}
-	    ]
+		    format: 'H:m:s',
+		},
+	    ],
 	},
 	{
 	    title: gettext('Selected Mail'),
@@ -168,29 +168,29 @@ Ext.define('PMG.VirusQuarantine', {
 			    reference: 'raw',
 			    text: gettext('Toggle Raw'),
 			    enableToggle: true,
-			    iconCls: 'fa fa-file-code-o'
+			    iconCls: 'fa fa-file-code-o',
 			},
 			'->',
 			{
 			    reference: 'deliver',
 			    text: gettext('Deliver'),
 			    iconCls: 'fa fa-paper-plane-o',
-			    handler: 'btnHandler'
+			    handler: 'btnHandler',
 			},
 			{
 			    reference: 'delete',
 			    text: gettext('Delete'),
 			    iconCls: 'fa fa-trash-o',
-			    handler: 'btnHandler'
-			}
-		    ]
+			    handler: 'btnHandler',
+			},
+		    ],
 		},
 		{
 		    xtype: 'pmgMailInfo',
 		    hidden: true,
 		    reference: 'mailinfo',
 		},
-	    ]
-	}
-    ]
+	    ],
+	},
+    ],
 });

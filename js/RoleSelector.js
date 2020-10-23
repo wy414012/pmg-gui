@@ -6,6 +6,6 @@ Ext.define('PMG.RoleSelector', {
 	['admin', PMG.Utils.format_user_role('admin')],
 	['helpdesk', PMG.Utils.format_user_role('helpdesk')],
 	['qmanager', PMG.Utils.format_user_role('qmanager')],
-	['audit', PMG.Utils.format_user_role('audit')]
-    ]
+	['audit', PMG.Utils.format_user_role('audit')],
+    ],
 });
