@@ -18,7 +18,7 @@ class QuarantineView extends Component {
 			<ul>
 			    <li class="item-content item-input">
 				<div class="item-inner">
-				    <div class="item-title item-label">` + gettext("From") + `</div>
+				    <div class="item-title item-label">` + gettext("Since") + `</div>
 				    <div class="item-input-wrap">
 					<input type="date" name="from" placeholder="from" required validate>
 				    </div>
@@ -26,7 +26,7 @@ class QuarantineView extends Component {
 			    </li>
 			    <li class="item-content item-input">
 				<div class="item-inner">
-				    <div class="item-title item-label">` + gettext("To") + `</div>
+				    <div class="item-title item-label">` + gettext("Until") + `</div>
 				    <div class="item-input-wrap">
 					<input type="date" name="to" placeholder="to" required validate>
 				    </div>
