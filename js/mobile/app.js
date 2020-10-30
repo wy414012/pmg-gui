@@ -43,7 +43,7 @@ app = new Framework7({
 			    },
 			    success: (data, status, xhr) => {
 				loader.close();
-				PMG.Utils.showSuccessToast(`${action} successful`);
+				PMG.Utils.showSuccessToast(`Action '${action}' successful`);
 				if (action === 'delete' || action === 'deliver') {
 				    app.ptr.refresh();
 				}
