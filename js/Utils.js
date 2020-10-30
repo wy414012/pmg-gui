@@ -819,5 +819,14 @@ Ext.define('PMG.Utils', {
 	var me = this;
 
 	// do whatever you want here
+	Proxmox.Utils.override_task_descriptions({
+	    applycustomscores: ['', gettext('Apply custom SpamAssassin scores')],
+	    avupdate: ['', gettext('ClamAV update')],
+	    backup: ['', gettext('Backup')],
+	    clustercreate: ['', gettext('Create Cluster')],
+	    clusterjoin: ['', gettext('Join Cluster')],
+	    restore: ['', gettext('Restore')],
+	    saupdate: ['', gettext('SpamAssassin update')],
+	});
     },
 });
