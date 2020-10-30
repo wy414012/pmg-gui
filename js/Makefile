@@ -89,37 +89,28 @@ JSSRC=							\
 	SpamContextMenu.js				\
 	Application.js
 
-# caution: order is important
-MOBILESRC=				\
-	  mobile/component.js		\
-	  mobile/loginscreen.js		\
-	  mobile/mailview.js		\
-	  mobile/quarantineview.js	\
-	  mobile/utils.js		\
-	  mobile/app.js			\
-
 OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
 	/usr/bin/asciidoc-pmg scan-extjs ${JSSRC} >$@.tmp
 	mv $@.tmp $@
 
 lint: ${JSSRC}
-	eslint ${JSSRC}
+	eslint $?
+
+lint-all: ${JSSRC}
+	eslint $^
 
 pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
 	echo "// ${DEB_VERSION_UPSTREAM_REVISION}" > $@.tmp
 	cat OnlineHelpInfo.js ${JSSRC} >> $@.tmp
 	mv $@.tmp $@
 
-pmgmanagerlib-mobile.js: ${MOBILESRC}
-	cat ${MOBILESRC} >$@.tmp
-	mv $@.tmp $@
-
-all: pmgmanagerlib.js pmgmanagerlib-mobile.js
+all: pmgmanagerlib.js
 
 .PHONY: clean
 clean:
+	$(MAKE) -C mobile clean
 	find . -name '*~' -exec rm {} ';'	
-	rm -rf pmgmanagerlib.js pmgmanagerlib-mobile.js OnlineHelpInfo.js
+	rm -rf pmgmanagerlib.js pmgmanagerlib.js.tmp OnlineHelpInfo.js
 
 
 

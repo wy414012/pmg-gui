@@ -28,13 +28,13 @@ deb ${DEB}:
 	cd build; dpkg-buildpackage -b -us -uc
 	lintian ${DEB}
 
-.PHONY: js/pmgmanagerlib.js js/pmgmanagerlib-mobile.js
+.PHONY: js/pmgmanagerlib.js js/mobile/pmgmanagerlib-mobile.js
 js/pmgmanagerlib.js:
 	make -C js pmgmanagerlib.js
-js/pmgmanagerlib-mobile.js:
-	make -C js pmgmanagerlib-mobile.js
+js/mobile/pmgmanagerlib-mobile.js:
+	make -C js/mobile pmgmanagerlib-mobile.js
 
-install: pmg-index.html.tt pmg-mobile-index.html.tt js/pmgmanagerlib.js js/pmgmanagerlib-mobile.js ${IMAGES} ${CSSFILES}
+install: pmg-index.html.tt pmg-mobile-index.html.tt js/pmgmanagerlib.js js/mobile/pmgmanagerlib-mobile.js ${IMAGES} ${CSSFILES}
 	install -d -m 755 ${WWWBASEDIR}
 	install -d -m 755 ${WWWCSSDIR}
 	install -d -m 755 ${WWWIMAGESDIR}
@@ -42,7 +42,7 @@ install: pmg-index.html.tt pmg-mobile-index.html.tt js/pmgmanagerlib.js js/pmgma
 	install -m 0644 pmg-index.html.tt ${WWWBASEDIR}
 	install -m 0644 pmg-mobile-index.html.tt ${WWWBASEDIR}
 	install -m 0644 js/pmgmanagerlib.js ${WWWJSDIR}
-	install -m 0644 js/pmgmanagerlib-mobile.js ${WWWJSDIR}
+	install -m 0644 js/mobile/pmgmanagerlib-mobile.js ${WWWJSDIR}
 	for f in ${IMAGES}; do install -m 0644 "$$f" ${WWWIMAGESDIR}; done
 	for f in ${CSSFILES}; do install -m 0644 "$$f" ${WWWCSSDIR}; done
 
@@ -52,6 +52,11 @@ upload: ${DEB}
 
 distclean: clean
 	rm -f examples/simple-demo.pem
+
+.PHONY: lint
+lint:
+	$(MAKE) -C js/ lint
+	#$(MAKE) -C js/mobile lint
 
 clean:
 	make -C js clean
