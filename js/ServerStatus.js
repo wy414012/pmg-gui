@@ -24,12 +24,12 @@ Ext.define('PMG.ServerStatus', {
 	},
 
 	nodeCommand: function(cmd) {
-	    var me = this.getView();
+	    var view = this.getView();
 	    Proxmox.Utils.API2Request({
 		params: { command: cmd },
-		url: '/nodes/' + Proxmox.NodeName + '/status',
+		url: `/nodes/${Proxmox.NodeName}/status`,
 		method: 'POST',
-		waitMsgTarget: me,
+		waitMsgTarget: view,
 		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		},

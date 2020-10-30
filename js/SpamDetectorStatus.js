@@ -62,7 +62,7 @@ Ext.define('PMG.SpamDetectorStatusGrid', {
 	{
 	    text: gettext('Update Now'),
 	    handler: function() {
-		var me = this.up('grid');
+		let view = this.up('grid');
 		Proxmox.Utils.API2Request({
 		    url: '/nodes/' + Proxmox.NodeName + '/spamassassin/rules',
 		    method: 'POST',
@@ -70,13 +70,13 @@ Ext.define('PMG.SpamDetectorStatusGrid', {
 			Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		    },
 		    success: function(response) {
-			var upid = response.result.data;
+			const upid = response.result.data;
 
-			var win = Ext.create('Proxmox.window.TaskViewer', {
+			let win = Ext.create('Proxmox.window.TaskViewer', {
 			    upid: upid,
+			    autoShow: true,
 			});
-			win.show();
-			me.mon(win, 'close', function() { me.store.load(); });
+			view.mon(win, 'close', () => view.store.load());
 		    },
 		});
 	    },

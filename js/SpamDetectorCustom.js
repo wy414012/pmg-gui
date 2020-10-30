@@ -22,9 +22,9 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 	xclass: 'Ext.app.ViewController',
 
 	reload: function() {
-	    var me = this;
-	    var vm = this.getViewModel();
-	    var grid = me.lookup('grid');
+	    let me = this;
+	    let vm = me.getViewModel();
+	    let grid = me.lookup('grid');
 
 	    Proxmox.Utils.API2Request({
 		url: '/config/customscores',
@@ -49,8 +49,9 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 	},
 
 	revert: function() {
-	    var me = this;
-	    var vm = this.getViewModel();
+	    let me = this;
+	    let vm = me.getViewModel();
+	    let grid = me.lookup('grid');
 
 	    Proxmox.Utils.API2Request({
 		url: '/config/customscores',
@@ -73,7 +74,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 	    var me = this;
 	    var vm = this.getViewModel();
 
-	    var win = Ext.createWidget('proxmoxWindowEdit', {
+	    Ext.createWidget('proxmoxWindowEdit', {
 		method: 'PUT',
 		url: "/api2/extjs/config/customscores",
 		isCreate: true,

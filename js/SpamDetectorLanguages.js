@@ -117,17 +117,21 @@ Ext.define('PMG.SpamDetectorLanguages', {
 
     subject: 'Languages',
 
-    initComponent: function() {
-	var me = this;
+    items: [
+	{
+	    xtype: 'pmgSpamDetectorLanguagesInputPanel',
+	},
+    ],
 
-	me.items = Ext.create('PMG.SpamDetectorLanguagesInputPanel');
+    initComponent: function() {
+	let me = this;
 
 	me.callParent();
 
 	me.load({
 	    success: function(response, options) {
-		var value = response.result.data.languages || '';
-		var languages = value.split(/[\ \,\;]+/);
+		let value = response.result.data.languages || '';
+		let languages = value.split(/[ ,;]+/);
 		me.setValues({ languages: languages });
 	    },
 	});

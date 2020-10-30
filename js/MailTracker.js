@@ -27,24 +27,24 @@ Ext.define('PMG.MailTrackerFilter', {
         xclass: 'Ext.app.ViewController',
 
 	onFilterChange: function() {
-	    var view = this.getView();
+	    let view = this.getView();
 	    view.fireEvent('filterChanged');
 	},
 
 	onSpecialKey: function(field, e) {
-	    if (e.getKey() == e.ENTER) {
+	    if (e.getKey() === e.ENTER) {
 		this.onFilterChange();
 	    }
 	},
     },
 
     getFilterParams: function() {
-	var me = this;
-	var param = {};
+	let me = this;
+	let param = {};
 
-	var names = ['from', 'target', 'xfilter', 'starttime', 'endtime', 'ndr', 'greylist'];
+	let names = ['from', 'target', 'xfilter', 'starttime', 'endtime', 'ndr', 'greylist'];
 	Ext.Array.each(names, function(name) {
-	    var value = me.lookupReference(name).getSubmitValue();
+	    let value = me.lookupReference(name).getSubmitValue();
 	    if (value) { param[name] = value; }
 	});
 
@@ -103,7 +103,7 @@ Ext.define('PMG.MailTrackerFilter', {
 			},
 		    },
 		    value: (function() {
-			var now = new Date();
+			let now = new Date();
 			return new Date(now.getTime() - 3600000);
 		    }()),
 		    xtype: 'promxoxDateTimeField',
@@ -118,8 +118,8 @@ Ext.define('PMG.MailTrackerFilter', {
 			},
 		    },
 		    value: (function() {
-			var now = new Date();
-			var tomorrow = new Date();
+			let now = new Date();
+			let tomorrow = new Date();
 			tomorrow.setDate(now.getDate()+1);
 			tomorrow.setHours(0);
 			tomorrow.setMinutes(0);
@@ -177,7 +177,7 @@ Ext.define('PMG.MaiLogWindow', {
     bodyPadding: 5,
 
     load: function() {
-	var me = this;
+	let me = this;
 
 	Proxmox.Utils.API2Request({
 	    method: 'GET',
@@ -188,9 +188,9 @@ Ext.define('PMG.MaiLogWindow', {
 		me.update(gettext('Error') + " " + response.htmlStatus);
 	    },
 	    success: function(response, opts) {
-		var data = response.result.data;
+		let data = response.result.data;
 
-		var logs = "<pre style='margin: 0;'>";
+		let logs = "<pre style='margin: 0;'>";
 		Ext.Array.each(data.logs, function(line) {
 		    logs += Ext.htmlEncode(line) + "\n";
 		});
@@ -201,7 +201,7 @@ Ext.define('PMG.MaiLogWindow', {
     },
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
 	if (!me.logid) {
 	    throw "no logid specified";
@@ -236,7 +236,7 @@ Ext.define('PMG.MailTracker', {
 	deferEmptyText: false,
 	enableTextSelection: true,
 	getRowClass: function(record, index) {
-	    var status = record.data.rstatus || record.data.dstatus;
+	    let status = record.data.rstatus || record.data.dstatus;
 	    return PMG.Utils.mail_status_map[status];
 	},
     },
@@ -260,11 +260,11 @@ Ext.define('PMG.MailTracker', {
         xclass: 'Ext.app.ViewController',
 
 	onSearch: function() {
-	    var view = this.getView();
+	    let view = this.getView();
 	    view.setEmptyText(gettext('No data in database'));
-	    var filter = this.lookupReference('filter');
-	    var status = this.lookupReference('status');
-	    var params = filter.getFilterParams();
+	    let filter = this.lookupReference('filter');
+	    let status = this.lookupReference('status');
+	    let params = filter.getFilterParams();
 	    if (params === undefined) {
 		return; // something went wrong with the filters bail out
 	    }
@@ -272,10 +272,10 @@ Ext.define('PMG.MailTracker', {
 	    view.store.proxy.setExtraParams(params);
 	    view.store.proxy.setUrl('/api2/json/nodes/' + Proxmox.NodeName + '/tracker');
 	    view.store.load(function(records, operation, success) {
-		var response = operation.getResponse();
+		let response = operation.getResponse();
 		if (success) {
 		    // fixme: howto avoid duplicate Ext.decode ?
-		    var result = Ext.decode(response.responseText);
+		    let result = Ext.decode(response.responseText);
 		    if (result.changes) {
 			status.update(result.changes);
 		    }
@@ -284,9 +284,9 @@ Ext.define('PMG.MailTracker', {
 	},
 
 	showDetails: function(rowNode, record) {
-	    var view = this.getView();
+	    let view = this.getView();
 
-	    var params = view.store.proxy.getExtraParams();
+	    let params = view.store.proxy.getExtraParams();
 
 	    Proxmox.Utils.API2Request({
 		method: 'GET',
@@ -297,8 +297,8 @@ Ext.define('PMG.MailTracker', {
 		    record.set('logs', gettext('Error') + " " + response.htmlStatus);
 		},
 		success: function(response, opts) {
-		    var data = response.result.data;
-		    var logs = "";
+		    let data = response.result.data;
+		    let logs = "";
 
 		    Ext.Array.each(data.logs, function(line) {
 			logs += Ext.htmlEncode(line) + "<br>";
@@ -379,16 +379,16 @@ Ext.define('PMG.MailTracker', {
 	    header: gettext('Status'),
 	    width: 150,
 	    renderer: function(v, metaData, rec) {
-		var returntext = 'unknown';
-		var icon = 'question-circle';
-		var rstatus = rec.data.rstatus;
+		let returntext = 'unknown';
+		let icon = 'question-circle';
+		let rstatus = rec.data.rstatus;
 		if (v !== undefined && v !== '') {
-		    var vtext = PMG.Utils.mail_status_map[v] || v;
+		    let vtext = PMG.Utils.mail_status_map[v] || v;
 		    icon = v;
 		    if (v === 'Q' || v === 'B') {
 			returntext = vtext;
 		    } else if (rstatus !== undefined && rstatus !== '') {
-			var rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
+			let rtext = PMG.Utils.mail_status_map[rstatus] || rstatus;
 			returntext = vtext + '/' + rtext;
 			icon = rstatus;
 		    } else if (rec.data.qid !== undefined) {
@@ -424,7 +424,7 @@ Ext.define('PMG.MailTracker', {
     ],
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
 	me.callParent();
 

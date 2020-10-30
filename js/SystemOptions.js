@@ -16,8 +16,8 @@ Ext.define('PMG.SystemOptions', {
 	xclass: 'Ext.app.ViewController',
 
 	onEdit: function() {
-	    var me = this.getView();
-	    me.run_editor();
+	    let view = this.getView();
+	    view.run_editor();
 	},
     },
 
@@ -33,7 +33,7 @@ Ext.define('PMG.SystemOptions', {
     },
 
     add_proxy_row: function(name, text, opts) {
-	var me = this;
+	let me = this;
 
 	opts = opts || {};
 	me.rows = me.rows || {};
@@ -61,7 +61,7 @@ Ext.define('PMG.SystemOptions', {
     },
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
 	me.add_boolean_row('dailyreport', gettext('Send daily admin reports'),
 			   { defaultValue: 1 });

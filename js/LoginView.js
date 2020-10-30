@@ -6,9 +6,9 @@ Ext.define('PMG.LoginView', {
 	xclass: 'Ext.app.ViewController',
 
 	init: function(view) {
-	    var me = this;
+	    let me = this;
 
-	    var realmfield = me.lookup('realmfield');
+	    let realmfield = me.lookup('realmfield');
 
 	    if (view.targetview !== 'quarantineview') {
 		return;
@@ -18,15 +18,17 @@ Ext.define('PMG.LoginView', {
 
 	    // try autologin with quarantine ticket from URL
 
-	    var loginForm = this.lookupReference('loginForm');
-
-	    var qs = Ext.Object.fromQueryString(location.search);
-	    if (qs.ticket == undefined) { return; }
-	    var ticket = decodeURIComponent(qs.ticket);
-	    var match = ticket.match(/^PMGQUAR:([^\s\:]+):/);
-	    if (!match) { return; }
-	    var username = match[1];
-	    var loginwin = me.lookup('loginwindow');
+	    let qs = Ext.Object.fromQueryString(location.search);
+	    if (qs.ticket === undefined) {
+		return;
+	    }
+	    let ticket = decodeURIComponent(qs.ticket);
+	    let match = ticket.match(/^PMGQUAR:([^\s:]+):/);
+	    if (!match) {
+		return;
+	    }
+	    let username = match[1];
+	    let loginwin = me.lookup('loginwindow');
 	    loginwin.autoShow = false;
 	    loginwin.setVisible(false);
 	    realmfield.setDisabled(true);
@@ -38,9 +40,9 @@ Ext.define('PMG.LoginView', {
 	},
 
 	submitForm: function() {
-	    var me = this;
-	    var view = me.getView();
-	    var loginForm = me.lookupReference('loginForm');
+	    let me = this;
+	    let view = me.getView();
+	    let loginForm = me.lookupReference('loginForm');
 
 	    if (loginForm.isValid()) {
 		if (loginForm.isVisible()) {
@@ -66,10 +68,10 @@ Ext.define('PMG.LoginView', {
 	control: {
 	    'field[name=lang]': {
 		change: function(f, value) {
-		    var dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
+		    let dt = Ext.Date.add(new Date(), Ext.Date.YEAR, 10);
 		    Ext.util.Cookies.set('PMGLangCookie', value, dt);
 
-		    var loginwin = this.lookupReference('loginwindow');
+		    let loginwin = this.lookupReference('loginwindow');
 		    loginwin.mask(gettext('Please wait...'), 'x-mask-loading');
 		    window.location.reload();
 		},

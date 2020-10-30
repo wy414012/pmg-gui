@@ -33,7 +33,7 @@ Ext.define('PMG.Application', {
 	    targetview: me.targetview,
 	});
 	if (skipCheck !== true) {
-	    Proxmox.Utils.checked_command(function() {}); // display subscription status
+	    Proxmox.Utils.checked_command(Ext.emptyFn); // display subscription status
 	}
     },
 
@@ -57,7 +57,7 @@ Ext.define('PMG.Application', {
 	if (pathname === "/quarantine") {
 	    me.targetview = 'quarantineview';
 
-	    if (qs.ticket == undefined && loggedin) {
+	    if (qs.ticket === undefined && loggedin) {
 		me.view = 'quarantineview';
 	    }
 	} else if (loggedin && cookie.substr(0, 7) !== 'PMGQUAR') {

@@ -170,7 +170,6 @@ Ext.define('PMG.ClusterAdministration', {
 		},
 
 		onJoin: function() {
-		    var view = this.getView();
 		    var win = Ext.create('PMG.ClusterJoinNodeWindow', {});
 		    win.show();
 		    win.on('destroy', function() {
@@ -256,7 +255,7 @@ Ext.define('PMG.ClusterAdministration', {
 			    var html = '<p>' + Ext.htmlEncode(d.conn_error) + '</p>';
 			    html = html.replace(/\n/g, '<br>');
 			    metaData.tdAttr = 'data-qwidth=600 data-qtitle="ERROR" data-qtip="' +
-				html.replace(/\"/g, '&quot;') + '"';
+				html.replace(/"/g, '&quot;') + '"';
 			    state = 'error';
 			}
 			return state;

@@ -39,9 +39,8 @@ Ext.define('PMG.RestoreWindow', {
 	    uncheckedValue: 0,
 	    fieldLabel: gettext('Rule Database'),
 	    listeners: {
-		change: function(cb, value) {
-		    var me = this;
-		    me.up().down('field[name=statistic]').setDisabled(!value);
+		change: function(field, value) {
+		    field.nextSibling('field[name=statistic]').setDisabled(!value);
 		},
 	    },
 	},
@@ -53,13 +52,13 @@ Ext.define('PMG.RestoreWindow', {
     ],
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
 	if (!me.filename) {
 	    throw "no filename given";
 	}
 
-	me.url = "/nodes/" + Proxmox.NodeName + "/backup/" + encodeURIComponent(me.filename);
+	me.url = `/nodes/${Proxmox.NodeName}/backup/${encodeURIComponent(me.filename)}`;
 
 	me.callParent();
     },
@@ -75,29 +74,29 @@ Ext.define('PMG.BackupRestore', {
 	xclass: 'Ext.app.ViewController',
 
 	createBackup: function() {
-	    var me = this.getView();
+	    let view = this.getView();
 	    Proxmox.Utils.API2Request({
 		url: "/nodes/" + Proxmox.NodeName + "/backup",
 		method: 'POST',
-		waitMsgTarget: me,
+		waitMsgTarget: view,
 		failure: function(response, opts) {
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 		},
 		success: function(response, opts) {
-		    var upid = response.result.data;
+		    let upid = response.result.data;
 
-		    var win = Ext.create('Proxmox.window.TaskViewer', {
+		    let win = Ext.create('Proxmox.window.TaskViewer', {
 			upid: upid,
+			autoShow: true,
 		    });
-		    win.show();
-		    me.mon(win, 'close', function() { me.store.load(); });
+		    view.mon(win, 'close', () => view.store.load());
 		},
 	    });
 	},
 
 	onRestore: function() {
-	    var me = this.getView();
-	    var rec = me.getSelection()[0];
+	    let view = this.getView();
+	    let rec = view.getSelection()[0];
 
 	    if (!(rec && rec.data && rec.data.filename)) {
 		return;
@@ -109,8 +108,8 @@ Ext.define('PMG.BackupRestore', {
 	},
 
 	onAfterRemove: function(btn, res) {
-	    var me = this.getView();
-	    me.store.load();
+	    let view = this.getView();
+	    view.store.load();
 	},
     },
 

@@ -480,9 +480,9 @@ Ext.define('PMG.LDAPConfigGrid', {
 
 
 	reload: function() {
-	    var me = this.getView();
-	    me.getStore().load();
-	    me.fireEvent('load', me);
+	    let view = this.getView();
+	    view.getStore().load();
+	    view.fireEvent('load', view);
 	},
 
 	sync: function() {

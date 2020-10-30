@@ -65,11 +65,11 @@ Ext.define('PMG.panel.Config', {
 	    singleExpand: false,
 	    listeners: {
 		selectionchange: function(treeList, selection) {
-		    var me = this.up('panel');
-		    me.suspendLayout = true;
-		    me.activateCard(selection.data.id);
-		    me.suspendLayout = false;
-		    me.updateLayout();
+		    let view = this.up('panel');
+		    view.suspendLayout = true;
+		    view.activateCard(selection.data.id);
+		    view.suspendLayout = false;
+		    view.updateLayout();
 		},
 		itemclick: function(treelist, info) {
 		    var olditem = treelist.getSelection();
@@ -113,13 +113,14 @@ Ext.define('PMG.panel.Config', {
 	    menu.setSelection(selection);
 	    return cardid;
 	}
+	return null;
     },
 
     activateCard: function(cardid) {
 	var me = this;
 	if (me.savedItems[cardid]) {
 	    var curcard = me.getLayout().getActiveItem();
-	    var newcard = me.add(me.savedItems[cardid]);
+	    me.add(me.savedItems[cardid]);
 	    if (curcard) {
 		me.setActiveItem(cardid);
 		me.remove(curcard, true);
@@ -155,23 +156,6 @@ Ext.define('PMG.panel.Config', {
 		activeTab = state.value;
 	    }
 	}
-
-	// get title
-	var title = me.title;
-	me.title = undefined;
-
-	// create toolbar
-	//var tbar = me.tbar || [];
-	//me.tbar = undefined;
-
-	//tbar.unshift('->');
-	//tbar.unshift({
-	//    xtype: 'tbtext',
-	//    text: title,
-	//    baseCls: 'x-panel-header-text'
-	//});
-
-	//me.dockedItems[1].items = tbar;
 
 	// include search tab
 	me.items = me.items || [];
@@ -251,14 +235,14 @@ Ext.define('PMG.panel.Config', {
 
 	// on a state change,
 	// select the new item
-	var statechange = function(sp, key, state) {
+	const statechange = function(sp, key, newState) {
 	    // it the state change is for this panel
-	    if (stateid && (key === stateid) && state) {
+	    if (stateid && (key === stateid) && newState) {
 		// get active item
 		var acard = me.getLayout().getActiveItem().itemId;
 		// get the itemid of the new value
-		var ncard = state.value || me.firstItem;
-		if (ncard && (acard != ncard)) {
+		var ncard = newState.value || me.firstItem;
+		if (ncard && (acard !== ncard)) {
 		    // select the chosen item
 		    menu.setSelection(root.findChild('id', ncard, true) || root.firstChild);
 		}

@@ -23,26 +23,26 @@ Ext.define('PMG.RulesConfiguration', {
 	xclass: 'Ext.app.ViewController',
 
 	selectedRuleChange: function(grid, selected, eOpts) {
-	    var me = this;
-	    var infoPanel = me.lookupReference('infopanel');
-	    var baseurl = '';
+	    let me = this;
+	    let infoPanel = me.lookupReference('infopanel');
+	    let baseurl = '';
 
 	    if (selected.length > 0) {
-		baseurl = '/config/ruledb/rules/' + selected[0].data.id;
+		baseurl = `/config/ruledb/rules/${selected[0].data.id}`;
 	    }
 
 	    infoPanel.getController().setBaseUrl(baseurl);
 	},
 
 	editIconClick: function(gridView, rowindex, colindex, column, e, record) {
-	    var me = this;
+	    let me = this;
 	    me.showEditWindow(gridView, record);
 	},
 
 	showEditWindow: function(gridView, record) {
-	    var me = this;
-	    var win = Ext.create('PMG.RuleEditor', {
-		url: '/api2/extjs/config/ruledb/rules/' + record.data.id + '/config',
+	    let me = this;
+	    let win = Ext.create('PMG.RuleEditor', {
+		url: `/api2/extjs/config/ruledb/rules/${record.data.id}/config`,
 		listeners: {
 		    destroy: function() {
 			gridView.getStore().load();
@@ -54,9 +54,9 @@ Ext.define('PMG.RulesConfiguration', {
 	},
 
 	toggleIconClick: function(gridView, rowindex, colindex, column, e, record) {
-	    var me = this;
+	    let me = this;
 	    Proxmox.Utils.API2Request({
-		url: '/config/ruledb/rules/' + record.data.id + '/config',
+		url: `/config/ruledb/rules/${record.data.id}/config`,
 		params: {
 		    active: record.data.active ? 0 : 1,
 		},
@@ -71,13 +71,13 @@ Ext.define('PMG.RulesConfiguration', {
 	},
 
 	reload: function() {
-	    var me = this;
+	    let me = this;
 	    me.lookupReference('rulegrid').getStore().load();
 	},
 
 	addRule: function() {
-	    var me = this;
-	    var win = Ext.create('PMG.RuleEditor', {
+	    let me = this;
+	    let win = Ext.create('PMG.RuleEditor', {
 		url: '/api2/extjs/config/ruledb/rules/',
 		method: 'POST',
 		isCreate: true,
@@ -92,7 +92,7 @@ Ext.define('PMG.RulesConfiguration', {
 	},
 
 	onFactoryDefaults: function() {
-	    var me = this;
+	    let me = this;
 
 	    Ext.Msg.confirm(
 		gettext('Confirm'),
@@ -101,7 +101,6 @@ Ext.define('PMG.RulesConfiguration', {
 		    if (button !== 'yes') {
 			return;
 		    }
-		    var url = '/config/ruledb';
 		    Proxmox.Utils.API2Request({
 			url: '/config/ruledb',
 			method: 'POST',
@@ -118,7 +117,7 @@ Ext.define('PMG.RulesConfiguration', {
 	},
 
 	init: function(view) {
-	    var grid = this.lookupReference('rulegrid');
+	    let grid = this.lookupReference('rulegrid');
 	    Proxmox.Utils.monStoreErrors(grid, grid.getStore(), true);
 	},
 

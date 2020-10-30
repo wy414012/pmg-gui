@@ -6,9 +6,9 @@ Ext.define('PMG.menu.SpamContextMenu', {
     controller: {
 	xclass: 'Ext.app.ViewController',
 	callCallback: function(btn) {
-	    var me = this.getView();
-	    if (Ext.isFunction(me.callback)) {
-		me.callback(btn.action);
+	    let view = this.getView();
+	    if (Ext.isFunction(view.callback)) {
+		view.callback(btn.action);
 	    }
 	},
     },

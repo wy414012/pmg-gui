@@ -85,7 +85,7 @@ Ext.define('PMG.ActionList', {
 	    menu_items.push({
 		text: config.subject,
 		handler: function() {
-		    if (me.baseurl == undefined) {
+		    if (me.baseurl === undefined) {
 			return;
 		    }
 		    config.url = me.baseurl + '/' + editor.subdir;

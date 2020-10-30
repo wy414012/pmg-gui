@@ -7,13 +7,22 @@ Ext.define('PMG.StatTimeSelector', {
 	selected_month: undefined,
 	selected_day: undefined,
 
+	initSelected: function() {
+	    let today = new Date();
+	    this.selected_year = today.getFullYear();
+	    this.selected_month = today.getMonth() + 1;
+	    this.selected_day = today.getDate();
+	},
+
 	getTimeSpan: function() {
-	    var year = this.selected_year;
-	    var month = this.selected_month;
-	    var day = this.selected_day;
+	    if (this.selected_year === undefined) {
+		this.initSelected();
+	    }
+	    const year = this.selected_year;
+	    const month = this.selected_month;
+	    const day = this.selected_day;
 
-	    var starttime, endtime, span;
-
+	    let starttime, endtime;
 	    if (!month) {
 		starttime = new Date(year, 0);
 		endtime = new Date(year + 1, 0);
@@ -25,12 +34,10 @@ Ext.define('PMG.StatTimeSelector', {
 		endtime = new Date(year, month - 1, day + 1);
 	    }
 
-	    var data = {};
-
-	    data.starttime = (starttime.getTime() / 1000).toFixed(0);
-	    data.endtime = (endtime.getTime() / 1000).toFixed(0);
-
-	    return data;
+	    return {
+		starttime: (starttime.getTime() / 1000).toFixed(0),
+		endtime: (endtime.getTime() / 1000).toFixed(0),
+	    };
 	},
     },
 
@@ -42,27 +49,27 @@ Ext.define('PMG.StatTimeSelector', {
 	xclass: 'Ext.app.ViewController',
 
 	updateVisibility: function() {
-	    var view = this.getView();
+	    let view = this.getView();
 
-	    var yearsel = this.lookupReference('yearsel');
-	    var monthsel = this.lookupReference('monthsel');
-	    var daysel = this.lookupReference('daysel');
+	    let yearsel = this.lookupReference('yearsel');
+	    let monthsel = this.lookupReference('monthsel');
+	    let daysel = this.lookupReference('daysel');
 
-	    var year = yearsel.getValue();
-	    var month = monthsel.getValue();
+	    let year = yearsel.getValue();
+	    let month = monthsel.getValue();
 	    daysel.setVisible(month !== 0);
 	    if (!month) {
 		daysel.setValue(0);
 	    }
-	    var day = daysel.getValue();
+	    let day = daysel.getValue();
 
-	    var statics = Ext.getClass(view);
+	    let statics = Ext.getClass(view);
 
 	    statics.selected_year = year;
 	    statics.selected_month = month;
 	    statics.selected_day = day;
 
-	    var data = statics.getTimeSpan();
+	    let data = statics.getTimeSpan();
 	    Ext.GlobalEvents.fireEvent('pmgStatTimeSelectorUpdate', data);
 	},
 
@@ -71,11 +78,11 @@ Ext.define('PMG.StatTimeSelector', {
 	},
 
 	init: function(view) {
-	    var statics = Ext.getClass(view);
+	    let statics = Ext.getClass(view);
 
-	    var yearsel = this.lookupReference('yearsel');
-	    var monthsel = this.lookupReference('monthsel');
-	    var daysel = this.lookupReference('daysel');
+	    let yearsel = this.lookupReference('yearsel');
+	    let monthsel = this.lookupReference('monthsel');
+	    let daysel = this.lookupReference('daysel');
 
 	    yearsel.setValue(statics.selected_year);
 	    monthsel.setValue(statics.selected_month);
@@ -92,8 +99,8 @@ Ext.define('PMG.StatTimeSelector', {
 	    store: {
 		fields: ['year'],
 		data: (function() {
-		    var today = new Date();
-		    var year = today.getFullYear();
+		    let today = new Date();
+		    let year = today.getFullYear();
 		    return [{ year: year }, { year: year -1 }, { year: year -2 }];
 		}()),
 	    },
@@ -110,8 +117,8 @@ Ext.define('PMG.StatTimeSelector', {
 	    store: {
 		fields: ['month', 'name'],
 		data: (function() {
-		    var i;
-		    var data = [{ month: 0, name: gettext('Whole year') }];
+		    let i;
+		    let data = [{ month: 0, name: gettext('Whole year') }];
 		    for (i = 1; i <= 12; i++) {
 			data.push({ month: i, name: Ext.Date.monthNames[i-1] });
 		    }
@@ -130,8 +137,8 @@ Ext.define('PMG.StatTimeSelector', {
 	    store: {
 		fields: ['day', 'name'],
 		data: (function() {
-		    var i;
-		    var data = [{ day: 0, name: gettext('Whole month') }];
+		    let i;
+		    let data = [{ day: 0, name: gettext('Whole month') }];
 		    for (i = 1; i <= 31; i++) {
 			data.push({ day: i, name: i });
 		    }
@@ -145,10 +152,4 @@ Ext.define('PMG.StatTimeSelector', {
 	    valueField: 'day',
 	},
     ],
-}, function() {
-    var today = new Date();
-
-    this.selected_year = today.getFullYear();
-    this.selected_month = today.getMonth() + 1;
-    this.selected_day = today.getDate();
 });

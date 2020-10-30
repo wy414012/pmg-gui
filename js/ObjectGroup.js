@@ -14,7 +14,7 @@ Ext.define('PMG.ObjectGroup', {
     emptyText: gettext('Please select an object.'),
 
     setBaseUrl: function(baseurl) {
-	var me = this;
+	let me = this;
 
 	me.baseurl = baseurl;
 
@@ -23,21 +23,21 @@ Ext.define('PMG.ObjectGroup', {
 	    me.store.setData([]);
 	    me.setButtonState(me.store, [], false);
 	} else {
-	    var url = '/api2/json' + me.baseurl + '/objects';
+	    let url = '/api2/json' + me.baseurl + '/objects';
 	    me.store.proxy.setUrl(url);
 	    me.store.load();
 	}
     },
 
     setObjectInfo: function(ogdata) {
-	var me = this;
+	let me = this;
 
 	me.ogdata = ogdata;
 
 	if (me.ogdata === undefined) {
 	    me.down('#oginfo').update(me.emptyText);
 	} else {
-	    var html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
+	    let html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
 	    html += "<br><br>";
 	    html += Ext.String.htmlEncode(Ext.String.trim(me.ogdata.info));
 
@@ -47,7 +47,7 @@ Ext.define('PMG.ObjectGroup', {
     },
 
     setButtonState: function(store, records, success) {
-	var me = this;
+	let me = this;
 	if (!success || !me.baseurl) {
 	    me.down('#addMenuButton').setDisabled(true);
 	    return;
@@ -56,7 +56,7 @@ Ext.define('PMG.ObjectGroup', {
     },
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
 	me.store = new Ext.data.Store({
 	    model: 'pmg-object-list',
@@ -98,13 +98,13 @@ Ext.define('PMG.ObjectGroup', {
 	    flex: 1,
 	});
 
-	var reload = function() {
+	let reload = function() {
             me.store.load();
         };
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
+	let remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
 	    selModel: me.selModel,
 	    getUrl: function(rec) {
 		return me.baseurl + '/objects/' + rec.data.id;
@@ -117,9 +117,9 @@ Ext.define('PMG.ObjectGroup', {
 	    waitMsgTarget: me,
 	});
 
-	var full_subject = function(subject, receivertest) {
+	let full_subject = function(subject, receivertest) {
 	    if (me.showDirection) {
-		var direction = receivertest
+		let direction = receivertest
 		    ? PMG.Utils.receiverText : PMG.Utils.senderText;
 
 		return subject + ' (' + direction + ')';
@@ -128,45 +128,45 @@ Ext.define('PMG.ObjectGroup', {
 	    }
 	};
 
-	var run_editor = function() {
-	    var rec = me.selModel.getSelection()[0];
+	let run_editor = function() {
+	    let rec = me.selModel.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
 
-	    var editor = PMG.Utils.object_editors[rec.data.otype];
+	    let editor = PMG.Utils.object_editors[rec.data.otype];
 	    if (!editor || editor.uneditable) {
 		return;
 	    }
 
-	    var config = Ext.apply({ method: 'PUT' }, editor);
+	    let config = Ext.apply({ method: 'PUT' }, editor);
 	    config.subject = full_subject(editor.subject, rec.data.receivertest);
 	    config.url = me.baseurl + '/' + editor.subdir + '/' + rec.data.id;
 
-	    var win = Ext.createWidget(config);
+	    let win = Ext.createWidget(config);
 
 	    win.load();
 	    win.on('destroy', reload);
 	    win.show();
 	};
 
-	var menu_items = [];
+	let menu_items = [];
 
 	Ext.Array.each(me.otype_list, function(otype) {
-	    var editor = PMG.Utils.object_editors[otype];
+	    let editor = PMG.Utils.object_editors[otype];
 
-	    var config = Ext.apply({ method: 'POST' }, editor);
+	    let config = Ext.apply({ method: 'POST' }, editor);
 	    config.subject = full_subject(editor.subject, editor.receivertest);
 
 	    menu_items.push({
 		text: config.subject,
 		iconCls: config.iconCls || 'fa fa-question-circle',
 		handler: function() {
-		    if (me.baseurl == undefined) {
+		    if (me.baseurl === undefined) {
 			return;
 		    }
 		    config.url = me.baseurl + '/' + editor.subdir;
-		    var win = Ext.create(config);
+		    let win = Ext.create(config);
 		    win.on('destroy', reload);
 		    win.show();
 		},
@@ -193,7 +193,7 @@ Ext.define('PMG.ObjectGroup', {
 		    disabled: true,
 		    selModel: me.selModel,
 		    enableFn: function(rec) {
-			var editor = PMG.Utils.object_editors[rec.data.otype];
+			let editor = PMG.Utils.object_editors[rec.data.otype];
 			return editor && !editor.uneditable;
 		    },
 		    handler: run_editor,

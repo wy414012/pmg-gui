@@ -18,7 +18,7 @@ Ext.define('PMG.MainView', {
 	},
 
 	beforeChangePath: function(path, subpath, action) {
-	    var me = this;
+	    let me = this;
 
 	    if (!Ext.ClassManager.getByAlias('widget.'+ path)) {
 		console.warn('xtype "'+path+'" not found');
@@ -26,7 +26,7 @@ Ext.define('PMG.MainView', {
 		return;
 	    }
 
-	    var lastpanel = me.lookupReference('contentpanel').getLayout().getActiveItem();
+	    let lastpanel = me.lookupReference('contentpanel').getLayout().getActiveItem();
 	    if (lastpanel && lastpanel.xtype === path) {
 		// we have the right component already,
 		// we just need to select the correct tab
@@ -48,12 +48,12 @@ Ext.define('PMG.MainView', {
 	},
 
 	changePath: function(path, subpath) {
-	    var me = this;
-	    var contentpanel = me.lookupReference('contentpanel');
-	    var lastpanel = contentpanel.getLayout().getActiveItem();
+	    let me = this;
+	    let contentpanel = me.lookupReference('contentpanel');
+	    let lastpanel = contentpanel.getLayout().getActiveItem();
 
-	    var obj = contentpanel.add({ xtype: path });
-	    var treelist = me.lookupReference('navtree');
+	    let obj = contentpanel.add({ xtype: path });
+	    let treelist = me.lookupReference('navtree');
 
 	    treelist.suspendEvents();
 	    treelist.select(path);
@@ -62,7 +62,7 @@ Ext.define('PMG.MainView', {
 	    if (Ext.isFunction(obj.setActiveTab)) {
 		obj.setActiveTab(subpath || 0);
 		obj.addListener('tabchange', function(tabpanel, newc, oldc) {
-		    var newpath = path;
+		    let newpath = path;
 
 		    // only add the subpath part for the
 		    // non-default tabs
@@ -105,7 +105,7 @@ Ext.define('PMG.MainView', {
 	},
 
 	init: function(view) {
-	    var me = this;
+	    let me = this;
 
 	    // load username
 	    me.lookupReference('usernameinfo').setText(Proxmox.UserName);
@@ -113,7 +113,7 @@ Ext.define('PMG.MainView', {
 	    // show login on requestexception
 	    // fixme: what about other errors
 	    Ext.Ajax.on('requestexception', function(conn, response, options) {
-		if (response.status == 401) { // auth failure
+		if (response.status === 401) { // auth failure
 		    me.logout();
 		}
 	    });
@@ -121,7 +121,7 @@ Ext.define('PMG.MainView', {
 	    // get ticket periodically
 	    Ext.TaskManager.start({
 		run: function() {
-		    var ticket = Proxmox.Utils.authOK();
+		    let ticket = Proxmox.Utils.authOK();
 		    if (!ticket || !Proxmox.UserName) {
 			return;
 		    }
@@ -137,7 +137,7 @@ Ext.define('PMG.MainView', {
 			    me.logout();
 			},
 			success: function(response, opts) {
-			    var obj = Ext.decode(response.responseText);
+			    let obj = Ext.decode(response.responseText);
 			    PMG.Utils.updateLoginData(obj.data);
 			},
 		    });
@@ -146,7 +146,7 @@ Ext.define('PMG.MainView', {
 	    });
 
 	    // select treeitem and load page from url fragment
-	    var token = Ext.util.History.getToken() || 'pmgDashboard';
+	    let token = Ext.util.History.getToken() || 'pmgDashboard';
 	    this.redirectTo(token, true);
 	},
     },

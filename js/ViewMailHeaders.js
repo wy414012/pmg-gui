@@ -23,7 +23,6 @@ Ext.define('PMG.ViewMailHeaders', {
 
 	init: function(view) {
 	    var panel = view.lookupReference('contentPanel');
-	    var fromField =
 	    Proxmox.Utils.API2Request({
 		url: view.url,
 		waitMsgTarget: view,

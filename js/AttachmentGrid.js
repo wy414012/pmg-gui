@@ -25,7 +25,7 @@ Ext.define('PMG.grid.AttachmentGrid', {
     emptyText: gettext('No Attachments'),
 
     download: function() {
-	alert(arguments);
+	Ext.Msg.alert(arguments);
     },
 
     columns: [
@@ -50,11 +50,10 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	    header: gettext('Download'),
 	    renderer: function(value, mD, rec) {
 		var me = this;
-		let url = '/api2/json/quarantine/download';
-		url += '?mailid=' + me.mailid;
-		url += '&attachmentid=' + rec.data.id;
-		return "<a target='_blank' class='download' download='"+ rec.data.name +"' href='" +
-		url + "'><i class='fa fa-fw fa-download'</i></a>";
+		let url = `/api2/json/quarantine/download?mailid=${me.mailid}&attachmentid=${rec.data.id}`;
+		return `<a target='_blank' class='download' download='${rec.data.name}' href='${url}'>
+		    <i class='fa fa-fw fa-download'</i>
+		</a>`;
 	    },
 	},
     ],

@@ -3,8 +3,8 @@ Ext.define('PMG.QuarantineNavigationTree', {
     xtype: 'quarantinenavigationtree',
 
     select: function(path) {
-	var me = this;
-	var item = me.getStore().findRecord('path', path, 0, false, true, true);
+	let me = this;
+	let item = me.getStore().findRecord('path', path, 0, false, true, true);
 	me.setSelection(item);
     },
 
@@ -62,7 +62,7 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	beforeChangePath: function(path, subpath, action) {
-	    var me = this;
+	    let me = this;
 
 	    if (!Ext.ClassManager.getByAlias('widget.'+ path)) {
 		console.warn('xtype "'+path+'" not found');
@@ -70,7 +70,7 @@ Ext.define('PMG.QuarantineView', {
 		return;
 	    }
 
-	    var lastpanel = me.lookupReference('contentpanel').getLayout().getActiveItem();
+	    let lastpanel = me.lookupReference('contentpanel').getLayout().getActiveItem();
 	    if (lastpanel && lastpanel.xtype === path) {
 		// we have the right component already,
 		// we just need to select the correct tab
@@ -92,12 +92,12 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	changePath: function(path, subpath) {
-	    var me = this;
-	    var contentpanel = me.lookupReference('contentpanel');
-	    var lastpanel = contentpanel.getLayout().getActiveItem();
+	    let me = this;
+	    let contentpanel = me.lookupReference('contentpanel');
+	    let lastpanel = contentpanel.getLayout().getActiveItem();
 
-	    var obj = contentpanel.add({ xtype: path, cselect: subpath });
-	    var treelist = me.lookupReference('navtree');
+	    let obj = contentpanel.add({ xtype: path, cselect: subpath });
+	    let treelist = me.lookupReference('navtree');
 
 	    treelist.suspendEvents();
 	    treelist.select(path);
@@ -106,7 +106,7 @@ Ext.define('PMG.QuarantineView', {
 	    if (Ext.isFunction(obj.setActiveTab)) {
 		obj.setActiveTab(subpath || 0);
 		obj.addListener('tabchange', function(tabpanel, newc, oldc) {
-		    var newpath = path;
+		    let newpath = path;
 
 		    // only add the subpath part for the
 		    // non-default tabs
@@ -153,22 +153,22 @@ Ext.define('PMG.QuarantineView', {
 	},
 
 	init: function(view) {
-	    var me = this;
+	    let me = this;
 
 	    // load username
-	    var username = Proxmox.UserName.replace(/\@quarantine$/, '');
+	    let username = Proxmox.UserName.replace(/@quarantine$/, '');
 	    me.lookupReference('usernameinfo').setText(username);
 
 	    // show login on requestexception
 	    // fixme: what about other errors
 	    Ext.Ajax.on('requestexception', function(conn, response, options) {
-		if (response.status == 401) { // auth failure
+		if (response.status === 401) { // auth failure
 		    me.logout();
 		}
 	    });
 
-	    var qa = PMG.Utils.extractQuarantineAction();
-	    var token;
+	    let qa = PMG.Utils.extractQuarantineAction();
+	    let token;
 	    if (qa) {
 		token = 'pmgSpamQuarantine';
 		if (qa.action === 'blacklist') { token = 'pmgUserBlacklist'; }

@@ -13,7 +13,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
     },
 
     setValues: function(values) {
-	var me = this;
+	let me = this;
 
 	if (values.profile !== undefined) {
 	    if (values.mode === 'any') {
@@ -24,7 +24,7 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 	}
 
 	if (values.profile !== undefined) {
-	    var groupField = this.lookupReference('groupField');
+	    let groupField = this.lookupReference('groupField');
 	    groupField.setProfile(values.profile);
 	}
 
@@ -36,17 +36,17 @@ Ext.define('PMG.LDAPGroupInputPanel', {
 	xclass: 'Ext.app.ViewController',
 
 	changeMode: function(f, value) {
-	    var groupField = this.lookupReference('groupField');
+	    let groupField = this.lookupReference('groupField');
 	    groupField.setDisabled(value !== 'group');
 	    groupField.setVisible(value === 'group');
-	    var profileField = this.lookupReference('profileField');
-	    var enabled = (value != 'any') && (value != 'none');
+	    let profileField = this.lookupReference('profileField');
+	    let enabled = (value !== 'any') && (value !== 'none');
 	    profileField.setDisabled(!enabled);
 	    profileField.setVisible(enabled);
 	},
 
 	changeProfile: function(f, value) {
-	    var groupField = this.lookupReference('groupField');
+	    let groupField = this.lookupReference('groupField');
 	    groupField.setProfile(value);
 	},
 

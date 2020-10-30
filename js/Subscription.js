@@ -1,4 +1,3 @@
-/*global Blob,Proxmox*/
 Ext.define('PMG.SubscriptionKeyEdit', {
     extend: 'Proxmox.window.Edit',
 
@@ -31,14 +30,14 @@ Ext.define('PMG.Subscription', {
     },
 
     showReport: function() {
-	var me = this;
+	let me = this;
 
-	var getReportFileName = function() {
-	    var now = Ext.Date.format(new Date(), 'D-d-F-Y-G-i');
+	const getReportFileName = function() {
+	    let now = Ext.Date.format(new Date(), 'D-d-F-Y-G-i');
 	    return Proxmox.NodeName + '-report-' + now + '.txt';
 	};
 
-	var view = Ext.createWidget('component', {
+	let view = Ext.createWidget('component', {
 	    itemId: 'system-report-view',
 	    scrollable: true,
 	    style: {
@@ -49,7 +48,7 @@ Ext.define('PMG.Subscription', {
 	    },
 	});
 
-	var reportWindow = Ext.create('Ext.window.Window', {
+	let reportWindow = Ext.create('Ext.window.Window', {
 	    title: gettext('System Report'),
 	    width: 1024,
 	    height: 600,
@@ -60,14 +59,14 @@ Ext.define('PMG.Subscription', {
 		{
 		    text: gettext('Download'),
 		    handler: function() {
-			var fileContent = Ext.String.htmlDecode(reportWindow.getComponent('system-report-view').html);
-			var fileName = getReportFileName();
+			let fileContent = Ext.String.htmlDecode(reportWindow.getComponent('system-report-view').html);
+			let fileName = getReportFileName();
 
 			// Internet Explorer
 			if (window.navigator.msSaveOrOpenBlob) {
 			    navigator.msSaveOrOpenBlob(new Blob([fileContent]), fileName);
 			} else {
-			    var element = document.createElement('a');
+			    let element = document.createElement('a');
 			    element.setAttribute('href', 'data:text/plain;charset=utf-8,'
 			      + encodeURIComponent(fileContent));
 			    element.setAttribute('download', fileName);
@@ -90,7 +89,7 @@ Ext.define('PMG.Subscription', {
 		Ext.Msg.alert(gettext('Error'), response.htmlStatus);
 	    },
 	    success: function(response) {
-		var report = Ext.htmlEncode(response.result.data);
+		let report = Ext.htmlEncode(response.result.data);
 		reportWindow.show();
 		view.update(report);
 	    },
@@ -98,23 +97,23 @@ Ext.define('PMG.Subscription', {
     },
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
-	var reload = function() {
+	const reload = function() {
 	    me.rstore.load();
 	};
 
-	var baseurl = '/nodes/' + Proxmox.NodeName + '/subscription';
+	let baseurl = `/nodes/${Proxmox.NodeName}/subscription`;
 
-	var render_status = function(value) {
-	    var message = me.getObjectValue('message');
+	let render_status = function(value) {
+	    let message = me.getObjectValue('message');
 	    if (message) {
 		return value + ": " + message;
 	    }
 	    return value;
 	};
 
-	var rows = {
+	let rows = {
 	    productname: {
 		header: gettext('Type'),
 	    },
@@ -150,10 +149,10 @@ Ext.define('PMG.Subscription', {
 		{
 		    text: gettext('Upload Subscription Key'),
 		    handler: function() {
-			var win = Ext.create('PMG.SubscriptionKeyEdit', {
+			let win = Ext.create('PMG.SubscriptionKeyEdit', {
 			    url: '/api2/extjs/' + baseurl,
+			    autoShow: true,
 			});
-			win.show();
 			win.on('destroy', reload);
 		    },
 		},
