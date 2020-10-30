@@ -52,7 +52,8 @@ class MailView extends Component {
 		</div>
 	    </div>
 	    <div class="page-content">
-		<iframe frameborder=0 width="100%" height="100%" sandbox="allow-same-origin" src="/api2/htmlmail/quarantine/content?id={{mailid}}"></iframe>
+		<iframe frameborder=0 width="100%" height="100%" sandbox="allow-same-origin"
+		    src="/api2/htmlmail/quarantine/content?id={{mailid}}"></iframe>
 	    </div>
 	</div>
 	`;

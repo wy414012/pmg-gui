@@ -6,7 +6,8 @@ class QuarantineView extends Component {
 		<div class="navbar">
 		    <div class="navbar-inner">
 			<div class="left">
-			    <img class="logo-navbar" style="padding: 0 10px" src="pve2/images/logo-128.png" height=32 />
+			    <img class="logo-navbar" style="padding: 0 10px"
+			        src="pve2/images/logo-128.png" height=32 />
 			</div>
 			<div class="title">Mail Gateway</div>
 		    </div>
@@ -142,7 +143,7 @@ class QuarantineView extends Component {
 	    });
 
 	    // setup pull to refresh
-	    $$('.ptr-content').on('ptr:refresh', (e) => {
+	    $$('.ptr-content').on('ptr:refresh', (ev) => {
 		me.setItems([
 		    { skel: true, divider: true },
 		    { skel: true },
@@ -167,7 +168,7 @@ class QuarantineView extends Component {
 			grouperFn: (val) => PMG.Utils.unixToIso(val.time),
 		    });
 		}).catch(PMG.Utils.showError).then(() => {
-		    e.detail();
+		    ev.detail();
 		});
 	    });
 
@@ -220,8 +221,8 @@ class QuarantineView extends Component {
 	let date = starttime;
 	if (!(starttime instanceof Date)) {
 	    // we assume an ISO string
-	    if (starttime == '') {
-		return;
+	    if (starttime === '') {
+		return null;
 	    }
 	    date = new Date(PMG.Utils.isoToUnix(starttime)*1000);
 	}
@@ -238,8 +239,8 @@ class QuarantineView extends Component {
 	var me = this;
 	let date = endtime;
 	if (!(endtime instanceof Date)) {
-	    if (endtime == '') {
-		return;
+	    if (endtime === '') {
+		return null;
 	    }
 	    // we assume an ISO string
 	    date = new Date(PMG.Utils.isoToUnix(endtime)*1000);
@@ -323,7 +324,7 @@ class QuarantineView extends Component {
 	    for (let i = 0; i+offset < items.length; i++) {
 		let item = items[i+offset];
 		let curgroup = options.grouperFn(item);
-		if (curgroup != lastgroup) {
+		if (curgroup !== lastgroup) {
 		    me.vList.insertItemBefore(i+offset++, {
 			divider: true,
 			group: curgroup,

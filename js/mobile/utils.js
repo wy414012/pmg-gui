@@ -1,4 +1,4 @@
-var PMG = {
+PMG = {
     Utils: {
 	getCookie(name) {
 	    let cookies = document.cookie.split(/;\s*/);
@@ -73,7 +73,7 @@ var PMG = {
 	    let mail, action, date, username, ticket;
 	    if (queryObj.ticket) {
 		let tocheck = decodeURIComponent(queryObj.ticket);
-		let match = tocheck.match(/^PMGQUAR:([^\s\:]+):/);
+		let match = tocheck.match(/^PMGQUAR:([^\s:]+):/);
 		if (match) {
 		    ticket = tocheck;
 		    username = match[1];

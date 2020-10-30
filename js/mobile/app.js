@@ -1,5 +1,5 @@
-var $$ = Dom7;
-var app = new Framework7({
+$$ = Dom7;
+app = new Framework7({
     root: '#app',
     init: false,
     name: 'Proxmox Mail Gateway',
@@ -73,6 +73,6 @@ var app = new Framework7({
     ],
 });
 
-let quarlist = new QuarantineView();
+let _quarantine_view = new QuarantineView();
 
 app.init();

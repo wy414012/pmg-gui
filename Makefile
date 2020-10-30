@@ -56,7 +56,7 @@ distclean: clean
 .PHONY: lint
 lint:
 	$(MAKE) -C js/ lint
-	#$(MAKE) -C js/mobile lint
+	$(MAKE) -C js/mobile lint
 
 clean:
 	make -C js clean
