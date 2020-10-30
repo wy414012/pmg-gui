@@ -68,6 +68,14 @@ PMG = {
 		destroyOnClose: true,
 	    });
 	},
+	showSuccessToast(msg) {
+	    app.toast.show({
+		text: msg,
+		closeTimeout: 2000,
+		closeButton: true,
+		destroyOnClose: true,
+	    });
+	},
 	extractParams() {
 	    let queryObj = app.utils.parseUrlQuery(location.search);
 	    let mail, action, date, username, ticket;

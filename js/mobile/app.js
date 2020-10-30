@@ -43,18 +43,10 @@ app = new Framework7({
 			    },
 			    success: (data, status, xhr) => {
 				loader.close();
-				app.dialog.alert(
-				    `Action '${action}' successful`,
-				    gettext("Info"),
-				    () => {
-					if (action === 'delete' ||
-					    action === 'deliver') {
-					    // refresh the main list when a mail
-					    // got deleted or delivered
-					    app.ptr.refresh();
-					}
-				    },
-				);
+				PMG.Utils.showSuccessToast(`${action} successful`);
+				if (action === 'delete' || action === 'deliver') {
+				    app.ptr.refresh();
+				}
 				reject();
 			    },
 			    error: xhr => {
