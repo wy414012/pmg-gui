@@ -12,6 +12,9 @@ MOBILESRC=				\
 lint: pmgmanagerlib-mobile.js
 	eslint $^
 
+.PHONY: check
+check: lint
+
 pmgmanagerlib-mobile.js: ${MOBILESRC}
 	cat $^ >$@.tmp
 	mv $@.tmp $@

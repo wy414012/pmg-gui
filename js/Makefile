@@ -93,11 +93,17 @@ OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
 	/usr/bin/asciidoc-pmg scan-extjs ${JSSRC} >$@.tmp
 	mv $@.tmp $@
 
-lint: ${JSSRC}
+.lint-incremental: ${JSSRC}
 	eslint $?
+	touch "$@"
 
-lint-all: ${JSSRC}
-	eslint $^
+.PHONY: lint
+lint: .lint-incremental
+
+.PHONY: check
+check: ${JSSRC}
+	rm ".lint-incremental"
+	$(MAKE) lint
 
 pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
 	echo "// ${DEB_VERSION_UPSTREAM_REVISION}" > $@.tmp

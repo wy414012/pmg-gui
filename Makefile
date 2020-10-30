@@ -54,9 +54,9 @@ distclean: clean
 	rm -f examples/simple-demo.pem
 
 .PHONY: lint
-lint:
-	$(MAKE) -C js/ lint
-	$(MAKE) -C js/mobile lint
+check:
+	$(MAKE) -C js/ check
+	$(MAKE) -C js/mobile check
 
 clean:
 	make -C js clean
