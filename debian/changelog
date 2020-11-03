@@ -1,3 +1,15 @@
+pmg-gui (2.2-3) pmg; urgency=medium
+
+  * fix #2844: MailTracker: do not collapse rows with double click
+
+  * quarantine view: make action success prompt a less intrusive toast
+
+  * mobile: show toast instead of success prompt
+
+  * mobile: fix wording of calendar start/end date labels
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 03 Nov 2020 12:03:02 +0100
+
 pmg-gui (2.2-2) pmg; urgency=medium
 
   * fix #1976: allow sorting in the postfix 'Deferred Mail' queue grid
