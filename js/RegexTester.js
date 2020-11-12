@@ -26,7 +26,7 @@ Ext.define('PMG.RegexTester', {
 	    text: 'Test',
 	    handler: function(btn) {
 		let view = this.up();
-		let regexField = btn.nextSibling(`field[reference=${view.regexFieldReference}]`);
+		let regexField = view.up().child(`field[reference=${view.regexFieldReference}]`);
 
 		let regex = regexField.getValue();
 		if (view.wholeMatch) {
