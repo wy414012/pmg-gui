@@ -102,7 +102,7 @@ lint: .lint-incremental
 
 .PHONY: check
 check: ${JSSRC}
-	rm ".lint-incremental"
+	rm -f ".lint-incremental"
 	$(MAKE) lint
 
 pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
