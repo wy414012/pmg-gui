@@ -26,39 +26,41 @@ Ext.define('PMG.RestoreWindow', {
     fieldDefaults: {
 	labelWidth: 150,
     },
-    items: [
-	{
-	    xtype: 'proxmoxcheckbox',
-	    name: 'config',
-	    fieldLabel: gettext('System Configuration'),
-	},
-	{
-	    xtype: 'proxmoxcheckbox',
-	    name: 'database',
-	    value: 1,
-	    uncheckedValue: 0,
-	    fieldLabel: gettext('Rule Database'),
-	    listeners: {
-		change: function(field, value) {
-		    field.nextSibling('field[name=statistic]').setDisabled(!value);
-		},
-	    },
-	},
-	{
-	    xtype: 'proxmoxcheckbox',
-	    name: 'statistic',
-	    fieldLabel: gettext('Statistic'),
-	},
-    ],
 
     initComponent: function() {
 	let me = this;
 
-	if (!me.filename) {
-	    throw "no filename given";
-	}
+	me.items = [
+	    {
+		xtype: 'proxmoxcheckbox',
+		name: 'config',
+		fieldLabel: gettext('System Configuration'),
+	    },
+	    {
+		xtype: 'proxmoxcheckbox',
+		name: 'database',
+		value: 1,
+		uncheckedValue: 0,
+		fieldLabel: gettext('Rule Database'),
+		listeners: {
+		    change: function(field, value) {
+			field.nextSibling('field[name=statistic]').setDisabled(!value);
+		    },
+		},
+	    },
+	    {
+		xtype: 'proxmoxcheckbox',
+		name: 'statistic',
+		fieldLabel: gettext('Statistic'),
+	    },
+	];
 
-	me.url = `/nodes/${Proxmox.NodeName}/backup/${encodeURIComponent(me.filename)}`;
+	let initurl = "/nodes/" + Proxmox.NodeName;
+	if (me.filename) {
+	    me.url = initurl + "/backup/" + encodeURIComponent(me.filename);
+	} else {
+	    throw "neither filename nor snapshot given";
+	}
 
 	me.callParent();
     },
