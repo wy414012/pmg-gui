@@ -58,6 +58,15 @@ Ext.define('PMG.RestoreWindow', {
 	let initurl = "/nodes/" + Proxmox.NodeName;
 	if (me.filename) {
 	    me.url = initurl + "/backup/" + encodeURIComponent(me.filename);
+	} else if (me.backup_time) {
+	    me.items.push(
+		{
+		    xtype: 'hiddenfield',
+		    name: 'backup-time',
+		    value: me.backup_time,
+		},
+	    );
+	    me.url = initurl + "/pbs/" + me.name + '/restore';
 	} else {
 	    throw "neither filename nor snapshot given";
 	}

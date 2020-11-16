@@ -37,6 +37,7 @@ JSSRC=							\
 	Subscription.js					\
 	BackupConfiguration.js				\
 	BackupRestore.js				\
+	PBSConfig.js					\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\
 	MailProxyPorts.js				\
