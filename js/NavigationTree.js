@@ -86,6 +86,12 @@ Ext.define('PMG.store.NavigationStore', {
 			path: 'pmgSubscription',
 			leaf: true,
 		    },
+		    {
+			text: gettext('Backup/Restore'),
+			iconCls: 'fa fa-floppy-o',
+			path: 'pmgBackupConfiguration',
+			leaf: true,
+		    },
 		],
 	    },
 	    {

@@ -49,10 +49,6 @@ Ext.define('PMG.SystemConfiguration', {
             title: gettext('Options'),
 	    xtype: 'pmgSystemOptions',
 	},
-	{
-	    itemId: 'backup',
-	    xtype: 'pmgBackupRestore',
-	},
     ],
 
     initComponent: function() {
