@@ -248,7 +248,7 @@ Ext.define('PMG.PBSScheduleEdit', {
     initComponent: function() {
 	let me = this;
 
-	me.url = '/nodes/' + Proxmox.NodeName + '/pbs/' + me.remote + '/timer';
+	me.url = `/nodes/${Proxmox.NodeName}/pbs/${me.remote}/timer`;
 	me.callParent();
     },
 });
@@ -261,10 +261,11 @@ Ext.define('PMG.PBSConfig', {
 	xclass: 'Ext.app.ViewController',
 
 	callRestore: function(grid, record) {
-	    let name = this.getViewModel().get('name');
+	    let remote = this.getViewModel().get('remote');
 	    Ext.create('PMG.RestoreWindow', {
-		name: name,
-		backup_time: record.data.time,
+		remote: remote,
+		backup_id: record.data['backup-id'],
+		backup_time: record.data['backup-time'],
 	    }).show();
 	},
 
@@ -278,9 +279,9 @@ Ext.define('PMG.PBSConfig', {
 	runBackup: function(button) {
 	    let me = this;
 	    let view = me.lookup('pbsremotegrid');
-	    let name = me.getViewModel().get('name');
+	    let remote = me.getViewModel().get('remote');
 	    Proxmox.Utils.API2Request({
-		url: "/nodes/" + Proxmox.NodeName + "/pbs/" + name + "/backup",
+		url: `/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`,
 		method: 'POST',
 		waitMsgTarget: view,
 		failure: function(response, opts) {
@@ -308,13 +309,13 @@ Ext.define('PMG.PBSConfig', {
 	    let me = this;
 	    let viewModel = me.getViewModel();
 	    if (selected[0]) {
-		let name = selected[0].data.remote;
+		let remote = selected[0].data.remote;
 		viewModel.set('selected', true);
-		viewModel.set('name', name);
+		viewModel.set('remote', remote);
 
 		// set grid stores and load them
 		let remstore = me.lookup('pbsremotegrid').getStore();
-		remstore.getProxy().setUrl('/api2/json/nodes/' + Proxmox.NodeName + '/pbs/' + name + '/snapshots');
+		remstore.getProxy().setUrl(`/api2/json/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`);
 		remstore.load();
 	    } else {
 		viewModel.set('selected', false);
@@ -347,7 +348,7 @@ Ext.define('PMG.PBSConfig', {
 
     viewModel: {
 	data: {
-	    name: '',
+	    remote: '',
 	    selected: false,
 	},
     },
@@ -389,13 +390,17 @@ Ext.define('PMG.PBSConfig', {
 		    disabled: true,
 		    getUrl: function(rec) {
 			let me = this;
-			let remote = me.lookupViewModel().get('name');
-			return '/nodes/' + Proxmox.NodeName + '/pbs/' + remote +'/snapshots/'+ rec.data.time;
+			let remote = me.lookupViewModel().get('remote');
+			let snapshot = `${rec.data['backup-id']}/${rec.data['backup-time']}`;
+			return `/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot/${snapshot}`;
 		    },
 		    confirmMsg: function(rec) {
 			let me = this;
-			let time = rec.data.time;
-			return Ext.String.format(gettext('Are you sure you want to forget snapshot {0}'), `'${time}'`);
+			let snapshot = `${rec.data['backup-id']}/${rec.data['backup-time']}`;
+			return Ext.String.format(
+			    gettext('Are you sure you want to forget snapshot {0}'),
+			    `'${snapshot}'`,
+			);
 		    },
 		    callback: 'reloadSnapshots',
 		},
@@ -411,23 +416,30 @@ Ext.define('PMG.PBSConfig', {
 		],
 	    },
 	    bind: {
-		title: Ext.String.format(gettext("Backup snapshots on '{0}'"), '{name}'),
+		title: Ext.String.format(gettext("Backup snapshots on '{0}'"), '{remote}'),
 		hidden: '{!selected}',
 	    },
 	    columns: [
 		{
-		    text: 'Time',
-		    dataIndex: 'time',
+		    text: 'Group ID',
+		    dataIndex: 'backup-id',
 		    flex: 1,
+		},
+		{
+		    text: 'Time',
+		    dataIndex: 'backup-time',
+		    width: 180,
 		},
 		{
 		    text: 'Size',
 		    dataIndex: 'size',
+		    renderer: Proxmox.Utils.format_size,
 		    flex: 1,
 		},
 		{
 		    text: 'Encrypted',
 		    dataIndex: 'encrypted',
+		    hidden: true, // FIXME: actually return from API
 		    renderer: Proxmox.Utils.format_boolean,
 		    flex: 1,
 		},
@@ -476,7 +488,6 @@ Ext.define('PMG.PBSConfigGrid', {
 	    win.on('destroy', me.reload, me);
 	    win.show();
 	},
-
 
 	reload: function() {
 	    let me = this;
@@ -544,8 +555,8 @@ Ext.define('PMG.PBSConfigGrid', {
 	    text: gettext('Remove Schedule'),
 	    confirmMsg: function(rec) {
 		let me = this;
-		let name = rec.getId();
-		return Ext.String.format(gettext('Are you sure you want to remove the schedule for {0}'), `'${name}'`);
+		let remote = rec.getId();
+		return Ext.String.format(gettext('Are you sure you want to remove the schedule for {0}'), `'${remote}'`);
 	    },
 	    getUrl: function(rec) {
 		let me = this;
@@ -561,7 +572,7 @@ Ext.define('PMG.PBSConfigGrid', {
 
     columns: [
 	{
-	    header: gettext('Backup Server name'),
+	    header: gettext('Remote'),
 	    sortable: true,
 	    dataIndex: 'remote',
 	    flex: 2,
