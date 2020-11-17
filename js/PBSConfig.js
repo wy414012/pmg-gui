@@ -118,22 +118,19 @@ Ext.define('PMG.PBSInputPanel', {
 		    xtype: 'proxmoxintegerfield',
 		    fieldLabel: gettext('Keep Last'),
 		    name: 'keep-last',
-		    cbind: {
-			deleteEmpty: (get) => !get('isCreate'),
-		    },
+		    cbind: { deleteEmpty: '{!isCreate}' },
 		},
 		{
 		    xtype: 'proxmoxintegerfield',
 		    fieldLabel: gettext('Keep Daily'),
 		    name: 'keep-daily',
-		    cbind: {
-			deleteEmpty: (get) => !get('isCreate'),
-		    },
+		    cbind: { deleteEmpty: '{!isCreate}' },
 		},
 		{
 		    xtype: 'proxmoxintegerfield',
 		    fieldLabel: gettext('Keep Monthly'),
 		    name: 'keep-monthly',
+		    cbind: { deleteEmpty: '{!isCreate}' },
 		},
 	    ],
 	    column2: [
@@ -141,16 +138,19 @@ Ext.define('PMG.PBSInputPanel', {
 		    xtype: 'proxmoxintegerfield',
 		    fieldLabel: gettext('Keep Hourly'),
 		    name: 'keep-hourly',
+		    cbind: { deleteEmpty: '{!isCreate}' },
 		},
 		{
 		    xtype: 'proxmoxintegerfield',
 		    fieldLabel: gettext('Keep Weekly'),
 		    name: 'keep-weekly',
+		    cbind: { deleteEmpty: '{!isCreate}' },
 		},
 		{
 		    xtype: 'proxmoxintegerfield',
 		    fieldLabel: gettext('Keep Yearly'),
 		    name: 'keep-yearly',
+		    cbind: { deleteEmpty: '{!isCreate}' },
 		},
 	    ],
 	},
