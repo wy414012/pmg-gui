@@ -1,6 +1,7 @@
 Ext.define('PMG.PBSInputPanel', {
     extend: 'Ext.tab.Panel',
     xtype: 'pmgPBSInputPanel',
+    mixins: ['Proxmox.Mixin.CBind'],
 
     bodyPadding: 10,
     remoteId: undefined,
