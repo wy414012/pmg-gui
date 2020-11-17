@@ -17,15 +17,13 @@ Ext.define('PMG.PBSInputPanel', {
 
     items: [
 	{
-	    title: gettext('Backup Server'),
 	    xtype: 'inputpanel',
-	    reference: 'remoteeditpanel',
+	    title: gettext('Backup Server'),
 	    onGetValues: function(values) {
 		values.disable = values.enable ? 0 : 1;
 		delete values.enable;
 		return values;
 	    },
-
 	    column1: [
 		{
 		    xtype: 'pmxDisplayEditField',
@@ -105,9 +103,8 @@ Ext.define('PMG.PBSInputPanel', {
 	    ],
 	},
 	{
-	    title: gettext('Prune Options'),
 	    xtype: 'inputpanel',
-	    reference: 'prunepanel',
+	    title: gettext('Prune Options'),
 	    defaults: {
 		// set nested, else we'd only set the defaults for the two column containers
 		defaults: {
