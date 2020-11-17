@@ -38,6 +38,7 @@ JSSRC=							\
 	BackupConfiguration.js				\
 	BackupRestore.js				\
 	PBSSnapshotView.js				\
+	PBSRemoteEdit.js				\
 	PBSConfig.js					\
 	SystemConfiguration.js				\
 	MailProxyRelaying.js				\
