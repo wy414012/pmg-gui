@@ -590,6 +590,7 @@ Ext.define('PMG.PBSConfigGrid', {
 	    header: gettext('Encryption'),
 	    width: 80,
 	    sortable: true,
+	    hidden: true, // for now
 	    dataIndex: 'encryption-key',
 	    renderer: Proxmox.Utils.format_boolean,
 	},
