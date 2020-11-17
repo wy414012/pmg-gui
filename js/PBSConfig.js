@@ -174,24 +174,18 @@ Ext.define('PMG.PBSEdit', {
 
 	me.isCreate = !me.remoteId;
 
-	if (me.isCreate) {
-            me.url = '/api2/extjs/config/pbs';
-            me.method = 'POST';
-	} else {
-            me.url = '/api2/extjs/config/pbs/' + me.remoteId;
-            me.method = 'PUT';
+	me.method = 'POST';
+	me.url = '/api2/extjs/config/pbs';
+	if (!me.isCreate) {
+	    me.url += `/${me.remoteId}`;
+	    me.method = 'PUT';
 	}
 
-	let ipanel = Ext.create('PMG.PBSInputPanel', {
+	me.items = [{
+	    xtype: 'pmgPBSInputPanel',
 	    isCreate: me.isCreate,
 	    remoteId: me.remoteId,
-	});
-
-	me.items = [ipanel];
-
-	me.fieldDefaults = {
-	    labelWidth: 150,
-	};
+	}];
 
 	me.callParent();
 
@@ -201,8 +195,7 @@ Ext.define('PMG.PBSEdit', {
 		    let values = response.result.data;
 
 		    values.enable = values.disable ? 0 : 1;
-		    me.down('inputpanel[reference=remoteeditpanel]').setValues(values);
-		    me.down('inputpanel[reference=prunepanel]').setValues(values);
+		    me.setValues(values);
 		},
 	    });
 	}
