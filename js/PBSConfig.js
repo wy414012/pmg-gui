@@ -1,66 +1,3 @@
-Ext.define('Proxmox.form.PBSEncryptionCheckbox', {
-    extend: 'Ext.form.field.Checkbox',
-    xtype: 'pbsEncryptionCheckbox',
-
-    inputValue: true,
-
-    viewModel: {
-	data: {
-	    value: null,
-	    originalValue: null,
-	},
-	formulas: {
-	    blabel: (get) => {
-		let v = get('value');
-		let original = get('originalValue');
-		if (!get('isCreate') && original) {
-		    if (!v) {
-			return gettext('Warning: Existing encryption key will be deleted!');
-		    }
-		    return gettext('Active');
-		} else {
-		    return gettext('Auto-generate a client encryption key, saved privately in /etc/pmg');
-		}
-	    },
-	},
-    },
-
-    bind: {
-	value: '{value}',
-	boxLabel: '{blabel}',
-    },
-    resetOriginalValue: function() {
-	let me = this;
-	let vm = me.getViewModel();
-	vm.set('originalValue', me.value);
-
-	me.callParent(arguments);
-    },
-
-    getSubmitData: function() {
-	let me = this;
-	let val = me.getSubmitValue();
-	if (!me.isCreate) {
-	    if (val === null) {
-	       return { 'delete': 'encryption-key' };
-	    } else if (val && !!val !== !!me.originalValue) {
-	       return { 'encryption-key': 'autogen' };
-	    }
-	} else if (val) {
-	   return { 'encryption-key': 'autogen' };
-	}
-	return null;
-    },
-
-    initComponent: function() {
-	let me = this;
-	me.callParent();
-
-	let vm = me.getViewModel();
-	vm.set('isCreate', me.isCreate);
-    },
-});
-
 Ext.define('PMG.PBSInputPanel', {
     extend: 'Ext.tab.Panel',
     xtype: 'pmgPBSInputPanel',
@@ -145,17 +82,6 @@ Ext.define('PMG.PBSInputPanel', {
 			regex: /[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31}/,
 			regexText: gettext('Example') + ': AB:CD:EF:...',
 			allowBlank: true,
-		    },
-		    {
-			xtype: 'pbsEncryptionCheckbox',
-			name: 'encryption-key',
-			isCreate: me.isCreate,
-			fieldLabel: gettext('Encryption Key'),
-		    },
-		    {
-			xtype: 'displayfield',
-			userCls: 'pmx-hint',
-			value: `Proxmox Backup Server is currently in beta.`,
 		    },
 		],
 	    },
