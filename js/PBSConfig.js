@@ -517,23 +517,25 @@ Ext.define('PMG.PBSConfigGrid', {
 
     tbar: [
 	{
+	    text: gettext('Add Remote'),
+	    handler: 'newRemote',
+	},
+	'-',
+	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),
 	    disabled: true,
 	    handler: 'run_editor',
 	},
 	{
-	    text: gettext('Create'),
-	    handler: 'newRemote',
-	},
-	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/config/pbs',
 	    callback: 'reload',
 	},
+	'-',
 	{
 	    xtype: 'proxmoxButton',
-	    text: gettext('Schedule'),
+	    text: gettext('Set Schedule'),
 	    enableFn: function(rec) {
 		return !rec.data.disable;
 	    },
