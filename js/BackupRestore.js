@@ -55,21 +55,15 @@ Ext.define('PMG.RestoreWindow', {
 	    },
 	];
 
-	let initurl = "/nodes/" + Proxmox.NodeName;
+	let restorePath;
 	if (me.filename) {
-	    me.url = initurl + "/backup/" + encodeURIComponent(me.filename);
+	    restorePath = `backup/${encodeURIComponent(me.filename)}`;
 	} else if (me.backup_time) {
-	    me.items.push(
-		{
-		    xtype: 'hiddenfield',
-		    name: 'backup-time',
-		    value: me.backup_time,
-		},
-	    );
-	    me.url = initurl + "/pbs/" + me.name + '/restore';
+	    restorePath = `pbs/${me.remote}/snapshot/${me.backup_id}/${me.backup_time}`;
 	} else {
 	    throw "neither filename nor snapshot given";
 	}
+	me.url = `/nodes/${Proxmox.NodeName}/${restorePath}`;
 
 	me.callParent();
     },
