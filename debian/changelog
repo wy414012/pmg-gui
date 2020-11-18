@@ -1,3 +1,15 @@
+pmg-gui (2.3-1) pmg; urgency=medium
+
+  * RegexTester: fix getting reference to regex field
+
+  * add Proxmox Backup Server configuration and status tab to backup
+    panel
+
+  * add Request Quarantine Link button to login view if spam quarantine
+    user self service is enabled
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 18 Nov 2020 18:04:09 +0100
+
 pmg-gui (2.2-3) pmg; urgency=medium
 
   * fix #2844: MailTracker: do not collapse rows with double click
