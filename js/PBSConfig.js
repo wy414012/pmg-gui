@@ -68,10 +68,10 @@ Ext.define('PMG.PBSConfigGrid', {
 
 	    let win = Ext.createWidget('pmgPBSEdit', {
 		remoteId: rec.data.remote,
+		autoLoad: true,
+		autoShow: true,
 	    });
 	    win.on('destroy', me.reload, me);
-	    win.load();
-	    win.show();
 	},
 
 	newRemote: function() {
@@ -85,19 +85,6 @@ Ext.define('PMG.PBSConfigGrid', {
 	    let me = this;
 	    let view = me.getView();
 	    view.getStore().load();
-	    view.fireEvent('load', view);
-	},
-
-	createSchedule: function() {
-	    let me = this;
-	    let view = me.getView();
-	    let rec = view.getSelection()[0];
-	    let remotename = rec.data.remote;
-	    let win = Ext.createWidget('pmgPBSScheduleEdit', {
-		remote: remotename,
-	    });
-	    win.on('destroy', me.reload, me);
-	    win.show();
 	},
 
 	init: function(view) {
@@ -131,30 +118,11 @@ Ext.define('PMG.PBSConfigGrid', {
 	    baseurl: '/config/pbs',
 	    callback: 'reload',
 	},
-	'-',
+	'->',
 	{
-	    xtype: 'proxmoxButton',
-	    text: gettext('Set Schedule'),
-	    enableFn: function(rec) {
-		return !rec.data.disable;
-	    },
-	    disabled: true,
-	    handler: 'createSchedule',
-	},
-	{
-	    xtype: 'proxmoxStdRemoveButton',
-	    baseurl: '/nodes/' + Proxmox.NodeName + '/pbs/',
-	    callback: 'reload',
-	    text: gettext('Remove Schedule'),
-	    confirmMsg: function(rec) {
-		let me = this;
-		let remote = rec.getId();
-		return Ext.String.format(gettext('Are you sure you want to remove the schedule for {0}'), `'${remote}'`);
-	    },
-	    getUrl: function(rec) {
-		let me = this;
-		return me.baseurl + '/' + rec.getId() + '/timer';
-	    },
+	    text: gettext('Reload'),
+	    iconCls: 'fa fa-refresh',
+	    handler: 'reload',
 	},
     ],
 

@@ -16,14 +16,14 @@ Ext.define('PMG.PBSConfig', {
 
 	restoreSnapshot: function(button) {
 	    let me = this;
-	    let view = me.lookup('pbsremotegrid');
+	    let view = me.lookup('snapshotsGrid');
 	    let record = view.getSelection()[0];
 	    me.callRestore(view, record);
 	},
 
 	runBackup: function(button) {
 	    let me = this;
-	    let view = me.lookup('pbsremotegrid');
+	    let view = me.lookup('snapshotsGrid');
 	    let remote = me.getViewModel().get('remote');
 	    Proxmox.Utils.API2Request({
 		url: `/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`,
@@ -59,11 +59,17 @@ Ext.define('PMG.PBSConfig', {
 		viewModel.set('remote', remote);
 
 		// set grid stores and load them
-		let remstore = me.lookup('pbsremotegrid').getStore();
+		let remstore = me.lookup('snapshotsGrid').getStore();
 		remstore
 		    .getProxy()
 		    .setUrl(`/api2/json/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`);
 		remstore.load();
+
+		let scheduleStore = me.lookup('schedulegrid').rstore;
+		scheduleStore
+		    .getProxy()
+		    .setUrl(`/api2/json/nodes/${Proxmox.NodeName}/pbs/${remote}/timer`);
+		scheduleStore.load();
 	    } else {
 		viewModel.set('selected', false);
 	    }
@@ -77,9 +83,19 @@ Ext.define('PMG.PBSConfig', {
 	init: function(view) {
 	    let me = this;
 	    me.lookup('grid').relayEvents(view, ['activate']);
-	    let pbsremotegrid = me.lookup('pbsremotegrid');
 
-	    Proxmox.Utils.monStoreErrors(pbsremotegrid, pbsremotegrid.getStore(), true);
+	    let remoteGrid = me.lookup('grid');
+	    view.mon(remoteGrid.store, 'load', function(store, r, success, o) {
+		if (success) {
+		    remoteGrid.getSelectionModel().select(0);
+		}
+	    });
+
+	    let snapshotGrid = me.lookup('snapshotsGrid');
+	    let schedulegrid = me.lookup('schedulegrid');
+
+	    Proxmox.Utils.monStoreErrors(snapshotGrid, snapshotGrid.getStore(), true);
+	    Proxmox.Utils.monStoreErrors(schedulegrid, schedulegrid.getStore(), true);
 	},
 
 	control: {
@@ -87,7 +103,7 @@ Ext.define('PMG.PBSConfig', {
 		selectionchange: 'showInfo',
 		load: 'reload',
 	    },
-	    'grid[reference=pbsremotegrid]': {
+	    'grid[reference=snapshotsGrid]': {
 		itemdblclick: 'restoreSnapshot',
 	    },
 	},
@@ -104,19 +120,93 @@ Ext.define('PMG.PBSConfig', {
 
     items: [
 	{
-	    region: 'center',
-	    reference: 'grid',
 	    xtype: 'pmgPBSConfigGrid',
+	    reference: 'grid',
+	    title: gettext('Remote'),
+	    hidden: false,
+	    region: 'center',
+	    minHeight: 130,
 	    border: false,
+	},
+	{
+	    xtype: 'proxmoxObjectGrid',
+	    region: 'south',
+	    reference: 'schedulegrid',
+	    title: gettext('Schedule'),
+	    height: 155,
+	    border: false,
+	    hidden: true,
+	    emptyText: gettext('No schedule setup.'),
+	    tbar: [
+		{
+		    text: gettext('Set Schedule'),
+		    handler: function() {
+			let me = this;
+			let remote = me.lookupViewModel().get('remote');
+			let win = Ext.createWidget('pmgPBSScheduleEdit', {
+			    remote: remote,
+			    autoShow: true,
+			});
+			win.on('destroy', () => me.up('grid').rstore.load());
+		    },
+		},
+		{
+		    xtype: 'proxmoxStdRemoveButton',
+		    baseurl: `/nodes/${Proxmox.NodeName}/pbs/`,
+		    callback: function() {
+			this.up('grid').rstore.load();
+		    },
+		    text: gettext('Remove Schedule'),
+		    selModel: false,
+		    confirmMsg: function(_rec) {
+			let me = this;
+			let remote = me.lookupViewModel().get('remote');
+			return Ext.String.format(
+			    gettext('Are you sure you want to remove the schedule for {0}'),
+			    `'${remote}'`,
+			);
+		    },
+		    getUrl: function(_rec) {
+			let remote = this.lookupViewModel().get('remote');
+			return `${this.baseurl}/${remote}/timer`;
+		    },
+		},
+		'->',
+		{
+		    text: gettext('Reload'),
+		    iconCls: 'fa fa-refresh',
+		    handler: function() {
+			this.up('grid').rstore.load();
+		    },
+		},
+	    ],
+	    bind: {
+		title: Ext.String.format(gettext("Schedule on '{0}'"), '{remote}'),
+		hidden: '{!selected}',
+	    },
+	    url: '/', // hack, obj. grid is a bit dumb..
+	    rows: {
+		schedule: {
+		    text: gettext('Schedule'),
+		    required: true,
+		    defaultValue: gettext('None'),
+		},
+		delay: {
+		    text: gettext('Delay'),
+		},
+		'next-run': {
+		    text: gettext('Next Run'),
+		},
+	    },
 	},
 	{
 	    xtype: 'grid',
 	    region: 'south',
-	    reference: 'pbsremotegrid',
-	    hidden: true,
-	    height: '70%',
+	    reference: 'snapshotsGrid',
+	    height: '50%',
 	    border: false,
 	    split: true,
+	    hidden: true,
 	    emptyText: gettext('No backups on remote'),
 	    tbar: [
 		{
@@ -149,6 +239,14 @@ Ext.define('PMG.PBSConfig', {
 		    },
 		    callback: 'reloadSnapshots',
 		},
+		'->',
+		{
+		    text: gettext('Reload'),
+		    iconCls: 'fa fa-refresh',
+		    handler: function() {
+			this.up('grid').store.load();
+		    },
+		},
 	    ],
 	    store: {
 		fields: ['backup-id', 'backup-time', 'size', 'ctime', 'encrypted'],
@@ -165,6 +263,7 @@ Ext.define('PMG.PBSConfig', {
 		    gettext("Backup snapshots on '{0}'"),
 		    '{remote}',
 		),
+		hidden: '{!selected}',
 	    },
 	    columns: [
 		{
