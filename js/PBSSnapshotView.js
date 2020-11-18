@@ -60,7 +60,9 @@ Ext.define('PMG.PBSConfig', {
 
 		// set grid stores and load them
 		let remstore = me.lookup('pbsremotegrid').getStore();
-		remstore.getProxy().setUrl(`/api2/json/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`);
+		remstore
+		    .getProxy()
+		    .setUrl(`/api2/json/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`);
 		remstore.load();
 	    } else {
 		viewModel.set('selected', false);
@@ -118,10 +120,8 @@ Ext.define('PMG.PBSConfig', {
 	    emptyText: gettext('No backups on remote'),
 	    tbar: [
 		{
-		    xtype: 'proxmoxButton',
 		    text: gettext('Backup'),
 		    handler: 'runBackup',
-		    selModel: false,
 		},
 		{
 		    xtype: 'proxmoxButton',
@@ -151,18 +151,20 @@ Ext.define('PMG.PBSConfig', {
 		},
 	    ],
 	    store: {
-		fields: ['time', 'size', 'ctime', 'encrypted'],
+		fields: ['backup-id', 'backup-time', 'size', 'ctime', 'encrypted'],
 		proxy: { type: 'proxmox' },
 		sorters: [
 		    {
-			property: 'time',
+			property: 'backup-time',
 			direction: 'DESC',
 		    },
 		],
 	    },
 	    bind: {
-		title: Ext.String.format(gettext("Backup snapshots on '{0}'"), '{remote}'),
-		hidden: '{!selected}',
+		title: Ext.String.format(
+		    gettext("Backup snapshots on '{0}'"),
+		    '{remote}',
+		),
 	    },
 	    columns: [
 		{

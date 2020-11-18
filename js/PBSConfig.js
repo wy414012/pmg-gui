@@ -104,7 +104,6 @@ Ext.define('PMG.PBSConfigGrid', {
 	    let me = this;
 	    Proxmox.Utils.monStoreErrors(view, view.getStore(), true);
 	},
-
     },
 
     store: {
