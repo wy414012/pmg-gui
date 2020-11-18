@@ -10,6 +10,8 @@ Ext.define('PMG.LoginView', {
 
 	    let realmfield = me.lookup('realmfield');
 
+	    me.lookup('quarantineButton').setVisible(!!Proxmox.QuarantineLink);
+
 	    if (view.targetview !== 'quarantineview') {
 		return;
 	    }
@@ -65,6 +67,30 @@ Ext.define('PMG.LoginView', {
 	    }
 	},
 
+	openQuarantineLinkWindow: function() {
+	    let me = this;
+	    me.lookup('loginwindow').setVisible(false);
+	    Ext.create('Proxmox.window.Edit', {
+		title: gettext('Request Quarantine Link'),
+		url: '/quarantine/sendlink',
+		isCreate: true,
+		submitText: gettext('OK'),
+		method: 'POST',
+		items: [
+		    {
+			xtype: 'proxmoxtextfield',
+			name: 'mail',
+			fieldLabel: gettext('Your E-Mail'),
+		    },
+		],
+		listeners: {
+		    destroy: function() {
+			me.lookup('loginwindow').show(true);
+		    },
+		},
+	    }).show();
+	},
+
 	control: {
 	    'field[name=lang]': {
 		change: function(f, value) {
@@ -75,6 +101,9 @@ Ext.define('PMG.LoginView', {
 		    loginwin.mask(gettext('Please wait...'), 'x-mask-loading');
 		    window.location.reload();
 		},
+	    },
+	    'button[reference=quarantineButton]': {
+		click: 'openQuarantineLinkWindow',
 	    },
 	    'button[reference=loginButton]': {
 		click: 'submitForm',
@@ -172,6 +201,10 @@ Ext.define('PMG.LoginView', {
                         },
 		    ],
 		    buttons: [
+			{
+			    text: gettext('Request Quarantine Link'),
+			    reference: 'quarantineButton',
+			},
 			{
 			    text: gettext('Login'),
 			    reference: 'loginButton',

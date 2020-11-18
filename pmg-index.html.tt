@@ -30,7 +30,8 @@
         Setup: { auth_cookie_name: 'PMGAuthCookie' },
         NodeName: '[% nodename %]',
         UserName: '[% username %]',
-        CSRFPreventionToken: '[% token %]'
+        CSRFPreventionToken: '[% token %]',
+        QuarantineLink: [% IF quarantinelink %] true [% ELSE %] false [% END %],
       };
     </script>
     <script type="text/javascript" src="/proxmoxlib.js?ver=[% wtversion %]"></script>
