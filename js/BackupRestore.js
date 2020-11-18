@@ -120,7 +120,7 @@ Ext.define('PMG.BackupRestore', {
 
     tbar: [
 	{
-	    text: gettext('Backup'),
+	    text: gettext('Backup Now'),
 	    handler: 'createBackup',
 	},
 	'-',

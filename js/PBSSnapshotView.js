@@ -210,9 +210,10 @@ Ext.define('PMG.PBSConfig', {
 	    emptyText: gettext('No backups on remote'),
 	    tbar: [
 		{
-		    text: gettext('Backup'),
+		    text: gettext('Backup Now'),
 		    handler: 'runBackup',
 		},
+		'-',
 		{
 		    xtype: 'proxmoxButton',
 		    text: gettext('Restore'),
