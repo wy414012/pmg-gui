@@ -3,8 +3,11 @@ Ext.define('PMG.PBSScheduleEdit', {
     xtype: 'pmgPBSScheduleEdit',
 
     isAdd: true,
+    isCreate: true,
+    submitText: gettext('Set'),
+
     method: 'POST',
-    subject: gettext('Scheduled Backup'),
+    title: gettext('Configure Scheduled Backup'),
     autoLoad: true,
     items: [
 	{
@@ -12,25 +15,27 @@ Ext.define('PMG.PBSScheduleEdit', {
 	    name: 'schedule',
 	    fieldLabel: gettext('Schedule'),
 	    comboItems: [
-		['daily', 'daily'],
 		['hourly', 'hourly'],
+		['daily', 'daily'],
 		['weekly', 'weekly'],
 		['monthly', 'monthly'],
 	    ],
 	    editable: true,
-	    emptyText: 'Systemd Calender Event',
+	    deleteEmpty: false,
+	    emptyText: gettext('daily'),
 	},
 	{
 	    xtype: 'proxmoxKVComboBox',
 	    name: 'delay',
 	    fieldLabel: gettext('Random Delay'),
 	    comboItems: [
-		['0s', 'no delay'],
+		['0s', gettext('No Delay')],
 		['15 minutes', '15 Minutes'],
 		['6 hours', '6 hours'],
 	    ],
 	    editable: true,
-	    emptyText: 'Systemd TimeSpan',
+	    deleteEmpty: false,
+	    emptyText: gettext('5 Minutes'),
 	},
     ],
     initComponent: function() {
