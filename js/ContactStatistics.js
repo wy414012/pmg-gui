@@ -16,10 +16,10 @@ Ext.define('PMG.ContactDetails', {
 
     plugins: 'gridfilters',
 
-    setUrl: function(url, title) {
+    setUrl: function(url, extraparam, title) {
 	var me = this;
 
-	me.store.setUrl(url);
+	me.store.setUrl(url, extraparam);
 	me.store.setRemoteFilter(url !== undefined);
 	Proxmox.Utils.setErrorMask(me, false);
 	me.store.reload();
@@ -201,9 +201,9 @@ Ext.define('PMG.ContactStatistics', {
 	    var details = this.lookupReference('details');
 	    if (selected.length > 0) {
 		var contact = selected[0].data.contact;
-		var url = "/api2/json/statistics/contact/" +
-		    encodeURIComponent(contact);
-		details.setUrl(url, '<b>' + gettext('Contact') + ':</b> ' + Ext.htmlEncode(contact));
+		var extraparam = { address: contact, type: 'contact' };
+		var url = "/api2/json/statistics/detail";
+		details.setUrl(url, extraparam, '<b>' + gettext('Contact') + ':</b> ' + Ext.htmlEncode(contact));
 	    } else {
 		details.setUrl();
 	    }

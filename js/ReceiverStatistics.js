@@ -16,10 +16,10 @@ Ext.define('PMG.ReceiverDetails', {
 
     plugins: 'gridfilters',
 
-    setUrl: function(url, title) {
+    setUrl: function(url, extraparam, title) {
 	var me = this;
 
-	me.store.setUrl(url);
+	me.store.setUrl(url, extraparam);
 	me.store.setRemoteFilter(url !== undefined);
 	Proxmox.Utils.setErrorMask(me, false);
 	me.store.reload();
@@ -212,10 +212,10 @@ Ext.define('PMG.ReceiverStatistics', {
 	selectionChange: function(grid, selected, eOpts) {
 	    var details = this.lookupReference('details');
 	    if (selected.length > 0) {
+		var url = "/api2/json/statistics/detail";
 		var receiver = selected[0].data.receiver;
-		var url = "/api2/json/statistics/receiver/" +
-		    encodeURIComponent(receiver);
-		details.setUrl(url, '<b>' + gettext('Receiver') + ':</b> ' + Ext.htmlEncode(receiver));
+		var extraparam = { address: receiver, type: 'receiver' };
+		details.setUrl(url, extraparam, '<b>' + gettext('Receiver') + ':</b> ' + Ext.htmlEncode(receiver));
 	    } else {
 		details.setUrl();
 	    }

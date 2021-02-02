@@ -8,13 +8,17 @@ Ext.define('PMG.data.StatStore', {
 
     includeTimeSpan: false,
 
-    setUrl: function(url) {
+    setUrl: function(url, extraparam) {
 	var me = this;
 
 	me.proxy.abort(); // abort pending requests
 
 	me.staturl = url;
 	me.proxy.extraParams = {};
+	if (extraparam !== undefined) {
+	    me.proxy.extraParams = extraparam;
+	}
+
 	me.setData([]);
     },
 
@@ -38,7 +42,10 @@ Ext.define('PMG.data.StatStore', {
 	}
 
 	me.proxy.url = me.staturl;
-	me.proxy.extraParams = { starttime: ts.starttime, endtime: ts.endtime };
+	Ext.apply(me.proxy.extraParams, {
+	    starttime: ts.starttime,
+	    endtime: ts.endtime,
+	});
 
 	var timespan = 3600;
 	if (me.includeTimeSpan) {
