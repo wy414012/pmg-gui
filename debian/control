@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 12),
                pmg-doc-generator (>= 6.0-4),
                pve-eslint (>= 7.18.0-1),
 Standards-Version: 4.3.0
-Homepage: http://www.proxmox.com
+Homepage: https://www.proxmox.com
 
 Package: pmg-gui
 Architecture: all
