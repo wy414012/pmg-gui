@@ -54,6 +54,18 @@ Ext.define('PMG.PBSInputPanel', {
 		    fieldLabel: 'Datastore',
 		    allowBlank: false,
 		},
+		{
+		    xtype: 'proxmoxKVComboBox',
+		    name: 'notify',
+		    fieldLabel: gettext('Notify'),
+		    comboItems: [
+			['always', 'always'],
+			['error', 'error'],
+			['never', 'never'],
+		    ],
+		    deleteEmpty: false,
+		    emptyText: gettext('never'),
+		},
 	    ],
 	    column2: [
 		{
