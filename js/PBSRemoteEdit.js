@@ -86,6 +86,13 @@ Ext.define('PMG.PBSInputPanel', {
 		    uncheckedValue: 0,
 		    fieldLabel: gettext('Enable'),
 		},
+		{
+		    xtype: 'proxmoxcheckbox',
+		    name: 'include-statistics',
+		    checked: true,
+		    uncheckedValue: 0,
+		    fieldLabel: gettext('Include Statistics'),
+		},
 	    ],
 	    columnB: [
 		{
