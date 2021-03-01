@@ -25,23 +25,10 @@ Ext.define('PMG.PBSConfig', {
 	    let me = this;
 	    let view = me.lookup('snapshotsGrid');
 	    let remote = me.getViewModel().get('remote');
-	    Proxmox.Utils.API2Request({
+	    Ext.create('PMG.BackupWindow', {
 		url: `/nodes/${Proxmox.NodeName}/pbs/${remote}/snapshot`,
-		method: 'POST',
-		waitMsgTarget: view,
-		failure: function(response, opts) {
-		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		},
-		success: function(response, opts) {
-		    let upid = response.result.data;
-
-		    let win = Ext.create('Proxmox.window.TaskViewer', {
-			upid: upid,
-		    });
-		    win.show();
-		    me.mon(win, 'close', function() { view.getStore().load(); });
-		},
-	    });
+		taskDone: () => view.getStore().load(),
+	    }).show();
 	},
 
 	reload: function(grid) {

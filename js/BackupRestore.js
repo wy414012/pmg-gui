@@ -69,6 +69,32 @@ Ext.define('PMG.RestoreWindow', {
     },
 });
 
+Ext.define('PMG.BackupWindow', {
+    extend: 'Proxmox.window.Edit',
+    xtype: 'pmgBackupWindow',
+    onlineHelp: 'chapter_pmgbackup',
+
+    showProgress: true,
+    title: gettext('Backup'),
+    isCreate: true,
+    method: 'POST',
+    submitText: gettext('Backup'),
+    fieldDefaults: {
+	labelWidth: 150,
+    },
+    showTaskViewer: true,
+    items: [
+	{
+	    xtype: 'proxmoxcheckbox',
+	    name: 'statistic',
+	    value: 1,
+	    uncheckedValue: 0,
+	    fieldLabel: gettext('Include Statistics'),
+	},
+    ],
+
+});
+
 Ext.define('PMG.BackupRestore', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgBackupRestore',
@@ -80,23 +106,10 @@ Ext.define('PMG.BackupRestore', {
 
 	createBackup: function() {
 	    let view = this.getView();
-	    Proxmox.Utils.API2Request({
+	    Ext.create('PMG.BackupWindow', {
 		url: "/nodes/" + Proxmox.NodeName + "/backup",
-		method: 'POST',
-		waitMsgTarget: view,
-		failure: function(response, opts) {
-		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		},
-		success: function(response, opts) {
-		    let upid = response.result.data;
-
-		    let win = Ext.create('Proxmox.window.TaskViewer', {
-			upid: upid,
-			autoShow: true,
-		    });
-		    view.mon(win, 'close', () => view.store.load());
-		},
-	    });
+		taskDone: () => view.store.load(),
+	    }).show();
 	},
 
 	onRestore: function() {
