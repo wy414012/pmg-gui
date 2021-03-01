@@ -160,6 +160,7 @@ Ext.define('PMG.PBSInputPanel', {
 Ext.define('PMG.PBSEdit', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgPBSEdit',
+    onlineHelp: 'pmgbackup_pbs_remotes',
 
     subject: 'Proxmox Backup Server',
     isAdd: true,

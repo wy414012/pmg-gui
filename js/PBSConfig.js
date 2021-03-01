@@ -1,6 +1,7 @@
 Ext.define('PMG.PBSScheduleEdit', {
     extend: 'Proxmox.window.Edit',
     xtype: 'pmgPBSScheduleEdit',
+    onlineHelp: 'pmgbackup_pbs_schedule',
 
     isAdd: true,
     isCreate: true,
