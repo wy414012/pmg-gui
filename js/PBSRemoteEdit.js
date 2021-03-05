@@ -59,12 +59,12 @@ Ext.define('PMG.PBSInputPanel', {
 		    name: 'notify',
 		    fieldLabel: gettext('Notify'),
 		    comboItems: [
-			['always', 'always'],
-			['error', 'error'],
-			['never', 'never'],
+			['always', gettext('Always')],
+			['error', gettext('Errors')],
+			['never', gettext('Never')],
 		    ],
 		    deleteEmpty: false,
-		    emptyText: gettext('never'),
+		    emptyText: gettext('Never'),
 		},
 	    ],
 	    column2: [
