@@ -3,7 +3,7 @@ Section: perl
 Priority: optional
 Maintainer: Proxmox Support Team <support@proxmox.com>
 Build-Depends: debhelper (>= 12),
-               pmg-doc-generator (>= 6.0-4),
+               pmg-doc-generator (>= 6.3-2),
                pve-eslint (>= 7.18.0-1),
 Standards-Version: 4.3.0
 Homepage: https://www.proxmox.com
