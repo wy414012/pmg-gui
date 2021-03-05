@@ -1,3 +1,15 @@
+pmg-gui (2.3-2) pmg; urgency=medium
+
+  * statistics: use new api call for detailed stats to allow "/" in mail
+    address localpart
+
+  * fix #3154: Proxmox Backup Server: make statistic backup optional and add
+    statistic setting to remote
+
+  * fix #3146: backup: add notification setting to remote
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 05 Mar 2021 22:54:30 +0100
+
 pmg-gui (2.3-1) pmg; urgency=medium
 
   * RegexTester: fix getting reference to regex field
