@@ -106,8 +106,8 @@ lint: .lint-incremental
 
 .PHONY: check
 check: ${JSSRC}
-	rm -f ".lint-incremental"
-	$(MAKE) lint
+	eslint --strict ${JSSRC}
+	touch ".lint-incremental"
 
 pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
 	echo "// ${DEB_VERSION_UPSTREAM_REVISION}" > $@.tmp
