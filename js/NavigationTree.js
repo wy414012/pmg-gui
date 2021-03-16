@@ -92,6 +92,12 @@ Ext.define('PMG.store.NavigationStore', {
 			path: 'pmgBackupConfiguration',
 			leaf: true,
 		    },
+		    {
+			text: gettext('Certificates'),
+			iconCls: 'fa fa-certificate',
+			path: 'pmgCertificateConfiguration',
+			leaf: true,
+		    },
 		],
 	    },
 	    {
