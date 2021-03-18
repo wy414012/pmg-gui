@@ -4,6 +4,8 @@ Ext.define('PMG.CertificateConfiguration', {
 
     title: gettext('Certificates'),
 
+    ...PMG.Utils.onlineHelpTool('sysadmin_certificate_management'),
+
     border: false,
     defaults: { border: false },
 
