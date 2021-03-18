@@ -8,6 +8,33 @@ Ext.define('PMG.Utils', {
 
     // this singleton contains miscellaneous utilities
 
+    // use in panels with object spread (...) operator, for example:
+    // ...PMG.Utils.onlineHelpTool('sysadmin_certificate_management'),
+    onlineHelpTool: function(blockid) {
+	let info = Proxmox.Utils.get_help_info(blockid);
+	if (info === undefined) {
+	    info = Proxmox.Utils.get_help_info('pmg_documentation_index');
+	    if (info === undefined) {
+		throw "get_help_info failed"; // should not happen
+	    }
+	}
+
+	let docsURI = window.location.origin + info.link;
+	let title = info.title || gettext('Help');
+	if (info.subtitle) {
+	    title += ' - ' + info.subtitle;
+	}
+	return {
+	    tools: [
+		{
+		    type: 'help',
+		    tooltip: title,
+		    handler: () => window.open(docsURI),
+		},
+	    ],
+	};
+    },
+
     senderText: gettext('Sender'),
     receiverText: gettext('Receiver'),
     scoreText: gettext('Score'),
