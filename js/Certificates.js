@@ -20,7 +20,7 @@ Ext.define('PMG.CertificateConfiguration', {
 });
 
 Ext.define('PMG.CertificateView', {
-    extend: 'Ext.container.Container',
+    extend: 'Ext.panel.Panel',
     alias: 'widget.pmgCertificatesView',
 
     title: gettext('Certificates'),
@@ -73,21 +73,21 @@ Ext.define('PMG.ACMEConfigView', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pmgACMEConfigView',
 
-    title: gettext('ACME Accounts'),
+    title: gettext('ACME Accounts/Challenges'),
 
     //onlineHelp: 'sysadmin_certificate_management',
 
     items: [
 	{
+	    xtype: 'pmxACMEAccounts',
 	    region: 'north',
 	    border: false,
-	    xtype: 'pmxACMEAccounts',
 	    acmeUrl: '/config/acme',
 	},
 	{
+	    xtype: 'pmxACMEPluginView',
 	    region: 'center',
 	    border: false,
-	    xtype: 'pmxACMEPluginView',
 	    acmeUrl: '/config/acme',
 	},
     ],
