@@ -1,3 +1,9 @@
+pmg-gui (2.3-3) pmg; urgency=medium
+
+  * add certificates and ACME (Let's Encrypt) view
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 18 Mar 2021 11:29:02 +0100
+
 pmg-gui (2.3-2) pmg; urgency=medium
 
   * statistics: use new api call for detailed stats to allow "/" in mail
