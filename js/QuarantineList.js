@@ -186,6 +186,57 @@ Ext.define('PMG.QuarantineList', {
 	    me.savedPosition = id;
 	},
 
+	updateFilter: function(field) {
+	    let me = this;
+	    let view = me.getView();
+	    let store = view.getStore();
+	    let sm = view.getSelectionModel();
+
+	    let searchValue = field.getValue().toLowerCase();
+
+	    // supress store event if not empty, let filterBy below trigger it to avoid glitches
+	    store.clearFilter(searchValue.length > 0);
+	    field.triggers.clear.setVisible(searchValue.length > 0);
+
+	    if (searchValue.length === 0) {
+		return;
+	    }
+
+	    const selected = sm.getSelection();
+	    const selectedRecordId = selected.length === 1 ? selected[0].id : null;
+	    let clearSelectedMail = true;
+	    let toDeselect = [];
+	    store.filterBy(function(record) {
+		let match = false;
+
+		Ext.each(['subject', 'from'], function(property) {
+		    if (record.data[property] === null) {
+			return;
+		    }
+
+		    let v = record.data[property].toString();
+		    if (v !== undefined) {
+			v = v.toLowerCase();
+			if (v.includes(searchValue)) {
+			    match = true;
+			    if (record.id === selectedRecordId) {
+				clearSelectedMail = false;
+			    }
+			}
+		    }
+		});
+		if (!match && sm.isSelected(record)) {
+		    toDeselect.push(record);
+		}
+		return match;
+	    });
+	    if (toDeselect.length > 0) {
+		sm.deselect(toDeselect);
+	    }
+	    if (selectedRecordId !== null && clearSelectedMail) {
+		view.setSelection();
+	    }
+	},
 
 	control: {
 	    '#': {
@@ -266,6 +317,30 @@ Ext.define('PMG.QuarantineList', {
 		selectOnFocus: true,
 		reference: 'email',
 		fieldLabel: 'E-Mail',
+	    },
+	    {
+		xtype: 'textfield',
+		name: 'filter',
+		fieldLabel: gettext('Search'),
+		emptyText: gettext('Subject, Sender'),
+		enableKeyEvents: true,
+		triggers: {
+		    clear: {
+			cls: 'pmx-clear-trigger',
+			weight: -1,
+			hidden: true,
+			handler: function() {
+			    let me = this;
+			    me.setValue('');
+			    // setValue does not results in a keyup event, so trigger manually
+			    me.up('grid').getController().updateFilter(me);
+			},
+		    },
+		},
+		listeners: {
+		    buffer: 500,
+		    keyup: 'updateFilter',
+		},
 	    },
 	],
     },
