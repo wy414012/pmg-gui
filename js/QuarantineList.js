@@ -221,18 +221,18 @@ Ext.define('PMG.QuarantineList', {
 	},
 	items: [
 	    {
+		xtype: 'datefield',
+		name: 'from',
 		fieldLabel: gettext('Since'),
 		reference: 'from',
-		xtype: 'datefield',
 		format: 'Y-m-d',
-		name: 'from',
 	    },
 	    {
+		xtype: 'datefield',
+		name: 'to',
 		fieldLabel: gettext('Until'),
 		reference: 'to',
-		xtype: 'datefield',
 		format: 'Y-m-d',
-		name: 'to',
 	    },
 	    {
 		xtype: 'combobox',
