@@ -57,13 +57,12 @@ Ext.define('PMG.QuarantineList', {
 		}
 	    });
         },
-	// extjs has no method to dynamically change the emptytext on
-	// grids, so we have to do it this way
+	// ExtJS cannot dynamically change the emptyText on grids, so implement ourself
 	setEmptyText: function(emptyText) {
 	    let me = this;
 	    let view = me.getView();
 	    let tableview = view.getView();
-	    tableview.emptyText = '<div class="x-grid-empty">'+ (emptyText || view.notFoundText) + '</div>';
+	    tableview.emptyText = `<div class="x-grid-empty">${emptyText || view.notFoundText}</div>`;
 	},
 
 	load: function(callback) {
@@ -73,8 +72,7 @@ Ext.define('PMG.QuarantineList', {
 	    let store = view.getStore();
 	    if (view.emailSelection) {
 		if (!me.lookupReference('email').getSelection()) {
-		    // if the combobox has no selection we do not reload
-		    return;
+		    return; // if the combobox has no selection we do not reload
 		}
 		me.setEmptyText();
 	    }
