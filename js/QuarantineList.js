@@ -76,6 +76,10 @@ Ext.define('PMG.QuarantineList', {
 		}
 		me.setEmptyText();
 	    }
+	    // deselect all first, else ExtJS does some funky O(n^3) comparissions as it tries
+	    // to keep the selection, but we do not care for that on a new load anyway
+	    view.getSelectionModel().deselectAll();
+
 	    store.load(function() {
 		if (me.savedPosition !== undefined) {
 		    if (store.getCount() - 1 < me.savedPosition) {
@@ -112,7 +116,11 @@ Ext.define('PMG.QuarantineList', {
 	setUser: function(user) {
 	    let view = this.getView();
 	    let params = view.getStore().getProxy().getExtraParams();
-	    params.pmail = user;
+	    if (user === null) {
+		delete params.pmail;
+	    } else {
+		params.pmail = user;
+	    }
 	    view.getStore().getProxy().setExtraParams(params);
 	    view.user = user;
 	},
@@ -164,7 +172,11 @@ Ext.define('PMG.QuarantineList', {
 	    let me = this;
 	    me.savedPosition = undefined;
 	    me.allowPositionSave = false;
-	    me.setUser(value);
+	    if (value === 'all') {
+		me.setUser(null);
+	    } else {
+		me.setUser(value);
+	    }
 	    me.load();
 	},
 
@@ -214,7 +226,8 @@ Ext.define('PMG.QuarantineList', {
 		return match;
 	    });
 	    if (toDeselect.length > 0) {
-		sm.deselect(toDeselect);
+		sm.deselect(toDeselect, true);
+		sm.maybeFireSelectionChange(true);
 	    }
 	    return selectedRecordId !== null && clearSelectedMail;
 	},
@@ -313,6 +326,13 @@ Ext.define('PMG.QuarantineList', {
 			    renderer: Ext.htmlEncode,
 			},
 		    ],
+		    listeners: {
+			load: function(store, records, successfull) {
+			    if (successfull && records.length > 1) {
+				store.insert(0, { mail: 'all' });
+			    }
+			},
+		    },
 		},
 		queryMode: 'local',
 		editable: true,
