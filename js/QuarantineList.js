@@ -184,22 +184,7 @@ Ext.define('PMG.QuarantineList', {
 	    me.savedPosition = id;
 	},
 
-	updateFilter: function(field) {
-	    let me = this;
-	    let view = me.getView();
-	    let store = view.getStore();
-	    let sm = view.getSelectionModel();
-
-	    let searchValue = field.getValue().toLowerCase();
-
-	    // supress store event if not empty, let filterBy below trigger it to avoid glitches
-	    store.clearFilter(searchValue.length > 0);
-	    field.triggers.clear.setVisible(searchValue.length > 0);
-
-	    if (searchValue.length === 0) {
-		return;
-	    }
-
+	doFilter: function(searchValue, store, sm) {
 	    const selected = sm.getSelection();
 	    const selectedRecordId = selected.length === 1 ? selected[0].id : null;
 	    let clearSelectedMail = true;
@@ -207,7 +192,7 @@ Ext.define('PMG.QuarantineList', {
 	    store.filterBy(function(record) {
 		let match = false;
 
-		Ext.each(['subject', 'from'], function(property) {
+		Ext.each(['subject', 'from'], property => {
 		    if (record.data[property] === null) {
 			return;
 		    }
@@ -231,7 +216,30 @@ Ext.define('PMG.QuarantineList', {
 	    if (toDeselect.length > 0) {
 		sm.deselect(toDeselect);
 	    }
-	    if (selectedRecordId !== null && clearSelectedMail) {
+	    return selectedRecordId !== null && clearSelectedMail;
+	},
+
+	updateFilter: async function(field) {
+	    let me = this;
+	    let view = me.getView();
+	    let store = view.getStore();
+	    let sm = view.getSelectionModel();
+
+	    let searchValue = field.getValue().toLowerCase();
+
+	    // supress store event if not empty, let filterBy below trigger it to avoid glitches
+	    store.clearFilter(searchValue.length > 0);
+	    field.triggers.clear.setVisible(searchValue.length > 0);
+
+	    if (searchValue.length === 0) {
+		me.setEmptyText();
+		return;
+	    }
+	    me.setEmptyText(gettext('No match found'));
+
+	    let clearSelection = me.doFilter(searchValue, store, sm);
+
+	    if (clearSelection) {
 		view.setSelection();
 	    }
 	},
