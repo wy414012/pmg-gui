@@ -1,3 +1,16 @@
+pmg-gui (2.4-1) pmg; urgency=medium
+
+  * quarantine lists: allow one to filter by subject or sender
+
+  * fix #3164: allow one to display all quarantined spam mails
+
+  * spam quarantine: batch message actions into 2500-sized chunks to
+    avoid overload and to big requests
+
+  * spam quarantine: avoid full store reload on single-element actions
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 23 Mar 2021 12:30:08 +0100
+
 pmg-gui (2.3-3) pmg; urgency=medium
 
   * add certificates and ACME (Let's Encrypt) view
