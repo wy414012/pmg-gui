@@ -118,10 +118,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    var list = this.lookupReference('list');
 
 	    if (selected.length > 1) {
-		var idlist = [];
-		selected.forEach(function(item) {
-		    idlist.push(item.data.id);
-		});
+		let idlist = selected.map(item => item.data.id);
 		Ext.Msg.confirm(
 		    gettext('Confirm'),
 		    Ext.String.format(
