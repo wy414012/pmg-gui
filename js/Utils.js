@@ -857,3 +857,55 @@ Ext.define('PMG.Utils', {
 	});
     },
 });
+
+Ext.define('PMG.Async', {
+    singleton: true,
+
+    // Returns a Promise which executes a quarantine action when awaited.
+    // Shows a Toast message box once completed, if batchNumber and batchTotal
+    // are set, they will be included into the title of that toast.
+    doQAction: function(action, ids, batchNumber, batchTotal) {
+	if (!Ext.isArray(ids)) {
+	    ids = [ids];
+	}
+	return Proxmox.Async.api2({
+	    url: '/quarantine/content/',
+	    params: {
+		action: action,
+		id: ids.join(';'),
+	    },
+	    method: 'POST',
+	}).then(
+	    response => {
+		let count = ids.length;
+		let fmt = count > 1
+		    ? gettext("Action '{0}' for '{1}' items successful")
+		    : gettext("Action '{0}' successful")
+		    ;
+		let message = Ext.String.format(fmt, action, count);
+		let titleFmt = batchNumber !== undefined && batchTotal > 1
+		    ? gettext("{0} ({1}/{2}) successful")
+		    : gettext("{0} successful")
+		    ;
+		let title = Ext.String.format(
+		    titleFmt,
+		    Ext.String.capitalize(action),
+		    batchNumber,
+		    batchTotal,
+		);
+
+		Ext.toast({
+		    html: message,
+		    title: title,
+		    minWidth: 200,
+		    hideDuration: 250,
+		    slideBackDuration: 250,
+		    slideBackAnimation: 'easeOut',
+		    iconCls: 'fa fa-check',
+		    shadow: true,
+		});
+	    },
+	    response => Proxmox.Utils.alertResponseFailure(response),
+	);
+    },
+});

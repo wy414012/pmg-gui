@@ -125,14 +125,36 @@ Ext.define('PMG.SpamQuarantine', {
 			gettext("Action '{0}' for '{1}' items"),
 			action, selected.length,
 		    ),
-		    function(button) {
+		    async function(button) {
 			if (button !== 'yes') {
 			    return;
 			}
 
-			PMG.Utils.doQuarantineAction(action, idlist.join(';'), function() {
-			    list.getController().load();
-			});
+			list.mask(gettext('Processing...'), 'x-mask-loading');
+
+			const sliceSize = 2500, maxInFlight = 2;
+			let batches = [], batchCount = Math.ceil(selected.length / sliceSize);
+			for (let i = 0; i * sliceSize < selected.length; i++) {
+			    let sliceStart = i * sliceSize;
+			    let sliceEnd = Math.min(sliceStart + sliceSize, selected.length);
+			    batches.push(
+				PMG.Async.doQAction(
+				    action,
+				    idlist.slice(sliceStart, sliceEnd),
+				    i + 1,
+				    batchCount,
+				),
+			    );
+			    if (batches.length >= maxInFlight) {
+				await Promise.allSettled(batches); // eslint-disable-line no-await-in-loop
+				batches = [];
+			    }
+			}
+			await Promise.allSettled(batches); // await possible remaining ones
+			list.unmask();
+			// below can be slow, we could remove directly from the in-memory store, but
+			// with lots of elements and some failures we could be quite out of sync?
+			list.getController().load();
 		    },
 		);
 		return;
