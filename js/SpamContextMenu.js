@@ -31,13 +31,13 @@ Ext.define('PMG.menu.SpamContextMenu', {
 	    text: gettext('Whitelist'),
 	    iconCls: 'fa fa-fw fa-check',
 	    action: 'whitelist',
-	    handler: 'action',
+	    handler: 'callCallback',
 	},
 	{
 	    text: gettext('Blacklist'),
 	    iconCls: 'fa fa-fw fa-times',
 	    action: 'blacklist',
-	    handler: 'action',
+	    handler: 'callCallback',
 	},
     ],
 });
