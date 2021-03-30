@@ -191,15 +191,11 @@ Ext.define('PMG.SpamQuarantine', {
 
 	openContextMenu: function(table, record, tr, index, event) {
 	    event.stopEvent();
-	    var me = this;
-	    var list = me.lookup('list');
-	    var menu = Ext.create('PMG.menu.SpamContextMenu', {
-		callback: function(action) {
-		    me.doAction(action, list.getSelection());
-		},
-	    });
-
-	    menu.showAt(event.getXY());
+	    let me = this;
+	    let list = me.lookup('list');
+	    Ext.create('PMG.menu.SpamContextMenu', {
+		callback: action => me.doAction(action, list.getSelection()),
+	    }).showAt(event.getXY());
 	},
 
 	keyPress: function(table, record, item, index, event) {
