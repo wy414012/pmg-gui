@@ -185,7 +185,7 @@ Ext.define('PMG.QuarantineList', {
 	    if (!me.allowPositionSave) {
 		return;
 	    }
-	    if (!selected.length) {
+	    if (selected.length <= 0) {
 		me.savedPosition = undefined;
 		return;
 	    }
