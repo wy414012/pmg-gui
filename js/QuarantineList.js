@@ -80,20 +80,27 @@ Ext.define('PMG.QuarantineList', {
 	    // to keep the selection, but we do not care for that on a new load anyway
 	    view.getSelectionModel().deselectAll();
 
-	    store.load(function() {
-		if (me.savedPosition !== undefined) {
-		    if (store.getCount() - 1 < me.savedPosition) {
-			me.savedPosition = store.getCount() - 1;
-		    }
-		    view.setSelection(store.getAt(me.savedPosition));
-		} else {
-		    view.setSelection();
-		}
+	    store.load(() => {
+		me.restoreSavedSelection();
 		if (Ext.isFunction(callback)) {
 		    callback();
 		}
 		me.allowPositionSave = true;
 	    });
+	},
+
+	restoreSavedSelection: function() {
+	    let me = this;
+	    let view = me.getView();
+	    if (me.savedPosition !== undefined) {
+		let store = view.getStore();
+		if (store.getCount() - 1 < me.savedPosition) {
+		    me.savedPosition = store.getCount() - 1;
+		}
+		view.setSelection(store.getAt(me.savedPosition));
+	    } else {
+		view.setSelection();
+	    }
 	},
 
 	setFrom: function(from) {
