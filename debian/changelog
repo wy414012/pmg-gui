@@ -1,3 +1,13 @@
+pmg-gui (2.4-2) pmg; urgency=medium
+
+  * spam quarantine: context menu: set correct handler for whitelist/blacklist
+
+  * spam quarantine: restore behavior of selecting the next element in the spam
+    list after the current one vanished due to completing an action like
+    deliver or delete
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 15 Apr 2021 15:21:56 +0200
+
 pmg-gui (2.4-1) pmg; urgency=medium
 
   * quarantine lists: allow one to filter by subject or sender
