@@ -42,7 +42,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 
 	    let url = `/api2/htmlmail/quarantine/content?id=${rec.data.id}`;
 	    if (raw) {
-		url += 'raw=1';
+		url += '&raw=1';
 	    }
 	    preview.setDisabled(false);
 	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
