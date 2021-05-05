@@ -67,7 +67,10 @@ Ext.define('PMG.SpamQuarantine', {
 		return;
 	    }
 
-	    var url = '/api2/htmlmail/quarantine/content?id=' + rec.data.id + (raw?'&raw=1':'');
+	    let url = `/api2/htmlmail/quarantine/content?id=${rec.data.id}`;
+	    if (raw) {
+		url += '&raw=1';
+	    }
 	    preview.setDisabled(false);
 	    this.lookupReference('raw').setDisabled(false);
 	    this.lookupReference('spam').setDisabled(false);
