@@ -1,3 +1,9 @@
+pmg-gui (2.4-3) pmg; urgency=medium
+
+  * attachment quarantine: fix sending the as-raw flag parameter
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 11 May 2021 16:18:00 +0200
+
 pmg-gui (2.4-2) pmg; urgency=medium
 
   * spam quarantine: context menu: set correct handler for whitelist/blacklist
