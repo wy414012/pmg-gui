@@ -10,8 +10,6 @@ Ext.define('PMG.ClamAVDatabaseConfig', {
 	me.add_text_row('dbmirror', gettext('Database Mirror'),
 			{ deleteEmpty: true, defaultValue: 'database.clamav.net' });
 
-	me.add_boolean_row('safebrowsing', gettext('Google Safe Browsing'),
-			   { defaultValue: 1 });
 	me.add_boolean_row('scriptedupdates', gettext('Incremental Download'),
 			   { defaultValue: 0 });
 
