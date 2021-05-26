@@ -153,7 +153,7 @@ Ext.define('PMG.MainView', {
 
 	    // select treeitem and load page from url fragment
 	    let token = Ext.util.History.getToken() || 'pmgDashboard';
-	    this.redirectTo(token, true);
+	    this.redirectTo(token, { force: true });
 	},
     },
 
