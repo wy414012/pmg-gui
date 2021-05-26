@@ -308,6 +308,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    title: gettext('Selected Mail'),
 	    border: false,
 	    region: 'center',
+	    layout: 'fit',
 	    split: true,
 	    reference: 'preview',
 	    disabled: true,
