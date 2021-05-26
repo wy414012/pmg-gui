@@ -224,5 +224,5 @@ Ext.define('PMG.view.main.NavigationTree', {
     expanderOnly: true,
     expanderFirst: false,
     store: 'NavigationStore',
-    ui: 'nav',
+    ui: 'pve-nav',
 });

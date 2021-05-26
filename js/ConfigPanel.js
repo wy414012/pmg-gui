@@ -58,7 +58,7 @@ Ext.define('PMG.panel.Config', {
 	items: {
 	    xtype: 'treelist',
 	    itemId: 'menu',
-	    ui: 'nav',
+	    ui: 'pve-nav',
 	    expanderOnly: true,
 	    expanderFirst: false,
 	    animation: false,

@@ -233,7 +233,7 @@ Ext.define('PMG.MainView', {
 		},
 	    }, {
 		xtype: 'box',
-		cls: 'x-treelist-nav',
+		cls: 'x-treelist-pve-nav',
 		flex: 1,
 	    }],
 	},
