@@ -17,8 +17,14 @@ Ext.define('PMG.MainView', {
 	    },
 	},
 
-	beforeChangePath: function(path, subpath, action) {
+	beforeChangePath: function(path, subpathOrAction, action) {
 	    let me = this;
+
+	    let subpath = subpathOrAction;
+	    if (!action) {
+		action = subpathOrAction;
+		subpath = undefined;
+	    }
 
 	    if (!Ext.ClassManager.getByAlias('widget.'+ path)) {
 		console.warn('xtype "'+path+'" not found');
