@@ -147,7 +147,7 @@ Ext.define('PMG.VirusQuarantine', {
 		    xtype: 'datecolumn',
 		    header: gettext('Time'),
 		    dataIndex: 'time',
-		    format: 'H:m:s',
+		    format: 'H:i:s',
 		},
 	    ],
 	},
