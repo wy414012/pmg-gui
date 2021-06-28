@@ -48,7 +48,7 @@ install: pmg-index.html.tt pmg-mobile-index.html.tt js/pmgmanagerlib.js js/mobil
 
 .PHONY: upload
 upload: ${DEB}
-	tar cf - ${DEB} | ssh -X repoman@repo.proxmox.com -- upload --product pmg --dist stretch
+	tar cf - ${DEB} | ssh -X repoman@repo.proxmox.com -- upload --product pmg --dist bullseye
 
 distclean: clean
 	rm -f examples/simple-demo.pem
