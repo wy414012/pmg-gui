@@ -1,3 +1,11 @@
+pmg-gui (3.0-1) bullseye; urgency=medium
+
+  * extjs 7.0 compatibility
+
+  * remove safe browsing from clamav tab
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 28 Jun 2021 16:58:48 +0200
+
 pmg-gui (2.4-3) pmg; urgency=medium
 
   * attachment quarantine: fix sending the as-raw flag parameter
