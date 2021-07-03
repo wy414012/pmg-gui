@@ -227,21 +227,23 @@ Ext.define('PMG.MainView', {
 		type: 'vbox',
 		align: 'stretch',
 	    },
-	    items: [{
-		xtype: 'navigationtree',
-		minWidth: 180,
-		reference: 'navtree',
-		// we have to define it here until extjs 6.2
-		// because of a bug where a viewcontroller does not detect
-		// the selectionchange event of a treelist
-		listeners: {
-		    selectionchange: 'navigate',
+	    items: [
+		{
+		    xtype: 'navigationtree',
+		    minWidth: 180,
+		    reference: 'navtree',
+		    // we have to define it here until extjs 6.2 because of a bug where a
+		    // viewcontroller does not detect the selectionchange event of a treelist
+		    listeners: {
+			selectionchange: 'navigate',
+		    },
 		},
-	    }, {
-		xtype: 'box',
-		cls: 'x-treelist-pve-nav',
-		flex: 1,
-	    }],
+		{
+		    xtype: 'box',
+		    cls: 'x-treelist-pve-nav',
+		    flex: 1,
+		},
+	    ],
 	},
 	{
 	    xtype: 'panel',
