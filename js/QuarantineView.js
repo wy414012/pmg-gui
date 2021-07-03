@@ -39,7 +39,7 @@ Ext.define('PMG.QuarantineNavigationTree', {
     animation: false,
     expanderOnly: true,
     expanderFirst: false,
-    ui: 'nav',
+    ui: 'pve-nav',
 });
 
 Ext.define('PMG.QuarantineView', {
