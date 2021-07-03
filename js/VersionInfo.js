@@ -8,6 +8,11 @@ Ext.define('PMG.view.main.VersionInfo', {
 	version: false,
     },
 
+    style: {
+	'font-size': '14px',
+	'line-height': '18px',
+    },
+
     tpl: [
 	'Mail Gateway',
 	'<tpl if="version">',
