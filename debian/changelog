@@ -1,3 +1,9 @@
+pmg-gui (3.0-2) bullseye; urgency=medium
+
+  * quarantine view: extjs 7.0 compatibility
+
+ -- Proxmox Support Team <support@proxmox.com>  Sat, 03 Jul 2021 22:48:47 +0200
+
 pmg-gui (3.0-1) bullseye; urgency=medium
 
   * extjs 7.0 compatibility
