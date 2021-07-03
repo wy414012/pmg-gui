@@ -249,17 +249,31 @@ Ext.define('PMG.QuarantineView', {
 	    ],
 	},
 	{
-	    xtype: 'quarantinenavigationtree',
-	    reference: 'navtree',
-	    minWidth: 177,
+	    xtype: 'panel',
+	    scrollable: 'y',
 	    border: false,
 	    region: 'west',
-	    // we have to define it here until extjs 6.2
-	    // because of a bug where a viewcontroller does not detect
-	    // the selectionchange event of a treelist
-	    listeners: {
-		selectionchange: 'navigate',
+	    layout: {
+		type: 'vbox',
+		align: 'stretch',
 	    },
+	    items: [
+		{
+		    xtype: 'quarantinenavigationtree',
+		    reference: 'navtree',
+		    minWidth: 180,
+		    // we have to define it here until extjs 6.2 because of a bug where a
+		    // viewcontroller does not detect the selectionchange event of a treelist
+		    listeners: {
+			selectionchange: 'navigate',
+		    },
+		},
+		{
+		    xtype: 'box',
+		    cls: 'x-treelist-pve-nav',
+		    flex: 1,
+		},
+	    ],
 	},
 	{
 	    xtype: 'panel',
