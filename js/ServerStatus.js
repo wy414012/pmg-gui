@@ -162,5 +162,13 @@ Ext.define('PMG.ServerStatus', {
 	});
 
 	me.callParent();
+
+	let sp = Ext.state.Manager.getProvider();
+	me.mon(sp, 'statechange', function(provider, key, value) {
+	    if (key !== 'summarycolumns') {
+		return;
+	    }
+	    Proxmox.Utils.updateColumnWidth(me);
+	});
    },
 });
