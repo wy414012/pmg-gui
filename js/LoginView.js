@@ -16,6 +16,9 @@ Ext.define('PMG.LoginView', {
 		return;
 	    }
 
+	    // hide save username field for quarantine view
+	    me.lookup('saveunField').setVisible(false);
+
 	    realmfield.setValue('quarantine');
 
 	    // try autologin with quarantine ticket from URL
@@ -45,11 +48,25 @@ Ext.define('PMG.LoginView', {
 	    let me = this;
 	    let view = me.getView();
 	    let loginForm = me.lookupReference('loginForm');
+	    var unField = me.lookupReference('usernameField');
+	    var saveunField = me.lookupReference('saveunField');
 
 	    if (loginForm.isValid()) {
 		if (loginForm.isVisible()) {
 		    loginForm.mask(gettext('Please wait...'), 'x-mask-loading');
 		}
+
+		// set or clear username for admin view
+		if (view.targetview !== 'quarantineview') {
+		    var sp = Ext.state.Manager.getProvider();
+		    if (saveunField.getValue() === true) {
+			sp.set(unField.getStateId(), unField.getValue());
+		    } else {
+			sp.clear(unField.getStateId());
+		    }
+		    sp.set(saveunField.getStateId(), saveunField.getValue());
+		}
+
 		loginForm.submit({
 		    success: function(form, action) {
 			// save login data and create cookie
@@ -108,6 +125,27 @@ Ext.define('PMG.LoginView', {
 	    'button[reference=loginButton]': {
 		click: 'submitForm',
 	    },
+	    'window[reference=loginwindow]': {
+		show: function() {
+		    let me = this;
+		    let view = me.getView();
+		    if (view.targetview !== 'quarantineview') {
+			var sp = Ext.state.Manager.getProvider();
+			var checkboxField = this.lookupReference('saveunField');
+			var unField = this.lookupReference('usernameField');
+
+			var checked = sp.get(checkboxField.getStateId());
+			checkboxField.setValue(checked);
+
+			if (checked === true) {
+			    var username = sp.get(unField.getStateId());
+			    unField.setValue(username);
+			    var pwField = this.lookupReference('passwordField');
+			    pwField.focus();
+			}
+		    }
+		},
+	    },
 	},
     },
 
@@ -147,6 +185,7 @@ Ext.define('PMG.LoginView', {
 	    reference: 'loginwindow',
 	    autoShow: true,
 	    modal: true,
+	    width: 450,
 
 	    defaultFocus: 'usernameField',
 
@@ -178,6 +217,7 @@ Ext.define('PMG.LoginView', {
 			    name: 'username',
 			    itemId: 'usernameField',
 			    reference: 'usernameField',
+			    stateId: 'login-username',
 			},
 			{
 			    xtype: 'textfield',
@@ -201,6 +241,16 @@ Ext.define('PMG.LoginView', {
                         },
 		    ],
 		    buttons: [
+			{
+			    xtype: 'checkbox',
+			    fieldLabel: gettext('Save User name'),
+			    name: 'saveusername',
+			    reference: 'saveunField',
+			    stateId: 'login-saveusername',
+			    labelAlign: 'right',
+			    labelWidth: 150,
+			    submitValue: false,
+			},
 			{
 			    text: gettext('Request Quarantine Link'),
 			    reference: 'quarantineButton',
