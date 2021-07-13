@@ -92,6 +92,7 @@ JSSRC=							\
 	HourlyMailDistribution.js			\
 	SpamContextMenu.js				\
 	Certificates.js					\
+	Settings.js					\
 	Application.js
 
 OnlineHelpInfo.js: /usr/bin/asciidoc-pmg

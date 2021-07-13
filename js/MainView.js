@@ -204,6 +204,11 @@ Ext.define('PMG.MainView', {
 		    iconCls: 'fa fa-user',
 		    menu: [
 			{
+			    iconCls: 'fa fa-gear',
+			    text: gettext('My Settings'),
+			    handler: () => Ext.create('PMG.window.Settings').show(),
+			},
+			{
 			    iconCls: 'fa fa-language',
 			    text: gettext('Language'),
 			    reference: 'languageButton',
