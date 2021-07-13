@@ -1,10 +1,6 @@
 /*
- * Base class for all the multitab config panels
- *
- * How to use this:
- *
- * You create a subclass of this, and then define your wanted tabs
- * as items like this:
+ * Base class for all the multitab config panels.
+ * Usage: You'd create a subclass of this, and then define your wanted tabs as items like this:
  *
  * items: [{
  *  title: "myTitle",
@@ -15,29 +11,25 @@
  *  itemId: 'someId'
  * }]
  *
- * this has to be in the declarative syntax, else we
- * cannot save them for later
- * (so no Ext.create or Ext.apply of an item in the subclass)
+ * this has to be in the declarative syntax, else we  cannot save them for later (so no Ext.create
+ * or Ext.apply of an item in the subclass)
  *
- * the groups array expects the itemids of the items
- * which are the parents, which have to come before they
- * are used
+ * the groups array expects the itemids of the items which are the parents, which have to come
+ * before they are used.
  *
- * if you want following the tree:
+ * If you want following the tree:
+ *   Option1
+ *   Option2
+ *      -> SubOption1
+ *         -> SubSubOption1
  *
- * Option1
- * Option2
- *   -> SubOption1
- *	-> SubSubOption1
+ * then the suboption1 group array has to look like this:
+ *  groups: ['itemid-of-option2']
  *
- * the suboption1 group array has to look like this:
- * groups: ['itemid-of-option2']
+ * and the subsuboption1 one:
+ *  groups: ['itemid-of-option2', 'itemid-of-suboption1']
  *
- * and of subsuboption1:
- * groups: ['itemid-of-option2', 'itemid-of-suboption1']
- *
- * setting the expandedOnInit determines if the item/group is expanded
- * initially (false by default)
+ * setting the expandedOnInit determines if the item/group is expanded initially (false by default)
  */
 Ext.define('PMG.panel.Config', {
     extend: 'Ext.panel.Panel',
@@ -75,16 +67,12 @@ Ext.define('PMG.panel.Config', {
 		    var olditem = treelist.getSelection();
 		    var newitem = info.node;
 
-		    // when clicking on the expand arrow,
-		    // we dont select items, but still want
-		    // the original behaviour
+		    // don't select when clicking on the expand arrow, but still want the original behavior
 		    if (info.select === false) {
 			return;
 		    }
 
-		    // if you click on a different item which is open,
-		    // leave it open
-		    // else toggle the clicked item
+		    // if a different open item is clicked, leave it open, else toggle the clicked item
 		    if (olditem.data.id !== newitem.data.id &&
 			newitem.data.expanded === true) {
 			info.toggle = false;
@@ -128,8 +116,7 @@ Ext.define('PMG.panel.Config', {
 		// trigger state change
 
 		var ncard = cardid;
-		// Note: '' is alias for first tab.
-		// First tab can be 'search' or something else
+		// Note: '' is alias for first tab. First tab can be 'search' or something else
 		if (cardid === me.firstItem) {
 		    ncard = '';
 		}
@@ -194,20 +181,17 @@ Ext.define('PMG.panel.Config', {
 
 		var child = curnode.findChild('id', group);
 		if (child === null) {
-		    // did not find the group item
-		    // so add it where we are
+		    // did not find the group item so add it where we are
 		    break;
 		}
 		curnode = child;
 	    }
 
-	    // insert the item
-
 	    // lets see if it already exists
 	    var node = curnode.findChild('id', item.itemId);
 
 	    if (node === null) {
-		curnode.appendChild(treeitem);
+		curnode.appendChild(treeitem); // insert the item
 	    } else {
 		// should not happen!
 		throw "id already exists";
@@ -233,8 +217,7 @@ Ext.define('PMG.panel.Config', {
 	menu.setStore(me.store);
 	menu.setSelection(selection);
 
-	// on a state change,
-	// select the new item
+	// on a state change select the new item
 	const statechange = function(sp, key, newState) {
 	    // it the state change is for this panel
 	    if (stateid && (key === stateid) && newState) {
