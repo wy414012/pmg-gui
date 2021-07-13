@@ -11,6 +11,7 @@ Ext.define('PMG.SystemConfiguration', {
 	{
 	    title: gettext('Network/Time'),
 	    itemId: 'network',
+	    iconCls: 'fa fa-exchange',
 	    xtype: 'panel',
 	    layout: {
 		type: 'vbox',
@@ -45,9 +46,10 @@ Ext.define('PMG.SystemConfiguration', {
 	    ],
 	},
 	{
+	    xtype: 'pmgSystemOptions',
 	    itemId: 'options',
             title: gettext('Options'),
-	    xtype: 'pmgSystemOptions',
+	    iconCls: 'fa fa-cogs',
 	},
     ],
 
