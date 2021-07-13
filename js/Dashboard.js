@@ -414,12 +414,12 @@ Ext.define('PMG.Dashboard', {
 	{
 	    xtype: 'pmgNodeInfoPanel',
 	    reference: 'nodeInfo',
-	    height: 250,
-	    bodyPadding: '10 5 10 5',
+	    height: 275,
+	    bodyPadding: '15 5 15 5',
 	    iconCls: 'fa fa-tasks',
 	},
 	{
-	    height: 250,
+	    height: 275,
 	    iconCls: 'fa fa-list',
 	    title: gettext('Top Receivers'),
 
@@ -434,9 +434,7 @@ Ext.define('PMG.Dashboard', {
 		bind: {
 		    store: '{receivers}',
 		},
-
 		emptyText: gettext('No data in database'),
-
 		// remove all borders/lines/headers
 		border: false,
 		bodyBorder: false,
@@ -447,7 +445,6 @@ Ext.define('PMG.Dashboard', {
 		viewConfig: {
 		    stripeRows: false,
 		},
-
 		columns: [
 		    {
 			dataIndex: 'receiver',
