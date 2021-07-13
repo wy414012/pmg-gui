@@ -20,11 +20,13 @@ Ext.define('PMG.ServerAdministration', {
 	{
 	    xtype: 'pmgServerStatus',
 	    itemId: 'status',
+	    iconCls: 'fa fa-area-chart',
 	},
 	{
 	    xtype: 'proxmoxNodeServiceView',
-            title: gettext('Services'),
+	    title: gettext('Services'),
 	    itemId: 'services',
+	    iconCls: 'fa fa-cogs',
 	    startOnlyServices: {
 		syslog: true,
 		pmgproxy: true,
@@ -34,7 +36,8 @@ Ext.define('PMG.ServerAdministration', {
 	},
 	{
 	    xtype: 'proxmoxNodeAPT',
-            title: gettext('Updates'),
+	    title: gettext('Updates'),
+	    iconCls: 'fa fa-refresh',
 	    upgradeBtn: {
 		xtype: 'button',
 		reference: 'upgradeBtn',
@@ -50,6 +53,7 @@ Ext.define('PMG.ServerAdministration', {
 	{
 	    xtype: 'proxmoxNodeAPTRepositories',
 	    title: gettext('Repositories'),
+	    iconCls: 'fa fa-files-o',
 	    itemId: 'aptrepositories',
 	    nodename: 'localhost',
 	    product: 'Proxmox Mail Gateway',
@@ -57,12 +61,14 @@ Ext.define('PMG.ServerAdministration', {
 	{
 	    xtype: 'proxmoxJournalView',
 	    itemId: 'logs',
+	    iconCls: 'fa fa-list',
 	    title: gettext('Syslog'),
 	    url: "/api2/extjs/nodes/" + Proxmox.NodeName + "/journal",
 	},
 	{
 	    xtype: 'proxmoxNodeTasks',
 	    itemId: 'tasks',
+	    iconCls: 'fa fa-list-alt',
 	    title: gettext('Tasks'),
 	    height: 'auto',
 	    nodename: Proxmox.NodeName,
