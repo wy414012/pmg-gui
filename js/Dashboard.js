@@ -412,37 +412,6 @@ Ext.define('PMG.Dashboard', {
 	    ],
 	},
 	{
-	    height: 250,
-	    iconCls: 'fa fa-tasks',
-	    title: gettext('Cluster Resources (average)'),
-	    reference: 'clusterResources',
-	    hidden: true,
-	    bodyPadding: '0 20 0 20',
-	    layout: {
-		type: 'hbox',
-		align: 'center',
-	    },
-	    defaults: {
-		xtype: 'proxmoxGauge',
-		spriteFontSize: '20px',
-		flex: 1,
-	    },
-	    items: [
-		{
-		    title: gettext('CPU'),
-		    reference: 'cpu',
-		},
-		{
-		    title: gettext('Memory'),
-		    reference: 'mem',
-		},
-		{
-		    title: gettext('Storage'),
-		    reference: 'hd',
-		},
-	    ],
-	},
-	{
 	    xtype: 'pmgNodeInfoPanel',
 	    reference: 'nodeInfo',
 	    height: 250,
@@ -492,6 +461,37 @@ Ext.define('PMG.Dashboard', {
 		    },
 		],
 	    }],
+	},
+	{
+	    height: 250,
+	    iconCls: 'fa fa-tasks',
+	    title: gettext('Cluster Resources (average)'),
+	    reference: 'clusterResources',
+	    hidden: true,
+	    bodyPadding: '0 20 0 20',
+	    layout: {
+		type: 'hbox',
+		align: 'center',
+	    },
+	    defaults: {
+		xtype: 'proxmoxGauge',
+		spriteFontSize: '20px',
+		flex: 1,
+	    },
+	    items: [
+		{
+		    title: gettext('CPU'),
+		    reference: 'cpu',
+		},
+		{
+		    title: gettext('Memory'),
+		    reference: 'mem',
+		},
+		{
+		    title: gettext('Storage'),
+		    reference: 'hd',
+		},
+	    ],
 	},
     ],
 });
