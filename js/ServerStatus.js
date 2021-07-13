@@ -161,7 +161,7 @@ Ext.define('PMG.ServerStatus', {
 	    ],
 	    listeners: {
 		resize: function(panel) {
-		    Proxmox.Utils.updateColumns(panel);
+		    Proxmox.Utils.updateColumnWidth(panel);
 		},
 		activate: function() {
 		    rrdstore.startUpdate();
