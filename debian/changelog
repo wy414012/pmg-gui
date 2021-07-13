@@ -1,3 +1,19 @@
+pmg-gui (3.0-3) bullseye; urgency=medium
+
+  * server status: dynamically update column count and width
+
+  * login form: add checkbox to save username in local browser storage
+
+  * add panel for basic management and status of APT repositories
+
+  * dashboard: add node info panel
+
+  * dashboard: hide cluster resources if it's a single node
+
+  * add some more icons
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 13 Jul 2021 19:12:38 +0200
+
 pmg-gui (3.0-2) bullseye; urgency=medium
 
   * quarantine view: extjs 7.0 compatibility
