@@ -10,19 +10,22 @@ Ext.define('PMG.UserManagement', {
 
     items: [
 	{
+	    xtype: "pmgUserView",
 	    title: gettext('Local'),
 	    itemId: 'local',
-	    xtype: "pmgUserView",
+	    iconCls: 'fa fa-user',
 	},
 	{
+	    xtype: 'pmgLDAPConfig',
 	    title: 'LDAP',
 	    itemId: 'ldap',
-	    xtype: 'pmgLDAPConfig',
+	    iconCls: 'fa fa-address-book-o',
 	},
 	{
+	    xtype: 'pmgFetchmailView',
 	    title: 'Fetchmail',
 	    itemId: 'pop',
-	    xtype: 'pmgFetchmailView',
+	    iconCls: 'fa fa-reply-all',
 	},
     ],
 });
