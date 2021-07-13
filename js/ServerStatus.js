@@ -25,15 +25,14 @@ Ext.define('PMG.ServerStatus', {
 	},
 
 	nodeCommand: function(cmd) {
-	    var view = this.getView();
 	    Proxmox.Utils.API2Request({
-		params: { command: cmd },
+		params: {
+		    command: cmd,
+		},
 		url: `/nodes/${Proxmox.NodeName}/status`,
 		method: 'POST',
-		waitMsgTarget: view,
-		failure: function(response, opts) {
-		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
-		},
+		waitMsgTarget: this.getView(),
+		failure: response => Ext.Msg.alert(gettext('Error'), response.htmlStatus),
 	    });
 	},
 
@@ -56,7 +55,7 @@ Ext.define('PMG.ServerStatus', {
 	    xtype: 'proxmoxButton',
 	    text: gettext('Restart'),
 	    dangerous: true,
-	    confirmMsg: gettext('Node') + " '" + Proxmox.NodeName + "' - " + gettext('Restart'),
+	    confirmMsg: `${gettext('Node')} '${Proxmox.NodeName}' - ${gettext('Restart')}`,
 	    handler: 'nodeReboot',
 	    iconCls: 'fa fa-undo',
 	},
@@ -64,7 +63,7 @@ Ext.define('PMG.ServerStatus', {
 	    xtype: 'proxmoxButton',
 	    text: gettext('Shutdown'),
 	    dangerous: true,
-	    confirmMsg: gettext('Node') + " '" + Proxmox.NodeName + "' - " + gettext('Shutdown'),
+	    confirmMsg: `${gettext('Node')} '${Proxmox.NodeName}' - ${gettext('Shutdown')}`,
 	    handler: 'nodeShutdown',
 	    iconCls: 'fa fa-power-off',
 	},
@@ -75,27 +74,23 @@ Ext.define('PMG.ServerStatus', {
     ],
 
     initComponent: function() {
-        var me = this;
+        let me = this;
 
-	var nodename = Proxmox.NodeName;
-	var rrdstore = Ext.create('Proxmox.data.RRDStore', {
-	    rrdurl: "/api2/json/nodes/" + nodename + "/rrddata",
+	let nodename = Proxmox.NodeName;
+	let rrdstore = Ext.create('Proxmox.data.RRDStore', {
+	    rrdurl: `/api2/json/nodes/${nodename}/rrddata`,
 	    fields: [
 		{ type: 'number', name: 'loadavg' },
 		{ type: 'number', name: 'maxcpu' },
 		{
 		    type: 'number',
 		    name: 'cpu',
-		    convert: function(val) {
-			return val*100;
-		    },
+		    convert: val => val * 100,
 		},
 		{
 		    type: 'number',
 		    name: 'iowait',
-		    convert: function(val) {
-			return val*100;
-		    },
+		    convert: val => val * 100,
 		},
 		{ type: 'number', name: 'memtotal' },
 		{ type: 'number', name: 'memused' },
@@ -160,18 +155,12 @@ Ext.define('PMG.ServerStatus', {
 		},
 	    ],
 	    listeners: {
-		resize: function(panel) {
-		    Proxmox.Utils.updateColumnWidth(panel);
-		},
-		activate: function() {
-		    rrdstore.startUpdate();
-		},
-		destroy: function() {
-		    rrdstore.stopUpdate();
-		},
+		resize: panel => Proxmox.Utils.updateColumnWidth(panel),
+		activate: () => rrdstore.startUpdate(),
+		destroy: () => rrdstore.stopUpdate(),
 	    },
 	});
+
 	me.callParent();
    },
 });
-
