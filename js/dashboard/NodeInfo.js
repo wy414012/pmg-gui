@@ -45,7 +45,7 @@ Ext.define('PMG.NodeInfoPanel', {
 		const status = get('repoStatus');
 		let repoLink = ` <a data-qtip="${gettext("Open Repositories Panel")}"
 		    href="#pmgServerAdministration:aptrepositories">
-		    <i class="fa black fa-chevron-right"></i>
+		    <i class="fa black fa-chevron-right txt-shadow-hover"></i>
 		    </a>`;
 		return Proxmox.Utils.formatNodeRepoStatus(status, 'Proxmox Mail Gateway') + repoLink;
 	    },

@@ -51,6 +51,11 @@
     font-size: 14px;
 }
 
+.txt-shadow-hover:hover:before, .txt-shadow-hover:hover:after {
+    text-shadow: 1px 1px 1px #AAA;
+}
+
+
 /* icons for tree/snapshots/menus/etc.. */
 
 /* overwrite folder icons of theme */
