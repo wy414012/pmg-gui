@@ -8,10 +8,11 @@ Ext.define('PMG.ServerStatus', {
 
     scrollable: true,
 
-    bodyPadding: '10 0 0 0',
+    bodyPadding: 5,
     defaults: {
 	width: 700,
-	padding: '0 0 10 10',
+	padding: 5,
+	columnWidth: 1,
     },
 
     layout: 'column',
@@ -159,6 +160,9 @@ Ext.define('PMG.ServerStatus', {
 		},
 	    ],
 	    listeners: {
+		resize: function(panel) {
+		    Proxmox.Utils.updateColumns(panel);
+		},
 		activate: function() {
 		    rrdstore.startUpdate();
 		},
