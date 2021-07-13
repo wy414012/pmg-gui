@@ -142,6 +142,9 @@ Ext.define('PMG.Dashboard', {
 
 	    me.lookup('nodeInfo').setSubscriptionStatus(subStatus);
 
+	    // the node info already displays this information in case there is no cluster
+	    me.lookup('clusterResources').setHidden(records.length === 1);
+
 	    cpu = cpu/count;
 	    mem = mem/count;
 	    hd = hd/count;
@@ -412,6 +415,8 @@ Ext.define('PMG.Dashboard', {
 	    height: 250,
 	    iconCls: 'fa fa-tasks',
 	    title: gettext('Cluster Resources (average)'),
+	    reference: 'clusterResources',
+	    hidden: true,
 	    bodyPadding: '0 20 0 20',
 	    layout: {
 		type: 'hbox',
