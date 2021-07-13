@@ -27,6 +27,7 @@ JSSRC=							\
 	QuarantineView.js				\
 	Dashboard.js					\
 	dashboard/MailProcessing.js			\
+	dashboard/NodeInfo.js				\
 	dashboard/SubscriptionInfo.js			\
 	dashboard/MiniGraph.js				\
 	VersionInfo.js					\

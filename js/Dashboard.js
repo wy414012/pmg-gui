@@ -140,6 +140,8 @@ Ext.define('PMG.Dashboard', {
 	    var subscriptionPanel = me.lookup('subscription');
 	    subscriptionPanel.setSubStatus(subStatus);
 
+	    me.lookup('nodeInfo').setSubscriptionStatus(subStatus);
+
 	    cpu = cpu/count;
 	    mem = mem/count;
 	    hd = hd/count;
@@ -161,6 +163,15 @@ Ext.define('PMG.Dashboard', {
 		Ext.Msg.alert(gettext('Error'), text);
 		viewmodel.set('error_shown', true);
 	    }
+	},
+
+	updateRepositoryStatus: function(store, records, success) {
+	    if (!success) {
+		return;
+	    }
+
+	    let me = this;
+	    me.lookup('nodeInfo').setRepositoryInfo(records[0].data['standard-repos']);
 	},
 
 	init: function(view) {
@@ -271,6 +282,21 @@ Ext.define('PMG.Dashboard', {
 		    { type: 'integer', name: 'count' },
 		    { type: 'string', name: 'receiver' },
 		],
+	    },
+	    repositories: {
+		storeid: 'dash-repositories',
+		type: 'update',
+		interval: 15000,
+		autoStart: true,
+		autoLoad: true,
+		autoDestroy: true,
+		proxy: {
+		    type: 'proxmox',
+		    url: '/api2/json/nodes/localhost/apt/repositories',
+		},
+		listeners: {
+		    load: 'updateRepositoryStatus',
+		},
 	    },
 	},
     },
@@ -385,7 +411,7 @@ Ext.define('PMG.Dashboard', {
 	{
 	    height: 250,
 	    iconCls: 'fa fa-tasks',
-	    title: gettext('Node Resources'),
+	    title: gettext('Cluster Resources (average)'),
 	    bodyPadding: '0 20 0 20',
 	    layout: {
 		type: 'hbox',
@@ -410,6 +436,13 @@ Ext.define('PMG.Dashboard', {
 		    reference: 'hd',
 		},
 	    ],
+	},
+	{
+	    xtype: 'pmgNodeInfoPanel',
+	    reference: 'nodeInfo',
+	    height: 250,
+	    bodyPadding: '10 5 10 5',
+	    iconCls: 'fa fa-tasks',
 	},
 	{
 	    height: 250,
