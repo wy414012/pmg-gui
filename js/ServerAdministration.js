@@ -48,6 +48,13 @@ Ext.define('PMG.ServerAdministration', {
 	    nodename: Proxmox.NodeName,
 	},
 	{
+	    xtype: 'proxmoxNodeAPTRepositories',
+	    title: gettext('Repositories'),
+	    itemId: 'aptrepositories',
+	    nodename: 'localhost',
+	    product: 'Proxmox Mail Gateway',
+	},
+	{
 	    xtype: 'proxmoxJournalView',
 	    itemId: 'logs',
 	    title: gettext('Syslog'),
