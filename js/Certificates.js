@@ -11,12 +11,14 @@ Ext.define('PMG.CertificateConfiguration', {
 
     items: [
 	{
-	    itemId: 'certificates',
 	    xtype: 'pmgCertificatesView',
+	    itemId: 'certificates',
+	    iconCls: 'fa fa-certificate',
 	},
 	{
-	    itemId: 'acme',
 	    xtype: 'pmgACMEConfigView',
+	    itemId: 'acme',
+	    iconCls: 'fa fa-file-text',
 	},
     ],
 });
