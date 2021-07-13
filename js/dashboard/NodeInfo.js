@@ -152,7 +152,7 @@ Ext.define('PMG.NodeInfoPanel', {
 
 	for (const standardRepo of standardRepos) {
 	    const handle = standardRepo.handle;
-	    const status = standardRepo.status;
+	    const status = standardRepo.status || 0;
 
 	    if (handle === "enterprise") {
 		vm.set('enterpriseRepo', status);
