@@ -57,6 +57,7 @@ Ext.define('PMG.ServerAdministration', {
 	    itemId: 'aptrepositories',
 	    nodename: 'localhost',
 	    product: 'Proxmox Mail Gateway',
+	    onlineHelp: 'pmg_package_repositories',
 	},
 	{
 	    xtype: 'proxmoxJournalView',
