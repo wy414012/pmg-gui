@@ -42,6 +42,7 @@ Ext.define('PMG.SystemConfiguration', {
 		    xtype: 'proxmoxNodeNetworkView',
 		    types: ['bond'],
 		    nodename: Proxmox.NodeName,
+		    showApplyBtn: true,
 		},
 	    ],
 	},
