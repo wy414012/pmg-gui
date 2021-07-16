@@ -26,11 +26,8 @@ Ext.define('PMG.SystemConfiguration', {
 	    },
 	    items: [
 		{
-		    flex: 1,
-		    minHeight: 200,
-		    title: gettext('Interfaces'),
-		    xtype: 'proxmoxNodeNetworkView',
-		    types: ['bond'],
+		    title: gettext('Time'),
+		    xtype: 'proxmoxNodeTimeView',
 		    nodename: Proxmox.NodeName,
 		},
 		{
@@ -39,8 +36,11 @@ Ext.define('PMG.SystemConfiguration', {
 		    nodename: Proxmox.NodeName,
 		},
 		{
-		    title: gettext('Time'),
-		    xtype: 'proxmoxNodeTimeView',
+		    flex: 1,
+		    minHeight: 200,
+		    title: gettext('Interfaces'),
+		    xtype: 'proxmoxNodeNetworkView',
+		    types: ['bond'],
 		    nodename: Proxmox.NodeName,
 		},
 	    ],
