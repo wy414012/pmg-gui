@@ -47,6 +47,15 @@ Ext.define('PMG.ServerStatus', {
 
     tbar: [
 	{
+	    text: gettext('Package versions'),
+	    iconCls: 'fa fa-gift',
+	    handler: () => Proxmox.Utils.checked_command(() => {
+		Ext.create('Proxmox.window.PackageVersions', {
+		    autoShow: true,
+		});
+	    }),
+	},
+	{
 	    text: gettext("Console"),
 	    iconCls: 'fa fa-terminal',
 	    handler: 'openConsole',
