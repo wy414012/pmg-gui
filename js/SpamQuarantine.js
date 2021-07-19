@@ -164,9 +164,12 @@ Ext.define('PMG.SpamQuarantine', {
 	    }
 
 	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
+		let listController = list.getController();
+		listController.allowPositionSave = false;
 		// success -> remove directly to avoid slow store reload for a single-element action
 		list.getStore().remove(selected[0]);
-		list.getController().restoreSavedSelection();
+		listController.restoreSavedSelection();
+		listController.allowPositionSave = true;
 	    });
 	},
 
