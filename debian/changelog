@@ -1,3 +1,18 @@
+pmg-gui (3.0-4) bullseye; urgency=medium
+
+  * system configuration: move network panel to bottom
+
+  * system configuration: network: show live-apply button
+
+  * server administration: repos: add online help
+
+  * server administration: status: add button to show package version window
+
+  * spam quarantine: avoid resetting saved position when removing single
+    element
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 19 Jul 2021 18:27:31 +0200
+
 pmg-gui (3.0-3) bullseye; urgency=medium
 
   * server status: dynamically update column count and width
