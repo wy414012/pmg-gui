@@ -790,6 +790,7 @@ Ext.define('PMG.Utils', {
 		    slideBackAnimation: 'easeOut',
 		    iconCls: 'fa fa-check',
 		    shadow: true,
+		    align: 'br',
 		});
 
 		if (Ext.isFunction(callback)) {
@@ -903,6 +904,7 @@ Ext.define('PMG.Async', {
 		    slideBackAnimation: 'easeOut',
 		    iconCls: 'fa fa-check',
 		    shadow: true,
+		    align: 'br',
 		});
 	    },
 	    response => Proxmox.Utils.alertResponseFailure(response),
