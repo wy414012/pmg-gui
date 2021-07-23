@@ -120,7 +120,8 @@ Ext.define('PMG.Dashboard', {
 		}
 
 		if (item.data.name === Proxmox.NodeName) {
-		    me.lookup('nodeInfo').setSubscriptionStatus(!!item.data.level);
+		    let repoStatus = me.lookup('nodeInfo').down('#repositoryStatus');
+		    repoStatus.setSubscriptionStatus(!!item.data.level);
 		}
 
 		// resources count
@@ -176,7 +177,8 @@ Ext.define('PMG.Dashboard', {
 	    }
 
 	    let me = this;
-	    me.lookup('nodeInfo').setRepositoryInfo(records[0].data['standard-repos']);
+	    let repoStatus = me.lookup('nodeInfo').down('#repositoryStatus');
+	    repoStatus.setRepositoryInfo(records[0].data['standard-repos']);
 	},
 
 	init: function(view) {

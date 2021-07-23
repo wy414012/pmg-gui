@@ -17,41 +17,6 @@ Ext.define('PMG.NodeInfoPanel', {
 	padding: '0 10 5 10',
     },
 
-    viewModel: {
-	data: {
-	    subscriptionActive: '',
-	    noSubscriptionRepo: '',
-	    enterpriseRepo: '',
-	    testRepo: '',
-	},
-	formulas: {
-	    repoStatus: function(get) {
-		if (get('subscriptionActive') === '' || get('enterpriseRepo') === '') {
-		    return '';
-		}
-
-		if (get('noSubscriptionRepo') || get('testRepo')) {
-		    return 'non-production';
-		} else if (get('subscriptionActive') && get('enterpriseRepo')) {
-		    return 'ok';
-		} else if (!get('subscriptionActive') && get('enterpriseRepo')) {
-		    return 'no-sub';
-		} else if (!get('enterpriseRepo') || !get('noSubscriptionRepo') || !get('testRepo')) {
-		    return 'no-repo';
-		}
-		return 'unknown';
-	    },
-	    repoStatusMessage: function(get) {
-		const status = get('repoStatus');
-		let repoLink = ` <a data-qtip="${gettext("Open Repositories Panel")}"
-		    href="#pmgServerAdministration:aptrepositories">
-		    <i class="fa black fa-chevron-right txt-shadow-hover"></i>
-		    </a>`;
-		return Proxmox.Utils.formatNodeRepoStatus(status, 'Proxmox Mail Gateway') + repoLink;
-	    },
-	},
-    },
-
     items: [
 	{
 	    itemId: 'nodecpu',
@@ -127,16 +92,10 @@ Ext.define('PMG.NodeInfoPanel', {
 	    value: '',
 	},
 	{
+	    xtype: 'pmxNodeInfoRepoStatus',
 	    itemId: 'repositoryStatus',
-	    colspan: 2,
-	    printBar: false,
-	    title: gettext('Repository Status'),
-	    setValue: function(value) { // for binding below
-		this.updateValue(value);
-	    },
-	    bind: {
-		value: '{repoStatusMessage}',
-	    },
+	    product: 'Proxmox Mail Gateway',
+	    repoLink: '#pmgServerAdministration:aptrepositories',
 	},
     ],
 
@@ -144,31 +103,6 @@ Ext.define('PMG.NodeInfoPanel', {
 	var me = this;
 	var uptime = Proxmox.Utils.render_uptime(me.getRecordValue('uptime'));
 	me.setTitle(Proxmox.NodeName + ' (' + gettext('Uptime') + ': ' + uptime + ')');
-    },
-
-    setRepositoryInfo: function(standardRepos) {
-	let me = this;
-	let vm = me.getViewModel();
-
-	for (const standardRepo of standardRepos) {
-	    const handle = standardRepo.handle;
-	    const status = standardRepo.status || 0;
-
-	    if (handle === "enterprise") {
-		vm.set('enterpriseRepo', status);
-	    } else if (handle === "no-subscription") {
-		vm.set('noSubscriptionRepo', status);
-	    } else if (handle === "test") {
-		vm.set('testRepo', status);
-	    }
-	}
-    },
-
-    setSubscriptionStatus: function(status) {
-	let me = this;
-	let vm = me.getViewModel();
-
-	vm.set('subscriptionActive', status);
     },
 
     initComponent: function() {
