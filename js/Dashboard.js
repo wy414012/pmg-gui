@@ -119,6 +119,10 @@ Ext.define('PMG.Dashboard', {
 		    subStatus = 0;
 		}
 
+		if (item.data.name === Proxmox.NodeName) {
+		    me.lookup('nodeInfo').setSubscriptionStatus(!!item.data.level);
+		}
+
 		// resources count
 		cpu += item.data.cpu || 0;
 
@@ -139,8 +143,6 @@ Ext.define('PMG.Dashboard', {
 
 	    var subscriptionPanel = me.lookup('subscription');
 	    subscriptionPanel.setSubStatus(subStatus);
-
-	    me.lookup('nodeInfo').setSubscriptionStatus(subStatus);
 
 	    // the node info already displays this information in case there is no cluster
 	    me.lookup('clusterResources').setHidden(records.length === 1);
