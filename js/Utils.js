@@ -676,7 +676,7 @@ Ext.define('PMG.Utils', {
 		    xtype: 'proxmoxcheckbox',
 		    checked: false,
 		    name: 'quarantine',
-		    fieldLabel: gettext("Copy orignal mail to Attachment Quarantine"),
+		    fieldLabel: gettext("Copy original mail to Attachment Quarantine"),
 		},
 	    ],
 	},
