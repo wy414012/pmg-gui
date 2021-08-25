@@ -1,3 +1,14 @@
+pmg-gui (3.0-5) bullseye; urgency=medium
+
+  * utils: align notification toast to bottom-right again, regressed with the
+    updated of ExtJS 7.0
+
+  * dashboard: node status: use repo status widget from widget-toolkit
+
+  * fix #3565: fix typo in gettext
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 25 Aug 2021 09:32:00 +0200
+
 pmg-gui (3.0-4) bullseye; urgency=medium
 
   * system configuration: move network panel to bottom
