@@ -28,6 +28,11 @@ Ext.define('PMG.LDAPInputPanel', {
 	values.disable = values.enable ? 0 : 1;
 	delete values.enable;
 
+	// do not send empty password
+	if (values.bindpw === '') {
+	    delete values.bindpw;
+	}
+
 	return values;
     },
 
@@ -103,6 +108,7 @@ Ext.define('PMG.LDAPInputPanel', {
 		xtype: 'textfield',
 		inputType: 'password',
 		allowBlank: true,
+		emptyText: gettext('Unchanged'),
 		name: 'bindpw',
 		fieldLabel: gettext('Password'),
 	    },
