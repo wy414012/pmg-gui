@@ -73,6 +73,7 @@ JSSRC=							\
 	FetchmailEdit.js				\
 	FetchmailView.js				\
 	UserManagement.js				\
+	UserSelector.js					\
 	ViewMailHeaders.js				\
 	PostfixQShape.js				\
 	PostfixMailQueue.js				\

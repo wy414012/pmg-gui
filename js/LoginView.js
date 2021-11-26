@@ -44,7 +44,7 @@ Ext.define('PMG.LoginView', {
 	    me.submitForm();
 	},
 
-	submitForm: function() {
+	submitForm: async function() {
 	    let me = this;
 	    let view = me.getView();
 	    let loginForm = me.lookupReference('loginForm');
@@ -67,21 +67,52 @@ Ext.define('PMG.LoginView', {
 		    sp.set(saveunField.getStateId(), saveunField.getValue());
 		}
 
-		loginForm.submit({
-		    success: function(form, action) {
-			// save login data and create cookie
-			PMG.Utils.updateLoginData(action.result.data);
-			PMG.app.changeView(view.targetview);
-		    },
-		    failure: function(form, action) {
-			loginForm.unmask();
-			Ext.MessageBox.alert(
-			    gettext('Error'),
-			    gettext('Login failed. Please try again'),
-			);
-		    },
-		});
+		let creds = loginForm.getValues();
+
+		try {
+		    let resp = await Proxmox.Async.api2({
+			url: '/api2/extjs/access/ticket',
+			params: creds,
+			method: 'POST',
+		    });
+
+		    let data = resp.result.data;
+		    if (data.ticket.startsWith('PMG:!tfa!')) {
+			data = await me.performTFAChallenge(data);
+		    }
+		    PMG.Utils.updateLoginData(data);
+		    PMG.app.changeView(view.targetview);
+		} catch (error) {
+		    Proxmox.Utils.authClear();
+		    loginForm.unmask();
+		    Ext.MessageBox.alert(
+			gettext('Error'),
+			gettext('Login failed. Please try again'),
+		    );
+		}
 	    }
+	},
+
+	performTFAChallenge: async function(data) {
+	    let me = this;
+
+	    let userid = data.username;
+	    let ticket = data.ticket;
+	    let challenge = JSON.parse(decodeURIComponent(
+		ticket.split(':')[1].slice("!tfa!".length),
+	    ));
+
+	    let resp = await new Promise((resolve, reject) => {
+		Ext.create('Proxmox.window.TfaLoginWindow', {
+		    userid,
+		    ticket,
+		    challenge,
+		    onResolve: value => resolve(value),
+		    onReject: reject,
+		}).show();
+	    });
+
+	    return resp.result.data;
 	},
 
 	openQuarantineLinkWindow: function() {

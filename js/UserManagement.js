@@ -27,7 +27,11 @@ Ext.define('PMG.UserManagement', {
 	    itemId: 'pop',
 	    iconCls: 'fa fa-reply-all',
 	},
+	{
+	    xtype: 'pmxTfaView',
+	    title: 'Two Factor',
+	    itemId: 'tfa',
+	    iconCls: 'fa fa-key',
+	},
     ],
 });
-
-
