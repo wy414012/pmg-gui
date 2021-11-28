@@ -16,6 +16,12 @@ Ext.define('PMG.UserManagement', {
 	    iconCls: 'fa fa-user',
 	},
 	{
+	    xtype: 'pmxTfaView',
+	    title: 'Two Factor',
+	    itemId: 'tfa',
+	    iconCls: 'fa fa-key',
+	},
+	{
 	    xtype: 'pmgLDAPConfig',
 	    title: 'LDAP',
 	    itemId: 'ldap',
@@ -26,12 +32,6 @@ Ext.define('PMG.UserManagement', {
 	    title: 'Fetchmail',
 	    itemId: 'pop',
 	    iconCls: 'fa fa-reply-all',
-	},
-	{
-	    xtype: 'pmxTfaView',
-	    title: 'Two Factor',
-	    itemId: 'tfa',
-	    iconCls: 'fa fa-key',
 	},
     ],
 });
