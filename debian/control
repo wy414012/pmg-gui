@@ -13,6 +13,7 @@ Architecture: all
 Depends: fonts-font-awesome,
          libjs-extjs (>= 6.0.1),
          libjs-framework7 (>= 4.1.1),
+         libjs-qrcodejs (>= 1.20201119),
          pmg-i18n,
          proxmox-widget-toolkit (>= 3.3-6),
 Description: Proxmox Mail Gateway web interface
