@@ -20,6 +20,7 @@ Ext.define('PMG.UserManagement', {
 	    title: 'Two Factor',
 	    itemId: 'tfa',
 	    iconCls: 'fa fa-key',
+	    issuerName: `Proxmox Mail Gateway - ${Proxmox.NodeName}`,
 	},
 	{
 	    xtype: 'pmgLDAPConfig',
