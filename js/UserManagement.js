@@ -16,7 +16,7 @@ Ext.define('PMG.UserManagement', {
 	    iconCls: 'fa fa-user',
 	},
 	{
-	    xtype: 'pmxTfaView',
+	    xtype: 'pmgTFAView',
 	    title: 'Two Factor',
 	    itemId: 'tfa',
 	    iconCls: 'fa fa-key',
