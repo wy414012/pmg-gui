@@ -1,3 +1,11 @@
+pmg-gui (3.1-1) bullseye; urgency=medium
+
+  * fix #3648: ldap config: do not send empty bindpw
+
+  * implement two factor authentication for admin interface
+
+ -- Proxmox Support Team <support@proxmox.com>  Sun, 28 Nov 2021 21:29:10 +0100
+
 pmg-gui (3.0-5) bullseye; urgency=medium
 
   * utils: align notification toast to bottom-right again, regressed with the
