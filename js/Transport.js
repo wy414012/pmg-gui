@@ -20,7 +20,7 @@ Ext.define('PMG.Transport', {
 	    model: 'pmg-transport',
 	    sorters: {
 		property: 'domain',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	});
 	Proxmox.Utils.monStoreErrors(me, store, true);

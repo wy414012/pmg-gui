@@ -19,7 +19,7 @@ Ext.define('PMG.MyNetworks', {
 	    model: 'pmg-mynetworks',
 	    sorters: {
 		property: 'cidr',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	});
 

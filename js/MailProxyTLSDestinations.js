@@ -8,7 +8,7 @@ Ext.define('pmg-tls-policy', {
     },
     sorters: {
 	property: 'destination',
-	order: 'DESC',
+	direction: 'ASC',
     },
 });
 

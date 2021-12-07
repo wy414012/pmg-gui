@@ -20,7 +20,7 @@ Ext.define('PMG.RelayDomains', {
 	    model: 'pmg-domains',
 	    sorters: {
 		property: 'domain',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	    proxy: {
 		type: 'proxmox',

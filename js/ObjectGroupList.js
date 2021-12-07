@@ -88,7 +88,7 @@ Ext.define('PMG.ObjectGroupList', {
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	});
 

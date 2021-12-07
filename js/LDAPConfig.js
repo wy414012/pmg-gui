@@ -518,7 +518,7 @@ Ext.define('PMG.LDAPConfigGrid', {
 	model: 'pmg-ldap-config',
 	sorters: [{
 	    property: 'profile',
-	    order: 'DESC',
+	    direction: 'ASC',
 	}],
     },
 

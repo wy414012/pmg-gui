@@ -31,7 +31,7 @@ Ext.define('PMG.ActionList', {
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	});
 

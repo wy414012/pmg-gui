@@ -66,7 +66,7 @@ Ext.define('PMG.ClamAVDatabaseStatus', {
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	});
 

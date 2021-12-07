@@ -94,7 +94,7 @@ Ext.define('PMG.SpamDetectorStatusGrid', {
 	    },
 	    sorters: {
 		property: 'name',
-		order: 'DESC',
+		direction: 'ASC',
 	    },
 	});
 

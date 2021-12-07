@@ -103,7 +103,7 @@ Ext.define('PMG.PBSConfigGrid', {
 	model: 'pmg-pbs-config',
 	sorters: [{
 	    property: 'remote',
-	    order: 'DESC',
+	    direction: 'ASC',
 	}],
     },
 
