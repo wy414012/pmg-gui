@@ -21,27 +21,43 @@ Ext.define('PMG.ViewMailHeaders', {
 
 	xclass: 'Ext.app.ViewController',
 
-	init: function(view) {
-	    var panel = view.lookupReference('contentPanel');
+	toggleRaw: function(btn) {
+	    let me = this;
+	    let view = me.getView();
+	    view.raw = !view.raw;
+	    me.loadData(view.url);
+	},
+
+	setData: function(data) {
+	    let view = this.getView();
+	    let panel = view.lookupReference('contentPanel');
+	    let from = data.match(/^FROM:\s*(.*\S)\s*$/mi);
+	    if (from) {
+		view.lookupReference('fromField').setValue(from[1]);
+	    }
+	    let to = data.match(/^TO:\s*(.*\S)\s*$/mi);
+	    if (to) {
+		view.lookupReference('toField').setValue(to[1]);
+	    }
+	    let subject = data.match(/^SUBJECT:\s*(.*\S)\s*$/mi);
+	    if (subject) {
+		view.lookupReference('subjectField').setValue(subject[1]);
+	    }
+	    panel.update(Ext.String.htmlEncode(data));
+	},
+
+	loadData: function(url) {
+	    let me = this;
+	    let view = me.getView();
+	    if (!view.raw) {
+		url += "?decode-header=1";
+	    }
 	    Proxmox.Utils.API2Request({
-		url: view.url,
+		url,
 		waitMsgTarget: view,
 		method: 'GET',
 		success: function(response, opts) {
-		    var data = response.result.data;
-		    var from = data.match(/^FROM:\s*(.*\S)\s*$/mi);
-		    if (from) {
-			view.lookupReference('fromField').setValue(from[1]);
-		    }
-		    var to = data.match(/^TO:\s*(.*\S)\s*$/mi);
-		    if (to) {
-			view.lookupReference('toField').setValue(to[1]);
-		    }
-		    var subject = data.match(/^SUBJECT:\s*(.*\S)\s*$/mi);
-		    if (subject) {
-			view.lookupReference('subjectField').setValue(subject[1]);
-		    }
-		    panel.update(Ext.String.htmlEncode(data));
+		    me.setData(response.result.data);
 		},
 		failure: function(response, opts) {
 		    view.destroy();
@@ -49,7 +65,24 @@ Ext.define('PMG.ViewMailHeaders', {
 		},
 	    });
 	},
+
+	init: function(view) {
+	    let me = this;
+	    me.loadData(view.url);
+	},
     },
+
+    buttons: [
+	{
+	    xtype: 'button',
+	    reference: 'raw',
+	    text: gettext('Toggle Raw'),
+	    enableToggle: true,
+	    iconCls: 'fa fa-file-code-o',
+	    handler: 'toggleRaw',
+	},
+	'->',
+    ],
 
     items: [
 	{
