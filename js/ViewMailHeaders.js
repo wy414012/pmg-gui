@@ -18,13 +18,12 @@ Ext.define('PMG.ViewMailHeaders', {
     },
 
     controller: {
-
 	xclass: 'Ext.app.ViewController',
 
-	toggleRaw: function(btn) {
+	toggleRaw: function(field, newValue) {
 	    let me = this;
 	    let view = me.getView();
-	    view.raw = !view.raw;
+	    view.raw = !newValue;
 	    me.loadData(view.url);
 	},
 
@@ -72,18 +71,6 @@ Ext.define('PMG.ViewMailHeaders', {
 	},
     },
 
-    buttons: [
-	{
-	    xtype: 'button',
-	    reference: 'raw',
-	    text: gettext('Toggle Raw'),
-	    enableToggle: true,
-	    iconCls: 'fa fa-file-code-o',
-	    handler: 'toggleRaw',
-	},
-	'->',
-    ],
-
     items: [
 	{
 	    xtype: 'textfield',
@@ -107,8 +94,23 @@ Ext.define('PMG.ViewMailHeaders', {
 	    exitable: false,
 	},
 	{
-	    xtype: 'displayfield',
-	    fieldLabel: gettext('Header'),
+	    xtype: 'container',
+	    layout: 'hbox',
+	    items: [
+		{
+		    xtype: 'displayfield',
+		    fieldLabel: gettext('Header'),
+		    flex: 1,
+		},
+		{
+		    xtype: 'checkbox',
+		    reference: 'raw',
+		    boxLabel: gettext('Decode'),
+		    value: true,
+		    iconCls: 'fa fa-file-code-o',
+		    handler: 'toggleRaw',
+		},
+	    ],
 	},
 	{
 	    xtype: 'panel',
