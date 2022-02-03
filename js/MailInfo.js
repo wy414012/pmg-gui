@@ -28,8 +28,11 @@ Ext.define('PMG.MailInfoBox', {
     },
 
     items: [
-	{ tpl: `<b class="bold">${gettext("From")}:</b> {from}` },
+	{
+	    tpl: `<b class="bold">${gettext("From")}:</b> {from}`
+	      + `<span style="float:right;white-space:normal;overflow-wrap:break-word;">`
+	      + `<b class="bold">${gettext("Receiver")}:</b> {receiver}</span>`,
+	},
 	{ tpl: `<b class="bold">${gettext("Subject")}:</b> {subject}` },
-	{ tpl: `<b class="bold">${gettext("Receiver")}:</b> {receiver}` },
     ],
 });
