@@ -55,9 +55,7 @@ Ext.define('PMG.ViewMailHeaders', {
 		url,
 		waitMsgTarget: view,
 		method: 'GET',
-		success: function(response, opts) {
-		    me.setData(response.result.data);
-		},
+		success: response => me.setData(response.result.data),
 		failure: function(response, opts) {
 		    view.destroy();
 		    Ext.Msg.alert(gettext('Error'), response.htmlStatus);
