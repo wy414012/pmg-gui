@@ -1,3 +1,13 @@
+pmg-gui (3.1-2) bullseye; urgency=medium
+
+  * quarantine: mail display: show receiver information
+
+  * postfix queue: show headers decoded by default
+
+  * sorters: fix default sorting direction in various grid views
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 03 Feb 2022 12:49:20 +0100
+
 pmg-gui (3.1-1) bullseye; urgency=medium
 
   * fix #3648: ldap config: do not send empty bindpw
