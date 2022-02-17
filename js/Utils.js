@@ -129,14 +129,12 @@ Ext.define('PMG.Utils', {
     },
 
     format_otype: function(otype) {
-	var editor = PMG.Utils.object_editors[otype];
-	var iconCls = 'fa fa-question-circle';
+	let editor = PMG.Utils.object_editors[otype];
+	let iconCls = 'fa fa-question-circle';
 	if (editor) {
-	    var icon = '<span class="fa-fw ' + (editor.iconCls || iconCls) + '"></span> ';
-	    return icon + editor.subject;
+	    return `<span class="fa-fw ${editor.iconCls || iconCls}"></span> ${editor.subject}`;
 	}
-
-	return '<span class="fa-fw ' + iconCls + '"></span> unknown';
+	return `<span class="fa-fw ${iconCls}"></span> unknown`;
     },
 
     format_ldap_protocol: function(p) {
@@ -148,7 +146,7 @@ Ext.define('PMG.Utils', {
     },
 
     convert_field_to_per_min: function(value, record) {
-	return value/(record.data.timespan/60);
+	return value / (record.data.timespan / 60);
     },
 
     object_editors: {
@@ -168,9 +166,9 @@ Ext.define('PMG.Utils', {
 		    fieldLabel: gettext("Regular Expression"),
 		},
 		{
-		    labelWidth: 150,
-		    fieldLabel: gettext('Test String'),
 		    xtype: 'pmgRegexTester',
+		    fieldLabel: gettext('Test String'),
+		    labelWidth: 150,
 		    wholeMatch: true,
 		    regexFieldReference: 'regex',
 		},
