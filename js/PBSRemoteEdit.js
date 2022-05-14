@@ -8,11 +8,8 @@ Ext.define('PMG.PBSInputPanel', {
 
     cbindData: function(initialConfig) {
 	let me = this;
-
 	me.isCreate = initialConfig.isCreate || !initialConfig.remoteId;
-	return {
-	    unsetValue: me.isCreate ? null : undefined,
-	};
+	return {};
     },
 
     items: [
@@ -29,29 +26,24 @@ Ext.define('PMG.PBSInputPanel', {
 		    xtype: 'pmxDisplayEditField',
 		    name: 'remote',
 		    cbind: {
-			value: '{unsetValue}',
 			editable: '{isCreate}',
 		    },
 		    fieldLabel: gettext('ID'),
 		    allowBlank: false,
 		},
 		{
-		    xtype: 'proxmoxtextfield',
+		    xtype: 'pmxDisplayEditField',
 		    name: 'server',
-		    cbind: {
-			value: '{unsetValue}',
-		    },
 		    vtype: 'DnsOrIp',
 		    fieldLabel: gettext('Server'),
+		    cbind: { editable: '{isCreate}' },
 		    allowBlank: false,
 		},
 		{
-		    xtype: 'proxmoxtextfield',
+		    xtype: 'pmxDisplayEditField',
 		    name: 'datastore',
-		    cbind: {
-			value: '{unsetValue}',
-		    },
 		    fieldLabel: 'Datastore',
+		    cbind: { editable: '{isCreate}' },
 		    allowBlank: false,
 		},
 		{
@@ -69,23 +61,21 @@ Ext.define('PMG.PBSInputPanel', {
 	    ],
 	    column2: [
 		{
-		    xtype: 'proxmoxtextfield',
+		    xtype: 'pmxDisplayEditField',
 		    name: 'username',
-		    cbind: {
-			value: '{unsetValue}',
-		    },
-		    emptyText: gettext('Example') + ': admin@pbs',
 		    fieldLabel: gettext('Username'),
+		    emptyText: gettext('Example') + ': admin@pbs',
+		    cbind: { editable: '{isCreate}' },
 		    regex: /\S+@\w+/,
 		    regexText: gettext('Example') + ': admin@pbs',
 		    allowBlank: false,
 		},
 		{
-		    xtype: 'proxmoxtextfield',
+		    xtype: 'pmxDisplayEditField',
+		    editable: true, // FIXME: set to false if (!create && user == token)
 		    inputType: 'password',
 		    name: 'password',
 		    cbind: {
-			value: '{unsetValue}',
 			allowBlank: '{!isCreate}',
 			emptyText: (get) => get('isCreate') ? '' : gettext('Unchanged'),
 		    },
@@ -110,9 +100,6 @@ Ext.define('PMG.PBSInputPanel', {
 		{
 		    xtype: 'proxmoxtextfield',
 		    name: 'fingerprint',
-		    cbind: {
-			value: '{unsetValue}',
-		    },
 		    fieldLabel: gettext('Fingerprint'),
 		    emptyText: gettext('Server certificate SHA-256 fingerprint, required for self-signed certificates'),
 		    regex: /[A-Fa-f0-9]{2}(:[A-Fa-f0-9]{2}){31}/,
