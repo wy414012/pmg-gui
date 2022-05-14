@@ -47,16 +47,11 @@ Ext.define('PMG.PBSInputPanel', {
 		    allowBlank: false,
 		},
 		{
-		    xtype: 'proxmoxKVComboBox',
-		    name: 'notify',
-		    fieldLabel: gettext('Notify'),
-		    comboItems: [
-			['always', gettext('Always')],
-			['error', gettext('Errors')],
-			['never', gettext('Never')],
-		    ],
-		    deleteEmpty: false,
-		    emptyText: gettext('Never'),
+		    xtype: 'pmxDisplayEditField',
+		    name: 'namespace',
+		    fieldLabel: gettext('Namespace'),
+		    cbind: { editable: '{isCreate}' },
+		    emptyText: gettext('Root'),
 		},
 	    ],
 	    column2: [
@@ -82,21 +77,34 @@ Ext.define('PMG.PBSInputPanel', {
 		    fieldLabel: gettext('Password'),
 		},
 		{
+		    xtype: 'proxmoxKVComboBox',
+		    name: 'notify',
+		    fieldLabel: gettext('Notify'),
+		    comboItems: [
+			['always', gettext('Always')],
+			['error', gettext('Errors')],
+			['never', gettext('Never')],
+		    ],
+		    deleteEmpty: false,
+		    emptyText: gettext('Never'),
+		},
+		{
 		    xtype: 'proxmoxcheckbox',
 		    name: 'enable',
 		    checked: true,
 		    uncheckedValue: 0,
 		    fieldLabel: gettext('Enable'),
 		},
+	    ],
+	    columnB: [
 		{
 		    xtype: 'proxmoxcheckbox',
 		    name: 'include-statistics',
 		    checked: true,
 		    uncheckedValue: 0,
-		    fieldLabel: gettext('Include Statistics'),
+		    fieldLabel: gettext('Statistics'),
+		    boxLabel: gettext('Include in Backup'),
 		},
-	    ],
-	    columnB: [
 		{
 		    xtype: 'proxmoxtextfield',
 		    name: 'fingerprint',
