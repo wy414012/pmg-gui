@@ -19,6 +19,7 @@ Ext.define('PMG.RegexTester', {
 	    name: 'teststring',
 	    isDirty: () => false,
 	    reset: Ext.emptyFn,
+	    flex: 1,
 	},
 	{
 	    margin: '0 0 0 5',
