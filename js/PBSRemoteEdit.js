@@ -68,6 +68,9 @@ Ext.define('PMG.PBSInputPanel', {
 		{
 		    xtype: 'pmxDisplayEditField',
 		    editable: true, // FIXME: set to false if (!create && user == token)
+		    editConfig: {
+			xtype: 'proxmoxtextfield',
+		    },
 		    inputType: 'password',
 		    name: 'password',
 		    cbind: {
