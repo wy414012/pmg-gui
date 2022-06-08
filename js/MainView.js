@@ -183,6 +183,16 @@ Ext.define('PMG.MainView', {
 		    flex: 1,
 		},
 		{
+		    xtype: 'proxmoxEOLNotice',
+		    product: 'Proxmox Mail Gateway',
+		    version: '7',
+		    eolDate: '2024-07-31',
+		    href: 'pmg.proxmox.com/pmg-docs/pmg-admin-guide.html#faq-support-table',
+		},
+		{
+		    flex: 1,
+		},
+		{
 		    xtype: 'proxmoxHelpButton',
 		    text: gettext('Documentation'),
 		    hidden: false,
