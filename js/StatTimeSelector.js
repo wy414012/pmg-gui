@@ -73,7 +73,20 @@ Ext.define('PMG.StatTimeSelector', {
 	    Ext.GlobalEvents.fireEvent('pmgStatTimeSelectorUpdate', data);
 	},
 
+	updateMaxDays: function() {
+	    let year = this.lookup('yearsel').getValue();
+	    let month = this.lookup('monthsel').getValue();
+	    // get last day of current month by wrapping back day 0 from next (zero indexed) month
+	    let maxDays = new Date(year, month, 0).getDate();
+	    this.lookup('daysel').getStore().setFilters([{
+		property: 'day',
+		operator: '<=',
+		value: maxDays,
+	    }]);
+	},
+
 	onSelect: function() {
+	    this.updateMaxDays();
 	    this.updateVisibility();
 	},
 
