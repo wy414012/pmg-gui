@@ -132,7 +132,7 @@ PMG = {
 	},
 	checkSubscription(data, showPopup) {
 	    return new Promise(function(resolve, reject) {
-		if (data.status !== 'Active') {
+		if (data.status?.toLowerCase() !== 'active') {
 		    let url = data.url || 'https://wwww.proxmox.com';
 		    let err = `You do not have a valid subscription for this server.
 			    Please visit
