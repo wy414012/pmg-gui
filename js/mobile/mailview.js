@@ -21,7 +21,7 @@ class MailView extends Component {
 		    <i class="icon material-icons md-only">close</i>
 		</a>
 		<div class="fab-buttons fab-buttons-top">
-		    <a href="/mail/{{mailid}}/blacklist" class="fab-label-button fab-close">
+		    <a href="/mail/{{mailid}}/blacklist" class="fab-label-button fab-close color-orange">
 			<span>
 			  <i class="icon f7-icons ios-only">close</i>
 			  <i class="icon material-icons md-only">close</i>
@@ -35,14 +35,14 @@ class MailView extends Component {
 			</span>
 			<span class="fab-label">` + gettext("Whitelist") + `</span>
 		    </a>
-		    <a href="/mail/{{mailid}}/delete" class="fab-label-button fab-close">
+		    <a href="/mail/{{mailid}}/delete" class="fab-label-button fab-close color-red">
 			<span>
 			    <i class="icon f7-icons ios-only">trash</i>
 			    <i class="icon material-icons md-only">delete</i>
 			</span>
 		    <span class="fab-label">` + gettext("Delete") + `</span>
 		    </a>
-		    <a href="/mail/{{mailid}}/deliver" class="fab-label-button fab-close">
+		    <a href="/mail/{{mailid}}/deliver" class="fab-label-button fab-close color-green">
 			<span>
 			    <i class="icon f7-icons ios-only">paper_plane</i>
 			    <i class="icon material-icons md-only">send</i>
