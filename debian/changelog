@@ -1,3 +1,10 @@
+pmg-gui (3.1-4) bullseye; urgency=medium
+
+  * mobile interface: adapt subscription check for both, new rust based and old
+    variant to avoid a possible false positive in the user spam quarantine
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 22 Sep 2022 08:56:29 +0200
+
 pmg-gui (3.1-3) bullseye; urgency=medium
 
   * PBS remote: disallow editing fixed fields
