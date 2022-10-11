@@ -28,6 +28,7 @@ Ext.define('PMG.CertificateView', {
     alias: 'widget.pmgCertificatesView',
 
     title: gettext('Certificates'),
+    scrollable: 'y',
 
     items: [
 	{
