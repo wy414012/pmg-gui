@@ -813,15 +813,28 @@ Ext.define('PMG.Utils', {
 	return `<i class='fa ${iconCls}'></i> ${text}`;
     },
 
-    sender_renderer: function(value, metaData, rec) {
-	var subject = Ext.htmlEncode(value);
-	var from = Ext.htmlEncode(rec.data.from);
-	var sender = Ext.htmlEncode(rec.data.sender);
+    addresses_subject_renderer: function(value, metaData, rec, render_receiver) {
+	let subject = Ext.htmlEncode(value);
+	let from = Ext.htmlEncode(rec.data.from);
+	let sender = Ext.htmlEncode(rec.data.sender);
 	if (sender) {
 	    from = Ext.String.format(gettext("{0} on behalf of {1}"),
 				     sender, from);
 	}
-	return '<small>' + from + '</small><br>' + subject;
+	let ret = '<small>' + from;
+	if (render_receiver) {
+	    ret += '<br>To: ' + Ext.htmlEncode(rec.data.receiver);
+	}
+	ret += '</small><br>' + subject;
+	return ret;
+    },
+
+    sender_renderer: function(value, metaData, rec) {
+	return PMG.Utils.addresses_subject_renderer(value, metaData, rec, false);
+    },
+
+    sender_receiver_renderer: function(value, metaData, rec) {
+	return PMG.Utils.addresses_subject_renderer(value, metaData, rec, true);
     },
 
     constructor: function() {
