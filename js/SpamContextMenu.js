@@ -1,17 +1,5 @@
 Ext.define('PMG.menu.SpamContextMenu', {
-    extend: 'Ext.menu.Menu',
-
-    showSeparator: false,
-
-    controller: {
-	xclass: 'Ext.app.ViewController',
-	callCallback: function(btn) {
-	    let view = this.getView();
-	    if (Ext.isFunction(view.callback)) {
-		view.callback(btn.action);
-	    }
-	},
-    },
+    extend: 'PMG.menu.QuarantineContextMenu',
 
     items: [
 	{
