@@ -4,13 +4,13 @@ Ext.define('PMG.menu.SpamContextMenu', {
     items: [
 	{
 	    text: gettext('Deliver'),
-	    iconCls: 'fa fa-fw fa-paper-plane-o',
+	    iconCls: 'fa fa-fw fa-paper-plane-o info-blue',
 	    action: 'deliver',
 	    handler: 'callCallback',
 	},
 	{
 	    text: gettext('Delete'),
-	    iconCls: 'fa fa-fw fa-trash-o',
+	    iconCls: 'fa fa-fw fa-trash-o critical',
 	    action: 'delete',
 	    handler: 'callCallback',
 	},

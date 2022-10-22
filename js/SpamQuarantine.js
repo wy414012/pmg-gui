@@ -364,13 +364,13 @@ Ext.define('PMG.SpamQuarantine', {
 			{
 			    reference: 'deliver',
 			    text: gettext('Deliver'),
-			    iconCls: 'fa fa-paper-plane-o',
+			    iconCls: 'fa fa-paper-plane-o info-blue',
 			    handler: 'btnHandler',
 			},
 			{
 			    reference: 'delete',
 			    text: gettext('Delete'),
-			    iconCls: 'fa fa-trash-o',
+			    iconCls: 'fa fa-trash-o critical',
 			    handler: 'btnHandler',
 			},
 		    ],

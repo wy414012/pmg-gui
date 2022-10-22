@@ -17,13 +17,13 @@ Ext.define('PMG.menu.QuarantineContextMenu', {
     items: [
 	{
 	    text: gettext('Deliver'),
-	    iconCls: 'fa fa-fw fa-paper-plane-o',
+	    iconCls: 'fa fa-fw fa-paper-plane-o good',
 	    action: 'deliver',
 	    handler: 'callCallback',
 	},
 	{
 	    text: gettext('Delete'),
-	    iconCls: 'fa fa-fw fa-trash-o',
+	    iconCls: 'fa fa-fw fa-trash-o critical',
 	    action: 'delete',
 	    handler: 'callCallback',
 	},
