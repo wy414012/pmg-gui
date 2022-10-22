@@ -124,7 +124,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 		},
 		{
 		    header: gettext('Size') + ' (KB)',
-		    renderer: function(v) { return Ext.Number.toFixed(v/1024, 0); },
+		    renderer: v => Ext.Number.toFixed(v/1024, 0),
 		    dataIndex: 'bytes',
 		    align: 'right',
 		    width: 90,
