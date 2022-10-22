@@ -278,7 +278,7 @@ Ext.define('PMG.SpamQuarantine', {
 		{
 		    header: gettext('Sender/Subject'),
 		    dataIndex: 'subject',
-		    renderer: PMG.Utils.sender_renderer,
+		    renderer: PMG.Utils.render_sender,
 		    flex: 1,
 		},
 		{

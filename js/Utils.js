@@ -813,29 +813,22 @@ Ext.define('PMG.Utils', {
 	return `<i class='fa ${iconCls}'></i> ${text}`;
     },
 
-    addresses_subject_renderer: function(value, metaData, rec, render_receiver) {
+    render_envelope: function(value, { data }, render_receiver) {
 	let subject = Ext.htmlEncode(value);
-	let from = Ext.htmlEncode(rec.data.from);
-	let sender = Ext.htmlEncode(rec.data.sender);
-	if (sender) {
-	    from = Ext.String.format(gettext("{0} on behalf of {1}"),
-				     sender, from);
+	let from = Ext.htmlEncode(data.from);
+	if (data.sender) {
+	    let sender = Ext.htmlEncode(data.sender);
+	    from = Ext.String.format(gettext("{0} on behalf of {1}"), sender, from);
 	}
-	let ret = '<small>' + from;
 	if (render_receiver) {
-	    ret += '<br>To: ' + Ext.htmlEncode(rec.data.receiver);
+	    let receiver = Ext.htmlEncode(data.receiver);
+	    return `<small>${from}<br>To: ${receiver}</small><br>${subject}`;
 	}
-	ret += '</small><br>' + subject;
-	return ret;
+	return `<small>${from}</small><br>${subject}`;
     },
 
-    sender_renderer: function(value, metaData, rec) {
-	return PMG.Utils.addresses_subject_renderer(value, metaData, rec, false);
-    },
-
-    sender_receiver_renderer: function(value, metaData, rec) {
-	return PMG.Utils.addresses_subject_renderer(value, metaData, rec, true);
-    },
+    render_sender: (value, _meta, rec) => PMG.Utils.render_envelope(value, rec, false),
+    render_sender_receiver: (value, _meta, rec) => PMG.Utils.render_envelope(value, rec, true),
 
     constructor: function() {
 	var me = this;

@@ -119,7 +119,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 		{
 		    header: `${gettext('Sender')}/${gettext('Receiver')}/${gettext('Subject')}`,
 		    dataIndex: 'subject',
-		    renderer: PMG.Utils.sender_receiver_renderer,
+		    renderer: PMG.Utils.render_sender_receiver,
 		    flex: 1,
 		},
 		{
