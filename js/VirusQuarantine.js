@@ -28,80 +28,23 @@ Ext.define('PMG.VirusQuarantine', {
 
     defaults: { border: false },
 
-    controller: {
-
-	xclass: 'Ext.app.ViewController',
-
-	updatePreview: function(raw) {
-	    var list = this.lookupReference('list');
-	    var rec = list.selModel.getSelection()[0];
-	    var preview = this.lookupReference('preview');
-
-	    if (!rec || !rec.data || !rec.data.id) {
-		preview.update('');
-		preview.setDisabled(true);
-		return;
-	    }
-
-	    let url = `/api2/htmlmail/quarantine/content?id=${rec.data.id}`;
-	    if (raw) {
-		url += '&raw=1';
-	    }
-	    preview.setDisabled(false);
-	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
+    viewModel: {
+	parent: null,
+	data: {
+	    mailid: '',
 	},
-
-	toggleRaw: function(button) {
-	    var me = this;
-	    me.lookup('mailinfo').setVisible(me.raw);
-	    me.raw = !me.raw;
-	    me.updatePreview(me.raw);
+	formulas: {
+	    downloadMailURL: get => '/api2/json/quarantine/download?mailid=' + encodeURIComponent(get('mailid')),
 	},
-
-	btnHandler: function(button, e) {
-	    var list = this.lookupReference('list');
-	    var selected = list.getSelection();
-	    if (!selected.length) {
-		return;
-	    }
-
-	    var action = button.reference;
-
-	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
-		list.getController().load();
-	    });
-	},
-
-	onSelectMail: function() {
-	    var me = this;
-	    me.updatePreview(me.raw || false);
-	    let mailinfo = me.lookup('mailinfo');
-	    let list = me.lookup('list');
-	    let selection = list.getSelection();
-	    if (selection.length < 1) {
-		mailinfo.setVisible(false);
-		return;
-	    }
-	    mailinfo.setVisible(!me.raw);
-	    mailinfo.update(selection[0].data);
-	},
-
-	control: {
-	    'button[reference=raw]': {
-		click: 'toggleRaw',
-	    },
-	    'pmgQuarantineList': {
-		selectionChange: 'onSelectMail',
-	    },
-	},
-
     },
+    controller: 'quarantine',
 
     items: [
 	{
 	    title: gettext('Virus Quarantine'),
 	    xtype: 'pmgQuarantineList',
 	    emptyText: gettext('No data in database'),
+	    selModel: 'checkboxmodel',
 	    emailSelection: false,
 	    reference: 'list',
 	    region: 'west',
@@ -172,6 +115,19 @@ Ext.define('PMG.VirusQuarantine', {
 			    iconCls: 'fa fa-file-code-o',
 			},
 			'->',
+			{
+			    xtype: 'button',
+			    reference: 'download',
+			    text: gettext('Download'),
+			    setDownload: function(id) {
+				this.el.dom.download = id + ".eml";
+			    },
+			    bind: {
+				href: '{downloadMailURL}',
+				download: '{mailid}',
+			    },
+			    iconCls: 'fa fa-download',
+			},
 			{
 			    reference: 'deliver',
 			    text: gettext('Deliver'),

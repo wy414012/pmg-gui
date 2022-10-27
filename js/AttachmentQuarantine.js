@@ -18,6 +18,34 @@ Ext.define('pmg-attachment-list', {
     idProperty: 'id',
 });
 
+Ext.define('PMG.AttachmentQuarantineController', {
+    extend: 'PMG.controller.QuarantineController',
+    alias: 'controller.attachmentquarantine',
+    xtype: 'pmgAttachmentQuarantineController',
+
+    onSelectMail: function() {
+	let me = this;
+	let list = this.lookupReference('list');
+	let selection = list.selModel.getSelection();
+	if (selection.length <= 1) {
+	    let rec = selection[0] || {};
+	    me.lookup('attachmentlist').setID(rec);
+	}
+
+	me.callParent();
+    },
+
+    control: {
+	'button[reference=raw]': {
+	    click: 'toggleRaw',
+	},
+	'pmgQuarantineList': {
+	    selectionChange: 'onSelectMail',
+	},
+    },
+
+});
+
 Ext.define('PMG.AttachmentQuarantine', {
     extend: 'Ext.container.Container',
     xtype: 'pmgAttachmentQuarantine',
@@ -27,78 +55,22 @@ Ext.define('PMG.AttachmentQuarantine', {
 
     defaults: { border: false },
 
-    controller: {
-
-	xclass: 'Ext.app.ViewController',
-
-	updatePreview: function(raw, rec) {
-	    var preview = this.lookupReference('preview');
-
-	    if (!rec || !rec.data || !rec.data.id) {
-		preview.update('');
-		preview.setDisabled(true);
-		return;
-	    }
-
-	    let url = `/api2/htmlmail/quarantine/content?id=${rec.data.id}`;
-	    if (raw) {
-		url += '&raw=1';
-	    }
-	    preview.setDisabled(false);
-	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
+    viewModel: {
+	parent: null,
+	data: {
+	    mailid: '',
 	},
-
-	toggleRaw: function(button) {
-	    var me = this;
-	    var list = this.lookupReference('list');
-	    var rec = list.getSelection()[0] || {};
-	    me.lookup('mailinfo').setVisible(me.raw);
-	    me.raw = !me.raw;
-	    me.updatePreview(me.raw, rec);
+	formulas: {
+	    downloadMailURL: get => '/api2/json/quarantine/download?mailid=' + encodeURIComponent(get('mailid')),
 	},
-
-	btnHandler: function(button, e) {
-	    var list = this.lookupReference('list');
-	    var selected = list.getSelection();
-	    if (!selected.length) {
-		return;
-	    }
-
-	    var action = button.reference;
-
-	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
-		list.getController().load();
-	    });
-	},
-
-	onSelectMail: function() {
-	    let me = this;
-	    let list = me.lookup('list');
-	    let rec = list.getSelection()[0] || {};
-	    let mailinfo = me.lookup('mailinfo');
-
-	    me.updatePreview(me.raw || false, rec);
-	    me.lookup('attachmentlist').setID(rec);
-	    mailinfo.setVisible(!!rec.data && !me.raw);
-	    mailinfo.update(rec.data);
-	},
-
-	control: {
-	    'button[reference=raw]': {
-		click: 'toggleRaw',
-	    },
-	    'pmgQuarantineList': {
-		selectionChange: 'onSelectMail',
-	    },
-	},
-
     },
-
+    controller: 'attachmentquarantine',
     items: [
 	{
 	    title: gettext('Attachment Quarantine'),
 	    xtype: 'pmgQuarantineList',
 	    emptyText: gettext('No data in database'),
+	    selModel: 'checkboxmodel',
 	    emailSelection: false,
 	    reference: 'list',
 	    region: 'west',
@@ -163,6 +135,19 @@ Ext.define('PMG.AttachmentQuarantine', {
 			    iconCls: 'fa fa-file-code-o',
 			},
 			'->',
+			{
+			    xtype: 'button',
+			    reference: 'download',
+			    text: gettext('Download'),
+			    setDownload: function(id) {
+				this.el.dom.download = id + ".eml";
+			    },
+			    bind: {
+				href: '{downloadMailURL}',
+				download: '{mailid}',
+			    },
+			    iconCls: 'fa fa-download',
+			},
 			{
 			    reference: 'deliver',
 			    text: gettext('Deliver'),
