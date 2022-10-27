@@ -33,6 +33,101 @@ Ext.define('pmg-spam-list', {
     idProperty: 'id',
 });
 
+Ext.define('PMG.SpamQuarantineController', {
+    extend: 'PMG.controller.QuarantineController',
+    xtype: 'pmgSpamQuarantineController',
+    alias: 'controller.spamquarantine',
+
+    updatePreview: function(raw, rec) {
+	let me = this;
+	me.lookupReference('spam').setDisabled(false);
+
+	me.callParent(arguments);
+    },
+
+    multiSelect: function(selection) {
+	let me = this;
+	let spam = me.lookupReference('spam');
+	spam.setDisabled(true);
+	spam.setPressed(false);
+	me.lookupReference('spaminfo').setVisible(false);
+	me.callParent(selection);
+    },
+
+    onSelectMail: function() {
+	let me = this;
+	let list = me.lookupReference('list');
+	let selection = list.selModel.getSelection();
+	if (selection.length <= 1) {
+	    let rec = selection[0] || {};
+	    me.lookupReference('spaminfo').setID(rec);
+	}
+	me.callParent();
+    },
+
+
+    toggleSpamInfo: function(btn) {
+	var grid = this.lookupReference('spaminfo');
+	grid.setVisible(!grid.isVisible());
+    },
+
+    openContextMenu: function(table, record, tr, index, event) {
+	event.stopEvent();
+	let me = this;
+	let list = me.lookup('list');
+	Ext.create('PMG.menu.SpamContextMenu', {
+	    callback: action => me.doAction(action, list.getSelection()),
+	}).showAt(event.getXY());
+    },
+
+    keyPress: function(table, record, item, index, event) {
+	var me = this;
+	var list = me.lookup('list');
+	var key = event.getKey();
+	var action = '';
+	switch (key) {
+	    case event.DELETE:
+	    case 127:
+		action = 'delete';
+		break;
+	    case Ext.event.Event.D:
+	    case Ext.event.Event.D + 32:
+		action = 'deliver';
+		break;
+	    case Ext.event.Event.W:
+	    case Ext.event.Event.W + 32:
+		action = 'whitelist';
+		break;
+	    case Ext.event.Event.B:
+	    case Ext.event.Event.B + 32:
+		action = 'blacklist';
+		break;
+	}
+
+	if (action !== '') {
+	    me.doAction(action, list.getSelection());
+	}
+    },
+
+    init: function(view) {
+	this.lookup('list').cselect = view.cselect;
+    },
+
+    control: {
+	'button[reference=raw]': {
+	    click: 'toggleRaw',
+	},
+	'button[reference=spam]': {
+	    click: 'toggleSpamInfo',
+	},
+	'pmgQuarantineList': {
+	    selectionChange: 'onSelectMail',
+	    itemkeypress: 'keyPress',
+	    rowcontextmenu: 'openContextMenu',
+	},
+    },
+});
+
 Ext.define('PMG.SpamQuarantine', {
     extend: 'Ext.container.Container',
     xtype: 'pmgSpamQuarantine',
@@ -54,204 +149,7 @@ Ext.define('PMG.SpamQuarantine', {
 	    downloadMailURL: get => '/api2/json/quarantine/download?mailid=' + encodeURIComponent(get('mailid')),
 	},
     },
-    controller: {
-
-	xclass: 'Ext.app.ViewController',
-
-	updatePreview: function(raw, rec) {
-	    var preview = this.lookupReference('preview');
-
-	    if (!rec || !rec.data || !rec.data.id) {
-		preview.update('');
-		preview.setDisabled(true);
-		return;
-	    }
-
-	    let url = `/api2/htmlmail/quarantine/content?id=${rec.data.id}`;
-	    if (raw) {
-		url += '&raw=1';
-	    }
-	    preview.setDisabled(false);
-	    this.lookupReference('raw').setDisabled(false);
-	    this.lookupReference('spam').setDisabled(false);
-	    this.lookupReference('download').setDisabled(false);
-	    preview.update("<iframe frameborder=0 width=100% height=100% sandbox='allow-same-origin' src='" + url +"'></iframe>");
-	},
-
-	multiSelect: function(selection) {
-	    var preview = this.lookupReference('preview');
-	    var raw = this.lookupReference('raw');
-	    var spam = this.lookupReference('spam');
-	    var spaminfo = this.lookupReference('spaminfo');
-	    var mailinfo = this.lookupReference('mailinfo');
-	    var download = this.lookupReference('download');
-
-	    preview.setDisabled(false);
-	    preview.update(`<h3 style="padding-left:5px;">${gettext('Multiple E-Mails selected')} (${selection.length})</h3>`);
-	    raw.setDisabled(true);
-	    spam.setDisabled(true);
-	    spam.setPressed(false);
-	    spaminfo.setVisible(false);
-	    mailinfo.setVisible(false);
-	    download.setDisabled(true);
-	},
-
-	toggleRaw: function(button) {
-	    var me = this;
-	    var list = me.lookupReference('list');
-	    var rec = list.selModel.getSelection()[0];
-	    me.lookupReference('mailinfo').setVisible(me.raw);
-	    me.raw = !me.raw;
-	    me.updatePreview(me.raw, rec);
-	},
-
-	btnHandler: function(button, e) {
-	    var me = this;
-	    var action = button.reference;
-	    var list = this.lookupReference('list');
-	    var selected = list.getSelection();
-	    me.doAction(action, selected);
-	},
-
-	doAction: function(action, selected) {
-	    if (!selected.length) {
-		return;
-	    }
-
-	    var list = this.lookupReference('list');
-
-	    if (selected.length > 1) {
-		let idlist = selected.map(item => item.data.id);
-		Ext.Msg.confirm(
-		    gettext('Confirm'),
-		    Ext.String.format(
-			gettext("Action '{0}' for '{1}' items"),
-			action, selected.length,
-		    ),
-		    async function(button) {
-			if (button !== 'yes') {
-			    return;
-			}
-
-			list.mask(gettext('Processing...'), 'x-mask-loading');
-
-			const sliceSize = 2500, maxInFlight = 2;
-			let batches = [], batchCount = Math.ceil(selected.length / sliceSize);
-			for (let i = 0; i * sliceSize < selected.length; i++) {
-			    let sliceStart = i * sliceSize;
-			    let sliceEnd = Math.min(sliceStart + sliceSize, selected.length);
-			    batches.push(
-				PMG.Async.doQAction(
-				    action,
-				    idlist.slice(sliceStart, sliceEnd),
-				    i + 1,
-				    batchCount,
-				),
-			    );
-			    if (batches.length >= maxInFlight) {
-				await Promise.allSettled(batches); // eslint-disable-line no-await-in-loop
-				batches = [];
-			    }
-			}
-			await Promise.allSettled(batches); // await possible remaining ones
-			list.unmask();
-			// below can be slow, we could remove directly from the in-memory store, but
-			// with lots of elements and some failures we could be quite out of sync?
-			list.getController().load();
-		    },
-		);
-		return;
-	    }
-
-	    PMG.Utils.doQuarantineAction(action, selected[0].data.id, function() {
-		let listController = list.getController();
-		listController.allowPositionSave = false;
-		// success -> remove directly to avoid slow store reload for a single-element action
-		list.getStore().remove(selected[0]);
-		listController.restoreSavedSelection();
-		listController.allowPositionSave = true;
-	    });
-	},
-
-	onSelectMail: function() {
-	    var me = this;
-	    var list = this.lookupReference('list');
-	    var selection = list.selModel.getSelection();
-	    if (selection.length > 1) {
-		me.multiSelect(selection);
-		return;
-	    }
-
-	    var rec = selection[0] || {};
-
-	    me.getViewModel().set('mailid', rec.data ? rec.data.id : '');
-	    me.updatePreview(me.raw || false, rec);
-	    me.lookupReference('spaminfo').setID(rec);
-	    me.lookupReference('mailinfo').setVisible(!!rec.data && !me.raw);
-	    me.lookupReference('mailinfo').update(rec.data);
-	},
-
-	toggleSpamInfo: function(btn) {
-	    var grid = this.lookupReference('spaminfo');
-	    grid.setVisible(!grid.isVisible());
-	},
-
-	openContextMenu: function(table, record, tr, index, event) {
-	    event.stopEvent();
-	    let me = this;
-	    let list = me.lookup('list');
-	    Ext.create('PMG.menu.SpamContextMenu', {
-		callback: action => me.doAction(action, list.getSelection()),
-	    }).showAt(event.getXY());
-	},
-
-	keyPress: function(table, record, item, index, event) {
-	    var me = this;
-	    var list = me.lookup('list');
-	    var key = event.getKey();
-	    var action = '';
-	    switch (key) {
-		case event.DELETE:
-		case 127:
-		    action = 'delete';
-		    break;
-		case Ext.event.Event.D:
-		case Ext.event.Event.D + 32:
-		    action = 'deliver';
-		    break;
-		case Ext.event.Event.W:
-		case Ext.event.Event.W + 32:
-		    action = 'whitelist';
-		    break;
-		case Ext.event.Event.B:
-		case Ext.event.Event.B + 32:
-		    action = 'blacklist';
-		    break;
-	    }
-
-	    if (action !== '') {
-		me.doAction(action, list.getSelection());
-	    }
-	},
-
-	init: function(view) {
-	    this.lookup('list').cselect = view.cselect;
-	},
-
-	control: {
-	    'button[reference=raw]': {
-		click: 'toggleRaw',
-	    },
-	    'button[reference=spam]': {
-		click: 'toggleSpamInfo',
-	    },
-	    'pmgQuarantineList': {
-		selectionChange: 'onSelectMail',
-		itemkeypress: 'keyPress',
-		rowcontextmenu: 'openContextMenu',
-	    },
-	},
-    },
+    controller: 'spamquarantine',
 
     items: [
 	{

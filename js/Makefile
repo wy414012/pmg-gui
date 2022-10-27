@@ -19,6 +19,7 @@ JSSRC=							\
 	RuleInfo.js					\
 	RuleEditor.js					\
 	MainView.js					\
+	controller/QuarantineController.js		\
 	QuarantineContextMenu.js			\
 	QuarantineList.js				\
 	SpamInfoGrid.js					\
