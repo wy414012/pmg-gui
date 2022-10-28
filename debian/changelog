@@ -1,3 +1,22 @@
+pmg-gui (3.1-5) bullseye; urgency=medium
+
+  * mobile: set button color in mail view similar to quarantine list
+
+  * statistic time range selector: don't show invalid month/day combinations
+
+  * node certificate: make parent panel scrollable, for setups with many SANs
+
+  * fix #4137: display receiver in attachment/virus quarantine
+
+  * quarantines: color code icons of deliver and delete buttons to better
+    highlight the widely different outcome of either action.
+
+  * quarantine: use newly refactore controller for virus and attachment
+    quarantines, bringing recent improvements int he user spam quarantine view
+    also to the other quarantines.
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 28 Oct 2022 11:49:59 +0200
+
 pmg-gui (3.1-4) bullseye; urgency=medium
 
   * mobile interface: adapt subscription check for both, new rust based and old
