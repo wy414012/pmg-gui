@@ -17,7 +17,7 @@ Ext.define('PMG.menu.QuarantineContextMenu', {
     items: [
 	{
 	    text: gettext('Deliver'),
-	    iconCls: 'fa fa-fw fa-paper-plane-o good',
+	    iconCls: 'fa fa-fw fa-paper-plane-o info-blue',
 	    action: 'deliver',
 	    handler: 'callCallback',
 	},
