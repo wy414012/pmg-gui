@@ -106,6 +106,11 @@ Ext.define('PMG.VirusQuarantine', {
 		{
 		    xtype: 'toolbar',
 		    dock: 'top',
+		    style: {
+			// docked items have set the bottom with to 0px with '! important'
+			// but we still want one here, so we can remove the borders of the grids
+			'border-bottom-width': '1px ! important',
+		    },
 		    items: [
 			{
 			    xtype: 'button',
@@ -146,6 +151,7 @@ Ext.define('PMG.VirusQuarantine', {
 		    xtype: 'pmgMailInfo',
 		    hidden: true,
 		    reference: 'mailinfo',
+		    border: false,
 		},
 	    ],
 	},
