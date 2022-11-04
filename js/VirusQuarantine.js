@@ -120,6 +120,14 @@ Ext.define('PMG.VirusQuarantine', {
 			    enableToggle: true,
 			    iconCls: 'fa fa-file-code-o',
 			},
+			{
+			    xtype: 'button',
+			    reference: 'attachments',
+			    text: gettext('Toggle Attachments'),
+			    enableToggle: true,
+			    pressed: true,
+			    iconCls: 'fa fa-paperclip',
+			},
 			'->',
 			{
 			    xtype: 'button',
@@ -147,6 +155,15 @@ Ext.define('PMG.VirusQuarantine', {
 			    handler: 'btnHandler',
 			},
 		    ],
+		},
+		{
+		    xtype: 'pmgAttachmentGrid',
+		    minHeight: 50,
+		    maxHeight: 250,
+		    scrollable: true,
+		    reference: 'attachmentlist',
+		    showDownloads: false,
+		    border: false,
 		},
 		{
 		    xtype: 'pmgMailInfo',

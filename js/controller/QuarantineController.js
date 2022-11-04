@@ -41,6 +41,11 @@ Ext.define('PMG.controller.QuarantineController', {
 	me.updatePreview(me.raw, rec);
     },
 
+    toggleAttachments: function(button) {
+	var grid = this.lookup('attachmentlist');
+	grid?.setVisible(!grid?.isVisible());
+    },
+
     btnHandler: function(button, e) {
 	let me = this;
 	let action = button.reference;
@@ -161,6 +166,9 @@ Ext.define('PMG.controller.QuarantineController', {
     control: {
 	'button[reference=raw]': {
 	    click: 'toggleRaw',
+	},
+	'button[reference=attachments]': {
+	    click: 'toggleAttachments',
 	},
 	'pmgQuarantineList': {
 	    selectionChange: 'onSelectMail',

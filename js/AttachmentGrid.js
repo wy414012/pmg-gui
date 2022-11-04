@@ -1,6 +1,9 @@
 Ext.define('PMG.grid.AttachmentGrid', {
     extend: 'Ext.grid.GridPanel',
     xtype: 'pmgAttachmentGrid',
+    mixins: ['Proxmox.Mixin.CBind'],
+
+    showDownloads: true,
 
     store: {
 	autoDestroy: true,
@@ -48,6 +51,9 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	},
 	{
 	    header: gettext('Download'),
+	    cbind: {
+		hidden: '{!showDownloads}',
+	    },
 	    renderer: function(value, mD, rec) {
 		var me = this;
 		let url = `/api2/json/quarantine/download?mailid=${me.mailid}&attachmentid=${rec.data.id}`;

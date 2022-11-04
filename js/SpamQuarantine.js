@@ -225,6 +225,14 @@ Ext.define('PMG.SpamQuarantine', {
 			    enableToggle: true,
 			    iconCls: 'fa fa-bullhorn',
 			},
+			{
+			    xtype: 'button',
+			    reference: 'attachments',
+			    text: gettext('Toggle Attachments'),
+			    enableToggle: true,
+			    pressed: true,
+			    iconCls: 'fa fa-paperclip',
+			},
 			'->',
 			{
 			    xtype: 'button',
@@ -269,6 +277,15 @@ Ext.define('PMG.SpamQuarantine', {
 		{
 		    xtype: 'pmgSpamInfoGrid',
 		    reference: 'spaminfo',
+		    border: false,
+		},
+		{
+		    xtype: 'pmgAttachmentGrid',
+		    minHeight: 50,
+		    maxHeight: 250,
+		    scrollable: true,
+		    reference: 'attachmentlist',
+		    showDownloads: false,
 		    border: false,
 		},
 		{
