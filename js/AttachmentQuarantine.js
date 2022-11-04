@@ -18,34 +18,6 @@ Ext.define('pmg-attachment-list', {
     idProperty: 'id',
 });
 
-Ext.define('PMG.AttachmentQuarantineController', {
-    extend: 'PMG.controller.QuarantineController',
-    alias: 'controller.attachmentquarantine',
-    xtype: 'pmgAttachmentQuarantineController',
-
-    onSelectMail: function() {
-	let me = this;
-	let list = this.lookupReference('list');
-	let selection = list.selModel.getSelection();
-	if (selection.length <= 1) {
-	    let rec = selection[0] || {};
-	    me.lookup('attachmentlist').setID(rec);
-	}
-
-	me.callParent();
-    },
-
-    control: {
-	'button[reference=raw]': {
-	    click: 'toggleRaw',
-	},
-	'pmgQuarantineList': {
-	    selectionChange: 'onSelectMail',
-	},
-    },
-
-});
-
 Ext.define('PMG.AttachmentQuarantine', {
     extend: 'Ext.container.Container',
     xtype: 'pmgAttachmentQuarantine',
@@ -64,7 +36,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 	    downloadMailURL: get => '/api2/json/quarantine/download?mailid=' + encodeURIComponent(get('mailid')),
 	},
     },
-    controller: 'attachmentquarantine',
+    controller: 'quarantine',
     items: [
 	{
 	    title: gettext('Attachment Quarantine'),

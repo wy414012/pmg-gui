@@ -54,18 +54,6 @@ Ext.define('PMG.SpamQuarantineController', {
 	me.callParent(selection);
     },
 
-    onSelectMail: function() {
-	let me = this;
-	let list = me.lookupReference('list');
-	let selection = list.selModel.getSelection();
-	if (selection.length <= 1) {
-	    let rec = selection[0] || {};
-	    me.lookupReference('spaminfo').setID(rec);
-	}
-	me.callParent();
-    },
-
-
     toggleSpamInfo: function(btn) {
 	var grid = this.lookupReference('spaminfo');
 	grid.setVisible(!grid.isVisible());
@@ -121,7 +109,6 @@ Ext.define('PMG.SpamQuarantineController', {
 	    click: 'toggleSpamInfo',
 	},
 	'pmgQuarantineList': {
-	    selectionChange: 'onSelectMail',
 	    itemkeypress: 'keyPress',
 	    rowcontextmenu: 'openContextMenu',
 	},

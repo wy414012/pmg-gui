@@ -1,6 +1,5 @@
 Ext.define('PMG.controller.QuarantineController', {
     extend: 'Ext.app.ViewController',
-    xtype: 'controller.Quarantine',
     alias: 'controller.quarantine',
 
     updatePreview: function(raw, rec) {
@@ -120,6 +119,8 @@ Ext.define('PMG.controller.QuarantineController', {
 	}
 
 	let rec = selection[0] || {};
+	me.lookup('spaminfo')?.setID(rec);
+	me.lookup('attachmentlist')?.setID(rec);
 
 	me.getViewModel().set('mailid', rec.data ? rec.data.id : '');
 	me.updatePreview(me.raw || false, rec);
