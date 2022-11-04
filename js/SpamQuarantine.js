@@ -204,6 +204,7 @@ Ext.define('PMG.SpamQuarantine', {
 		{
 		    xtype: 'toolbar',
 		    dock: 'top',
+		    overflowHandler: 'scroller',
 		    style: {
 			// docked items have set the bottom with to 0px with '! important'
 			// but we still want one here, so we can remove the borders of the grids

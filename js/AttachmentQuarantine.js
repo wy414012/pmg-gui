@@ -97,6 +97,7 @@ Ext.define('PMG.AttachmentQuarantine', {
 	    dockedItems: [
 		{
 		    xtype: 'toolbar',
+		    overflowHandler: 'scroller',
 		    dock: 'top',
 		    items: [
 			{
