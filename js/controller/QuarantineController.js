@@ -26,6 +26,7 @@ Ext.define('PMG.controller.QuarantineController', {
 	me.lookupReference('raw').setDisabled(true);
 	me.lookupReference('download').setDisabled(true);
 	me.lookupReference('mailinfo').setVisible(false);
+	me.lookup('attachmentlist')?.setVisible(false);
 
 	let preview = me.lookupReference('preview');
 	preview.setDisabled(false);
@@ -39,11 +40,6 @@ Ext.define('PMG.controller.QuarantineController', {
 	me.lookupReference('mailinfo').setVisible(me.raw);
 	me.raw = !me.raw;
 	me.updatePreview(me.raw, rec);
-    },
-
-    toggleAttachments: function(button) {
-	var grid = this.lookup('attachmentlist');
-	grid?.setVisible(!grid?.isVisible());
     },
 
     btnHandler: function(button, e) {
@@ -126,6 +122,7 @@ Ext.define('PMG.controller.QuarantineController', {
 	let rec = selection[0] || {};
 	me.lookup('spaminfo')?.setID(rec);
 	me.lookup('attachmentlist')?.setID(rec);
+	me.lookup('attachmentlist')?.setVisible(!!rec.data);
 
 	me.getViewModel().set('mailid', rec.data ? rec.data.id : '');
 	me.updatePreview(me.raw || false, rec);
@@ -166,9 +163,6 @@ Ext.define('PMG.controller.QuarantineController', {
     control: {
 	'button[reference=raw]': {
 	    click: 'toggleRaw',
-	},
-	'button[reference=attachments]': {
-	    click: 'toggleAttachments',
 	},
 	'pmgQuarantineList': {
 	    selectionChange: 'onSelectMail',

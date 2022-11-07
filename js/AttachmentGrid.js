@@ -5,9 +5,15 @@ Ext.define('PMG.grid.AttachmentGrid', {
 
     showDownloads: true,
 
+    title: gettext('Attachments'),
+    iconCls: 'fa fa-paperclip',
+
     minHeight: 50,
     maxHeight: 250,
     scrollable: true,
+
+    collapsible: true,
+    titleCollapse: true,
 
     store: {
 	autoDestroy: true,

@@ -136,13 +136,15 @@ Ext.define('PMG.AttachmentQuarantine', {
 		    ],
 		},
 		{
-		    xtype: 'pmgAttachmentGrid',
-		    reference: 'attachmentlist',
-		},
-		{
 		    xtype: 'pmgMailInfo',
 		    hidden: true,
 		    reference: 'mailinfo',
+		},
+		{
+		    xtype: 'pmgAttachmentGrid',
+		    reference: 'attachmentlist',
+		    dock: 'bottom',
+		    collapsible: false,
 		},
 	    ],
 	},
