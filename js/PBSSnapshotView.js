@@ -267,7 +267,7 @@ Ext.define('PMG.PBSConfig', {
 		{
 		    text: 'Size',
 		    dataIndex: 'size',
-		    renderer: Proxmox.Utils.format_size,
+		    renderer: Proxmox.Utils.render_size,
 		    flex: 1,
 		},
 		{

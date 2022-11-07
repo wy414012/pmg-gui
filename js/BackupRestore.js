@@ -183,7 +183,7 @@ Ext.define('PMG.BackupRestore', {
 	    header: gettext('Size'),
 	    width: 100,
 	    sortable: true,
-	    renderer: Proxmox.Utils.format_size,
+	    renderer: Proxmox.Utils.render_size,
 	    dataIndex: 'size',
 	},
 	{

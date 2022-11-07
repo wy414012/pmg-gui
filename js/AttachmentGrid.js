@@ -90,7 +90,7 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	},
 	{
 	    text: gettext('Size'),
-	    renderer: Proxmox.Utils.format_size,
+	    renderer: Proxmox.Utils.render_size,
 	    dataIndex: 'size',
 	    flex: 1,
 	},
