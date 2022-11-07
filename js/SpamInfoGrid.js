@@ -13,13 +13,13 @@ Ext.define('PMG.grid.SpamInfoGrid', {
     },
 
     setID: function(rec) {
-	var me = this;
-	if (!rec || !rec.data || !rec.data.id) {
+	let me = this;
+	let id = rec?.data?.id;
+	if (!id) {
 	    me.getStore().removeAll();
 	    return;
 	}
-	var url = '/api2/json/quarantine/content?id=' + rec.data.id;
-	me.store.proxy.setUrl(url);
+	me.store.proxy.setUrl(`/api2/json/quarantine/content?id=${id}`);
 	me.store.load();
     },
 
@@ -36,9 +36,7 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 	    dataIndex: 'name',
 	    flex: 2,
 	    summaryType: 'count',
-	    summaryRenderer: function(value, summaryData, dataIndex, metaData) {
-		return gettext('Spamscore');
-	    },
+	    summaryRenderer: _v => gettext('Spamscore'),
 	    tdCls: 'txt-monospace',
 	},
 	{
@@ -65,9 +63,7 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 		return score;
 	    },
 	    summaryType: 'sum',
-	    summaryRenderer: function(value, summaryData, dataIndex, metaData) {
-		return Ext.util.Format.round(value, 5);
-	    },
+	    summaryRenderer: value => Ext.util.Format.round(value, 5),
 	},
 	{
 	    text: gettext('Description'),
