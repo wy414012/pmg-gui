@@ -34,7 +34,7 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 	{
 	    text: gettext('Test Name'),
 	    dataIndex: 'name',
-	    flex: 2,
+	    flex: 1,
 	    summaryType: 'count',
 	    summaryRenderer: _v => gettext('Spamscore'),
 	    tdCls: 'txt-monospace',
@@ -68,7 +68,7 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 	{
 	    text: gettext('Description'),
 	    dataIndex: 'desc',
-	    flex: 3,
+	    flex: 2,
 	},
     ],
 });
