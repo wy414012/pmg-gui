@@ -9,6 +9,7 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 	    type: 'proxmox',
 	    root: 'data.spaminfo',
 	},
+	sorters: 'score',
     },
 
     setID: function(rec) {
