@@ -23,6 +23,41 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	},
     },
 
+    controller: {
+	xclass: 'Ext.app.ViewController',
+	init: function(view) {
+	    view.store.on('load', this.onLoad, this);
+	},
+	onLoad: function(store, records, success) {
+	    let me = this;
+	    let view = me.getView();
+	    if (!success) {
+		view.updateTitleStats(-1);
+		return;
+	    }
+	    let totalSize = records.reduce((sum, { data }) => sum + data.size, 0);
+	    view.updateTitleStats(records.length, totalSize);
+	},
+    },
+
+    updateTitleStats: function(count, totalSize) {
+	let me = this;
+	let title;
+	if (count > 0) {
+	    title = Ext.String.format(gettext('{0} Attachements'), count);
+	    title += ` (${Proxmox.Utils.format_size(totalSize)})`;
+	    if (me.collapsible) {
+		me.expand();
+	    }
+	} else {
+	    title = gettext('No Attachments');
+	    if (me.collapsible) {
+		me.collapse();
+	    }
+	}
+	me.setTitle(title);
+    },
+
     setID: function(rec) {
 	var me = this;
 	if (!rec || !rec.data || !rec.data.id) {
