@@ -51,7 +51,7 @@ Ext.define('PMG.SpamQuarantineController', {
 	spam.setDisabled(true);
 	spam.setPressed(false);
 	me.lookupReference('spaminfo').setVisible(false);
-	me.callParent(selection);
+	me.callParent(arguments);
     },
 
     toggleSpamInfo: function(btn) {
