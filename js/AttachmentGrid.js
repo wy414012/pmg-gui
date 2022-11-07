@@ -11,15 +11,51 @@ Ext.define('PMG.grid.AttachmentGrid', {
     minHeight: 50,
     maxHeight: 250,
     scrollable: true,
+    collapsed: true,
 
-    collapsible: true,
-    titleCollapse: true,
+    tools: [
+	{
+	    xtype: 'checkbox',
+	    boxLabel: gettext('show all parts'),
+	    boxLabelAlgign: 'before',
+	    listeners: {
+		change: function(cb, value) {
+		    let grid = this.up('pmgAttachmentGrid');
+		    let store = grid.getStore();
+		    store.clearFilter();
+		    if (!value) {
+			store.filter({
+			    property: 'content-disposition',
+			    value: 'attachment',
+			});
+		    }
+		},
+	    },
+	},
+	{
+	    type: 'down',
+	    handler: function() {
+		let me = this;
+		let type = me.type === 'up' ? 'down' : 'up';
+		me.up('pmgAttachmentGrid').toggleCollapse();
+		me.setType(type);
+	    },
+	},
+    ],
+
+    header: {
+	padding: '6 10 6 10', // make same height as normal panel
+    },
 
     store: {
 	autoDestroy: true,
-	fields: ['name', 'content-type', 'size'],
+	fields: ['name', 'content-type', 'size', 'content-disposition'],
 	proxy: {
 	    type: 'proxmox',
+	},
+	filters: {
+	    property: 'content-disposition',
+	    value: 'attachment',
 	},
     },
 
@@ -35,8 +71,15 @@ Ext.define('PMG.grid.AttachmentGrid', {
 		view.updateTitleStats(-1);
 		return;
 	    }
-	    let totalSize = records.reduce((sum, { data }) => sum + data.size, 0);
-	    view.updateTitleStats(records.length, totalSize);
+	    let count = 0;
+	    let totalSize = records.reduce((sum, { data }) => {
+		if (data['content-disposition'] === 'attachment') {
+		    count++;
+		    return sum + data.size;
+		}
+		return sum;
+	    }, 0);
+	    view.updateTitleStats(count, totalSize);
 	},
     },
 
@@ -46,14 +89,10 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	if (count > 0) {
 	    title = Ext.String.format(gettext('{0} Attachments'), count);
 	    title += ` (${Proxmox.Utils.format_size(totalSize)})`;
-	    if (me.collapsible) {
-		me.expand();
-	    }
+	    me.expand();
 	} else {
 	    title = gettext('No Attachments');
-	    if (me.collapsible) {
-		me.collapse();
-	    }
+	    me.collapse();
 	}
 	me.setTitle(title);
     },
