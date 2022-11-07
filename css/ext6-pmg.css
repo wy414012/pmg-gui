@@ -55,6 +55,10 @@
     text-shadow: 1px 1px 1px #AAA;
 }
 
+.txt-monospace {
+    font-family: Consolas, "Roboto Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+}
+
 
 /* icons for tree/snapshots/menus/etc.. */
 

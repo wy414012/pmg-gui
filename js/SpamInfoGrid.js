@@ -39,11 +39,13 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 	    summaryRenderer: function(value, summaryData, dataIndex, metaData) {
 		return gettext('Spamscore');
 	    },
+	    tdCls: 'txt-monospace',
 	},
 	{
 	    text: gettext('Score'),
 	    dataIndex: 'score',
 	    align: 'right',
+	    tdCls: 'txt-monospace',
 	    renderer: function(score, metaData) {
 		if (score === 0) {
 		    return score;
