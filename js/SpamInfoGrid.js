@@ -44,11 +44,23 @@ Ext.define('PMG.grid.SpamInfoGrid', {
 	    text: gettext('Score'),
 	    dataIndex: 'score',
 	    align: 'right',
-	    renderer: function(value, metaData) {
-		let color = value < 0 ? '#d7e9f6' : value > 0 ? '#f3d6d7' : '';
-		let fontWeight = value >= 3 ? '1000' : value >= 1.5 ? '600' : '';
-		metaData.tdStyle = `background-color: ${color}; font-weight: ${fontWeight};`;
-		return value;
+	    renderer: function(score, metaData) {
+		if (score === 0) {
+		    return score;
+		}
+		let absScore = Math.abs(score);
+		let fontWeight = '400', background = score < 0 ? '#d7e9f6' : '#f3d6d7';
+		if (absScore >= 3) {
+		    fontWeight = '900';
+		    background = score < 0 ? '#ACD1EC' : '#E8B0B2';
+		} else if (absScore >= 1.5) {
+		    fontWeight = '600';
+		} else if (absScore <= 0.1) {
+		    fontWeight = '200';
+		    background = score < 0 ? '#EEF6FB' : '#FAEFF0';
+		}
+		metaData.tdStyle = `font-weight: ${fontWeight};background-color: ${background};`;
+		return score;
 	    },
 	    summaryType: 'sum',
 	    summaryRenderer: function(value, summaryData, dataIndex, metaData) {
