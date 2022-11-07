@@ -44,7 +44,7 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	let me = this;
 	let title;
 	if (count > 0) {
-	    title = Ext.String.format(gettext('{0} Attachements'), count);
+	    title = Ext.String.format(gettext('{0} Attachments'), count);
 	    title += ` (${Proxmox.Utils.format_size(totalSize)})`;
 	    if (me.collapsible) {
 		me.expand();
