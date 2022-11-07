@@ -158,9 +158,6 @@ Ext.define('PMG.VirusQuarantine', {
 		},
 		{
 		    xtype: 'pmgAttachmentGrid',
-		    minHeight: 50,
-		    maxHeight: 250,
-		    scrollable: true,
 		    reference: 'attachmentlist',
 		    showDownloads: false,
 		    border: false,

@@ -281,9 +281,6 @@ Ext.define('PMG.SpamQuarantine', {
 		},
 		{
 		    xtype: 'pmgAttachmentGrid',
-		    minHeight: 50,
-		    maxHeight: 250,
-		    scrollable: true,
 		    reference: 'attachmentlist',
 		    showDownloads: false,
 		    border: false,

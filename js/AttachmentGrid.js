@@ -5,6 +5,10 @@ Ext.define('PMG.grid.AttachmentGrid', {
 
     showDownloads: true,
 
+    minHeight: 50,
+    maxHeight: 250,
+    scrollable: true,
+
     store: {
 	autoDestroy: true,
 	fields: ['name', 'content-type', 'size'],
