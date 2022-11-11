@@ -11,17 +11,19 @@ Ext.define('PMG.grid.AttachmentGrid', {
     minHeight: 50,
     maxHeight: 250,
     scrollable: true,
-    collapsed: true,
 
-    tools: [
+    collapsible: true,
+    titleCollapse: true,
+
+    tbar: [
+	'->',
 	{
 	    xtype: 'checkbox',
 	    boxLabel: gettext('show all parts'),
 	    boxLabelAlgign: 'before',
 	    listeners: {
-		change: function(cb, value) {
-		    let grid = this.up('pmgAttachmentGrid');
-		    let store = grid.getStore();
+		change: function(checkBox, value) {
+		    let store = this.up('pmgAttachmentGrid').getStore();
 		    store.clearFilter();
 		    if (!value) {
 			store.filter({
@@ -32,20 +34,7 @@ Ext.define('PMG.grid.AttachmentGrid', {
 		},
 	    },
 	},
-	{
-	    type: 'down',
-	    handler: function() {
-		let me = this;
-		let type = me.type === 'up' ? 'down' : 'up';
-		me.up('pmgAttachmentGrid').toggleCollapse();
-		me.setType(type);
-	    },
-	},
     ],
-
-    header: {
-	padding: '6 10 6 10', // make same height as normal panel
-    },
 
     store: {
 	autoDestroy: true,
@@ -83,10 +72,14 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	if (count > 0) {
 	    title = Ext.String.format(gettext('{0} Attachments'), count);
 	    title += ` (${Proxmox.Utils.format_size(totalSize)})`;
-	    me.expand();
+	    if (me.collapsible) {
+		me.expand();
+	    }
 	} else {
 	    title = gettext('No Attachments');
-	    me.collapse();
+	    if (me.collapsible) {
+		me.collapse();
+	    }
 	}
 	me.setTitle(title);
     },
