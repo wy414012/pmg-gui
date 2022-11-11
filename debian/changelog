@@ -1,3 +1,30 @@
+pmg-gui (3.1-6) bullseye; urgency=medium
+
+  * fix #4238: spam info grid: enable sorting spam score and info columns, add
+    colors and font-weight higlihting for spam score
+
+  * spam info grid: add score depending background colors gradations
+
+  * spam info grid: use monospace font for score and level names for better
+    alignment
+
+  * quarantine: improve borders for docked items
+
+  * fix #2533: quarantine: add an overflow handler to the top bar, allowing one
+    to scroll to all buttons on narrow browser windows
+
+  * quarantines: add attachment grid to spam and virus quarantine
+
+  * quarantines: dock attachment grid to bottom, avoid toggle button
+
+  * quarantine: attachment info: show count & total size summary in header
+
+  * spam quarantine controller: fix args when calling the parent multiSelect
+
+  * attachment grid: default to filtering by content-disposition
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 11 Nov 2022 18:48:32 +0100
+
 pmg-gui (3.1-5) bullseye; urgency=medium
 
   * mobile: set button color in mail view similar to quarantine list
