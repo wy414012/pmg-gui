@@ -71,15 +71,9 @@ Ext.define('PMG.grid.AttachmentGrid', {
 		view.updateTitleStats(-1);
 		return;
 	    }
-	    let count = 0;
-	    let totalSize = records.reduce((sum, { data }) => {
-		if (data['content-disposition'] === 'attachment') {
-		    count++;
-		    return sum + data.size;
-		}
-		return sum;
-	    }, 0);
-	    view.updateTitleStats(count, totalSize);
+	    let attachments = records.filter(({ data }) => data['content-disposition'] === 'attachment');
+	    let totalSize = attachments.reduce((sum, { data }) => sum + data.size, 0);
+	    view.updateTitleStats(attachments.length, totalSize);
 	},
     },
 
