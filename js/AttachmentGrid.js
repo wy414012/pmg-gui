@@ -19,7 +19,7 @@ Ext.define('PMG.grid.AttachmentGrid', {
 	'->',
 	{
 	    xtype: 'checkbox',
-	    boxLabel: gettext('show all parts'),
+	    boxLabel: gettext('Show All Parts'),
 	    boxLabelAlgign: 'before',
 	    listeners: {
 		change: function(checkBox, value) {
