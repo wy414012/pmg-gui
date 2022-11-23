@@ -45,7 +45,7 @@ Ext.define('PMG.VirusQuarantine', {
 	    xtype: 'pmgQuarantineList',
 	    emptyText: gettext('No data in database'),
 	    selModel: 'checkboxmodel',
-	    emailSelection: false,
+	    quarantineType: 'virus',
 	    reference: 'list',
 	    region: 'west',
 	    width: 500,

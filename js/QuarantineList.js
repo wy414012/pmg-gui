@@ -8,7 +8,7 @@ Ext.define('PMG.QuarantineList', {
     },
 
     config: {
-	emailSelection: false,
+	quarantineType: 'spam',
 	notFoundText: gettext('No data in database'),
     },
 
@@ -24,13 +24,22 @@ Ext.define('PMG.QuarantineList', {
 
         init: function(view) {
 	    let me = this;
-	    if (PMG.view === 'quarantineview') {
-		view.emailSelection = false;
-		me.setEmptyText();
-	    }
 	    let emailCombobox = me.lookupReference('email');
-	    emailCombobox.setVisible(view.emailSelection);
-	    emailCombobox.setDisabled(!view.emailSelection);
+	    if (PMG.view === 'quarantineview') {
+		view.autoLoadAll = false;
+		me.setEmptyText();
+	    } else {
+		emailCombobox.setVisible(true);
+		emailCombobox.setDisabled(false);
+		emailCombobox.getStore().on('load', me.injectAllOption, me);
+	    }
+
+
+	    if (view.quarantineType) {
+		emailCombobox.getStore().getProxy().setExtraParams({
+		    'quarantine-type': view.quarantineType,
+		});
+	    }
 
 	    let from;
 	    if (PMG.QuarantineList.from !== 0) {
@@ -70,7 +79,7 @@ Ext.define('PMG.QuarantineList', {
 	    me.allowPositionSave = false;
 	    let view = me.getView();
 	    let store = view.getStore();
-	    if (view.emailSelection) {
+	    if (view.quarantineType === 'spam' && PMG.view !== 'quarantineview') {
 		if (!me.lookupReference('email').getSelection()) {
 		    return; // if the combobox has no selection we do not reload
 		}
@@ -123,7 +132,7 @@ Ext.define('PMG.QuarantineList', {
 	setUser: function(user) {
 	    let view = this.getView();
 	    let params = view.getStore().getProxy().getExtraParams();
-	    if (user === null) {
+	    if (!user) {
 		delete params.pmail;
 	    } else {
 		params.pmail = user;
@@ -169,10 +178,7 @@ Ext.define('PMG.QuarantineList', {
 
 	resetEmail: function() {
 	    let me = this;
-	    let view = me.getView();
-	    if (view.emailSelection) {
-		me.setUser(undefined);
-	    }
+	    me.setUser(undefined);
 	},
 
 	changeEmail: function(tb, value) {
@@ -264,6 +270,18 @@ Ext.define('PMG.QuarantineList', {
 	    }
 	},
 
+	injectAllOption: function(store, records, successfull) {
+	    let me = this;
+	    let view = me.getView();
+	    if (successfull && records.length > 1) {
+		store.insert(0, { mail: 'all' });
+	    }
+	    let emailCombobox = me.lookup('email');
+	    if (!emailCombobox.getSelection() && view.quarantineType !== 'spam') {
+		emailCombobox.setSelection(store.getAt(0));
+	    }
+	},
+
 	control: {
 	    '#': {
 		beforedestroy: 'resetEmail',
@@ -314,6 +332,7 @@ Ext.define('PMG.QuarantineList', {
 	    {
 		xtype: 'combobox',
 		hidden: true,
+		disabled: true,
 		displayField: 'mail',
 		valueField: 'mail',
 		listConfig: {
@@ -333,13 +352,6 @@ Ext.define('PMG.QuarantineList', {
 			    renderer: Ext.htmlEncode,
 			},
 		    ],
-		    listeners: {
-			load: function(store, records, successfull) {
-			    if (successfull && records.length > 1) {
-				store.insert(0, { mail: 'all' });
-			    }
-			},
-		    },
 		},
 		queryMode: 'local',
 		editable: true,
