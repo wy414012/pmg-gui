@@ -127,7 +127,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 	{
 	    xtype: 'combobox',
 	    displayField: 'mail',
-	    vtype: 'proxmoxMail',
+	    vtype: 'PMGMail',
 	    allowBlank: false,
 	    valueField: 'mail',
 	    store: {
