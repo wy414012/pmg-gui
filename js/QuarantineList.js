@@ -190,6 +190,7 @@ Ext.define('PMG.QuarantineList', {
 	    } else {
 		me.setUser(value);
 	    }
+	    tb.triggers.clear.setVisible(value.length > 0 && value !== 'all');
 	    me.load();
 	},
 
@@ -362,6 +363,18 @@ Ext.define('PMG.QuarantineList', {
 		selectOnFocus: true,
 		reference: 'email',
 		fieldLabel: 'E-Mail',
+		triggers: {
+		    clear: {
+			cls: 'pmx-clear-trigger',
+			weight: -1,
+			hidden: true,
+			handler: function() {
+			    this.triggers.clear.setVisible(false);
+			    // 'all' is unfiltered here, so empty/originalValue makes no sense
+			    this.setValue('all');
+			},
+		    },
+		},
 	    },
 	    {
 		xtype: 'textfield',
