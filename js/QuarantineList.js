@@ -337,10 +337,7 @@ Ext.define('PMG.QuarantineList', {
 		displayField: 'mail',
 		valueField: 'mail',
 		listConfig: {
-		    emptyText:
-			'<div class="x-grid-empty">' +
-			    gettext('No data in database') +
-			'</div>',
+		    emptyText: `<div class="x-grid-empty">${gettext('No data in database')}</div>`,
 		},
 		store: {
 		    proxy: {
