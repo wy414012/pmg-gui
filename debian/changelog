@@ -1,3 +1,10 @@
+pmg-gui (3.2-2) bullseye; urgency=medium
+
+  * quarantine list: cope with undefined mail value to avoid exception breaking
+    deletion of multiple selected mails
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 29 Nov 2022 17:38:06 +0100
+
 pmg-gui (3.2-1) bullseye; urgency=medium
 
   * fix #3287: add recipient filter for virus & attachment quarantines
