@@ -1,3 +1,15 @@
+pmg-gui (3.2-1) bullseye; urgency=medium
+
+  * fix #3287: add recipient filter for virus & attachment quarantines
+
+  * quarantines: mail filter: add clear trigger so that any filter can be
+    reset quickly
+
+  * utils: add custom validator for the now very flexible pmg-email-address
+    format and use it for user access/block lists
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 29 Nov 2022 15:50:34 +0100
+
 pmg-gui (3.1-6) bullseye; urgency=medium
 
   * fix #4238: spam info grid: enable sorting spam score and info columns, add
