@@ -190,7 +190,7 @@ Ext.define('PMG.QuarantineList', {
 	    } else {
 		me.setUser(value);
 	    }
-	    tb.triggers.clear.setVisible(value.length > 0 && value !== 'all');
+	    tb.triggers.clear.setVisible(value?.length > 0 && value !== 'all');
 	    me.load();
 	},
 
