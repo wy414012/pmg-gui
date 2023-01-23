@@ -407,7 +407,7 @@ Ext.define('PMG.Dashboard', {
 		},
 		{
 		    iconCls: 'fa fa-ticket',
-		    title: 'Subscription',
+		    title: gettext('Subscription'),
 		    reference: 'subscription',
 		    xtype: 'pmgSubscriptionInfo',
 		    margin: '10 0 0 0',
