@@ -33,6 +33,36 @@ Ext.define('PMG.controller.QuarantineController', {
 	preview.update(`<h3 style="padding-left:5px;">${gettext('Multiple E-Mails selected')} (${selection.length})</h3>`);
     },
 
+    toggleTheme: function(button) {
+	let preview = this.lookup('preview');
+	this.themed = !this.themed;
+
+	if (this.themed) {
+	    preview.addCls("pmg-mail-preview-themed");
+	} else {
+	    preview.removeCls("pmg-mail-preview-themed");
+	}
+    },
+
+    hideThemeToggle: function(argument) {
+	let me = this;
+	let themeButton = me.lookup("themeToggle");
+	themeButton.disable();
+	themeButton.hide();
+	me.themed = true;
+	me.toggleTheme();
+    },
+
+    showThemeToggle: function(argument) {
+	let me = this;
+	let themeButton = me.lookup("themeToggle");
+	me.themed = false;
+	me.toggleTheme();
+	themeButton.setPressed(true);
+	themeButton.enable();
+	themeButton.show();
+    },
+
     toggleRaw: function(button) {
 	let me = this;
 	let list = me.lookupReference('list');
@@ -160,9 +190,44 @@ Ext.define('PMG.controller.QuarantineController', {
 	}
     },
 
+    beforeRender: function() {
+	let me = this;
+	let currentTheme = Ext.util.Cookies.get("PMGThemeCookie");
+
+	if (currentTheme === "auto") {
+	    me.mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+
+	    me.themeListener = (e) => {
+		if (e.matches) {
+		    me.showThemeToggle();
+		} else {
+		    me.hideThemeToggle();
+		}
+	    };
+
+	    me.themeListener(me.mediaQueryList);
+	    me.mediaQueryList.addEventListener("change", me.themeListener);
+	} else if (currentTheme === "__default__") {
+	    me.hideThemeToggle();
+	} else {
+	    me.showThemeToggle();
+	}
+    },
+
+    destroy: function() {
+	let me = this;
+
+	me.mediaQueryList?.removeEventListener("change", me.themeListener);
+
+	me.callParent();
+    },
+
     control: {
 	'button[reference=raw]': {
 	    click: 'toggleRaw',
+	},
+	'button[reference=themeToggle]': {
+	    click: 'toggleTheme',
 	},
 	'pmgQuarantineList': {
 	    selectionChange: 'onSelectMail',

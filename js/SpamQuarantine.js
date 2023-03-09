@@ -224,6 +224,13 @@ Ext.define('PMG.SpamQuarantine', {
 			    enableToggle: true,
 			    iconCls: 'fa fa-bullhorn',
 			},
+			{
+			    xtype: 'button',
+			    reference: 'themeToggle',
+			    text: gettext('Toggle Theme'),
+			    enableToggle: true,
+			    iconCls: 'fa fa-paint-brush',
+			},
 			'->',
 			{
 			    xtype: 'button',
