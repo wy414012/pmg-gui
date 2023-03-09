@@ -3,6 +3,7 @@ app = new Framework7({
     root: '#app',
     init: false,
     name: 'Proxmox Mail Gateway',
+    autoDarkTheme: true,
     routes: [
 	{
 	    path: '/:path/:subpath?',

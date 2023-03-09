@@ -44,3 +44,13 @@ img.logo-navbar {
 	font-size: 32px;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    img.logo-navbar {
+        filter: invert(100%) hue-rotate(180deg);
+    }
+
+    .page-content > iframe {
+        background-color: var(--f7-color-white-shade);
+    }
+}
