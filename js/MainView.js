@@ -209,6 +209,14 @@ Ext.define('PMG.MainView', {
 			    handler: () => Ext.create('PMG.window.Settings').show(),
 			},
 			{
+			    iconCls: 'fa fa-paint-brush',
+			    text: gettext('Theme'),
+			    handler: () => Ext.create('Proxmox.window.ThemeEditWindow', {
+				cookieName: 'PMGThemeCookie',
+				autoShow: true,
+			    }),
+			},
+			{
 			    iconCls: 'fa fa-language',
 			    text: gettext('Language'),
 			    reference: 'languageButton',

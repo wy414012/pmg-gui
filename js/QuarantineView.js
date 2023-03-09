@@ -141,6 +141,10 @@ Ext.define('PMG.QuarantineView', {
 	    }).show();
 	},
 
+	changeTheme: () => Ext.create('Proxmox.window.ThemeEditWindow', {
+		cookieName: 'PMGThemeCookie',
+		autoShow: true,
+	}),
 	navigate: function(treelist, item) {
 	    this.redirectTo(item.get('path'));
 	},
@@ -155,6 +159,9 @@ Ext.define('PMG.QuarantineView', {
 	    },
 	    '[reference=languageButton]': {
 		click: 'changeLanguage',
+	    },
+	    '[reference=themeButton]': {
+		click: 'changeTheme',
 	    },
 	},
 
@@ -233,6 +240,11 @@ Ext.define('PMG.QuarantineView', {
 		    margin: '0 5 0 0',
 		    iconCls: 'fa fa-user',
 		    menu: [
+			{
+			    reference: 'themeButton',
+			    iconCls: 'fa fa-paint-brush',
+			    text: gettext('Theme'),
+			},
 			{
 			    iconCls: 'fa fa-language',
 			    text: gettext('Language'),
