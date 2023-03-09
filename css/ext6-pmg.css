@@ -1,3 +1,13 @@
+/* color variables (e.g. for the spam info grid) */
+:root {
+    --pmg-spam-high-neg: #ACD1EC;
+    --pmg-spam-high-pos: #E8B0B2;
+    --pmg-spam-mid-neg: #d7e9f6;
+    --pmg-spam-mid-pos: #f3d6d7;
+    --pmg-spam-low-neg: #EEF6FB;
+    --pmg-spam-low-pos: #FAEFF0;
+}
+
 /* overwrite to use full black for enabled buttons */
 .x-btn-inner-default-toolbar-small {
     font: 300 12px/16px helvetica, arial, verdana, sans-serif;
