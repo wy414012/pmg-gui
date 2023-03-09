@@ -41,7 +41,6 @@ Ext.define('PMG.Subscription', {
 	    itemId: 'system-report-view',
 	    scrollable: true,
 	    style: {
-		'background-color': 'white',
 		'white-space': 'pre',
 		'font-family': 'monospace',
 		padding: '5px',
