@@ -19,6 +19,8 @@ Ext.define('PMG.SpamDetectorOptions', {
 	me.add_boolean_row('use_razor', gettext('Use Razor2 checks'),
 			   { defaultValue: 1 });
 
+	me.add_boolean_row('extract_text', gettext('Extract Text from Attachments'));
+
 	me.add_integer_row('maxspamsize', gettext('Max Spam Size (bytes)'),
 			   {
  defaultValue: 256*1024,
