@@ -46,6 +46,7 @@ img.logo-navbar {
 }
 
 @media (prefers-color-scheme: dark) {
+    img.logo,
     img.logo-navbar {
         filter: invert(100%) hue-rotate(180deg);
     }
