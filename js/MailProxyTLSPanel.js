@@ -26,11 +26,17 @@ Ext.define('PMG.MailProxyTLSPanel', {
 	    flex: 1,
 	});
 
-	me.items = [tlsSettings, tlsDestinations];
+	const tlsInboundDomains = Ext.create('PMG.MailProxyTLSInboundDomains', {
+	    title: gettext('TLS Inbound Domains'),
+	    flex: 1,
+	});
+
+	me.items = [tlsSettings, tlsDestinations, tlsInboundDomains];
 
 	me.callParent();
 
 	tlsSettings.relayEvents(me, ['activate', 'deactivate', 'destroy']);
 	tlsDestinations.relayEvents(me, ['activate', 'deactivate', 'destroy']);
+	tlsInboundDomains.relayEvents(me, ['activate', 'deactivate', 'destroy']);
     },
 });
