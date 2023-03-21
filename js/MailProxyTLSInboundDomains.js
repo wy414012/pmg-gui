@@ -4,7 +4,7 @@ Ext.define('pmg-tls-inbound-domains', {
     idProperty: 'domain',
     proxy: {
 	type: 'proxmox',
-	url: '/api2/json/config/tlsinbounddomains',
+	url: '/api2/json/config/tls-inbound-domains',
     },
     sorters: {
 	property: 'domain',
@@ -18,7 +18,7 @@ Ext.define('PMG.TLSInboundDomainsEdit', {
     onlineHelp: 'pmgconfig_mailproxy_tls',
 
     subject: gettext('TLS Inbound domains'),
-    url: '/api2/extjs/config/tlsinbounddomains',
+    url: '/api2/extjs/config/tls-inbound-domains',
     method: 'POST',
 
     items: [
@@ -76,7 +76,7 @@ Ext.define('PMG.MailProxyTLSInboundDomains', {
 		},
 		{
 		    xtype: 'proxmoxStdRemoveButton',
-		    baseurl: '/config/tlsinbounddomains',
+		    baseurl: '/config/tls-inbound-domains',
 		    callback: reload,
 		    waitMsgTarget: me,
 		},
