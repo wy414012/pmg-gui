@@ -1,3 +1,21 @@
+pmg-gui (3.2-3) bullseye; urgency=medium
+
+  * dashboard: fix untranslated use of "Subscription"
+
+  * main view, quarantine: add theme switcher for auto, light and dark themes
+
+  * drop various hard coded colors and favor CSS variables
+
+  * hourly mail distribution chart: add dynamic color switching
+
+  * mobile quarantine: add dark theme support to the mobile quarantine
+
+  * quarantines: add support for a theme toggle
+
+  * fix #2437: proxy: Add 'TLS Inbound Domains' panel
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 21 Mar 2023 13:02:52 +0100
+
 pmg-gui (3.2-2) bullseye; urgency=medium
 
   * quarantine list: cope with undefined mail value to avoid exception breaking
