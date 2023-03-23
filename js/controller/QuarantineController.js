@@ -194,7 +194,7 @@ Ext.define('PMG.controller.QuarantineController', {
 	let me = this;
 	let currentTheme = Ext.util.Cookies.get("PMGThemeCookie");
 
-	if (currentTheme === "auto") {
+	if (currentTheme === "__default__" || currentTheme === null) {
 	    me.mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 
 	    me.themeListener = (e) => {
@@ -207,7 +207,7 @@ Ext.define('PMG.controller.QuarantineController', {
 
 	    me.themeListener(me.mediaQueryList);
 	    me.mediaQueryList.addEventListener("change", me.themeListener);
-	} else if (currentTheme === "__default__") {
+	} else if (currentTheme === "crisp") {
 	    me.hideThemeToggle();
 	} else {
 	    me.showThemeToggle();
