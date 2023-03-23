@@ -225,10 +225,14 @@ Ext.define('PMG.SpamQuarantine', {
 			    iconCls: 'fa fa-bullhorn',
 			},
 			{
-			    xtype: 'button',
-			    reference: 'themeToggle',
-			    text: gettext('Toggle Theme'),
-			    enableToggle: true,
+			    xtype: 'tbseparator',
+			    reference: 'themeCheckSep',
+			},
+			{
+			    xtype: 'proxmoxcheckbox',
+			    reference: 'themeCheck',
+			    checked: true,
+			    boxLabel: gettext('Dark-mode filter'),
 			    iconCls: 'fa fa-paint-brush',
 			},
 			'->',

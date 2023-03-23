@@ -121,10 +121,14 @@ Ext.define('PMG.VirusQuarantine', {
 			    iconCls: 'fa fa-file-code-o',
 			},
 			{
-			    xtype: 'button',
-			    reference: 'themeToggle',
-			    text: gettext('Toggle Theme'),
-			    enableToggle: true,
+			    xtype: 'tbseparator',
+			    reference: 'themeCheckSep',
+			},
+			{
+			    xtype: 'proxmoxcheckbox',
+			    reference: 'themeCheck',
+			    checked: true,
+			    boxLabel: gettext('Dark-mode filter'),
 			    iconCls: 'fa fa-paint-brush',
 			},
 			'->',

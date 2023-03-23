@@ -46,21 +46,23 @@ Ext.define('PMG.controller.QuarantineController', {
 
     hideThemeToggle: function(argument) {
 	let me = this;
-	let themeButton = me.lookup("themeToggle");
+	let themeButton = me.lookup('themeCheck');
 	themeButton.disable();
 	themeButton.hide();
+	me.lookup('themeCheckSep').hide();
 	me.themed = true;
 	me.toggleTheme();
     },
 
     showThemeToggle: function(argument) {
 	let me = this;
-	let themeButton = me.lookup("themeToggle");
+	let themeButton = me.lookup('themeCheck');
 	me.themed = false;
 	me.toggleTheme();
-	themeButton.setPressed(true);
+	themeButton.setValue(true);
 	themeButton.enable();
 	themeButton.show();
+	me.lookup('themeCheckSep').show();
     },
 
     toggleRaw: function(button) {
@@ -226,8 +228,8 @@ Ext.define('PMG.controller.QuarantineController', {
 	'button[reference=raw]': {
 	    click: 'toggleRaw',
 	},
-	'button[reference=themeToggle]': {
-	    click: 'toggleTheme',
+	'proxmoxcheckbox[reference=themeCheck]': {
+	    change: 'toggleTheme',
 	},
 	'pmgQuarantineList': {
 	    selectionChange: 'onSelectMail',
