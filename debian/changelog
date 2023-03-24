@@ -1,3 +1,11 @@
+pmg-gui (3.3-1) bullseye; urgency=medium
+
+  * quarantines: fix the default behavior of the theme toggle button
+
+  * quarantines: use a check mark for the dark mode filter
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 24 Mar 2023 10:35:46 +0100
+
 pmg-gui (3.2-3) bullseye; urgency=medium
 
   * dashboard: fix untranslated use of "Subscription"
