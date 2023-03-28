@@ -86,7 +86,6 @@ Ext.define('PMG.RuleInfo', {
 		viewmodel.set('selectedRule', null);
 		viewmodel.get('objects').setData([]);
 	    } else {
-		ruledata.name = Ext.String.htmlEncode(ruledata.name);
 		viewmodel.set('selectedRule', ruledata);
 
 		var data = [];
@@ -234,7 +233,7 @@ Ext.define('PMG.RuleInfo', {
 	    },
 	    bind: {
 		data: {
-		    name: '{selectedRule.name}',
+		    name: '{selectedRule.name:htmlEncode}',
 		    priority: '{selectedRule.priority}',
 		    active: '{selectedRule.active}',
 		    direction: '{selectedRule.direction}',

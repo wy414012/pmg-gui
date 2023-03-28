@@ -216,6 +216,7 @@ Ext.define('PMG.RulesConfiguration', {
 		    text: 'Name',
 		    dataIndex: 'name',
 		    flex: 1,
+		    renderer: Ext.htmlEncode,
 		},
 		{
 		    text: 'Priority',
