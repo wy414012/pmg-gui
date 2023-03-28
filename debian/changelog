@@ -1,3 +1,10 @@
+pmg-gui (3.3-2) bullseye; urgency=medium
+
+  * spam detector options: add setting for enabling text-extraction from
+    attachments
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 28 Mar 2023 07:43:05 +0200
+
 pmg-gui (3.3-1) bullseye; urgency=medium
 
   * quarantines: fix the default behavior of the theme toggle button
