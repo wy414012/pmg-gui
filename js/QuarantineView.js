@@ -243,7 +243,7 @@ Ext.define('PMG.QuarantineView', {
 			{
 			    reference: 'themeButton',
 			    iconCls: 'fa fa-paint-brush',
-			    text: gettext('Theme'),
+			    text: gettext('Color Theme'),
 			},
 			{
 			    iconCls: 'fa fa-language',

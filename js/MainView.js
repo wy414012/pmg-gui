@@ -210,7 +210,7 @@ Ext.define('PMG.MainView', {
 			},
 			{
 			    iconCls: 'fa fa-paint-brush',
-			    text: gettext('Theme'),
+			    text: gettext('Color Theme'),
 			    handler: () => Ext.create('Proxmox.window.ThemeEditWindow', {
 				cookieName: 'PMGThemeCookie',
 				autoShow: true,
