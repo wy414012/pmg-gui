@@ -15,7 +15,7 @@ lint: pmgmanagerlib-mobile.js
 .PHONY: check
 check: lint
 
-pmgmanagerlib-mobile.js: ${MOBILESRC}
+pmgmanagerlib-mobile.js: $(MOBILESRC)
 	cat $^ >$@.tmp
 	mv $@.tmp $@
 

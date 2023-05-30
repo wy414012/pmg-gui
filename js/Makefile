@@ -102,10 +102,10 @@ JSSRC=							\
 	Application.js
 
 OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
-	/usr/bin/asciidoc-pmg scan-extjs ${JSSRC} >$@.tmp
+	/usr/bin/asciidoc-pmg scan-extjs $(JSSRC) >$@.tmp
 	mv $@.tmp $@
 
-.lint-incremental: ${JSSRC}
+.lint-incremental: $(JSSRC)
 	eslint $?
 	touch "$@"
 
@@ -113,13 +113,13 @@ OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
 lint: .lint-incremental
 
 .PHONY: check
-check: ${JSSRC}
-	eslint --strict ${JSSRC}
+check: $(JSSRC)
+	eslint --strict $(JSSRC)
 	touch ".lint-incremental"
 
-pmgmanagerlib.js: OnlineHelpInfo.js ${JSSRC}
-	echo "// ${DEB_VERSION_UPSTREAM_REVISION}" > $@.tmp
-	cat OnlineHelpInfo.js ${JSSRC} >> $@.tmp
+pmgmanagerlib.js: OnlineHelpInfo.js $(JSSRC)
+	echo "// $(DEB_VERSION_UPSTREAM_REVISION)" > $@.tmp
+	cat OnlineHelpInfo.js $(JSSRC) >> $@.tmp
 	mv $@.tmp $@
 
 all: pmgmanagerlib.js
