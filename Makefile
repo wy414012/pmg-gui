@@ -2,7 +2,9 @@ include /usr/share/dpkg/pkg-info.mk
 
 PACKAGE=pmg-gui
 
-DEB=$(PACKAGE)_$(DEB_VERSION_UPSTREAM_REVISION)_all.deb
+BUILDDIR ?= $(PACKAGE)-$(DEB_VERSION)
+DSC=$(PACKAGE)_$(DEB_VERSION).dsc
+DEB=$(PACKAGE)_$(DEB_VERSION)_all.deb
 
 DESTDIR=
 DOCDIR=$(DESTDIR)/usr/share/doc/$(PACKAGE)
@@ -21,11 +23,26 @@ export DEB_VERSION_UPSTREAM_REVISION
 
 all:
 
-.PHONY: deb
-deb $(DEB):
-	rm -rf build
-	rsync -a * build
-	cd build; dpkg-buildpackage -b -us -uc
+$(BUILDDIR):
+	rm -rf $@ $@.tmp
+	rsync -a * $@.tmp
+	mv $@.tmp $@
+
+
+.PHONY: dsc deb
+dsc: $(DSC)
+
+$(DSC): $(BUILDDIR)
+	cd $(BUILDDIR); dpkg-buildpackage -S -us -uc
+	lintian $(DSC)
+
+sbuild: $(DSC)
+	sbuild $(DSC)
+
+deb: $(DEB)
+
+$(DEB): $(BUILDDIR)
+	cd $(BUILDDIR); dpkg-buildpackage -b -us -uc
 	lintian $(DEB)
 
 .PHONY: js/pmgmanagerlib.js js/mobile/pmgmanagerlib-mobile.js
@@ -60,7 +77,7 @@ check:
 
 clean:
 	make -C js clean
-	rm -rf ./build *.deb *.changes *.buildinfo
+	rm -rf $(PACKAGE)-[0-9]* *.dsc *.tar.* *.deb *.changes *.buildinfo *.build
 	find . -name '*~' -exec rm {} ';'
 
 .PHONY: dinstall
