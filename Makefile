@@ -64,8 +64,9 @@ install: pmg-index.html.tt pmg-mobile-index.html.tt js/pmgmanagerlib.js js/mobil
 	for f in $(CSSFILES); do install -m 0644 "$$f" $(WWWCSSDIR); done
 
 .PHONY: upload
+upload: UPLOAD_DIST ?= $(DEB_DISTRIBUTION)
 upload: $(DEB)
-	tar cf - $(DEB) | ssh -X repoman@repo.proxmox.com -- upload --product pmg --dist bullseye
+	tar cf - $(DEB) | ssh -X repoman@repo.proxmox.com -- upload --product pmg --dist $(UPLOAD_DIST)
 
 distclean: clean
 	rm -f examples/simple-demo.pem
