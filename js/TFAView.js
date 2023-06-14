@@ -94,7 +94,7 @@ Ext.define('PMG.TFAView', {
 	me.tbar.push(
 	    '->',
 	    {
-		text: gettext('WebAuthn '),
+		text: gettext('WebAuthn'),
 		itemId: 'webauthn',
 		iconCls: 'fa fa-fw fa-cog',
 		handler: () => Ext.create('PMG.WebauthnConfigEdit', { autoShow: true }),
