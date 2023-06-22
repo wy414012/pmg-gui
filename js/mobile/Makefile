@@ -1,3 +1,4 @@
+include ../../defines.mk
 
 # caution: order is important
 MOBILESRC=				\
@@ -10,7 +11,7 @@ MOBILESRC=				\
 	  app.js			\
 
 lint: pmgmanagerlib-mobile.js
-	eslint $^
+	$(ESLINT) $^
 
 .PHONY: check
 check: lint

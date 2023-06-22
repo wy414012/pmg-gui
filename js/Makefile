@@ -1,3 +1,5 @@
+include ../defines.mk
+
 JSSRC=							\
 	Utils.js					\
 	FilterProxy.js					\
@@ -106,7 +108,7 @@ OnlineHelpInfo.js: /usr/bin/asciidoc-pmg
 	mv $@.tmp $@
 
 .lint-incremental: $(JSSRC)
-	eslint $?
+	$(ESLINT) $?
 	touch "$@"
 
 .PHONY: lint
@@ -114,7 +116,7 @@ lint: .lint-incremental
 
 .PHONY: check
 check: $(JSSRC)
-	eslint --strict $(JSSRC)
+	$(ESLINT) --strict $(JSSRC)
 	touch ".lint-incremental"
 
 pmgmanagerlib.js: OnlineHelpInfo.js $(JSSRC)
