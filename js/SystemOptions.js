@@ -67,7 +67,7 @@ Ext.define('PMG.SystemOptions', {
 			   { defaultValue: 1 });
 
 	me.add_boolean_row('advfilter', gettext('Use advanced statistic filters'),
-			   { defaultValue: 1 });
+			   { defaultValue: 0 });
 
 	me.add_integer_row('statlifetime', gettext('User statistic lifetime (days)'),
 			   { minValue: 1, defaultValue: 7, deleteEmpty: true });
