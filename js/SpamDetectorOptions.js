@@ -8,10 +8,10 @@ Ext.define('PMG.SpamDetectorOptions', {
 	var me = this;
 
 	me.add_boolean_row('use_awl', gettext('Use auto-whitelists'),
-			   { defaultValue: 1 });
+			   { defaultValue: 0 });
 
 	me.add_boolean_row('use_bayes', gettext('Use Bayesian filter'),
-			   { defaultValue: 1 });
+			   { defaultValue: 0 });
 
 	me.add_boolean_row('rbl_checks', gettext('Use RBL checks'),
 			   { defaultValue: 1 });
