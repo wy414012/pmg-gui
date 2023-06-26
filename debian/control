@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Proxmox Support Team <support@proxmox.com>
 Build-Depends: debhelper-compat (= 13),
                pmg-doc-generator (>= 6.3-2),
-               pve-eslint (>= 7.18.0-1),
+               pve-eslint (>= 7.18.0),
 Standards-Version: 4.6.2
 Homepage: https://www.proxmox.com
 
