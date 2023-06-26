@@ -78,7 +78,7 @@ check:
 
 clean:
 	make -C js clean
-	rm -rf $(PACKAGE)-[0-9]* *.dsc *.tar.* *.deb *.changes *.buildinfo *.build
+	rm -rf $(PACKAGE)-[0-9]*/ *.dsc $(PACKAGE)*.tar.* *.deb *.changes *.buildinfo *.build
 	find . -name '*~' -exec rm {} ';'
 
 .PHONY: dinstall
