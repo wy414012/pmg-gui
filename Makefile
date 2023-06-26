@@ -33,7 +33,7 @@ $(BUILDDIR):
 dsc: $(DSC)
 
 $(DSC): $(BUILDDIR)
-	cd $(BUILDDIR); dpkg-buildpackage -S -us -uc
+	cd $(BUILDDIR); dpkg-buildpackage -S -us -uc -d
 	lintian $(DSC)
 
 sbuild: $(DSC)
