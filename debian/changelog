@@ -1,3 +1,16 @@
+pmg-gui (4.0.0) bookworm; urgency=medium
+
+  * re-build for Proxmox Mail Gateway 8 based on Debian 12 Bookworm
+
+  * switch to native versioning
+
+  * configuration: options: adapt to advanced statistic filter being disabled
+    by default
+
+  * spam: options: adapt to bayes and awl being disabled by default
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 26 Jun 2023 18:10:42 +0200
+
 pmg-gui (3.3-2) bullseye; urgency=medium
 
   * spam detector options: add setting for enabling text-extraction from
