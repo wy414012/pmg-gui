@@ -38,6 +38,8 @@ Ext.define('PMG.MailTrackerFilter', {
 	},
     },
 
+    viewModel: {},
+
     getFilterParams: function() {
 	let me = this;
 	let param = {};
