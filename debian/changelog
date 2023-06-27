@@ -1,3 +1,9 @@
+pmg-gui (4.0.1) bookworm; urgency=medium
+
+  * fix regression in tracking center with newer proxmox-widget-toolkit
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 27 Jun 2023 13:43:18 +0200
+
 pmg-gui (4.0.0) bookworm; urgency=medium
 
   * re-build for Proxmox Mail Gateway 8 based on Debian 12 Bookworm
