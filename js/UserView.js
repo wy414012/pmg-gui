@@ -2,7 +2,7 @@ Ext.define('pmg-users', {
     extend: 'Ext.data.Model',
     fields: [
 	'userid', 'firstname', 'lastname', 'email', 'comment',
-	'role', 'keys', 'realm',
+	'role', 'keys', 'realm', 'totp-lock',
 	{ type: 'boolean', name: 'enable' },
 	{ type: 'date', dateFormat: 'timestamp', name: 'expire' },
     ],
@@ -159,6 +159,27 @@ Ext.define('PMG.UserView', {
 	    sortable: true,
 	    renderer: 'renderFullName',
 	    dataIndex: 'firstname',
+	},
+	{
+	    header: gettext('TFA Lock'),
+	    width: 120,
+	    sortable: true,
+	    dataIndex: 'totp-locked',
+	    renderer: function(v, metaData, record) {
+		let locked_until = record.data['tfa-locked-until'];
+		if (locked_until !== undefined) {
+		    let now = new Date().getTime() / 1000;
+		    if (locked_until > now) {
+			return gettext('Locked');
+		    }
+		}
+
+		if (record.data['totp-locked']) {
+		    return gettext('TOTP Locked');
+		}
+
+		return Proxmox.Utils.noText;
+	    },
 	},
 	{
 	    header: gettext('Comment'),
