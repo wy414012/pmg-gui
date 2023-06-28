@@ -1,3 +1,10 @@
+pmg-gui (4.0.2) bookworm; urgency=medium
+
+  * show TFA lock status in user view and add button for unlocking a user's TFA
+    state again.
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 28 Jun 2023 11:33:51 +0200
+
 pmg-gui (4.0.1) bookworm; urgency=medium
 
   * fix regression in tracking center with newer proxmox-widget-toolkit
