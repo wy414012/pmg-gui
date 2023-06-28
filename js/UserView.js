@@ -145,6 +145,7 @@ Ext.define('PMG.UserView', {
 	    xtype: 'proxmoxButton',
 	    text: gettext('Unlock TFA'),
 	    handler: 'onUnlockTfa',
+	    disabled: true,
 	    enableFn: ({ data }) =>
 		data['totp-locked'] || (data['tfa-locked-until'] > (new Date().getTime() / 1000)),
 	},
