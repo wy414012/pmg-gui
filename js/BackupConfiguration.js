@@ -12,11 +12,13 @@ Ext.define('PMG.BackupConfiguration', {
 	    itemId: 'local',
 	    title: gettext('Local Backup/Restore'),
 	    xtype: 'pmgBackupRestore',
+	    iconCls: 'fa fa-folder',
 	},
 	{
 	    itemId: 'proxmoxbackupserver',
 	    title: 'Proxmox Backup Server',
 	    xtype: 'pmgPBSConfig',
+	    iconCls: 'fa fa-floppy-o',
 	},
    ],
 });
