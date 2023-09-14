@@ -7,8 +7,10 @@ Ext.define('PMG.MailProxyRelaying', {
     initComponent: function() {
 	var me = this;
 
-	me.add_text_row('relay', gettext('Default Relay'),
-			{ deleteEmpty: true, defaultValue: Proxmox.Utils.noneText });
+	me.add_text_row('relay', gettext('Default Relay'), {
+	    deleteEmpty: true,
+	    defaultValue: Proxmox.Utils.noneText,
+	});
 
 	me.add_integer_row('relayport', gettext('Relay Port'), {
 	    defaultValue: 25,
