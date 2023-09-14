@@ -10,6 +10,7 @@ Ext.define('PMG.MailProxyRelaying', {
 	me.add_text_row('relay', gettext('Default Relay'), {
 	    deleteEmpty: true,
 	    defaultValue: Proxmox.Utils.noneText,
+	    onlineHelp: 'pmgconfig_mailproxy_relaying',
 	});
 
 	me.add_integer_row('relayport', gettext('Relay Port'), {
@@ -17,6 +18,7 @@ Ext.define('PMG.MailProxyRelaying', {
 	    deleteEmpty: true,
 	    minValue: 1,
 	    maxValue: 65535,
+	    onlineHelp: 'pmgconfig_mailproxy_relaying',
 	});
 
 	me.add_combobox_row('relayprotocol', gettext('Relay Protocol'), {
@@ -24,10 +26,13 @@ Ext.define('PMG.MailProxyRelaying', {
 	    comboItems: [
 	    ['smtp', 'SMTP'],
 	    ['lmtp', 'LMTP']],
+	    onlineHelp: 'pmgconfig_mailproxy_relaying',
 	});
 
 
-	me.add_boolean_row('relaynomx', gettext('Disable MX lookup (SMTP)'));
+	me.add_boolean_row('relaynomx', gettext('Disable MX lookup (SMTP)'), {
+	    onlineHelp: 'pmgconfig_mailproxy_relaying',
+	});
 
 	me.rows.smarthost = {
 	    required: true,
@@ -79,6 +84,7 @@ Ext.define('PMG.MailProxyRelaying', {
 		    },
 		],
 	    },
+	    onlineHelp: 'pmgconfig_mailproxy_relaying',
 	};
 
 	me.rows.smarthostport = { visible: false };
