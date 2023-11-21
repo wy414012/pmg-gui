@@ -58,7 +58,7 @@ Ext.define('PMG.NodeInfoPanel', {
 	    title: gettext('HD space') + ' (root)',
 	    valueField: 'rootfs',
 	    maxField: 'rootfs',
-	    renderer: Proxmox.Utils.render_node_size_usage,
+	    renderer: ({ used, total }) => Proxmox.Utils.render_size_usage(used, total, true),
 	},
 	{
 	    iconCls: 'pmx-icon-size fa fa-fw fa-refresh',
