@@ -51,7 +51,7 @@ Ext.define('PMG.MyNetworks', {
 		    {
 			xtype: 'displayfield',
 			name: 'cidr',
-			fieldLabel: 'CIDR',
+			fieldLabel: gettext('CIDR'),
 		    },
 		    {
 			xtype: 'textfield',
@@ -89,7 +89,7 @@ Ext.define('PMG.MyNetworks', {
 			    {
 				xtype: 'proxmoxtextfield',
 				name: 'cidr',
-				fieldLabel: 'CIDR',
+				fieldLabel: gettext('CIDR'),
 			    },
 			    {
 				xtype: 'proxmoxtextfield',

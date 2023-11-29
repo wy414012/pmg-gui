@@ -37,7 +37,7 @@ Ext.define('PMG.DKIMEnableEdit', {
 		},
 		success: function(response, opts) {
 		    if (!Ext.isDefined(response.result.data.record)) {
-			disablefn('Could not read private key - please create a selector first!');
+			disablefn(gettext('Could not read private key - please create a selector first!'));
 		    }
 		},
 	    });

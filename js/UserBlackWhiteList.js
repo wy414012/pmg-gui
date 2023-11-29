@@ -153,7 +153,7 @@ Ext.define('PMG.UserBlackWhiteList', {
 		gettext('No data in database') +
 		'</div>',
 	    },
-	    fieldLabel: 'E-Mail',
+	    fieldLabel: gettext('E-Mail'),
 	},
 	{
 	    text: gettext('Add'),

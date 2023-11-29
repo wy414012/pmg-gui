@@ -359,7 +359,7 @@ Ext.define('PMG.QuarantineList', {
 		anyMatch: true,
 		selectOnFocus: true,
 		reference: 'email',
-		fieldLabel: 'E-Mail',
+		fieldLabel: gettext('E-Mail'),
 		triggers: {
 		    clear: {
 			cls: 'pmx-clear-trigger',
