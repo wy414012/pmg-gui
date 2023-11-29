@@ -163,7 +163,7 @@ Ext.define('PMG.store.NavigationStore', {
 			leaf: true,
 		    },
 		    {
-			text: gettext('Virus  Charts'),
+			text: gettext('Virus Charts'),
 			iconCls: 'fa fa-bug',
 			path: 'pmgVirusCharts',
 			leaf: true,
