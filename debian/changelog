@@ -1,3 +1,17 @@
+pmg-gui (4.0.3) bookworm; urgency=medium
+
+  * backup config: add icons to tab buttons
+
+  * ui: node summary: use SI units for HD usage
+
+  * gui: Mark missing strings as translatable
+
+  * NavigationTree: Remove extra space
+
+  * mail-proxy-relaying: add help to Default Relay
+
+ -- Proxmox Support Team <support@proxmox.com>  Wed, 20 Dec 2023 10:59:24 +0100
+
 pmg-gui (4.0.2) bookworm; urgency=medium
 
   * show TFA lock status in user view and add button for unlocking a user's TFA
