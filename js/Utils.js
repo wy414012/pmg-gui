@@ -686,6 +686,17 @@ Ext.define('PMG.Utils', {
 		    growMax: 250,
 		    fieldLabel: gettext("Disclaimer"),
 		},
+		{
+		    xtype: 'proxmoxKVComboBox',
+		    name: 'position',
+		    fieldLabel: gettext("Position"),
+		    deleteEmpty: false,
+		    value: 'end',
+		    comboItems: [
+			['end', gettext('End')],
+			['start', gettext('Start')],
+		    ],
+		},
 	    ],
 	},
     },
