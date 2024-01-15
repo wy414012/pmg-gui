@@ -697,6 +697,13 @@ Ext.define('PMG.Utils', {
 			['start', gettext('Start')],
 		    ],
 		},
+		{
+		    xtype: 'proxmoxcheckbox',
+		    name: 'add-separator',
+		    fieldLabel: gettext("Add Separator"),
+		    uncheckedValue: '0',
+		    value: true,
+		},
 	    ],
 	},
     },
