@@ -249,6 +249,7 @@ Ext.define('PMG.LoginView', {
 			    itemId: 'usernameField',
 			    reference: 'usernameField',
 			    stateId: 'login-username',
+			    inputAttrTpl: 'autocomplete=username',
 			},
 			{
 			    xtype: 'textfield',
@@ -256,6 +257,7 @@ Ext.define('PMG.LoginView', {
 			    fieldLabel: gettext('Password'),
 			    name: 'password',
 			    reference: 'passwordField',
+			    inputAttrTpl: 'autocomplete=current-password',
 			},
 			{
 			    xtype: 'proxmoxLanguageSelector',
