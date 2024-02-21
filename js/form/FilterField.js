@@ -35,21 +35,18 @@ Ext.define('PMG.form.FilterField', {
 	    }
 
 	    me.store.clearFilter();
-	    field.triggers.clear.setVisible(false);
+	    field.triggers.clear.setVisible(value.length > 0);
+
 	    if (value) {
 		me.store.filterBy((rec) => me.filteredFields.some((fieldDef) => {
-		    let fieldname, renderer;
+		    let fieldname = fieldDef, renderer = Ext.identityFn;
 		    if (Ext.isObject(fieldDef)) {
 			fieldname = fieldDef.name;
 			renderer = fieldDef.renderer;
-		    } else {
-			fieldname = fieldDef;
-			renderer = Ext.identityFn;
 		    }
 		    let testedValue = renderer(rec.data[fieldname]);
 		    return testedValue.toString().toLowerCase().indexOf(value.toLowerCase()) !== -1;
 		}));
-		field.triggers.clear.setVisible(true);
 	    }
 	},
     },
