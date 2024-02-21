@@ -72,6 +72,11 @@ Ext.define('PMG.Transport', {
 		    callback: reload,
 		    waitMsgTarget: me,
 		},
+		'->',
+		{
+		    xtype: 'pmgFilterField',
+		    filteredFields: ['domain', 'host', 'port', 'protocol', 'comment'],
+		},
 	    ],
 	    viewConfig: {
 		trackOver: false,

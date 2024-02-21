@@ -106,6 +106,11 @@ Ext.define('PMG.MyNetworks', {
 		},
             },
 	    remove_btn,
+	    '->',
+	    {
+		xtype: 'pmgFilterField',
+		filteredFields: ['cidr', 'comment'],
+	    },
         ];
 
 	Proxmox.Utils.monStoreErrors(me, store, true);

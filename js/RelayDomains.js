@@ -111,6 +111,11 @@ Ext.define('PMG.RelayDomains', {
 		},
             },
 	    remove_btn,
+	    '->',
+	    {
+		xtype: 'pmgFilterField',
+		filteredFields: ['domain', 'comment'],
+	    },
         ];
 
 	Proxmox.Utils.monStoreErrors(me, store, true);

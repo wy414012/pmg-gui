@@ -199,6 +199,17 @@ Ext.define('PMG.ObjectGroup', {
 		    handler: run_editor,
 		},
 		remove_btn,
+		'->',
+		{
+		    xtype: 'pmgFilterField',
+		    filteredFields: [
+			{
+			    name: 'otype',
+			    renderer: (otype) => PMG.Utils.object_editors[otype].subject,
+			},
+			'descr',
+		    ],
+		},
 	    ],
 	});
 

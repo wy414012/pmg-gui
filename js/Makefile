@@ -2,6 +2,7 @@ include ../defines.mk
 
 JSSRC=							\
 	Utils.js					\
+	form/FilterField.js				\
 	FilterProxy.js					\
 	LoginView.js					\
 	RoleSelector.js					\
