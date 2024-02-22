@@ -1,3 +1,26 @@
+pmg-gui (4.0.4) bookworm; urgency=medium
+
+  * fix #4818: drop minimum length requirement for username field
+
+  * fix #4510: add a filter box to the grids of domains, transports, trusted
+    networks, SMTP whitelist and the when/what/who object to make handling
+    large setups easier.
+
+  * rules: use tree panel instead of grouping feature of the grid
+
+  * rules/objects: add match-mode selector drop-down menu to select new 'and'
+    and 'invert' logical operators for objects.
+
+  * objects: don't reload object parent list on match-mode change
+
+  * disclaimer edit: add combo-box field for selecting the position where a
+    disclaimers gets added.
+
+  * disclaimer edit: add 'add-separator' checkbox to allow opting out of
+    adding a separator between the body and the disclaimer.
+
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 22 Feb 2024 17:31:59 +0100
+
 pmg-gui (4.0.3) bookworm; urgency=medium
 
   * backup config: add icons to tab buttons
@@ -6,7 +29,7 @@ pmg-gui (4.0.3) bookworm; urgency=medium
 
   * gui: Mark missing strings as translatable
 
-  * NavigationTree: Remove extra space
+  * navigation tree: Remove extra space
 
   * mail-proxy-relaying: add help to Default Relay
 
