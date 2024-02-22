@@ -43,7 +43,7 @@ Ext.define('PMG.ObjectGroup', {
 	    me.down('#modeBox').setHidden(true);
 	    me.down('#whatWarning').setHidden(true);
 	} else {
-	    let html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
+	    let html = '<b style="font-weight: bold;">' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
 	    html += "<br><br>";
 	    html += Ext.String.htmlEncode(Ext.String.trim(me.ogdata.info));
 
@@ -245,7 +245,7 @@ Ext.define('PMG.ObjectGroup', {
 		    items: [
 			{
 			    xtype: 'box',
-			    html: `<b>${gettext("Match if")}</b>`,
+			    html: `<b style="font-weight: bold;">${gettext("Match if")}</b>`,
 			},
 			{
 			    xtype: 'pmgMatchModeSelector',
