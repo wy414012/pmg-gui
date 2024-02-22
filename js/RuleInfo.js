@@ -120,6 +120,8 @@ Ext.define('PMG.RuleInfo', {
 			name: oc,
 			oclass: oc,
 			type: true,
+			invert: ruledata[`${oc}-invert`],
+			and: ruledata[`${oc}-and`],
 			leaf: false,
 			expanded: true,
 			expandable: false,
@@ -162,12 +164,32 @@ Ext.define('PMG.RuleInfo', {
 	    return true;
 	},
 
+	updateMode: function(field, value) {
+	    let me = this;
+	    let vm = me.getViewModel();
+	    let oclass = field.getWidgetRecord().data.oclass;
+
+	    let params = {};
+	    params[`${oclass}-invert`] = value.startsWith('not') ? 1 : 0;
+	    params[`${oclass}-and`] = value.endsWith('all') ? 1 : 0;
+
+	    Proxmox.Utils.API2Request({
+		url: `${vm.get('baseurl')}/config`,
+		method: 'PUT',
+		params,
+		success: () => me.reload(),
+	    });
+	},
+
 	control: {
 	    'treepanel[reference=usedobjects]': {
 		drop: 'addDrop',
 	    },
 	    'tabpanel[reference=availobjects] > grid': {
 		drop: 'removeDrop',
+	    },
+	    'pmgMatchModeSelector': {
+		change: 'updateMode',
 	    },
 	},
     },
@@ -311,6 +333,26 @@ Ext.define('PMG.RuleInfo', {
 			return a.data.text.localeCompare(b.data.text);
 		    },
 		    flex: 1,
+		},
+		{
+		    header: gettext('Match if'),
+		    xtype: 'widgetcolumn',
+		    width: 200,
+		    widget: {
+			xtype: 'pmgMatchModeSelector',
+		    },
+		    onWidgetAttach: function(col, widget, rec) {
+			if (rec.data.type && rec.data.oclass !== 'action') {
+			    let mode = rec.data.invert ? 'not' : '';
+			    mode += rec.data.and ? 'all' : 'any';
+			    widget.suspendEvents();
+			    widget.setValue(mode);
+			    widget.resumeEvents();
+			    widget.setHidden(false);
+			} else {
+			    widget.setHidden(true);
+			}
+		    },
 		},
 		{
 		    text: '',

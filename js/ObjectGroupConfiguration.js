@@ -30,6 +30,7 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 
 	var right = Ext.create('PMG.ObjectGroup', {
 	    otype_list: me.otype_list,
+	    objectClass: me.ogclass,
 	    border: false,
 	    region: 'center',
 	    listeners: {
@@ -40,6 +41,7 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 			left.run_editor();
 		    }
 		},
+		modeUpdate: () => left.reload(),
 	    },
 	});
 

@@ -3,6 +3,7 @@ include ../defines.mk
 JSSRC=							\
 	Utils.js					\
 	form/FilterField.js				\
+	form/MatchModeSelector.js			\
 	FilterProxy.js					\
 	LoginView.js					\
 	RoleSelector.js					\

@@ -10,6 +10,7 @@ Ext.define('PMG.ObjectGroup', {
     showDirection: false, // only important for SMTP Whitelist
 
     ogdata: undefined,
+    objectClass: undefined,
 
     emptyText: gettext('Please select an object.'),
 
@@ -32,10 +33,15 @@ Ext.define('PMG.ObjectGroup', {
     setObjectInfo: function(ogdata) {
 	let me = this;
 
+	let mode = ogdata?.invert ? 'not' : '';
+	mode += ogdata?.and ? 'all' : 'any';
+
 	me.ogdata = ogdata;
 
 	if (me.ogdata === undefined) {
 	    me.down('#oginfo').update(me.emptyText);
+	    me.down('#modeBox').setHidden(true);
+	    me.down('#whatWarning').setHidden(true);
 	} else {
 	    let html = '<b>' + Ext.String.htmlEncode(me.ogdata.name) + '</b>';
 	    html += "<br><br>";
@@ -43,6 +49,12 @@ Ext.define('PMG.ObjectGroup', {
 
 	    me.down('#oginfo').update(html);
 	    me.down('#ogdata').setHidden(false);
+	    let modeSelector = me.down('#modeSelector');
+	    modeSelector.suspendEvents();
+	    me.down('#modeSelector').setValue(mode);
+	    modeSelector.resumeEvents();
+	    me.down('#modeBox').setHidden(false);
+	    me.down('#whatWarning').setHidden(me.objectClass !== 'what' || mode === 'any');
 	}
     },
 
@@ -216,13 +228,51 @@ Ext.define('PMG.ObjectGroup', {
 	me.dockedItems.push({
 	    dock: 'top',
 	    border: 1,
-	    layout: 'anchor',
+	    layout: 'hbox',
 	    hidden: !!me.hideGroupInfo,
 	    itemId: 'ogdata',
 	    items: [
 		{
+		    xtype: 'container',
+		    itemId: 'modeBox',
+		    hidden: true,
+		    width: 220,
+		    padding: 10,
+		    layout: {
+			type: 'vbox',
+			align: 'stretch',
+		    },
+		    items: [
+			{
+			    xtype: 'box',
+			    html: `<b>${gettext("Match if")}</b>`,
+			},
+			{
+			    xtype: 'pmgMatchModeSelector',
+			    itemId: 'modeSelector',
+			    padding: '10 0 0 0',
+			    listeners: {
+				change: function(_field, value) {
+				    let invert = value.startsWith('not') ? 1 : 0;
+				    let and = value.endsWith('all') ? 1 : 0;
+
+				    Proxmox.Utils.API2Request({
+					url: `${me.baseurl}/config`,
+					method: 'PUT',
+					params: {
+					    and,
+					    invert,
+					},
+					success: () => me.fireEvent('modeUpdate', me),
+				    });
+				},
+			    },
+			},
+		    ],
+		},
+		{
 		    xtype: 'component',
-		    anchor: '100%',
+		    flex: 1,
 		    itemId: 'oginfo',
 		    style: { 'white-space': 'pre' },
 		    padding: 10,
@@ -239,6 +289,20 @@ Ext.define('PMG.ObjectGroup', {
 		    },
 		},
 	    ],
+	});
+
+	me.dockedItems.push({
+	    dock: 'top',
+	    border: 1,
+	    hidden: true,
+	    itemId: 'whatWarning',
+	    bodyPadding: 5,
+	    items: {
+		xtype: 'displayfield',
+		margin: 0,
+		value: gettext("Caution: 'What Objects' match each mail part separately, so be careful with any option besides 'Any matches'."),
+		userCls: 'pmx-hint',
+	    },
 	});
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
