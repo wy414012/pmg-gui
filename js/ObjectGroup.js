@@ -263,7 +263,11 @@ Ext.define('PMG.ObjectGroup', {
 					    and,
 					    invert,
 					},
-					success: () => me.fireEvent('modeUpdate', me),
+					success: () => {
+					    me.fireEvent('modeUpdate', me, !!and, !!invert);
+					    me.down('#whatWarning')
+						.setHidden(me.objectClass !== 'what' || value === 'any');
+					},
 				    });
 				},
 			    },

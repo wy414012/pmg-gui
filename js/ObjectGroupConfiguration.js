@@ -41,7 +41,12 @@ Ext.define('PMG.ObjectGroupConfiguration', {
 			left.run_editor();
 		    }
 		},
-		modeUpdate: () => left.reload(),
+		modeUpdate: (_cmp, and, invert) => {
+		    let rec = left.selModel.getSelection()[0];
+		    rec.set('and', and);
+		    rec.set('invert', invert);
+		    rec.commit();
+		},
 	    },
 	});
 
