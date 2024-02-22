@@ -88,7 +88,11 @@ Ext.define('PMG.RuleInfo', {
 	    } else {
 		viewmodel.set('selectedRule', ruledata);
 
-		var data = [];
+		let data = {
+		    leaf: false,
+		    expanded: true,
+		    children: [],
+		};
 		Ext.Array.each(['from', 'to', 'when', 'what', 'action'], function(oc) {
 		    var store = viewmodel.get(oc + 'objects');
 		    if (ruledata[oc] === undefined || store === undefined) { return; }
@@ -111,12 +115,25 @@ Ext.define('PMG.RuleInfo', {
 			},
 		    });
 		    store.load();
-		    Ext.Array.each(ruledata[oc], function(og) {
-			data.push({ oclass: oc, name: og.name, typeid: og.id });
-		    });
-		});
 
-		viewmodel.get('objects').setData(data);
+		    let group = {
+			name: oc,
+			oclass: oc,
+			type: true,
+			leaf: false,
+			expanded: true,
+			expandable: false,
+			children: [],
+		    };
+		    Ext.Array.each(ruledata[oc], function(og) {
+			group.children.push({ oclass: oc, name: og.name, typeid: og.id, leaf: true });
+		    });
+
+		    if (group.children.length) {
+			data.children.push(group);
+		    }
+		});
+		viewmodel.get('objects').setRoot(data);
 	    }
 	},
 
@@ -146,7 +163,7 @@ Ext.define('PMG.RuleInfo', {
 	},
 
 	control: {
-	    'grid[reference=usedobjects]': {
+	    'treepanel[reference=usedobjects]': {
 		drop: 'addDrop',
 	    },
 	    'tabpanel[reference=availobjects] > grid': {
@@ -162,6 +179,7 @@ Ext.define('PMG.RuleInfo', {
 
 	stores: {
 	    objects: {
+		type: 'tree',
 		fields: ['oclass', 'name', 'typeid'],
 		groupField: 'oclass',
 		sorters: 'name',
@@ -252,23 +270,19 @@ Ext.define('PMG.RuleInfo', {
 	    ],
 	},
 	{
-	    xtype: 'grid',
+	    xtype: 'treepanel',
 	    reference: 'usedobjects',
 	    hidden: true,
 	    emptyText: gettext('No Objects'),
-	    features: [{
-		id: 'group',
-		ftype: 'grouping',
-		enableGroupingMenu: false,
-		collapsible: false,
-		groupHeaderTpl: [
-		    '{[PMG.Utils.format_oclass(values.name)]}',
-		],
-	    }],
 
 	    title: gettext('Used Objects'),
+	    rootVisible: false,
+	    useArrows: true,
+	    rowLines: true,
+	    userCls: 'pmx-rule-tree',
 
 	    viewConfig: {
+		getRowClass: record => record.data.type ? 'pmx-type-row' : '',
 		plugins: {
 		    ptype: 'gridviewdragdrop',
 		    copy: true,
@@ -286,13 +300,16 @@ Ext.define('PMG.RuleInfo', {
 
 	    columns: [
 		{
-		    header: gettext('Type'),
-		    dataIndex: 'oclass',
-		    hidden: true,
-		},
-		{
 		    header: gettext('Name'),
 		    dataIndex: 'name',
+		    xtype: 'treecolumn',
+		    renderer: PMG.Utils.format_oclass,
+		    sorter: function(a, b) {
+			if (a.data.type && b.data.type) {
+			    return a.data.oclass.localeCompare(b.data.oclass);
+			}
+			return a.data.text.localeCompare(b.data.text);
+		    },
 		    flex: 1,
 		},
 		{
@@ -302,8 +319,9 @@ Ext.define('PMG.RuleInfo', {
 		    width: 40,
 		    items: [
 			{
-			    iconCls: 'fa fa-fw fa-minus-circle',
 			    tooltip: gettext('Remove'),
+			    isActionDisabled: (v, rI, cI, i, rec) => rec.data.type,
+			    getClass: (v, mD, { data }) => data.type ? 'pmx-hidden' : 'fa fa-fw fa-minus-circle',
 			    handler: 'removeIconClick',
 			},
 		    ],
