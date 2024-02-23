@@ -120,6 +120,11 @@ Ext.define('PMG.DKIMSettings', {
 
     monStoreErrors: true,
 
+    dkimdomainTextHash: {
+	envelope: gettext('Envelope'),
+	header: gettext('Header'),
+    },
+
     initComponent: function() {
 	var me = this;
 
@@ -182,6 +187,17 @@ Ext.define('PMG.DKIMSettings', {
 		],
 	    },
 	};
+
+	var render_dkimdomain = function(value) {
+	    return me.dkimdomainTextHash[value] || value;
+	};
+	me.add_combobox_row('dkim-use-domain', gettext('Get Signing Domain From'), {
+	    renderer: render_dkimdomain,
+	    defaultValue: 'envelope',
+	    comboItems: [
+		['envelope', render_dkimdomain('envelope')],
+		['header', render_dkimdomain('header')]],
+	});
 
 	me.add_boolean_row('dkim_sign_all_mail', gettext('Sign all Outgoing Mail'));
 
