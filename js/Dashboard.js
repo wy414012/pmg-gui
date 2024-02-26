@@ -418,12 +418,12 @@ Ext.define('PMG.Dashboard', {
 	{
 	    xtype: 'pmgNodeInfoPanel',
 	    reference: 'nodeInfo',
-	    height: 275,
+	    height: 300,
 	    bodyPadding: '15 5 15 5',
 	    iconCls: 'fa fa-tasks',
 	},
 	{
-	    height: 275,
+	    height: 300,
 	    iconCls: 'fa fa-list',
 	    title: gettext('Top Receivers'),
 
