@@ -1,3 +1,16 @@
+pmg-gui (4.1.0) bookworm; urgency=medium
+
+  * fix #2971: DKIM: Add a setting to specify whether to use the from-header
+    for signing instead of the current default envelope-from-address.
+
+  * dashboard:
+    - reduce noise when displaying currently booted kernel version
+    - show boot-mode information and secureboot status
+    - increase height of node-info and top-receiver panel and
+    - show ten instead five of the current top receiver for better spac usage
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 26 Feb 2024 20:33:49 +0100
+
 pmg-gui (4.0.4) bookworm; urgency=medium
 
   * fix #4818: drop minimum length requirement for username field
