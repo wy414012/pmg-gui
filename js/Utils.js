@@ -921,7 +921,7 @@ Ext.define('PMG.Async', {
 Ext.apply(Ext.form.field.VTypes, {
     // matches the pmg-email-address in pmg-api
     PMGMail: function(v) {
-	return (/[^\s\\@]+@[^\s/\\@]+/).test(v);
+	return (/^[^\s\\@]+@[^\s/\\@]+$/).test(v);
     },
     PMGMailText: gettext('Example') + ": user@example.com",
 });
