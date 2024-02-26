@@ -283,6 +283,7 @@ Ext.define('PMG.Dashboard', {
 		    url: '/api2/json/statistics/recentreceivers',
 		    extraParams: {
 			hours: '{hours}',
+			limit: 10, // make this also configurable?
 		    },
 		},
 		fields: [
@@ -427,7 +428,7 @@ Ext.define('PMG.Dashboard', {
 	    iconCls: 'fa fa-list',
 	    title: gettext('Top Receivers'),
 
-	    bodyPadding: '20 20 20 20',
+	    bodyPadding: '10 10 10 10',
 	    layout: {
 		type: 'vbox',
 		pack: 'center',
