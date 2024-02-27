@@ -106,7 +106,8 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 	    var me = this;
 	    var vm = this.getViewModel();
 
-	    var win = Ext.createWidget('proxmoxWindowEdit', {
+	    Ext.createWidget('proxmoxWindowEdit', {
+		autoShow: true,
 		method: 'POST',
 		url: "/api2/extjs/config/customscores",
 		isCreate: true,
@@ -137,22 +138,24 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 			value: vm.get('digest'),
 		    },
 		],
+		listeners: {
+		    destroy: () => me.reload(),
+		},
 	    });
-
-	    win.on('destroy', me.reload, me);
-	    win.show();
 	},
 
 	run_editor: function() {
-	    var me = this;
-	    var vm = this.getViewModel();
-	    var grid = me.lookup('grid');
-	    var rec = grid.getSelection()[0];
+	    let me = this;
+	    let vm = me.getViewModel();
+	    let grid = me.lookup('grid');
+	    let rec = grid.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
 
-	    var win = Ext.createWidget('proxmoxWindowEdit', {
+	    Ext.createWidget('proxmoxWindowEdit', {
+		autoShow: true,
+		autoLoad: true,
 		url: "/api2/extjs/config/customscores/" + rec.data.name,
 		method: 'PUT',
 		subject: gettext("Custom Rule Score"),
@@ -181,11 +184,10 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 			value: vm.get('digest'),
 		    },
 		],
+		listeners: {
+		    destroy: () => me.reload(),
+		},
 	    });
-
-	    win.load();
-	    win.on('destroy', me.reload, me);
-	    win.show();
 	},
     },
 
@@ -216,14 +218,15 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 
 	    tbar: [
 		{
+		    text: gettext('Create'),
+		    handler: 'create_custom',
+		},
+		'-',
+		{
 		    xtype: 'proxmoxButton',
 		    text: gettext('Edit'),
 		    disabled: true,
 		    handler: 'run_editor',
-		},
-		{
-		    text: gettext('Create'),
-		    handler: 'create_custom',
 		},
 		{
 		    xtype: 'proxmoxStdRemoveButton',
