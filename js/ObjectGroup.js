@@ -40,6 +40,7 @@ Ext.define('PMG.ObjectGroup', {
 
 	if (me.ogdata === undefined) {
 	    me.down('#oginfo').update(me.emptyText);
+	    me.down('#separator').setHidden(true);
 	    me.down('#modeBox').setHidden(true);
 	    me.down('#whatWarning').setHidden(true);
 	} else {
@@ -49,6 +50,7 @@ Ext.define('PMG.ObjectGroup', {
 
 	    me.down('#oginfo').update(html);
 	    me.down('#ogdata').setHidden(false);
+	    me.down('#separator').setHidden(false);
 	    let modeSelector = me.down('#modeSelector');
 	    modeSelector.suspendEvents();
 	    me.down('#modeSelector').setValue(mode);
@@ -228,9 +230,13 @@ Ext.define('PMG.ObjectGroup', {
 	me.dockedItems.push({
 	    dock: 'top',
 	    border: 1,
-	    layout: 'hbox',
+	    layout: {
+		type: 'hbox',
+		align: 'stretch',
+	    },
 	    hidden: !!me.hideGroupInfo,
 	    itemId: 'ogdata',
+	    xtype: 'toolbar',
 	    items: [
 		{
 		    xtype: 'container',
@@ -273,6 +279,11 @@ Ext.define('PMG.ObjectGroup', {
 			    },
 			},
 		    ],
+		},
+		{
+		    xtype: 'tbseparator',
+		    itemId: 'separator',
+		    hidden: true,
 		},
 		{
 		    xtype: 'component',
