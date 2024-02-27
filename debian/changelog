@@ -1,3 +1,20 @@
+pmg-gui (4.1.1) bookworm; urgency=medium
+
+  * utils: anchor email address regex expression to avoid false positives due
+    to partial matches
+
+  * objects: add separator between match field selector and description
+
+  * group and separate the buttons for action that create or add new elements
+    from the ones that edit or remove exiting ones consistently.
+
+  * spam detector: custom rules: move apply/revert buttons to top bar of
+    pending section
+
+  * dashboard: implement column-count browser setting
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 27 Feb 2024 15:57:46 +0100
+
 pmg-gui (4.1.0) bookworm; urgency=medium
 
   * fix #2971: DKIM: Add a setting to specify whether to use the from-header
