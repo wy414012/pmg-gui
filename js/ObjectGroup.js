@@ -201,6 +201,7 @@ Ext.define('PMG.ObjectGroup', {
 			items: menu_items,
 		    },
 		},
+		'-',
 		{
 		    xtype: 'proxmoxButton',
 		    text: gettext('Edit'),

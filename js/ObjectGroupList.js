@@ -94,42 +94,41 @@ Ext.define('PMG.ObjectGroupList', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
-	    selModel: me.selModel,
-	    baseurl: me.baseurl,
-	    callback: function() { me.reload(); },
-	    getRecordName: function(rec) { return rec.data.name; },
-	    waitMsgTarget: me,
-	});
-
 	var tbar = [
-            {
-		xtype: 'proxmoxButton',
-		text: gettext('Edit'),
-		disabled: true,
-		selModel: me.selModel,
-		handler: function() { me.run_editor(); },
-            },
             {
 		text: gettext('Create'),
 		handler: function() {
-		    var config = {
+		    Ext.createWidget('proxmoxWindowEdit', {
 			method: 'POST',
-			url: "/api2/extjs" + me.baseurl,
+			url: `/api2/extjs${me.baseurl}`,
 			onlineHelp: 'chapter_mailfilter',
 			isCreate: true,
 			width: 400,
 			subject: me.subject,
 			items: me.inputItems,
-		    };
-
-		    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
-		    win.on('destroy', me.reload, me);
-		    win.show();
+			autoShow: true,
+			listeners: {
+			    destroy: () => me.reload(),
+			},
+		    });
 		},
             },
-	    remove_btn,
+	    '-',
+            {
+		xtype: 'proxmoxButton',
+		text: gettext('Edit'),
+		disabled: true,
+		selModel: me.selModel,
+		handler: () => me.run_editor(),
+            },
+	    {
+		xtype: 'proxmoxStdRemoveButton',
+		selModel: me.selModel,
+		baseurl: me.baseurl,
+		callback: () => me.reload(),
+		getRecordName: rec => rec.data.name,
+		waitMsgTarget: me,
+	    },
         ];
 
 	Proxmox.Utils.monStoreErrors(me, me.store, true);
