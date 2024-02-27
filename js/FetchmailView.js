@@ -71,6 +71,7 @@ Ext.define('PMG.FetchmailView', {
 	    reference: 'addBtn',
 	    handler: 'onAdd',
 	},
+	'-',
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),

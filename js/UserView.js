@@ -121,6 +121,7 @@ Ext.define('PMG.UserView', {
 	    reference: 'addBtn',
 	    handler: 'onAdd',
 	},
+	'-',
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),

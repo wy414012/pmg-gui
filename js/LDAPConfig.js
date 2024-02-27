@@ -524,20 +524,22 @@ Ext.define('PMG.LDAPConfigGrid', {
 
     tbar: [
 	{
+	    text: gettext('Create'),
+	    handler: 'newProfile',
+	},
+	'-',
+	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Edit'),
 	    disabled: true,
 	    handler: 'run_editor',
 	},
 	{
-	    text: gettext('Create'),
-	    handler: 'newProfile',
-	},
-	{
 	    xtype: 'proxmoxStdRemoveButton',
 	    baseurl: '/config/ldap',
 	    callback: 'reload',
 	},
+	'-',
 	{
 	    xtype: 'proxmoxButton',
 	    text: gettext('Synchronize'),
