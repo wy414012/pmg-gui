@@ -47,23 +47,24 @@ Ext.define('PMG.Transport', {
 	    store: store,
 	    tbar: [
 		{
+		    text: gettext('Create'),
+		    handler: () => Ext.createWidget('pmgTransportEditor', {
+			autoShow: true,
+			method: 'POST',
+			url: "/api2/extjs/config/transport",
+			isCreate: true,
+			listeners: {
+			    destroy: () => reload(),
+			},
+		    }),
+		},
+		'-',
+		{
 		    xtype: 'proxmoxButton',
 		    text: gettext('Edit'),
 		    disabled: true,
 		    selModel: me.selModel,
 		    handler: run_editor,
-		},
-		{
-		    text: gettext('Create'),
-		    handler: function() {
-			let win = Ext.createWidget('pmgTransportEditor', {
-			    method: 'POST',
-			    url: "/api2/extjs/config/transport",
-			    isCreate: true,
-			});
-			win.on('destroy', reload);
-			win.show();
-		    },
 		},
 		{
 		    xtype: 'proxmoxStdRemoveButton',
