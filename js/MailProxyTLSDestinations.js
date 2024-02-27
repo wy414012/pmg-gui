@@ -87,18 +87,16 @@ Ext.define('PMG.MailProxyTLSDestinations', {
     ],
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
-	var rstore = Ext.create('Proxmox.data.UpdateStore', {
+	let rstore = Ext.create('Proxmox.data.UpdateStore', {
 	    model: 'pmg-tls-policy',
 	    storeid: 'pmg-mailproxy-tls-store-' + ++Ext.idSeed,
 	});
 
-	var store = Ext.create('Proxmox.data.DiffStore', { rstore: rstore });
+	let store = Ext.create('Proxmox.data.DiffStore', { rstore: rstore });
 
-        var reload = function() {
-            rstore.load();
-        };
+        let reload = () => rstore.load();
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
@@ -117,22 +115,23 @@ Ext.define('PMG.MailProxyTLSDestinations', {
 	    win.show();
 	};
 
-	var tbar = [
-            {
+	let tbar = [
+	    {
+		text: gettext('Create'),
+		handler: () => Ext.createWidget('pmgTLSDestinationEdit', {
+		    autoLoad: true,
+		    autoShow: true,
+		    listeners: {
+			destroy: () => reload(),
+		    },
+		}),
+	    },
+	    '-',
+	    {
 		xtype: 'proxmoxButton',
 		disabled: true,
 		text: gettext('Edit'),
 		handler: run_editor,
-            },
-	    {
-		text: gettext('Create'),
-		handler: function() {
-		    var win = Ext.createWidget('pmgTLSDestinationEdit');
-
-		    win.load();
-		    win.on('destroy', reload);
-		    win.show();
-		},
             },
 	    {
 		xtype: 'proxmoxStdRemoveButton',
