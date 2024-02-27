@@ -89,7 +89,7 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		    {
 			xtype: 'proxmoxcheckbox',
 			name: 'restart-daemon',
-			fieldLabel: gettext('Restart pmg-smtp-filter'),
+			boxLabel: gettext('Restart pmg-smtp-filter to activate changes.'),
 			labelWidth: 150,
 			checked: true,
 		    },
@@ -240,26 +240,6 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 		    },
 		    callback: 'reload',
 		},
-		' ',
-		{
-		    text: gettext('Revert'),
-		    reference: 'revert_btn',
-		    handler: 'revert',
-		    disabled: true,
-		    bind: {
-			disabled: '{applied}',
-		    },
-		},
-		'-',
-		{
-		    text: gettext('Apply Custom Scores'),
-		    reference: 'restart_btn',
-		    disabled: true,
-		    bind: {
-			disabled: '{applied}',
-		    },
-		    handler: 'restart',
-		},
 	    ],
 
 	    viewConfig: {
@@ -305,8 +285,26 @@ Ext.define('PMG.SpamDetectorCustomScores', {
 	    },
 	    reference: 'changes',
 	    tbar: [
-		gettext('Pending changes') + ' (' +
-		gettext('Please restart pmg-smtp-filter to activate changes') + ')',
+		{
+		    text: gettext('Revert'),
+		    handler: 'revert',
+		    disabled: true,
+		    bind: {
+			disabled: '{applied}',
+		    },
+		},
+		'-',
+		{
+		    text: gettext('Apply Custom Scores'),
+		    handler: 'restart',
+		    disabled: true,
+		    bind: {
+			disabled: '{applied}',
+		    },
+		},
+		'->',
+		`<b style="font-weight: 600">${gettext('Pending changes')}</b>`,
+		'->',
 	    ],
 	    split: true,
 	},
