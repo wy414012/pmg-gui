@@ -186,7 +186,18 @@ Ext.define('PMG.Dashboard', {
 	    var sp = Ext.state.Manager.getProvider();
 	    var hours = sp.get('dashboard-hours') || 12;
 	    me.setHours(hours, false);
+
+	    view.mon(sp, 'statechange', function(provider, key, value) {
+		if (key !== 'summarycolumns') {
+		    return;
+		}
+		Proxmox.Utils.updateColumnWidth(view);
+	    });
 	},
+    },
+
+    listeners: {
+	resize: panel => Proxmox.Utils.updateColumnWidth(panel),
     },
 
     viewModel: {
@@ -322,7 +333,7 @@ Ext.define('PMG.Dashboard', {
     bodyPadding: '20 0 0 20',
 
     defaults: {
-	columnWidth: 0.5,
+	columnWidth: 1,
 	xtype: 'panel',
 	margin: '0 20 20 0',
     },
