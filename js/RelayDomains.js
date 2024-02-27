@@ -34,13 +34,6 @@ Ext.define('PMG.RelayDomains', {
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
-	    selModel: me.selModel,
-	    baseurl: me.baseurl,
-	    callback: reload,
-	    waitMsgTarget: me,
-	});
-
 	var run_editor = function() {
 	    var rec = me.selModel.getSelection()[0];
 	    if (!rec) {
@@ -73,7 +66,34 @@ Ext.define('PMG.RelayDomains', {
 	    win.show();
 	};
 
-	var tbar = [
+	let tbar = [
+            {
+		text: gettext('Create'),
+		handler: () => Ext.createWidget('proxmoxWindowEdit', {
+		    autoShow: true,
+		    method: 'POST',
+		    url: '/api2/extjs' + me.baseurl,
+		    onlineHelp: me.onlineHelp,
+		    isCreate: true,
+		    subject: gettext("Relay Domain"),
+		    items: [
+			{
+			    xtype: 'proxmoxtextfield',
+			    name: 'domain',
+			    fieldLabel: me.domain_desc,
+			},
+			{
+			    xtype: 'proxmoxtextfield',
+			    name: 'comment',
+			    fieldLabel: gettext("Comment"),
+			},
+		    ],
+		    listeners: {
+			destroy: () => reload(),
+		    },
+		}),
+	    },
+	    '-',
             {
 		xtype: 'proxmoxButton',
 		text: gettext('Edit'),
@@ -81,36 +101,13 @@ Ext.define('PMG.RelayDomains', {
 		selModel: me.selModel,
 		handler: run_editor,
             },
-            {
-		text: gettext('Create'),
-		handler: function() {
-		    var config = {
-			method: 'POST',
-			url: '/api2/extjs' + me.baseurl,
-			onlineHelp: me.onlineHelp,
-			isCreate: true,
-			subject: gettext("Relay Domain"),
-			items: [
-			    {
-				xtype: 'proxmoxtextfield',
-				name: 'domain',
-				fieldLabel: me.domain_desc,
-			    },
-			    {
-				xtype: 'proxmoxtextfield',
-				name: 'comment',
-				fieldLabel: gettext("Comment"),
-			    },
-			],
-		    };
-
-		    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
-		    win.on('destroy', reload);
-		    win.show();
-		},
-            },
-	    remove_btn,
+	    {
+		xtype: 'proxmoxStdRemoveButton',
+		selModel: me.selModel,
+		baseurl: me.baseurl,
+		callback: reload,
+		waitMsgTarget: me,
+	    },
 	    '->',
 	    {
 		xtype: 'pmgFilterField',
