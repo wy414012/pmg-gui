@@ -13,36 +13,27 @@ Ext.define('PMG.MyNetworks', {
     alias: ['widget.pmgMyNetworks'],
 
     initComponent: function() {
-	var me = this;
+	let me = this;
 
-	var store = new Ext.data.Store({
+	let store = new Ext.data.Store({
 	    model: 'pmg-mynetworks',
 	    sorters: {
 		property: 'cidr',
 		direction: 'ASC',
 	    },
 	});
-
-        var reload = function() {
-            store.load();
-        };
+	let reload = () => store.load();
 
 	me.selModel = Ext.create('Ext.selection.RowModel', {});
 
-	var remove_btn = Ext.createWidget('proxmoxStdRemoveButton', {
-	    selModel: me.selModel,
-	    baseurl: '/config/mynetworks',
-	    callback: reload,
-	    waitMsgTarget: me,
-	});
-
-	var run_editor = function() {
-	    var rec = me.selModel.getSelection()[0];
+	let run_editor = function() {
+	    let rec = me.selModel.getSelection()[0];
 	    if (!rec) {
 		return;
 	    }
-
-	    var config = {
+	    Ext.createWidget('proxmoxWindowEdit', {
+		autoShow: true,
+		autoLoad: true,
 		url: "/api2/extjs/config/mynetworks/" + rec.data.cidr,
 		onlineHelp: 'pmgconfig_mailproxy_networks',
 		method: 'PUT',
@@ -59,16 +50,40 @@ Ext.define('PMG.MyNetworks', {
 			fieldLabel: gettext("Comment"),
 		    },
 		],
-	    };
-
-	    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
-	    win.load();
-	    win.on('destroy', reload);
-	    win.show();
+		listeners: {
+		    destroy: () => reload(),
+		},
+	    });
 	};
 
-	var tbar = [
+	let tbar = [
+	    {
+		text: gettext('Create'),
+		handler: () => Ext.createWidget('proxmoxWindowEdit', {
+		    autoShow: true,
+		    method: 'POST',
+		    url: "/api2/extjs/config/mynetworks",
+		    onlineHelp: 'pmgconfig_mailproxy_networks',
+		    isCreate: true,
+		    subject: gettext("Trusted Network"),
+		    items: [
+			{
+			    xtype: 'proxmoxtextfield',
+			    name: 'cidr',
+			    fieldLabel: gettext('CIDR'),
+			},
+			{
+			    xtype: 'proxmoxtextfield',
+			    name: 'comment',
+			    fieldLabel: gettext("Comment"),
+			},
+		    ],
+		    listeners: {
+			destroy: () => reload(),
+		    },
+		}),
+            },
+	    '-',
             {
 		xtype: 'proxmoxButton',
 		text: gettext('Edit'),
@@ -76,36 +91,13 @@ Ext.define('PMG.MyNetworks', {
 		selModel: me.selModel,
 		handler: run_editor,
             },
-            {
-		text: gettext('Create'),
-		handler: function() {
-		    var config = {
-			method: 'POST',
-			url: "/api2/extjs/config/mynetworks",
-			onlineHelp: 'pmgconfig_mailproxy_networks',
-			isCreate: true,
-			subject: gettext("Trusted Network"),
-			items: [
-			    {
-				xtype: 'proxmoxtextfield',
-				name: 'cidr',
-				fieldLabel: gettext('CIDR'),
-			    },
-			    {
-				xtype: 'proxmoxtextfield',
-				name: 'comment',
-				fieldLabel: gettext("Comment"),
-			    },
-			],
-		    };
-
-		    var win = Ext.createWidget('proxmoxWindowEdit', config);
-
-		    win.on('destroy', reload);
-		    win.show();
-		},
-            },
-	    remove_btn,
+	    {
+		xtype: 'proxmoxStdRemoveButton',
+		selModel: me.selModel,
+		baseurl: '/config/mynetworks',
+		callback: reload,
+		waitMsgTarget: me,
+	    },
 	    '->',
 	    {
 		xtype: 'pmgFilterField',
