@@ -188,10 +188,8 @@ Ext.define('PMG.DKIMSettings', {
 	    },
 	};
 
-	var render_dkimdomain = function(value) {
-	    return me.dkimdomainTextHash[value] || value;
-	};
-	me.add_combobox_row('dkim-use-domain', gettext('Get Signing Domain From'), {
+	let render_dkimdomain = value => me.dkimdomainTextHash[value] || value;
+	me.add_combobox_row('dkim-use-domain', gettext('Signing Domain Source'), {
 	    renderer: render_dkimdomain,
 	    defaultValue: 'envelope',
 	    comboItems: [
