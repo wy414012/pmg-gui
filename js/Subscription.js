@@ -8,7 +8,8 @@ Ext.define('PMG.SubscriptionKeyEdit', {
     onlineHelp: 'getting_help',
 
     items: {
-	xtype: 'textfield',
+	xtype: 'proxmoxtextfield',
+	trimValue: true,
 	name: 'key',
 	value: '',
 	fieldLabel: gettext('Subscription Key'),
