@@ -1,3 +1,15 @@
+pmg-gui (3.3-3) bullseye; urgency=medium
+
+  * main view/quarantine: rename "Theme" selector to "Color Theme"
+
+  * mail filter: properly html-encode rule names
+
+  * tfa: avoid trailing space on WebAuthn
+
+  * add notice for the nearing PMG 7 End-of-Life on 2024-07-31
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 16 Apr 2024 13:19:06 +0200
+
 pmg-gui (3.3-2) bullseye; urgency=medium
 
   * spam detector options: add setting for enabling text-extraction from
