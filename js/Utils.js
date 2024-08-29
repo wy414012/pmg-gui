@@ -538,7 +538,7 @@ Ext.define('PMG.Utils', {
 		    grow: true,
 		    growMax: 250,
 		    value:
-			"Proxmox Notifcation:\n\n" +
+			"Proxmox Notification:\n\n" +
 			"Sender:   __SENDER__\n" +
 			"Receiver: __RECEIVERS__\n" +
 			"Targets:  __TARGETS__\n\n" +
