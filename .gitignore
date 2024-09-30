@@ -1,0 +1,5 @@
+/pmg-gui-[0-9]*/
+/pmg-gui_[0-9]*
+*.deb
+*.buildinfo
+*.changes
